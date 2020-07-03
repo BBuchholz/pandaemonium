@@ -1,13 +1,17 @@
 {
   "name": "pandaemonium",
   "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  }
   "description": "pandaemonic's node.js playground",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Brent Buchholz <brentbuchholz@gmail.com>",
+  "license": "MIT",
   "dependencies": {
     "express": "^4.17.1"
   }
