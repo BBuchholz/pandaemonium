@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node app.js"
-  }
+  },
   "description": "pandaemonic's node.js playground",
   "main": "app.js",
   "scripts": {
