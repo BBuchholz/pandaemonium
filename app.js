@@ -1,13 +1,12 @@
-var express = require('express');
-var app = express();
+var express        = require( 'express' );
+var http           = require( 'http' );
 
+var app            = express();
+app.set( 'port', process.env.PORT || 3001 );
 app.get('/', function (req, res) {
-  res.send("<h1>hello world</h1>");
+    res.send('Hello World');
 });
 
-app.listen(8080, function () {
-  console.log('Example app listening on port 8080!');
-  //call this app from https://<workspace name>-<user name>.c9users.io
+http.createServer( app ).listen( app.get( 'port' ), function (){
+  console.log( 'Express server listening on port ' + app.get( 'port' ));
 });
-
-
