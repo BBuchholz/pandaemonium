@@ -1,0 +1,588 @@
+<script>
+	export let beforeGame = true;
+</script>
+
+  <div class="game-board before-game">
+
+    <div class="daemon-area">
+
+      <h1>
+        <strong>EMPYREAN</strong> <br/> Choose your response to the play of the Heavenly City...
+      </h1>
+
+      <div class="stats daemon-stats" onClick="showStats()">
+        <div class="life-bar">
+          <div class="life-left daemon-color"></div>
+        </div>
+        <div class="life-total"></div>
+        <div class="thumbnail">💦</div>
+        <div class="name m-index-name">MI</div>
+      </div>
+      
+      <div class="card daemon-card daemon-color">
+        <div class="text"></div>
+        <img class="image" alt="daemon card one" />
+        <div class="power"></div>
+      </div>
+
+    </div>
+
+    <div class="player-area">
+
+      <div class="stats player-stats" onClick="showStats()">
+        <div class="life-bar">
+          <div class="life-left player-color"></div>
+        </div>
+        <div class="life-total"></div>
+        <div class="thumbnail">🌡</div>
+        <div class="name h-index-name">HI</div>
+      </div>
+
+      <div class="card player-card player-color">
+        <div class="text"></div>
+        <img class="image" alt="player card one" />
+        <div class="power"></div>
+      </div>
+
+      <div class="card player-card player-color">
+        <div class="text"></div>
+        <img class="image" alt="player card two" />
+        <div class="power"></div>
+      </div>
+
+      <div class="card player-card player-color">
+        <div class="text"></div>
+        <img class="image" alt="player card tree" />
+        <div class="power"></div>
+      </div>
+
+      <button class="start-game" onClick="startGame()">Play the Game!</button>
+      <button class="next-turn" onClick="playTurn()">Next!</button>
+    </div>
+  </div>
+
+
+<style>
+
+main {
+  text-align: center;
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+/* daemonium */
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+
+body {
+  font-family: "Open Sans", sans-serif;
+  color: white;
+  text-align: center;
+  background-repeat: repeat;
+  background-size: 200px;
+  margin: 0;
+  padding: 0;
+}
+
+.game-board {
+  height: 100%;
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+}
+
+.daemon-area h1 {
+  padding: 12px 10px 0 10px;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(255,255,255,.6);
+  font-style: italic;
+  position: absolute;
+  top: 0;
+}
+
+h1 strong {
+  color: white;
+  font-style: normal;
+}
+
+.daemon-area,
+.player-area {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding: 30px 10px 30px 110px;
+  min-height: 235px;
+  background-repeat: repeat;
+  background-size: 200px;
+  height: 50vh;
+  box-sizing: border-box;
+}
+
+.daemon-area {
+  background-position: bottom;
+  align-items: flex-end;
+}
+
+.player-area {
+  background-position: top;
+  align-items: top;
+}
+
+.player-area .card {
+  cursor: pointer;
+}
+
+.life-bar {
+  background: rgba(255,255,255,.15);
+  width: 10px;
+  height: 90px;
+  position: relative;
+}
+
+.life-left {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: white;
+  width: 100%;
+  height: 50%;
+  transition: height .25s ease-out;
+}
+
+.stats {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  min-width: 90px;
+  padding: 0 5px 0 5px;
+  border-radius: 4px;
+  background: rgba(0,0,0,.3);
+}
+
+.stats .thumbnail {
+  font-size: 40px;
+  line-height: 40px;
+  margin: 0 0 5px 0;
+  text-shadow: 5px 5px 0px rgba(0,0,0,.2);
+}
+
+.stats .thumbnail.ouch {
+  animation: ouch .15s linear 3;
+}
+
+.stats .name {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.life-total {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 8px 0;
+}
+
+@keyframes ouch {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  75% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.game-over button {
+  display: none;
+}
+
+button.next-turn {
+  position: fixed;
+  bottom: 20px;
+  transition: all .15s ease-out;
+  background: black;
+  display: none;
+}
+
+.during-game .next-turn {
+  display: block;
+}
+
+button.start-game {
+  position: absolute;
+  background: black;
+  display: none;
+  top: -20px;
+}
+
+.before-game .start-game {
+  display: block;
+}
+
+button:hover {
+  transform: scale(1.03);
+}
+
+button:active {
+  transform: scale(.97);
+}
+
+.winner-section {
+  display: none;
+  position: fixed;
+  padding: 15px 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  align-items: center;
+  justify-content: center;
+  animation: winnerAppear .4s ease-out;
+}
+
+.winner-section button {
+  margin-left: 15px;
+}
+
+.winner-message {
+  color: white;
+  font-size: 22px;
+  font-weight: 700;
+  position: relative;
+  top: 1px;
+}
+
+.next-turn-section {
+  display: none;
+  position: fixed;
+  padding: 15px 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  align-items: center;
+  justify-content: center;
+  animation: winnerAppear .4s ease-out;
+}
+
+.next-turn-section button {
+  margin-left: 15px;
+}
+
+.next-turn-message {
+  color: white;
+  font-size: 22px;
+  font-weight: 700;
+  position: relative;
+  top: 1px;
+}
+
+@keyframes winnerAppear {
+  0% {
+    transform: translateY(150px);
+  }
+  60% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+button {
+  font-size: 15px;
+  line-height: 15px;
+  padding: 8px 22px 9px 22px;
+  box-sizing: border-box;
+  font-weight: 700;
+  border: solid 3px white;
+  color: white;
+  background: transparent;
+  border-radius: 30px;
+  transition: all ease-out .2s;
+  cursor: pointer;
+  outline: none;
+  animation: buttonPulse .2s infinite ease-in-out;
+}
+
+@keyframes buttonPulse {
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+button[disabled=true] {
+  opacity: 0;
+  transform: scale(.95);
+  cursor: default;
+}
+
+.card {
+  opacity: 0;
+  margin: 0 10px;
+  width: 150px;
+  height: 200px;
+  padding: 10px 15px;
+  color: black;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: bold;
+  position: relative;
+  box-sizing: border-box;
+  text-align: left;
+  transition: all .15s ease-out;
+  box-shadow: 0px 5px 5px rgba(0,0,0,.3);
+  overflow: hidden;
+}
+
+.card:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -20%;
+  width: 140%;
+  height: 0%;
+  background: white;
+  animation: sheen infinite .5s ease-in-out;
+  display: none;
+  transform: rotate(-7deg);
+}
+
+.game-board:not(.card-selected) .player-card:hover:after {
+  display: block;
+  animation: sheen .35s linear 1;
+}
+
+@keyframes sheen {
+  0% {
+    top: -10%;
+    height: 0%;
+    opacity: 0;
+  }
+  25% {
+    top: -10%;
+    height: 20%;
+    opacity: .2;
+  }
+  50% {
+    top: 20%;
+    height: 50%;
+    opacity: .3;
+  }
+  75% {
+    top: 110%;
+    height: 20%;
+    opacity: .2;
+  }
+  100% {
+    top: 110%;
+    height: 0%;
+    opacity: 0;
+  }
+}
+
+.card.prepared {
+  display: block;
+  opacity: 0;
+}
+
+.card.showCard {
+  opacity: 1;
+}
+
+.daemon-card.showCard {
+  animation: daemonShowCard .5s ease-out;
+}
+
+/* When the daemon card appears */
+@keyframes daemonShowCard {
+  0%   { transform: translateY(-25px); opacity: .5; }
+  60%  { transform: translateY(5px); }
+  100% { transform: translateY(0px); }
+}
+
+.player-card.showCard {
+  animation: playerShowCard .5s ease-out;
+}
+
+/* When the player card appears */
+@keyframes playerShowCard {
+  0%   { transform: translateY(25px); opacity: .5; }
+  60%  { transform: translateY(-5px); }
+  100% { transform: translateY(0px); }
+}
+
+.card.tie-card {
+  transform: translateY(0px) !important;
+}
+
+.card.worse-card {
+  background: #888;
+}
+
+.daemon-card.better-card {
+  transform: scale(1.03);
+}
+
+.daemon-card.worse-card {
+  transform: scale(.90) translateY(-25px) rotate(3deg);
+}
+
+
+.game-board:not(.card-selected) .player-area .card:not(.played-card):hover {
+  transform: translateY(-10px);
+  box-shadow: 0px 15px 15px rgba(0,0,0,.3);
+}
+
+.player-card.played-card {
+  transform: translateY(-40px);
+  box-shadow: 0px 15px 15px rgba(0,0,0,.3);
+}
+
+.player-card.worse-card {
+  transform: translateY(10px) rotate(3deg) !important;
+  box-shadow: 0px 5px 5px rgba(0,0,0,.3);
+}
+
+.player-card.better-card {
+  transform: scale(1.03) translateY(-60px);
+}
+
+
+/* Shows a checkmark on the better card */
+
+.card.better-card:before,
+.card.worse-card:before {
+  font-size: 30px;
+  position: absolute;
+  bottom: 18px;
+  right: 20px;
+  color: rgba(0,0,0,.3);
+  display: block;
+}
+
+.card.better-card:before {
+  content: "\2713";
+}
+
+.card.worse-card:before {
+  content: "\2717";
+}
+
+.card .power {
+  font-size: 30px;
+  position: absolute;
+  bottom: 12px;
+  line-height: 30px;
+  left: 10px;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  border-radius: 50%;
+  color: rgba(0,0,0,0);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.card.reveal-power .power {
+  color: black;
+  animation: showPower .2s ease-out;
+  background: none;
+}
+
+
+@keyframes showPower {
+  0% {
+    background: none;
+    transform: scaleX(1);
+    color: rgba(0,0,0,0);
+  }
+  49% {
+    color: rgba(0,0,0,0);
+    transform: scaleX(0);
+  }
+  51% {
+    background: none;
+    color: black;
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+img {
+  width: 10vw;
+  height: 20vh;
+  object-fit: contain;
+}
+
+/* Change the colors in this stylesheet to customize the game. */ 
+
+/* Player Styles */
+
+.player-color {
+  background-color: #ce3d20;
+}
+
+.player-area {
+  background-color: #3c1912;
+  background-image: url(images/chip.svg);
+}
+
+.player-card .power {
+  background-image: url(images/skull.svg);
+}
+
+/* Daemon Styles */
+
+.daemon-color {
+  background-color: #2a79d0;
+}
+
+.daemon-area {
+  background-color: #0d3158;
+  background-image: url(images/chip.svg);
+}
+
+.daemon-card .power {
+  background-image: url(images/shield.svg);
+}
+
+/* Elemental Styles */
+.fire-color {
+  background-color: #ff0000;
+}
+
+.air-color {
+  background-color: #ffff00;
+}
+
+.water-color {
+  background-color: #0000ff;
+}
+
+.earth-color {
+  background-color: #00ff00;
+}
+
+
+</style>
