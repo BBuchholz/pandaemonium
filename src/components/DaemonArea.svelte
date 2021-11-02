@@ -267,11 +267,11 @@
 
   .daemon-area {
     background-color: #0d3158;
-    background-image: url(images/chip.svg);
+    background-image: url("/images/chip.svg");
   }
 
   .daemon-card .power {
-    background-image: url(images/shield.svg);
+    background-image: url("/images/shield.svg");
   }
 
 

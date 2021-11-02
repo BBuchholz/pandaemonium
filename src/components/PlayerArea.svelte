@@ -1,35 +1,45 @@
-    <div class="player-area">
+<script>
+  function startGame() {
+    alert('startGame() in PlayerArea.svelte not implemented')
+  }
 
-      <div class="stats player-stats" onClick="showStats()">
-        <div class="life-bar">
-          <div class="life-left player-color"></div>
-        </div>
-        <div class="life-total"></div>
-        <div class="thumbnail">🌡</div>
-        <div class="name h-index-name">HI</div>
-      </div>
+  function playTurn() {
+    alert('playTurn() in PlayerArea.svelte not implemented')
+  }
+</script>
 
-      <div class="card player-card player-color">
-        <div class="text"></div>
-        <img class="image" alt="player card one" />
-        <div class="power"></div>
-      </div>
+<div class="player-area">
 
-      <div class="card player-card player-color">
-        <div class="text"></div>
-        <img class="image" alt="player card two" />
-        <div class="power"></div>
-      </div>
-
-      <div class="card player-card player-color">
-        <div class="text"></div>
-        <img class="image" alt="player card tree" />
-        <div class="power"></div>
-      </div>
-
-      <button class="start-game" onClick="startGame()">Play the Game!</button>
-      <button class="next-turn" onClick="playTurn()">Next!</button>
+  <div class="stats player-stats" onClick="showStats()">
+    <div class="life-bar">
+      <div class="life-left player-color"></div>
     </div>
+    <div class="life-total"></div>
+    <div class="thumbnail">🌡</div>
+    <div class="name h-index-name">HI</div>
+  </div>
+
+  <div class="card player-card player-color">
+    <div class="text"></div>
+    <img class="image" alt="player card one" />
+    <div class="power"></div>
+  </div>
+
+  <div class="card player-card player-color">
+    <div class="text"></div>
+    <img class="image" alt="player card two" />
+    <div class="power"></div>
+  </div>
+
+  <div class="card player-card player-color">
+    <div class="text"></div>
+    <img class="image" alt="player card tree" />
+    <div class="power"></div>
+  </div>
+
+  <button class="start-game" on:click={startGame}>Play the Game!</button>
+  <button class="next-turn" on:click={playTurn}>Next!</button>
+</div>
 
 
 
@@ -311,11 +321,11 @@ img {
 
 .player-area {
   background-color: #3c1912;
-  background-image: url(images/chip.svg);
+  background-image: url("/images/chip.svg");
 }
 
 .player-card .power {
-  background-image: url(images/skull.svg);
+  background-image: url("/images/skull.svg");
 }
 
 
