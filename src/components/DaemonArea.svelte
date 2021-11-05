@@ -1,6 +1,9 @@
 <script>
   export let moistureIndex = 9;
 
+  function showDaemonStats() {
+    alert('showDaemonStats() in DaemonArea.svelte not implemented');
+  }
 </script>
 
 <div class="daemon-area">
@@ -9,7 +12,7 @@
     Choose your response to the play of the Heavenly City...
   </h1>
 
-  <div class="stats daemon-stats" onClick="showStats()">
+  <div class="stats daemon-stats" on:click={showDaemonStats}>
     <div class="life-total">{moistureIndex}</div>
     <div class="thumbnail">🌫️</div>
     <div class="name m-index-name">MI</div>

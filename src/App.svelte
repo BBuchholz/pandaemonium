@@ -1,6 +1,10 @@
 <script>
   import GameBoard from './components/GameBoard.svelte';
 
+  function showStats() {
+    alert('showStats() in App.svelte is not yet implemented');
+  }
+
 </script>
 
 <main>
@@ -12,7 +16,7 @@
     <div>
       <span class="winner-message">You have fallen...</span>
       <button class="restart" onClick="location.reload()">Play Again</button>
-      <button onClick="showStats()">Show Stats</button>
+      <button on:click={showStats}>Show Stats</button>
     </div>
   </div>
 </main>

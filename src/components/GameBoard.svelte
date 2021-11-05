@@ -8,6 +8,8 @@
   // original code uses before-game to display 
   // start-game button, see style block below (porting from vanilla js)
 	export let beforeGame = true;
+  export let duringGame = false;
+  export let gameOver = false;
 
   // original code uses card-selected to trigger 
   // css logic, see style block below (porting from vanilla js)
@@ -15,19 +17,21 @@
   
   let moistureIndex = 0;
   let heatIndex = 0;
+  let scenarios = [];
 
 
 </script>
 
-  <div 
-    class="game-board"
-    class:before-game={beforeGame} 
-    class:card-selected={cardSelected} 
-  >
+  <div class="game-board">
 
     <DaemonArea bind:moistureIndex />
 
-    <PlayerArea bind:heatIndex />
+    <PlayerArea 
+      bind:heatIndex 
+      bind:beforeGame
+      bind:gameOver 
+      bind:duringGame
+      bind:scenarios />
 
   </div> 
 
