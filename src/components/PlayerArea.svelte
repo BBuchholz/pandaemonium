@@ -1,4 +1,6 @@
 <script>
+  export let heatIndex = 9;
+
   function startGame() {
     alert('startGame() in PlayerArea.svelte not implemented')
   }
@@ -11,10 +13,7 @@
 <div class="player-area">
 
   <div class="stats player-stats" onClick="showStats()">
-    <div class="life-bar">
-      <div class="life-left player-color"></div>
-    </div>
-    <div class="life-total"></div>
+    <div class="life-total">{heatIndex}</div>
     <div class="thumbnail">🌡</div>
     <div class="name h-index-name">HI</div>
   </div>

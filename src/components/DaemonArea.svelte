@@ -1,15 +1,17 @@
+<script>
+  export let moistureIndex = 9;
+
+</script>
+
 <div class="daemon-area">
 
   <h1>
-    <strong>EMPYREAN</strong> <br/> Choose your response to the play of the Heavenly City...
+    Choose your response to the play of the Heavenly City...
   </h1>
 
   <div class="stats daemon-stats" onClick="showStats()">
-    <div class="life-bar">
-      <div class="life-left daemon-color"></div>
-    </div>
-    <div class="life-total"></div>
-    <div class="thumbnail">💦</div>
+    <div class="life-total">{moistureIndex}</div>
+    <div class="thumbnail">🌫️</div>
     <div class="name m-index-name">MI</div>
   </div>
   

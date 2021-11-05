@@ -1,4 +1,10 @@
 <script>
+
+  import { onMount } from 'svelte';
+
+  import DaemonArea from './DaemonArea.svelte';
+  import PlayerArea from './PlayerArea.svelte';
+
   // original code uses before-game to display 
   // start-game button, see style block below (porting from vanilla js)
 	export let beforeGame = true;
@@ -6,8 +12,11 @@
   // original code uses card-selected to trigger 
   // css logic, see style block below (porting from vanilla js)
   export let cardSelected = false;
-  import DaemonArea from './DaemonArea.svelte';
-  import PlayerArea from './PlayerArea.svelte';
+  
+  let moistureIndex = 0;
+  let heatIndex = 0;
+
+
 </script>
 
   <div 
@@ -16,9 +25,9 @@
     class:card-selected={cardSelected} 
   >
 
-    <DaemonArea />
+    <DaemonArea bind:moistureIndex />
 
-    <PlayerArea />
+    <PlayerArea bind:heatIndex />
 
   </div> 
 
