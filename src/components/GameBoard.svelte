@@ -17,11 +17,27 @@
   let moistureIndex = 0;
   let heatIndex = 0;
 
+  // const tempScenariosTest = async () => {
+  //   const resp = await fetch('/api/scenarios');
+  //   const data = await resp.json();
 
-  function startGame() {
+  //   alert("data: " + JSON.stringify(data));
+
+  // } 
+
+  // tempScenariosTest();
+
+  async function startGame() {
     beforeGame = false;
     duringGame = true;
+    await loadScenarios();
+    console.log(scenarios);
     playTurn();
+  }
+
+  async function loadScenarios() {
+    const resp = await fetch('/api/scenarios');
+    scenarios = await resp.json();
   }
 
   function playTurn() {
@@ -80,19 +96,19 @@
       return;
     }
 
-    var j = 0;
-    var cardIndexes = shuffleArray([0, 1, 2]);
+    // var j = 0;
+    // var cardIndexes = shuffleArray([0, 1, 2]);
 
-    // Get scenario cards
-    console.log("scenarios.length == " + scenarios.length);
+    // // Get scenario cards
+    // console.log("scenarios.length == " + scenarios.length);
 
-    var randomScenarioIndex = Math.floor(Math.random() * scenarios.length);
-    var scenario = scenarios[randomScenarioIndex];
-    console.log(scenario.daemonCard.description);
+    // var randomScenarioIndex = Math.floor(Math.random() * scenarios.length);
+    // var scenario = scenarios[randomScenarioIndex];
+    // console.log(scenario.daemonCard.description);
 
-    scenarios.splice(randomScenarioIndex, 1);
+    // scenarios.splice(randomScenarioIndex, 1);
 
-    console.log("scenarios.length after splice == " + scenarios.length);
+    // console.log("scenarios.length after splice == " + scenarios.length);
 
     // var daemonCard = scenario.daemonCard;
     // var daemonCardEl = document.querySelector(".daemon-area .card");
