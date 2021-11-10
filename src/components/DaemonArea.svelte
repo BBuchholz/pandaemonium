@@ -5,7 +5,7 @@
   export let moistureIndex = 9;
   export let daemonCards = [1,2,3];
   export let beforeGame = false;
-
+  export let selectedCards = [];
 
   function showDaemonStats() {
     alert('showDaemonStats() in DaemonArea.svelte not implemented');
@@ -32,6 +32,7 @@
         isPlayerCard={false} 
         {cardKey}
         {i}
+        on:cardSelected
       />
 
     {/each}

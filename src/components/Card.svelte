@@ -1,10 +1,14 @@
 <script>
   
   import { fade, fly } from 'svelte/transition';
+  import { createEventDispatcher } from 'svelte';
+  const dispatch = createEventDispatcher();
 
   export let isPlayerCard = false;
   export let cardKey = '2D';
   export let i = 0;
+  export let selectedCards = [];
+  let isSelected = false;
   let src = '';
   let cardTitle = 'card title';
   let cardPower = 'xx';
@@ -12,11 +16,16 @@
   $: src = getImgSrcFromCardKey(cardPower);
   $: cardTitle = cardKey;
   $: cardPower = cardKey; 
+  $: isSelected = selectedCards.includes(cardKey);
 
   function getImgSrcFromCardKey(powerString){
     return '/images/' + powerString + '.jpg';
   }
 
+  function handleClick() {
+    isSelected = !isSelected;
+    dispatch('cardSelected', cardKey);
+  }
 
 </script>
 
@@ -28,6 +37,8 @@
   class:player-color={isPlayerCard}
   class:daemon-card={!isPlayerCard}
   class:daemon-color={!isPlayerCard}
+  class:played-card={isSelected}
+  on:click={handleClick}
 >
   <div class="text">{cardTitle}</div>
   <img class="image" alt={cardTitle} {src}/>
@@ -215,6 +226,11 @@ button {
   animation: sheen infinite .5s ease-in-out;
   display: none;
   transform: rotate(-7deg);
+}
+
+.played-card {
+  transform: translateY(-40px);
+  box-shadow: 0px 15px 15px rgba(0,0,0,.3);
 }
 
 @keyframes sheen {

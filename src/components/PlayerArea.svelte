@@ -1,10 +1,11 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
   import Card from './Card.svelte';
+  import { createEventDispatcher } from 'svelte';
   const dispatch = createEventDispatcher();
   export let heatIndex = 9;
   export let beforeGame = false;
   export let playerCards = [3,2,1];
+  export let selectedCards = [];
 
   function onStartGame() {
     dispatch('startGame', 'no details');
@@ -46,6 +47,7 @@
         isPlayerCard={true}
         {cardKey} 
         {i}
+        on:cardSelected
       />
     
     {/each}
