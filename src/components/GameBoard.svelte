@@ -8,21 +8,29 @@
   import KnechtController from '../myriad/KnechtController.js';
   const magisterLudi = KnechtController();
 
+  import { 
+    selectedCardForPlayer, 
+    selectedCardForDaemon
+    } from '../stores.js';
+
   // original code uses before-game to display 
   // start-game button, see style block below (porting from vanilla js)
 	export let beforeGame = true;
   export let duringGame = false;
   export let gameOver = false;
   export let roundFinished = false;
-  export let selectedCards = [];
   export let scenarios = [];
   let deck = [];
   let daemonCards = [];
   let playerCards = [];
+  let selectedCards = [];
 
   let moistureIndex = 0;
   let heatIndex = 0;
 
+  $: selectedCards = [$selectedCardForPlayer, $selectedCardForDaemon];
+  $: console.log("selectedCardForDaemon: " + selectedCardForDaemon);
+  $: console.log("selectedCardForPlayer: " + selectedCardForPlayer);
   // const tempScenariosTest = async () => {
   //   const resp = await fetch('/api/scenarios');
   //   const data = await resp.json();

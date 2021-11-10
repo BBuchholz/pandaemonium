@@ -1,8 +1,14 @@
 <script>
   
   import { fade, fly } from 'svelte/transition';
-  import { createEventDispatcher } from 'svelte';
-  const dispatch = createEventDispatcher();
+
+  import { 
+    selectedCardForPlayer, 
+    selectedCardForDaemon
+    } from '../stores.js';
+
+  // import { createEventDispatcher } from 'svelte';
+  // const dispatch = createEventDispatcher();
 
   export let isPlayerCard = false;
   export let cardKey = '2D';
@@ -11,7 +17,7 @@
   let isSelected = false;
   let src = '';
   let cardTitle = 'card title';
-  let cardPower = 'xx';
+  let cardPower = 'zw';
   
   $: src = getImgSrcFromCardKey(cardPower);
   $: cardTitle = cardKey;
@@ -23,8 +29,24 @@
   }
 
   function handleClick() {
-    isSelected = !isSelected;
-    dispatch('cardSelected', cardKey);
+    // isSelected = !isSelected;
+    // dispatch('cardSelected', cardKey);
+    console.log('clicked' + cardKey);
+    if(isPlayerCard){
+
+      if(selectedCardForPlayer === cardKey){
+        selectedCardForPlayer.set('');
+      }else{
+        selectedCardForPlayer.set(cardKey);
+      }
+    }else{
+
+      if(selectedCardForDaemon === cardKey){
+        selectedCardForDaemon.set('');
+      }else{
+        selectedCardForDaemon.set(cardKey);
+      }
+    }
   }
 
 </script>
