@@ -1,69 +1,40 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
-  import Card from './Card.svelte';
-  const dispatch = createEventDispatcher();
-  export let heatIndex = 9;
-  export let beforeGame = false;
-  export let playerCards = [3,2,1];
+  
+  import { fade, fly } from 'svelte/transition';
 
-  function onStartGame() {
-    dispatch('startGame', 'no details');
+  export let isPlayerCard = false;
+  export let cardKey = '2D';
+  export let i = 0;
+  let src = '';
+  let cardTitle = 'card title';
+  let cardPower = 'xx';
+  
+  $: src = getImgSrcFromCardKey(cardPower);
+  $: cardTitle = cardKey;
+  $: cardPower = cardKey; 
+
+  function getImgSrcFromCardKey(powerString){
+    return '/images/' + powerString + '.jpg';
   }
 
-  function onPlayTurn() {
-    dispatch('playTurn', 'no details');
-  }
 
-  function showPlayerStats() {
-    alert('showPlayerStats in PlayerArea.svelte not implemented');
-  }
 </script>
 
-<div class="player-area">
-
-  <div class="stats player-stats" on:click={showPlayerStats}>
-    <div class="life-total">{heatIndex}</div>
-    <div class="thumbnail">🌡</div>
-    <div class="name h-index-name">HI</div>
-  </div>
-
-    
-  {#if beforeGame}
-
-    <button 
-      class="start-game"
-      class:beforeGame
-      on:click={onStartGame}
-    >
-      Play the Game!
-    </button>
-
-  {:else}
-
-    {#each playerCards as cardKey,i}
-
-      <Card 
-        isPlayerCard={true}
-        {cardKey} 
-        {i}
-      />
-    
-    {/each}
-
-  {/if}
-
-  <button 
-    class="next-turn" 
-    on:click={onPlayTurn}
-  >
-    Next!
-  </button>
-
+<div 
+  class="card"
+  in:fly="{{ y: 200, duration: 2000, delay: i*200 }}" 
+  out:fade
+  class:player-card={isPlayerCard}
+  class:player-color={isPlayerCard}
+  class:daemon-card={!isPlayerCard}
+  class:daemon-color={!isPlayerCard}
+>
+  <div class="text">{cardTitle}</div>
+  <img class="image" alt={cardTitle} {src}/>
+  <div class="power">{cardPower}</div>
 </div>
 
-
-
-<style> 
+<style>
 
 .player-area {
   position: relative;
@@ -337,6 +308,21 @@ img {
 
 /* Change the colors in this stylesheet to customize the game. */ 
 
+/* Daemon Styles */
+
+.daemon-color { 
+  background-color: #2a79d0;
+}
+
+.daemon-area {
+  background-color: #0d3158;
+  background-image: url("/images/chip.svg");
+}
+
+.daemon-card .power {
+  background-image: url("/images/shield.svg");
+}
+
 /* Player Styles */
 
 .player-color {
@@ -351,6 +337,5 @@ img {
 .player-card .power {
   background-image: url("/images/skull.svg");
 }
-
 
 </style>

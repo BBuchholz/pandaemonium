@@ -5,6 +5,9 @@
   import DaemonArea from './DaemonArea.svelte';
   import PlayerArea from './PlayerArea.svelte';
 
+  import KnechtController from '../myriad/KnechtController.js';
+  const magisterLudi = KnechtController();
+
   // original code uses before-game to display 
   // start-game button, see style block below (porting from vanilla js)
 	export let beforeGame = true;
@@ -13,6 +16,9 @@
   export let roundFinished = false;
   export let cardSelected = false;
   export let scenarios = [];
+  let deck = [];
+  let daemonCards = [];
+  let playerCards = [];
 
   let moistureIndex = 0;
   let heatIndex = 0;
@@ -27,17 +33,30 @@
 
   // tempScenariosTest();
 
-  async function startGame() {
+  // async function startGame() {
+  //   beforeGame = false;
+  //   duringGame = true;
+  //   await loadScenarios();
+  //   console.log(scenarios);
+  //   playTurn();
+  // }
+
+  // async function loadScenarios() {
+  //   const resp = await fetch('/api/scenarios');
+  //   scenarios = await resp.json();
+  // }
+
+  function startGame() {
     beforeGame = false;
     duringGame = true;
-    await loadScenarios();
-    console.log(scenarios);
+    loadScenariosAndDeck();
     playTurn();
   }
 
-  async function loadScenarios() {
-    const resp = await fetch('/api/scenarios');
-    scenarios = await resp.json();
+  function loadScenariosAndDeck() {
+    
+    scenarios = magisterLudi.getScenarios();
+    deck = magisterLudi.dealTwelveTrees();
   }
 
   function playTurn() {
@@ -45,38 +64,7 @@
     roundFinished = true;
     cardSelected = false;
 
-    ////////////////////////////////////////////////////////////////////
-    // TODO: vanilla-sky implementation removes card-selected class from game-board
-    ////////////////////////////////////////////////////////////////////
-
-    ////////////////////////////////////////////////////////////////////
-    // TODO: vanilla-sky implementation removes ouch class from daemon and player stats thumbnail
-    ////////////////////////////////////////////////////////////////////
-
-    ////////////////////////////////////////////////////////////////////
-    // TODO: vanilla-sky implementation hides next-turn button by disabling it
-    ////////////////////////////////////////////////////////////////////
-
-    ////////////////////////////////////////////////////////////////////
-    // TODO: vanilla-sky implementation calls updateScores() 
-    // DONE: vanilla-sky implementation calls updateScores() 
-    // PORT NOTES: shouldn't be needed, leaving comments until working
-    ////////////////////////////////////////////////////////////////////
-
-    ////////////////////////////////////////////////////////////////////
-    // TODO: vanilla-sky implementation removes class showCard from all card elements
-    ////////////////////////////////////////////////////////////////////
-
-    ////////////////////////////////////////////////////////////////////
-    // TODO: vanilla-sky implementation sets timeout and calls revealCards()
-    // DONE: vanilla-sky implementation sets timeout and calls revealCards()
-    setTimeout(function(){
-      revealCards();
-    }, 500);
-    ////////////////////////////////////////////////////////////////////
-
-
-    alert('playTurn() in GameBoard.svelte not fully implemented (end of current function implementation reached');
+    dealCards();
   }
 
   function outOfCards() {
@@ -84,7 +72,7 @@
     alert('outOfCards() in GameBoard.svelte not fully implemented (end of current function implementation reached');
   }
 
-  function revealCards() {
+  function dealCards() {
 
     ////////////////////////////////////////////////////////////////////
     // TODO: vanilla-sky implementation needs porting
@@ -95,6 +83,16 @@
       outOfCards();
       return;
     }
+
+    var cardsToDeal = 3;
+
+    for(let i = 0; i < cardsToDeal; i++){
+      daemonCards = [...daemonCards, deck.pop()];
+      playerCards = [...playerCards, deck.pop()];
+      console.log("dealt to daemon: " + daemonCards);
+      console.log("dealt to player: " + playerCards);
+    }
+
 
     // var j = 0;
     // var cardIndexes = shuffleArray([0, 1, 2]);
@@ -152,19 +150,25 @@
     // daemonCardEl.querySelector(".power").innerHTML = daemonCard.power;
 
 
-    alert('revealCards() in GameBoard.svelte not implemented');
   }
 
 </script>
 
   <div class="game-board">
 
-    <DaemonArea bind:moistureIndex />
+    <DaemonArea 
+      bind:moistureIndex 
+      bind:beforeGame
+      bind:daemonCards
+    />
 
     <PlayerArea 
       bind:heatIndex
+      bind:beforeGame
+      bind:playerCards
       on:startGame={ e => startGame(e.detail) }
-      on:nextTurn={ e => nextTurn(e.detail) } />
+      on:nextTurn={ e => nextTurn(e.detail) } 
+    />
 
   </div> 
 

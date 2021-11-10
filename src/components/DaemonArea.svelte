@@ -1,5 +1,11 @@
 <script>
+  
+  import Card from './Card.svelte';
+
   export let moistureIndex = 9;
+  export let daemonCards = [1,2,3];
+  export let beforeGame = false;
+
 
   function showDaemonStats() {
     alert('showDaemonStats() in DaemonArea.svelte not implemented');
@@ -18,11 +24,19 @@
     <div class="name m-index-name">MI</div>
   </div>
   
-  <div class="card daemon-card daemon-color">
-    <div class="text"></div>
-    <img class="image" alt="daemon card one" />
-    <div class="power"></div>
-  </div>
+  {#if !beforeGame}
+
+    {#each daemonCards as cardKey, i}
+
+      <Card 
+        isPlayerCard={false} 
+        {cardKey}
+        {i}
+      />
+
+    {/each}
+
+  {/if}
 
 </div>
 
@@ -149,7 +163,7 @@
   }
 
   .card {
-    opacity: 0;
+    opacity: 1;
     margin: 0 10px;
     width: 150px;
     height: 200px;
