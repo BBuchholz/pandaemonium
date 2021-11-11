@@ -23,6 +23,7 @@
   $: cardTitle = cardKey;
   $: cardPower = cardKey; 
   $: isSelected = selectedCards.includes(cardKey);
+  $: console.log("isSelected for " + cardKey + ": " + isSelected);
 
   function getImgSrcFromCardKey(powerString){
     return '/images/' + powerString + '.jpg';

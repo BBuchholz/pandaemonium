@@ -29,8 +29,8 @@
   let heatIndex = 0;
 
   $: selectedCards = [$selectedCardForPlayer, $selectedCardForDaemon];
-  $: console.log("selectedCardForDaemon: " + selectedCardForDaemon);
-  $: console.log("selectedCardForPlayer: " + selectedCardForPlayer);
+  $: console.log("selectedCardForDaemon: " + $selectedCardForDaemon);
+  $: console.log("selectedCardForPlayer: " + $selectedCardForPlayer);
   // const tempScenariosTest = async () => {
   //   const resp = await fetch('/api/scenarios');
   //   const data = await resp.json();
