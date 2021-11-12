@@ -1,5 +1,7 @@
 <script>
   
+  import { selectedCardForDaemon } from '../stores.js';
+
   import Card from './Card.svelte';
 
   export let moistureIndex = 9;
@@ -33,6 +35,7 @@
         {cardKey}
         {i}
         on:cardSelected
+        isSelected={$selectedCardForDaemon === cardKey}
       />
 
     {/each}

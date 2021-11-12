@@ -1,4 +1,7 @@
 <script>
+  
+  import { selectedCardForPlayer } from '../stores.js';
+
   import Card from './Card.svelte';
   import { createEventDispatcher } from 'svelte';
   const dispatch = createEventDispatcher();
@@ -48,6 +51,7 @@
         {cardKey} 
         {i}
         on:cardSelected
+        isSelected={$selectedCardForPlayer === cardKey}
       />
     
     {/each}

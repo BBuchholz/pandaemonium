@@ -13,16 +13,14 @@
   export let isPlayerCard = false;
   export let cardKey = '2D';
   export let i = 0;
-  export let selectedCards = [];
-  let isSelected = false;
+  export let isSelected = false;
   let src = '';
   let cardTitle = 'card title';
   let cardPower = 'zw';
-  
+
   $: src = getImgSrcFromCardKey(cardPower);
   $: cardTitle = cardKey;
   $: cardPower = cardKey; 
-  $: isSelected = selectedCards.includes(cardKey);
   $: console.log("isSelected for " + cardKey + ": " + isSelected);
 
   function getImgSrcFromCardKey(powerString){
