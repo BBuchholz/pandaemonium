@@ -1,13 +1,8 @@
 <script>
   
-  import { selectedCardForDaemon } from '../stores.js';
+  import { selectedCardsForDaemon, daemonCards, moistureIndex, beforeGame } from '../stores.js';
 
   import Card from './Card.svelte';
-
-  export let moistureIndex = 9;
-  export let daemonCards = [1,2,3];
-  export let beforeGame = false;
-  export let selectedCards = [];
 
   function showDaemonStats() {
     alert('showDaemonStats() in DaemonArea.svelte not implemented');
@@ -21,21 +16,21 @@
   </h1>
 
   <div class="stats daemon-stats" on:click={showDaemonStats}>
-    <div class="life-total">{moistureIndex}</div>
+    <div class="life-total">{$moistureIndex}</div>
     <div class="thumbnail">🌫️</div>
     <div class="name m-index-name">MI</div>
   </div>
   
-  {#if !beforeGame}
+  {#if !$beforeGame}
 
-    {#each daemonCards as cardKey, i}
+    {#each $daemonCards as cardKey, i}
 
       <Card 
         isPlayerCard={false} 
         {cardKey}
         {i}
         on:cardSelected
-        isSelected={$selectedCardForDaemon === cardKey}
+        isSelected={$selectedCardsForDaemon.includes(cardKey)}
       />
 
     {/each}

@@ -9,28 +9,16 @@
   const magisterLudi = KnechtController();
 
   import { 
-    selectedCardForPlayer, 
-    selectedCardForDaemon
+    selectedCardsForPlayer, 
+    selectedCardsForDaemon,
+    playerCards,
+    daemonCards,
+    beforeGame,
+    deck
     } from '../stores.js';
 
-  // original code uses before-game to display 
-  // start-game button, see style block below (porting from vanilla js)
-	export let beforeGame = true;
-  export let duringGame = false;
-  export let gameOver = false;
-  export let roundFinished = false;
-  export let scenarios = [];
-  let deck = [];
-  let daemonCards = [];
-  let playerCards = [];
-  let selectedCards = [];
-
-  let moistureIndex = 0;
-  let heatIndex = 0;
-
-  $: selectedCards = [$selectedCardForPlayer, $selectedCardForDaemon];
-  $: console.log("selectedCardForDaemon: " + $selectedCardForDaemon);
-  $: console.log("selectedCardForPlayer: " + $selectedCardForPlayer);
+  $: console.log("selectedCardForDaemon: " + $selectedCardsForDaemon);
+  $: console.log("selectedCardForPlayer: " + $selectedCardsForPlayer);
   // const tempScenariosTest = async () => {
   //   const resp = await fetch('/api/scenarios');
   //   const data = await resp.json();
@@ -55,22 +43,23 @@
   // }
 
   function startGame() {
-    beforeGame = false;
-    duringGame = true;
+    $beforeGame = false;
+    console.log('starting game...');
     loadScenariosAndDeck(); 
     playTurn();
   }
 
   function loadScenariosAndDeck() {
     
-    scenarios = magisterLudi.getScenarios();
-    deck = magisterLudi.dealTwelveTrees();
+    // scenarios = magisterLudi.getScenarios();
+    $deck = magisterLudi.dealTwelveTrees();
   }
 
   function playTurn() {
 
-    roundFinished = true;
-    selectedCards = [];
+    // roundFinished = true;
+    $selectedCardsForPlayer = [];
+    $selectedCardsForDaemon = [];
 
     dealCards();
   }
@@ -86,7 +75,7 @@
 
   function dealCards() {
 
-    if(deck.length == 0){
+    if($deck.length == 0){
       
       outOfCards();
       return;
@@ -95,8 +84,8 @@
     var cardsToDeal = 3;
 
     for(let i = 0; i < cardsToDeal; i++){
-      daemonCards = [...daemonCards, deck.pop()];
-      playerCards = [...playerCards, deck.pop()];
+      $daemonCards = [...$daemonCards, $deck.pop()];
+      $playerCards = [...$playerCards, $deck.pop()];
     }
 
   }
@@ -106,18 +95,10 @@
   <div class="game-board">
 
     <DaemonArea 
-      bind:moistureIndex 
-      bind:beforeGame
-      bind:daemonCards
-      bind:selectedCards
       on:cardSelected={ e => selectCard(e.detail) }
     />
 
     <PlayerArea 
-      bind:heatIndex
-      bind:beforeGame
-      bind:playerCards
-      bind:selectedCards
       on:startGame={ e => startGame(e.detail) }
       on:nextTurn={ e => nextTurn(e.detail) } 
       on:cardSelected={ e => selectCard(e.detail) }

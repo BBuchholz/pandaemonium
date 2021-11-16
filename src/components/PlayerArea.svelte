@@ -1,14 +1,12 @@
 <script>
   
-  import { selectedCardForPlayer } from '../stores.js';
+  import { selectedCardsForPlayer, selectedCardsForDaemon, playerCards, beforeGame, heatIndex } from '../stores.js';
 
   import Card from './Card.svelte';
   import { createEventDispatcher } from 'svelte';
   const dispatch = createEventDispatcher();
-  export let heatIndex = 9;
-  export let beforeGame = false;
-  export let playerCards = [3,2,1];
-  export let selectedCards = [];
+
+  // $: hasSelected = selectionIsInProgress();
 
   function onStartGame() {
     dispatch('startGame', 'no details');
@@ -21,18 +19,35 @@
   function showPlayerStats() {
     alert('showPlayerStats in PlayerArea.svelte not implemented');
   }
+
+  // function selectionIsInProgress() {
+  //   let selectedFound = false;
+  //   let selectedValue = '';
+
+  //   for(const thisCardKey of selectedCards){
+  //     if(thisCardKey != ''){
+  //       selectedFound = true;
+  //       selectedValue = thisCardKey;
+  //     }
+  //   }
+
+  //   console.log("selectedFound" + selectedFound + selectedValue);
+
+  //   return selectedFound;
+  // }
+
 </script>
 
 <div class="player-area">
 
   <div class="stats player-stats" on:click={showPlayerStats}>
-    <div class="life-total">{heatIndex}</div>
+    <div class="life-total">{$heatIndex}</div>
     <div class="thumbnail">🌡</div>
     <div class="name h-index-name">HI</div>
   </div>
 
     
-  {#if beforeGame}
+  {#if $beforeGame}
 
     <button 
       class="start-game"
@@ -44,19 +59,34 @@
 
   {:else}
 
-    {#each playerCards as cardKey,i}
+    {#each $playerCards as cardKey,i}
 
       <Card 
         isPlayerCard={true}
         {cardKey} 
         {i}
         on:cardSelected
-        isSelected={$selectedCardForPlayer === cardKey}
+        isSelected={$selectedCardsForPlayer.includes(cardKey)}
       />
     
     {/each}
 
   {/if}
+
+
+  {#if $selectedCardsForPlayer.length > 0 ||
+       $selectedCardsForDaemon.length > 0}
+  <!-- {#if selectedCards.length > 0} -->
+
+    <button 
+      class="confirmSelection"
+      on:click={() => alert('selection confirmed')}
+    >
+      -0/+0 
+    </button>
+
+  {/if}
+
 
   <button 
     class="next-turn" 
@@ -172,6 +202,17 @@ button.start-game {
   position: absolute;
   background: black;
   display: none;
+  top: -20px;
+}
+
+button.confirmSelection {
+  position: absolute; 
+  background: black;
+  display: block;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  left: 0;
   top: -20px;
 }
 

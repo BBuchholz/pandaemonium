@@ -3,8 +3,8 @@
   import { fade, fly } from 'svelte/transition';
 
   import { 
-    selectedCardForPlayer, 
-    selectedCardForDaemon
+    selectedCardsForPlayer, 
+    selectedCardsForDaemon
     } from '../stores.js';
 
   // import { createEventDispatcher } from 'svelte';
@@ -33,17 +33,18 @@
     console.log('clicked' + cardKey);
     if(isPlayerCard){
 
-      if(selectedCardForPlayer === cardKey){
-        selectedCardForPlayer.set('');
+      if($selectedCardsForPlayer.includes(cardKey)){
+        $selectedCardsForPlayer = $selectedCardsForPlayer.filter(cKey => cKey !== cardKey)
       }else{
-        selectedCardForPlayer.set(cardKey);
+        $selectedCardsForPlayer = [...$selectedCardsForPlayer, cardKey];
       }
+
     }else{
 
-      if(selectedCardForDaemon === cardKey){
-        selectedCardForDaemon.set('');
+      if($selectedCardsForDaemon.includes(cardKey)){
+        $selectedCardsForDaemon = $selectedCardsForDaemon.filter(cKey => cKey !== cardKey)
       }else{
-        selectedCardForDaemon.set(cardKey);
+        $selectedCardsForDaemon = [...$selectedCardsForDaemon, cardKey];
       }
     }
   }
