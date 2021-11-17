@@ -45,13 +45,12 @@
   function startGame() {
     $beforeGame = false;
     console.log('starting game...');
-    loadScenariosAndDeck(); 
+    loadDeck(); 
     playTurn();
   }
 
-  function loadScenariosAndDeck() {
+  function loadDeck() {
     
-    // scenarios = magisterLudi.getScenarios();
     $deck = magisterLudi.dealTwelveTrees();
   }
 
@@ -68,9 +67,22 @@
     console.log('selected ' + cardKey);
   }
 
+  function handleSelectionConfirmed() {
+    console.log('selection confirmed'); 
+
+    processCardComparison();
+    dealCards();
+  }
+
+  function processCardComparison() {
+    console.log('card comparison processed');
+  }
+
   function outOfCards() {
     
-    alert('outOfCards() in GameBoard.svelte not fully implemented (end of current function implementation reached');
+    alert('out of cards, reshuffling...');
+    loadDeck();
+    playTurn();
   }
 
   function dealCards() {
@@ -82,6 +94,9 @@
     }
 
     var cardsToDeal = 3;
+
+    $daemonCards = [];
+    $playerCards = [];
 
     for(let i = 0; i < cardsToDeal; i++){
       $daemonCards = [...$daemonCards, $deck.pop()];
@@ -102,6 +117,7 @@
       on:startGame={ e => startGame(e.detail) }
       on:nextTurn={ e => nextTurn(e.detail) } 
       on:cardSelected={ e => selectCard(e.detail) }
+      on:selectionConfirmed={ e => handleSelectionConfirmed(e.detail) }
     />
 
   </div> 

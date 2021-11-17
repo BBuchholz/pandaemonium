@@ -7,9 +7,6 @@
     selectedCardsForDaemon
     } from '../stores.js';
 
-  // import { createEventDispatcher } from 'svelte';
-  // const dispatch = createEventDispatcher();
-
   export let isPlayerCard = false;
   export let cardKey = '2D';
   export let i = 0;

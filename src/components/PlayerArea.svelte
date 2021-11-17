@@ -20,6 +20,10 @@
     alert('showPlayerStats in PlayerArea.svelte not implemented');
   }
 
+  function selectionConfirmed() {
+    dispatch('selectionConfirmed', 'no details');
+  }
+
   // function selectionIsInProgress() {
   //   let selectedFound = false;
   //   let selectedValue = '';
@@ -80,7 +84,7 @@
 
     <button 
       class="confirmSelection"
-      on:click={() => alert('selection confirmed')}
+      on:click={selectionConfirmed}
     >
       -0/+0 
     </button>
