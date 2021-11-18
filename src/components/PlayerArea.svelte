@@ -1,6 +1,6 @@
 <script>
   
-  import { selectedCardsForPlayer, selectedCardsForDaemon, playerCards, beforeGame, heatIndex } from '../stores.js';
+  import { selectionResolutionValue, selectedCardsForPlayer, selectedCardsForDaemon, playerCards, beforeGame, heatIndex } from '../stores.js';
 
   import Card from './Card.svelte';
   import { createEventDispatcher } from 'svelte';
@@ -86,7 +86,7 @@
       class="confirmSelection"
       on:click={selectionConfirmed}
     >
-      -0/+0 
+      {$selectionResolutionValue} 
     </button>
 
   {/if}
