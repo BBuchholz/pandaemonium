@@ -2,6 +2,7 @@ import { writable, derived } from 'svelte/store';
 
 export const selectedCardsForPlayer = writable([]);
 export const selectedCardsForDaemon = writable([]);
+
 // export const selectionIsInProgress = derived(
 	
 // ); 
@@ -12,7 +13,7 @@ export const deck = writable([]);
 
 
 export const beforeGame = writable(true);
-export const moistureIndex = writable(0);
+export const moistureIndex = writable(1);
 export const heatIndex = writable(0);
 export const selectionResolutionValue = derived(
 	[selectedCardsForDaemon, selectedCardsForPlayer],
@@ -30,5 +31,12 @@ export const selectionResolutionValue = derived(
 		}
 
 		return daemonTotal + playerTotal;
+	}
+);
+
+export const selectionIsCombinatory = derived(
+	moistureIndex,
+	($moistureIndex) => {
+		return $moistureIndex > 0;
 	}
 );

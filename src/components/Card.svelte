@@ -4,7 +4,8 @@
 
   import { 
     selectedCardsForPlayer, 
-    selectedCardsForDaemon
+    selectedCardsForDaemon,
+    selectionIsCombinatory
     } from '../stores.js';
 
   export let isPlayerCard = false;
@@ -31,17 +32,41 @@
     if(isPlayerCard){
 
       if($selectedCardsForPlayer.includes(cardKey)){
-        $selectedCardsForPlayer = $selectedCardsForPlayer.filter(cKey => cKey !== cardKey)
+
+        $selectedCardsForPlayer = 
+          $selectedCardsForPlayer.filter(cKey => cKey !== cardKey);
+
       }else{
-        $selectedCardsForPlayer = [...$selectedCardsForPlayer, cardKey];
+
+        if($selectionIsCombinatory){
+          
+          $selectedCardsForPlayer = 
+            [...$selectedCardsForPlayer, cardKey];
+
+        }else{
+
+          $selectedCardsForPlayer = [cardKey];
+        }
+
       }
 
     }else{
 
       if($selectedCardsForDaemon.includes(cardKey)){
-        $selectedCardsForDaemon = $selectedCardsForDaemon.filter(cKey => cKey !== cardKey)
+
+        $selectedCardsForDaemon = $selectedCardsForDaemon.filter(cKey => cKey !== cardKey);
+
       }else{
-        $selectedCardsForDaemon = [...$selectedCardsForDaemon, cardKey];
+      
+        if($selectionIsCombinatory) {
+          
+          $selectedCardsForDaemon = 
+            [...$selectedCardsForDaemon, cardKey];
+
+        }else{
+
+          $selectedCardsForDaemon = [cardKey];
+        }
       }
     }
   }
