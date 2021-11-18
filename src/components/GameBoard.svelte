@@ -14,11 +14,15 @@
     playerCards,
     daemonCards,
     beforeGame,
-    deck
+    deck,
+    selectionResolutionMValue,
+    selectionResolutionHValue,
+    heatIndex,
+    moistureIndex
     } from '../stores.js';
 
-  $: console.log("selectedCardForDaemon: " + $selectedCardsForDaemon);
-  $: console.log("selectedCardForPlayer: " + $selectedCardsForPlayer);
+  $: console.log("selectedCardsForDaemon: " + $selectedCardsForDaemon);
+  $: console.log("selectedCardsForPlayer: " + $selectedCardsForPlayer);
   // const tempScenariosTest = async () => {
   //   const resp = await fetch('/api/scenarios');
   //   const data = await resp.json();
@@ -56,11 +60,15 @@
 
   function playTurn() {
 
+    dealCards();
+  }
+
+  function resetSelection() {
+
     // roundFinished = true;
     $selectedCardsForPlayer = [];
     $selectedCardsForDaemon = [];
-
-    dealCards();
+    console.log('selection reset');
   }
 
   function selectCard(cardKey) {
@@ -74,7 +82,16 @@
     dealCards();
   }
 
+  function nextTurn() {
+
+  }
+
   function processCardComparison() {
+
+    $heatIndex = $heatIndex + $selectionResolutionHValue;
+    $moistureIndex = $moistureIndex + $selectionResolutionMValue;
+
+    resetSelection();
     console.log('card comparison processed');
   }
 

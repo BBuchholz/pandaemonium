@@ -1,6 +1,6 @@
 <script>
   
-  import { selectionResolutionValue, selectedCardsForPlayer, selectedCardsForDaemon, playerCards, beforeGame, heatIndex } from '../stores.js';
+  import { selectionResolutionMValue, selectionResolutionHValue, selectedCardsForPlayer, selectedCardsForDaemon, playerCards, beforeGame, heatIndex } from '../stores.js';
 
   import Card from './Card.svelte';
   import { createEventDispatcher } from 'svelte';
@@ -23,22 +23,6 @@
   function selectionConfirmed() {
     dispatch('selectionConfirmed', 'no details');
   }
-
-  // function selectionIsInProgress() {
-  //   let selectedFound = false;
-  //   let selectedValue = '';
-
-  //   for(const thisCardKey of selectedCards){
-  //     if(thisCardKey != ''){
-  //       selectedFound = true;
-  //       selectedValue = thisCardKey;
-  //     }
-  //   }
-
-  //   console.log("selectedFound" + selectedFound + selectedValue);
-
-  //   return selectedFound;
-  // }
 
 </script>
 
@@ -79,14 +63,16 @@
 
 
   {#if $selectedCardsForPlayer.length > 0 ||
-       $selectedCardsForDaemon.length > 0}
+       $selectedCardsForDaemon.length > 0 }
   <!-- {#if selectedCards.length > 0} -->
 
     <button 
       class="confirmSelection"
       on:click={selectionConfirmed}
     >
-      {$selectionResolutionValue} 
+      {$selectionResolutionMValue}
+      <hr />
+      {$selectionResolutionHValue}
     </button>
 
   {/if}
@@ -216,8 +202,8 @@ button.confirmSelection {
   align-items: center;
   justify-content: center;
   font-size: 20px;
-  left: 0;
-  top: -20px;
+  left: 20px;
+  top: -35px;
 }
 
 button.beforeGame {
