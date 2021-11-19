@@ -15,7 +15,7 @@ export const beforeGame = writable(true);
 export const moistureIndex = writable(0);
 export const heatIndex = writable(0);
 
-export const resolutionIsCompetitive = derived(
+export const resolutionIsHeated = derived(
 	heatIndex,
 	($heatIndex) => {
 		return $heatIndex > 0;
@@ -23,8 +23,8 @@ export const resolutionIsCompetitive = derived(
 );
 
 export const selectionResolutionHValue = derived(
-	[selectedCardsForDaemon, selectedCardsForPlayer, resolutionIsCompetitive],
-	([$selectedCardsForDaemon, $selectedCardsForPlayer, $resolutionIsCompetitive]) => {
+	[selectedCardsForDaemon, selectedCardsForPlayer, resolutionIsHeated],
+	([$selectedCardsForDaemon, $selectedCardsForPlayer, $resolutionIsHeated]) => {
 		
 		let daemonTotalHeatIndex = 0;
 		let playerTotalHeatIndex = 0;
@@ -49,7 +49,7 @@ export const selectionResolutionHValue = derived(
 
 		let outcome = 0;
 
-		if($resolutionIsCompetitive){
+		if($resolutionIsHeated){
 
 			outcome = playerTotalHeatIndex - daemonTotalHeatIndex;
 
@@ -64,8 +64,8 @@ export const selectionResolutionHValue = derived(
 );
 
 export const selectionResolutionMValue = derived(
-	[selectedCardsForDaemon, selectedCardsForPlayer, resolutionIsCompetitive],
-	([$selectedCardsForDaemon, $selectedCardsForPlayer, $resolutionIsCompetitive]) => {
+	[selectedCardsForDaemon, selectedCardsForPlayer, resolutionIsHeated],
+	([$selectedCardsForDaemon, $selectedCardsForPlayer, $resolutionIsHeated]) => {
 		
 		let daemonTotalMoistureIndex = 0;
 		let playerTotalMoistureIndex = 0;
@@ -90,7 +90,7 @@ export const selectionResolutionMValue = derived(
 
 		let outcome = 0;
 
-		if($resolutionIsCompetitive){
+		if($resolutionIsHeated){
 
 			outcome = playerTotalMoistureIndex - daemonTotalMoistureIndex;
 
@@ -104,7 +104,7 @@ export const selectionResolutionMValue = derived(
 	}
 );
 
-export const selectionIsCombinatory = derived(
+export const selectionIsWet = derived(
 	moistureIndex,
 	($moistureIndex) => {
 		return $moistureIndex > 0;

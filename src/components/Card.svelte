@@ -5,7 +5,8 @@
   import { 
     selectedCardsForPlayer, 
     selectedCardsForDaemon,
-    selectionIsCombinatory
+    selectionIsWet,
+    resolutionIsHeated
     } from '../stores.js';
 
   export let isPlayerCard = false;
@@ -20,6 +21,9 @@
   $: cardTitle = cardKey;
   $: cardPower = cardKey; 
   $: console.log("isSelected for " + cardKey + ": " + isSelected);
+
+  $: console.log('resolutionIsHeated' + $resolutionIsHeated);
+  
 
   function getImgSrcFromCardKey(powerString){
     return '/images/' + powerString + '.jpg';
@@ -38,7 +42,7 @@
 
       }else{
 
-        if($selectionIsCombinatory){
+        if($selectionIsWet){
           
           $selectedCardsForPlayer = 
             [...$selectedCardsForPlayer, cardKey];
@@ -58,7 +62,7 @@
 
       }else{
       
-        if($selectionIsCombinatory) {
+        if($selectionIsWet) {
           
           $selectedCardsForDaemon = 
             [...$selectedCardsForDaemon, cardKey];
@@ -81,7 +85,10 @@
   class:player-color={isPlayerCard}
   class:daemon-card={!isPlayerCard}
   class:daemon-color={!isPlayerCard}
-  class:played-card={isSelected}
+  class:played-card-player-hot={isSelected && isPlayerCard && $resolutionIsHeated}
+  class:played-card-daemon-hot={isSelected && !isPlayerCard && $resolutionIsHeated}
+  class:played-card-daemon-cold={isSelected && !isPlayerCard && !$resolutionIsHeated}
+  class:played-card-player-cold={isSelected && isPlayerCard && !$resolutionIsHeated}
   on:click={handleClick}
 >
   <div class="text">{cardTitle}</div>
@@ -271,9 +278,29 @@ button {
   display: none;
   transform: rotate(-7deg);
 }
-
+/*
 .played-card {
   transform: translateY(-40px);
+  box-shadow: 0px 15px 15px rgba(0,0,0,.3);
+}*/
+
+.played-card-player-cold {
+  transform: translateY(30px);
+  box-shadow: 0px 15px 15px rgba(0,0,0,.3);
+}
+
+.played-card-player-hot {
+  transform: translateY(-30px);
+  box-shadow: 0px 15px 15px rgba(0,0,0,.3);
+}
+
+.played-card-daemon-cold {
+  transform: translateY(-30px);
+  box-shadow: 0px 15px 15px rgba(0,0,0,.3);
+}
+
+.played-card-daemon-hot {
+  transform: translateY(30px);
   box-shadow: 0px 15px 15px rgba(0,0,0,.3);
 }
 
