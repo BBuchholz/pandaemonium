@@ -12,7 +12,7 @@
     selectedCardsForPlayer, 
     selectedCardsForDaemon,
     playerCards,
-    daemonCards,
+    daemonCards, 
     beforeGame,
     deck,
     selectionResolutionMValue,
@@ -23,28 +23,6 @@
 
   $: console.log("selectedCardsForDaemon: " + $selectedCardsForDaemon);
   $: console.log("selectedCardsForPlayer: " + $selectedCardsForPlayer);
-  // const tempScenariosTest = async () => {
-  //   const resp = await fetch('/api/scenarios');
-  //   const data = await resp.json();
-
-  //   alert("data: " + JSON.stringify(data));
-
-  // } 
-
-  // tempScenariosTest();
-
-  // async function startGame() {
-  //   beforeGame = false;
-  //   duringGame = true;
-  //   await loadScenarios();
-  //   console.log(scenarios);
-  //   playTurn();
-  // }
-
-  // async function loadScenarios() {
-  //   const resp = await fetch('/api/scenarios');
-  //   scenarios = await resp.json();
-  // }
 
   function startGame() {
     $beforeGame = false;
@@ -147,20 +125,6 @@
   position: absolute;
   height: 100vh;
   width: 100%;
-}
-
-.before-game .start-game {
-  display: block;
-}
-
-.game-board:not(.card-selected) .player-card:hover:after {
-  display: block;
-  animation: sheen .35s linear 1;
-}
-
-.game-board:not(.card-selected) .player-area .card:not(.played-card):hover {
-  transform: translateY(-10px);
-  box-shadow: 0px 15px 15px rgba(0,0,0,.3);
 }
 
 </style>
