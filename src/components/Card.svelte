@@ -9,6 +9,9 @@
     resolutionIsHeated
     } from '../stores.js';
 
+  import KnechtController from '../myriad/KnechtController.js';
+  const magisterLudi = KnechtController();
+
   export let isPlayerCard = false;
   export let cardKey = '2D';
   export let i = 0;
@@ -89,6 +92,10 @@
   class:played-card-daemon-hot={isSelected && !isPlayerCard && $resolutionIsHeated}
   class:played-card-daemon-cold={isSelected && !isPlayerCard && !$resolutionIsHeated}
   class:played-card-player-cold={isSelected && isPlayerCard && !$resolutionIsHeated}
+  class:fire-color={magisterLudi.parseSuit(cardKey) === 'W'}
+  class:water-color={magisterLudi.parseSuit(cardKey) === 'C'}
+  class:air-color={magisterLudi.parseSuit(cardKey) === 'S'}
+  class:earth-color={magisterLudi.parseSuit(cardKey) === 'D'}
   on:click={handleClick}
 >
   <div class="text">{cardTitle}</div>
@@ -185,6 +192,23 @@ img {
 
 .player-card .power {
   background-image: url("/images/skull.svg");
+}
+
+/* Elemental Styles */
+.fire-color {
+  background-color: #ff0000;
+}
+
+.air-color {
+  background-color: #ffff00;
+}
+
+.water-color {
+  background-color: #0000ff;
+}
+
+.earth-color {
+  background-color: #00ff00;
 }
 
 </style>
