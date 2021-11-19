@@ -18,7 +18,8 @@
     selectionResolutionMValue,
     selectionResolutionHValue,
     heatIndex,
-    moistureIndex
+    moistureIndex,
+    turnFinished
     } from '../stores.js';
 
   $: console.log("selectedCardsForDaemon: " + $selectedCardsForDaemon);
@@ -57,11 +58,14 @@
     console.log('selection confirmed'); 
 
     processCardComparison();
-    dealCards();
+
+    $turnFinished = true;
   }
 
   function nextTurn() {
 
+    $turnFinished = false;
+    dealCards();
   }
 
   function processCardComparison() {

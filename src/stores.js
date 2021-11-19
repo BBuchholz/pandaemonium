@@ -12,8 +12,10 @@ export const deck = writable([]);
 
 
 export const beforeGame = writable(true);
+export const turnFinished = writable(false);
 export const moistureIndex = writable(0);
 export const heatIndex = writable(0);
+export const nextTurnButtonText = writable('Next!');
 
 export const resolutionIsHeated = derived(
 	heatIndex,

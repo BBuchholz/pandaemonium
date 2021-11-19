@@ -1,19 +1,17 @@
 <script>
   
-  import { selectionResolutionMValue, selectionResolutionHValue, selectedCardsForPlayer, selectedCardsForDaemon, playerCards, beforeGame, heatIndex } from '../stores.js';
+  import { selectionResolutionMValue, selectionResolutionHValue, selectedCardsForPlayer, selectedCardsForDaemon, playerCards, beforeGame, heatIndex, turnFinished, nextTurnButtonText } from '../stores.js';
 
   import Card from './Card.svelte';
   import { createEventDispatcher } from 'svelte';
   const dispatch = createEventDispatcher();
 
-  // $: hasSelected = selectionIsInProgress();
-
   function onStartGame() {
     dispatch('startGame', 'no details');
   }
 
-  function onPlayTurn() {
-    dispatch('playTurn', 'no details');
+  function onNextTurn() {
+    dispatch('nextTurn', 'no details');
   }
 
   function showPlayerStats() {
@@ -77,13 +75,16 @@
 
   {/if}
 
+  {#if $turnFinished}
 
-  <button 
-    class="next-turn" 
-    on:click={onPlayTurn}
-  >
-    Next!
-  </button>
+    <button 
+      class="next-turn" 
+      on:click={onNextTurn}
+    >
+      {$nextTurnButtonText}
+    </button>
+
+  {/if}
 
 </div>
 
@@ -147,11 +148,11 @@
 }
 
 button.next-turn {
-  position: fixed;
-  bottom: 20px;
+  position: absolute;
+  top: -20px;
   transition: all .15s ease-out;
   background: black;
-  display: none;
+  display: block;
 }
 
 button.start-game {
