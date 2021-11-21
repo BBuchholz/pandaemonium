@@ -107,7 +107,7 @@
 .player-area {
   background-position: top;
   align-items: top;
-  background-color: #3c1912;
+  background-color: #d9d9d9;
   background-image: url("/images/chip.svg");
 }
 

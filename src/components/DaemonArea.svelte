@@ -107,7 +107,7 @@
   }
 
   .daemon-area {
-    background-color: #0d3158;
+    background-color: #272727;
     background-image: url("/images/chip.svg");
   }
 

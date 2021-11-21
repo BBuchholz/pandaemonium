@@ -187,7 +187,7 @@ img {
 }
 
 .player-color {
-  background-color: #ce3d20;
+  background-color: #272727;
 }
 
 .player-card .power {
@@ -196,19 +196,19 @@ img {
 
 /* Elemental Styles */
 .fire-color {
-  background-color: #ff0000;
+  background-color: #e3170a;
 }
 
 .air-color {
-  background-color: #ffff00;
+  background-color: #ffca3a;
 }
 
 .water-color {
-  background-color: #0000ff;
+  background-color: #a9efef;
 }
 
 .earth-color {
-  background-color: #00ff00;
+  background-color: #e16036;
 }
 
 </style>
