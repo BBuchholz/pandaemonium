@@ -2,8 +2,10 @@
 
   import { onMount } from 'svelte';
 
-  import DaemonArea from './DaemonArea.svelte';
-  import PlayerArea from './PlayerArea.svelte';
+  // import DaemonArea from './DaemonArea.svelte';
+  // import PlayerArea from './PlayerArea.svelte';
+  import DaemonArea from './DaemonAreaMod.svelte';
+  import PlayerArea from './PlayerAreaMod.svelte';
 
   import KnechtController from '../myriad/KnechtController.js';
   const magisterLudi = KnechtController();

@@ -1,8 +1,9 @@
 <script>
   
-  import { selectedCardsForDaemon, daemonCards, moistureIndex, heatIndex,beforeGame } from '../stores.js';
+  import { selectedCardsForDaemon, daemonCards, moistureIndex, heatIndex, beforeGame } from '../stores.js';
 
   import Card from './Card.svelte';
+  import ElementalVessel from './ElementalVessel.svelte';
 
   function showDaemonStats() {
     alert('showDaemonStats() in DaemonArea.svelte not implemented');
@@ -12,13 +13,20 @@
 <div class="daemon-area">
 
   <h1>
-    
+    MI: {$moistureIndex} HI: {$heatIndex}
   </h1>
 
   <div class="stats daemon-stats" on:click={showDaemonStats}>
-    <div class="life-total">{$moistureIndex}</div>
-    <div class="thumbnail">🌫️</div>
-    <div class="name m-index-name">MI</div>
+    
+
+    <ElementalVessel 
+      mutableSign="♍"
+      fixedSign="♉"
+      cardinalSign="♑"/>
+    <ElementalVessel 
+      mutableSign="♍"
+      fixedSign="♉"
+      cardinalSign="♑"/>
   </div>
   
   {#if !$beforeGame}
@@ -75,7 +83,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     font-size: 20px;
     position: absolute;
     left: 0;
