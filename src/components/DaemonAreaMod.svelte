@@ -19,14 +19,16 @@
   <div class="stats daemon-stats" on:click={showDaemonStats}>
     
 
-    <ElementalVessel 
-      mutableSign="♍"
-      fixedSign="♉"
-      cardinalSign="♑"/>
-    <ElementalVessel 
-      mutableSign="♍"
-      fixedSign="♉"
-      cardinalSign="♑"/>
+    <ElementalVessel
+      elementLabel="Water" 
+      mutableSign="♓"
+      fixedSign="♏"
+      cardinalSign="♋"/>
+    <ElementalVessel
+      elementLabel="Air" 
+      mutableSign="♊"
+      fixedSign="♒"
+      cardinalSign="♎"/>
   </div>
   
   {#if !$beforeGame}

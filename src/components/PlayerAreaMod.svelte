@@ -31,13 +31,15 @@
   <div class="stats player-stats" on:click={showPlayerStats}>
     
     <ElementalVessel 
+      elementLabel="Earth"
       mutableSign="♍"
       fixedSign="♉"
       cardinalSign="♑"/>
     <ElementalVessel 
-      mutableSign="♍"
-      fixedSign="♉"
-      cardinalSign="♑"/>
+      elementLabel="Fire"
+      mutableSign="♐"
+      fixedSign="♌"
+      cardinalSign="♈"/>
   </div>
 
     

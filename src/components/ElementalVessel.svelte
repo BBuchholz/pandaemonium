@@ -3,10 +3,12 @@
   export let cardinalSign = "C";
   export let fixedSign = "F";
   export let mutableSign = "M";
+  export let elementLabel = "Element";
 
 </script>
 
 <div class="elemental-vessel">
+  <div class="elemental-vessel-label">{elementLabel}</div>
   <div class="zodiac-vessel">
     <div class="decan-vessel">8</div>
     <div class="decan-vessel">9</div>
