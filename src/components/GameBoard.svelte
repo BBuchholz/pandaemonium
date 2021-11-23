@@ -49,6 +49,8 @@
     // roundFinished = true;
     $selectedCardsForPlayer = [];
     $selectedCardsForDaemon = [];
+    $playerCards = [];
+    $daemonCards = [];
     console.log('selection reset');
   }
 
