@@ -13,19 +13,19 @@
     <div class="decan-vessel">8</div>
     <div class="decan-vessel">9</div>
     <div class="decan-vessel">10</div>
-    {mutableSign}
+    <div class="zodiac-vessel-label">{mutableSign}</div>
   </div>
   <div class="zodiac-vessel">
     <div class="decan-vessel">5</div>
     <div class="decan-vessel">6</div>
     <div class="decan-vessel">7</div>
-    {fixedSign}
+    <div class="zodiac-vessel-label">{fixedSign}</div>
   </div>
   <div class="zodiac-vessel">
     <div class="decan-vessel">2</div>
     <div class="decan-vessel">3</div>
     <div class="decan-vessel">4</div>
-    {cardinalSign}
+    <div class="zodiac-vessel-label">{cardinalSign}</div>
   </div>
 </div>
 
@@ -39,7 +39,10 @@
   }
 
   .decan-vessel {
+    margin: 5px;
     padding: 5px;
+    border-style: double;
+    border-radius: 10px;
   }
 
 </style>
