@@ -137,37 +137,6 @@
   background: rgba(0,0,0,.3);
 }
 
-.zodiac-vessel {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.decan-vessel {
-  padding: 5px;
-}
-
-.stats .thumbnail {
-  font-size: 40px;
-  line-height: 40px;
-  margin: 0 0 5px 0;
-  text-shadow: 5px 5px 0px rgba(0,0,0,.2);
-}
-
-
-.stats .name {
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 20px;
-}
-
-.life-total {
-  font-size: 20px;
-  font-weight: 700;
-  margin: 8px 0;
-}
-
 button.next-turn {
   position: absolute;
   top: -20px;

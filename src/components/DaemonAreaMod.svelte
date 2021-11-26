@@ -1,15 +1,28 @@
 <script>
+
   
   import { selectedCardsForDaemon, daemonCards, moistureIndex, heatIndex, beforeGame } from '../stores.js';
 
   import Card from './Card.svelte';
   import ElementalVessel from './ElementalVessel.svelte';
 
+
+  import { getContext } from 'svelte';
+  import ElementalPopup from './ElementalPopup.svelte';
+
+  const { open } = getContext('simple-modal');
+
   function showDaemonStats() {
     alert('showDaemonStats() in DaemonArea.svelte not implemented');
   }
-</script>
 
+
+  const showPopupLong = () => {
+    open(ElementalPopup, { message: "It's a popup with long text!" });
+  };
+
+</script>
+ 
 <div class="daemon-area">
 
   <h1>
@@ -29,6 +42,13 @@
       mutableSign="♊"
       fixedSign="♒"
       cardinalSign="♎"/>
+    <button on:click={showPopupLong}>
+
+      Test
+
+    </button>
+
+  <br/>
   </div>
   
   {#if !$beforeGame}
@@ -74,11 +94,10 @@
     background-size: 200px;
     height: 50vh;
     box-sizing: border-box;
-  }
-
-  .daemon-area {
     background-position: bottom;
     align-items: flex-end;
+    background-color: #272727;
+    background-image: url("/images/chip.svg");
   }
 
   .stats {
@@ -97,29 +116,6 @@
     background: rgba(0,0,0,.3);
   }
 
-  .stats .thumbnail {
-    font-size: 40px;
-    line-height: 40px;
-    margin: 0 0 5px 0;
-    text-shadow: 5px 5px 0px rgba(0,0,0,.2);
-  }
-
-  .stats .name {
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 20px;
-  }
-
-  .life-total {
-    font-size: 20px;
-    font-weight: 700;
-    margin: 8px 0;
-  }
-
-  .daemon-area {
-    background-color: #272727;
-    background-image: url("/images/chip.svg");
-  }
 
 
 </style>

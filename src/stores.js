@@ -3,6 +3,8 @@ import KnechtController from './myriad/KnechtController.js';
 
 const magisterLudi = KnechtController();
 
+export const modal = writable(null);
+
 export const selectedCardsForPlayer = writable([]);
 export const selectedCardsForDaemon = writable([]);
 
