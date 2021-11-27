@@ -5,6 +5,11 @@
   import Card from './Card.svelte';
   import ElementalVessel from './ElementalVessel.svelte';
 
+
+  import EarthPopupButton from './EarthPopupButton.svelte';
+  import FirePopupButton from './FirePopupButton.svelte';
+
+
   import { createEventDispatcher } from 'svelte';
   const dispatch = createEventDispatcher();
 
@@ -16,10 +21,6 @@
     dispatch('nextTurn', 'no details');
   }
 
-  function showPlayerStats() {
-    alert('showPlayerStats in PlayerArea.svelte not implemented');
-  }
-
   function selectionConfirmed() {
     dispatch('selectionConfirmed', 'no details');
   }
@@ -28,18 +29,12 @@
 
 <div class="player-area">
 
-  <div class="stats player-stats" on:click={showPlayerStats}>
+  <div class="stats player-stats">
     
-    <ElementalVessel 
-      elementLabel="Earth"
-      mutableSign="♍"
-      fixedSign="♉"
-      cardinalSign="♑"/>
-    <ElementalVessel 
-      elementLabel="Fire"
-      mutableSign="♐"
-      fixedSign="♌"
-      cardinalSign="♈"/>
+    <EarthPopupButton />
+  
+    <FirePopupButton />
+
   </div>
 
     

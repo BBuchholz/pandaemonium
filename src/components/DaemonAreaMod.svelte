@@ -4,22 +4,9 @@
   import { selectedCardsForDaemon, daemonCards, moistureIndex, heatIndex, beforeGame } from '../stores.js';
 
   import Card from './Card.svelte';
-  import ElementalVessel from './ElementalVessel.svelte';
 
-
-  import { getContext } from 'svelte';
-  import ElementalPopup from './ElementalPopup.svelte';
-
-  const { open } = getContext('simple-modal');
-
-  function showDaemonStats() {
-    alert('showDaemonStats() in DaemonArea.svelte not implemented');
-  }
-
-
-  const showPopupLong = () => {
-    open(ElementalPopup, { message: "It's a popup with long text!" });
-  };
+  import WaterPopupButton from './WaterPopupButton.svelte';
+  import AirPopupButton from './AirPopupButton.svelte';
 
 </script>
  
@@ -29,43 +16,31 @@
     MI: {$moistureIndex} HI: {$heatIndex}
   </h1>
 
-  <div class="stats daemon-stats" on:click={showDaemonStats}>
+  <div class="stats daemon-stats">
     
-
-    <ElementalVessel
-      elementLabel="Water" 
-      mutableSign="♓"
-      fixedSign="♏"
-      cardinalSign="♋"/>
-    <ElementalVessel
-      elementLabel="Air" 
-      mutableSign="♊"
-      fixedSign="♒"
-      cardinalSign="♎"/>
-    <button on:click={showPopupLong}>
-
-      Test
-
-    </button>
-
-  <br/>
-  </div>
+    <WaterPopupButton />
   
-  {#if !$beforeGame}
+    <AirPopupButton />
+  
+    <br/>
+  
+  </div>
+    
+    {#if !$beforeGame}
 
-    {#each $daemonCards as cardKey, i}
+      {#each $daemonCards as cardKey, i}
 
-      <Card 
-        isPlayerCard={false} 
-        {cardKey}
-        {i}
-        on:cardSelected
-        isSelected={$selectedCardsForDaemon.includes(cardKey)}
-      />
+        <Card 
+          isPlayerCard={false} 
+          {cardKey}
+          {i}
+          on:cardSelected
+          isSelected={$selectedCardsForDaemon.includes(cardKey)}
+        />
 
-    {/each}
+      {/each}
 
-  {/if}
+    {/if}
 
 </div>
 

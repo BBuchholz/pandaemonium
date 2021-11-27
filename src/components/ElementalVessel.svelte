@@ -4,10 +4,11 @@
   export let fixedSign = "F";
   export let mutableSign = "M";
   export let elementLabel = "Element";
+  export let color = '#000fff';
 
 </script>
 
-<div class="elemental-vessel">
+<div class="elemental-vessel" style="--elemental-color: {color}">
   <div class="elemental-vessel-label">{elementLabel}</div>
   <div class="zodiac-vessel">
     <div class="decan-vessel">8</div>
@@ -30,6 +31,10 @@
 </div>
 
 <style>
+
+  .elemental-vessel {
+    background-color: var(--elemental-color);
+  }
   
   .zodiac-vessel {
     display: flex;
