@@ -4,7 +4,7 @@
   export let fixedSign = "F";
   export let mutableSign = "M";
   export let elementLabel = "Element";
-  export let color = '#000fff';
+  export let color = '#ffffff';
 
 </script>
 
