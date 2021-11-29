@@ -12,6 +12,43 @@ export const playerCards = writable([]);
 export const daemonCards = writable([]);
 export const deck = writable([]);
 
+export const fireCollection = writable([]);
+
+export const fireColCount = derived(
+	fireCollection,
+	($fireCollection) => {
+		return $fireCollection.length;
+	}
+);
+
+
+export const earthCollection = writable([]);
+
+export const earthColCount = derived(
+	earthCollection,
+	($earthCollection) => {
+		return $earthCollection.length;
+	}
+);
+
+export const waterCollection = writable([]);
+
+export const waterColCount = derived(
+	waterCollection,
+	($waterCollection) => {
+		return $waterCollection.length;
+	}
+);
+
+
+export const airCollection = writable([]);
+
+export const airColCount = derived(
+	airCollection,
+	($airCollection) => {
+		return $airCollection.length;
+	}
+);
 
 export const beforeGame = writable(true);
 export const turnFinished = writable(false);
@@ -114,3 +151,147 @@ export const selectionIsWet = derived(
 		return $moistureIndex > 0;
 	}
 );
+
+export const currentQuadrant = derived(
+	[selectionIsWet, resolutionIsHeated],
+	([$selectionIsWet, $resolutionIsHeated]) => {
+
+		// Quadrant Determination follows the Empedoclean Elements
+		// see: https://en.wikipedia.org/wiki/Classical_element#Greece 
+
+		if($selectionIsWet){
+
+			if($resolutionIsHeated){
+
+				// Wet and Hot = Air
+				return 'Air';
+
+			}else{
+
+				// Wet and Cold = Water
+				return 'Water';
+			}
+
+		}else{
+
+			if($resolutionIsHeated){
+
+				// Dry and Hot
+				return 'Fire';
+				
+			}else{
+
+				// Dry and Cold
+				return 'Earth';
+			}
+		}
+	}
+);
+
+export const selectionIsValid = derived(
+	[selectedCardsForPlayer,
+     selectedCardsForDaemon,
+     currentQuadrant],
+    ([$selectedCardsForPlayer,
+      $selectedCardsForDaemon,
+      $currentQuadrant]) => {
+	
+
+		let outcome = false;
+
+		if($currentQuadrant === 'Earth'){
+			// implement first
+			// Cooperative and Solitary (Cold and Dry)
+			// one card from each tree
+			// cuz wet should match either suit or rank
+
+			let isSolitary = $selectedCardsForPlayer.length === 1 &&
+       		   		  	     $selectedCardsForDaemon.length === 1;
+
+	  	    if(isSolitary){
+
+		  	    let playerCardKey = $selectedCardsForPlayer[0];
+		  	    let daemonCardKey = $selectedCardsForDaemon[0];
+
+		  	    let daemonSuit = magisterLudi.parseSuit(daemonCardKey);
+		  	    let playerSuit = magisterLudi.parseSuit(playerCardKey);
+
+		  	    let isCooperative = daemonSuit === playerSuit;
+
+		  	    outcome = isSolitary && isCooperative;	
+	  	    }
+
+		}
+
+		return outcome;
+    } 
+);
+
+export const selectionResolutionValue = derived(
+	[selectedCardsForDaemon, 
+	 selectedCardsForPlayer, 
+	 currentQuadrant],
+	([$selectedCardsForDaemon, 
+	  $selectedCardsForPlayer, 
+	  $currentQuadrant]) => {
+		
+		let daemonRank = 0;
+		let playerRank = 0;
+		let daemonSuit = '?';
+		let playerSuit = '?';
+
+		
+		for(const cardKey of $selectedCardsForDaemon){
+
+			let cardSuit = magisterLudi.parseSuit(cardKey);
+			let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
+			let cardMoistureDelta = magisterLudi.getMDeltaFromSuit(cardSuit) * cardRank;
+
+			//daemonTotalMoistureIndex += cardMoistureDelta;
+		}
+
+		for(const cardKey of $selectedCardsForPlayer){
+			
+			let cardSuit = magisterLudi.parseSuit(cardKey);
+			let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
+			let cardMoistureDelta = magisterLudi.getMDeltaFromSuit(cardSuit) * cardRank;
+
+			//playerTotalMoistureIndex += cardMoistureDelta;
+		}
+
+		let outcome = 0;
+
+		if($currentQuadrant === 'Earth'){
+			// implement first
+			// Cooperative and Solitary (Cold and Dry)
+			// one card from each tree
+			// cuz wet should match either suit or rank
+
+			let isSolitary = $selectedCardsForPlayer.length === 1 &&
+       		   		  	     $selectedCardsForDaemon.length === 1;
+
+	  	    if(isSolitary){
+		  	    
+		  	    let playerCardKey = $selectedCardsForPlayer[0];
+		  	    let daemonCardKey = $selectedCardsForDaemon[0];
+
+		  	    let daemonSuit = magisterLudi.parseSuit(daemonCardKey);
+		  	    let playerSuit = magisterLudi.parseSuit(playerCardKey);
+
+		  	    let isCooperative = daemonSuit === playerSuit;
+
+		  	    if(isCooperative){
+
+		  	    	outcome = daemonCardKey + ", " + playerCardKey;
+		  	    }
+	  	    }
+
+		}else{
+
+			outcome = 'Current Quadrant Not Supported';
+		}
+
+		return outcome;
+	}
+);
+

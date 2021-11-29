@@ -1,6 +1,6 @@
 <script>
   
-  import { selectionResolutionMValue, selectionResolutionHValue, selectedCardsForPlayer, selectedCardsForDaemon, playerCards, beforeGame, heatIndex, turnFinished, nextTurnButtonText } from '../stores.js';
+  import { selectionResolutionMValue, selectionResolutionHValue, selectedCardsForPlayer, selectedCardsForDaemon, playerCards, beforeGame, heatIndex, turnFinished, nextTurnButtonText, earthColCount, fireColCount, selectionResolutionValue, selectionIsValid } from '../stores.js';
 
   import Card from './Card.svelte';
   import ElementalVessel from './ElementalVessel.svelte';
@@ -31,9 +31,9 @@
 
   <div class="stats player-stats">
     
-    <EarthPopupButton />
+    <EarthPopupButton buttonText={$earthColCount} />
   
-    <FirePopupButton />
+    <FirePopupButton buttonText={$fireColCount} />
 
   </div>
 
@@ -65,17 +65,15 @@
   {/if}
 
 
-  {#if $selectedCardsForPlayer.length > 0 ||
-       $selectedCardsForDaemon.length > 0 }
-  <!-- {#if selectedCards.length > 0} -->
+  {#if $selectionIsValid }
 
     <button 
       class="confirmSelection"
       on:click={selectionConfirmed}
     >
-      {$selectionResolutionMValue}
-      <hr />
-      {$selectionResolutionHValue}
+
+      {$selectionResolutionValue}
+
     </button>
 
   {/if}
