@@ -19,9 +19,14 @@
     deck,
     selectionResolutionMValue,
     selectionResolutionHValue,
+    selectionResolutionValue,
     heatIndex,
     moistureIndex,
-    turnFinished
+    turnFinished,
+    earthCollection,
+    fireCollection,
+    airCollection,
+    waterCollection
     } from '../stores.js';
 
   $: console.log("selectedCardsForDaemon: " + $selectedCardsForDaemon);
@@ -74,8 +79,31 @@
 
   function processCardComparison() {
 
-    $heatIndex = $heatIndex + $selectionResolutionHValue;
-    $moistureIndex = $moistureIndex + $selectionResolutionMValue;
+    for(const cardKey of $selectionResolutionValue){
+
+      let cardSuit = magisterLudi.parseSuit(cardKey);
+
+      if(cardSuit === 'D'){
+        $earthCollection = [...$earthCollection, cardKey];
+        console.log('earth collected: ' + cardKey);
+        console.log($earthCollection);
+      }
+
+      if(cardSuit === 'W'){
+        $fireCollection = [...$fireCollection, cardKey];
+        console.log('fire collected: ' + cardKey);
+      }
+
+      if(cardSuit === 'S'){
+        $airCollection = [...$airCollection, cardKey];
+        console.log('air collected: ' + cardKey);
+      }
+
+      if(cardSuit === 'C'){
+        $waterCollection = [...$waterCollection, cardKey];
+        console.log('water collected: ' + cardKey);
+      }
+    }
 
     resetSelection();
     console.log('card comparison processed');

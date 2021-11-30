@@ -137,22 +137,22 @@
 }
 
 .played-card-player-cold {
-  transform: translateY(30px);
+  transform: translateY(-30px);
   box-shadow: 0px 15px 15px rgba(0,0,0,.3);
 }
 
 .played-card-player-hot {
-  transform: translateY(-30px);
+  transform: translateY(30px);
   box-shadow: 0px 15px 15px rgba(0,0,0,.3);
 }
 
 .played-card-daemon-cold {
-  transform: translateY(-30px);
+  transform: translateY(30px);
   box-shadow: 0px 15px 15px rgba(0,0,0,.3);
 }
 
 .played-card-daemon-hot {
-  transform: translateY(30px);
+  transform: translateY(-30px);
   box-shadow: 0px 15px 15px rgba(0,0,0,.3);
 }
 
