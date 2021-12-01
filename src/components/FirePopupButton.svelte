@@ -3,7 +3,9 @@
   import { getContext } from 'svelte';
   import FirePopup from './FirePopup.svelte';
 
-  export let buttonText = 'Fire';
+
+  import { fireColCount } from '../stores.js';
+  
 
   const { open } = getContext('simple-modal');
 
@@ -15,7 +17,7 @@
 
 <button on:click={showPopupLong}>
 
-  {buttonText}
+  {$fireColCount}
 
 </button>
 

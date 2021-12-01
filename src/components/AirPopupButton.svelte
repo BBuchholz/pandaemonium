@@ -3,8 +3,8 @@
   import { getContext } from 'svelte';
   import AirPopup from './AirPopup.svelte';
 
-  export let buttonText = 'Air';
-
+  import { airColCount } from '../stores.js';
+  
   const { open } = getContext('simple-modal');
 
   const showPopupLong = () => {
@@ -15,7 +15,7 @@
 
 <button on:click={showPopupLong}>
 
-  {buttonText}
+  {$airColCount}
 
 </button>
 

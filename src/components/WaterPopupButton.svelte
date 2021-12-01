@@ -3,7 +3,7 @@
   import { getContext } from 'svelte';
   import WaterPopup from './WaterPopup.svelte';
 
-  export let buttonText = 'Water';
+  import { waterColCount } from '../stores.js';
 
   const { open } = getContext('simple-modal');
 
@@ -15,7 +15,7 @@
 
 <button on:click={showPopupLong}>
 
-  {buttonText}
+  {$waterColCount}
 
 </button>
 

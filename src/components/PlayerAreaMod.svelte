@@ -31,9 +31,9 @@
 
   <div class="stats player-stats">
   
-    <AirPopupButton buttonText={$airColCount} />
+    <AirPopupButton />
 
-    <EarthPopupButton buttonText={$earthColCount} />
+    <EarthPopupButton />
   
   </div>
 

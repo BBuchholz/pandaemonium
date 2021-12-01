@@ -3,7 +3,7 @@
   import { getContext } from 'svelte';
   import EarthPopup from './EarthPopup.svelte';
 
-  export let buttonText = 'Earth';
+  import { earthColCount } from '../stores.js';
 
   const { open } = getContext('simple-modal');
 
@@ -15,7 +15,7 @@
 
 <button on:click={showPopupLong}>
 
-  {buttonText}
+  {$earthColCount}
 
 </button>
 
