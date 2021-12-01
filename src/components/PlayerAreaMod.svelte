@@ -1,13 +1,13 @@
 <script>
   
-  import { selectionResolutionMValue, selectionResolutionHValue, selectedCardsForPlayer, selectedCardsForDaemon, playerCards, beforeGame, heatIndex, turnFinished, nextTurnButtonText, earthColCount, fireColCount, selectionResolutionValue, selectionIsValid } from '../stores.js';
+  import { selectionResolutionMValue, selectionResolutionHValue, selectedCardsForPlayer, selectedCardsForDaemon, playerCards, beforeGame, heatIndex, turnFinished, nextTurnButtonText, earthColCount, airColCount, selectionResolutionValue, selectionIsValid } from '../stores.js';
 
   import Card from './Card.svelte';
   import ElementalVessel from './ElementalVessel.svelte';
 
 
   import EarthPopupButton from './EarthPopupButton.svelte';
-  import FirePopupButton from './FirePopupButton.svelte';
+  import AirPopupButton from './AirPopupButton.svelte';
 
 
   import { createEventDispatcher } from 'svelte';
@@ -30,11 +30,11 @@
 <div class="player-area">
 
   <div class="stats player-stats">
-    
+  
+    <AirPopupButton buttonText={$airColCount} />
+
     <EarthPopupButton buttonText={$earthColCount} />
   
-    <FirePopupButton buttonText={$fireColCount} />
-
   </div>
 
     

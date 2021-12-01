@@ -1,12 +1,12 @@
 <script>
 
   
-  import { selectedCardsForDaemon, daemonCards, moistureIndex, heatIndex, beforeGame, airColCount, waterColCount, currentQuadrant } from '../stores.js';
+  import { selectedCardsForDaemon, daemonCards, moistureIndex, heatIndex, beforeGame, fireColCount, waterColCount, currentQuadrant } from '../stores.js';
 
   import Card from './Card.svelte';
 
   import WaterPopupButton from './WaterPopupButton.svelte';
-  import AirPopupButton from './AirPopupButton.svelte';
+  import FirePopupButton from './FirePopupButton.svelte';
 
 </script>
  
@@ -17,10 +17,10 @@
   </h1>
 
   <div class="stats daemon-stats">
+  
+    <FirePopupButton buttonText={$fireColCount} />
     
     <WaterPopupButton buttonText={$waterColCount} />
-  
-    <AirPopupButton buttonText={$airColCount} />
   
   </div>
     
