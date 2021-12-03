@@ -12,6 +12,11 @@ export const playerCards = writable([]);
 export const daemonCards = writable([]);
 export const deck = writable([]);
 
+export const airColCountChanged = writable(false);
+export const earthColCountChanged = writable(false);
+export const fireColCountChanged = writable(false);
+export const waterColCountChanged = writable(false);
+
 export const fireCollection = writable([]);
 
 export const fireColCount = derived(

@@ -26,7 +26,11 @@
     earthCollection,
     fireCollection,
     airCollection,
-    waterCollection
+    waterCollection,
+    airColCountChanged,
+    fireColCountChanged,
+    waterColCountChanged,
+    earthColCountChanged,
     } from '../stores.js';
 
   $: console.log("selectedCardsForDaemon: " + $selectedCardsForDaemon);
@@ -74,6 +78,11 @@
   function nextTurn() {
 
     $turnFinished = false;
+    $earthColCountChanged = false;
+    $fireColCountChanged = false;
+    $airColCountChanged = false;
+    $waterColCountChanged = false;
+    
     dealCards();
   }
 
@@ -84,24 +93,44 @@
       let cardSuit = magisterLudi.parseSuit(cardKey);
 
       if(cardSuit === 'D'){
-        $earthCollection = [...$earthCollection, cardKey];
-        console.log('earth collected: ' + cardKey);
-        console.log($earthCollection);
+        
+        if(!$earthCollection.includes(cardKey)){
+          
+          $earthCollection = [...$earthCollection, cardKey];
+          $earthColCountChanged = true;
+        }
+        
+        
       }
 
       if(cardSuit === 'W'){
-        $fireCollection = [...$fireCollection, cardKey];
-        console.log('fire collected: ' + cardKey);
+        
+        if(!$fireCollection.includes(cardKey)){
+          
+          $fireCollection = [...$fireCollection, cardKey];
+          $fireColCountChanged = true;
+        }
+        
       }
 
       if(cardSuit === 'S'){
-        $airCollection = [...$airCollection, cardKey];
-        console.log('air collected: ' + cardKey);
+        
+        if(!$airCollection.includes(cardKey)){
+          
+          $airCollection = [...$airCollection, cardKey];
+          $airColCountChanged = true;
+        }
+        
       }
 
       if(cardSuit === 'C'){
-        $waterCollection = [...$waterCollection, cardKey];
-        console.log('water collected: ' + cardKey);
+        
+        if(!$waterCollection.includes(cardKey)){
+          
+          $waterCollection = [...$waterCollection, cardKey];
+          $waterColCountChanged = true;
+        }
+        
       }
     }
 

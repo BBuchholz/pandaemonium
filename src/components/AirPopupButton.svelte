@@ -3,7 +3,7 @@
   import { getContext } from 'svelte';
   import AirPopup from './AirPopup.svelte';
 
-  import { airColCount } from '../stores.js';
+  import { airColCount, airColCountChanged } from '../stores.js';
   
   const { open } = getContext('simple-modal');
 
@@ -13,7 +13,9 @@
 
 </script>
 
-<button on:click={showPopupLong}>
+<button 
+  on:click={showPopupLong} 
+  class:wiggle={ $airColCountChanged } >
 
   {$airColCount}
 
@@ -45,4 +47,25 @@
     outline: none;
     animation: buttonPulse .2s infinite ease-in-out;
   }
+
+  .wiggle {
+    animation: wiggle .15s linear 3;
+  }
+
+
+  @keyframes wiggle {
+    0% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-5px);
+    }
+    75% {
+      transform: translateX(5px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
 </style>
