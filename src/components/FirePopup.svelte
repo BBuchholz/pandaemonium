@@ -1,33 +1,19 @@
 <script>
   
   import { fireCollection } from '../stores.js';
-
+  import FireDecanVessel from './FireDecanVessel.svelte';
+ 
 </script>
 
 <div class="elemental-vessel">
   <div class="elemental-vessel-label">Fire</div>
   <div class="zodiac-vessel">
     
-    <div 
-      class="decan-vessel" 
-      class:collected={$fireCollection.includes('8W')}
-    >
-      8
-    </div>
+    <FireDecanVessel cardKey="8W" />
 
-    <div 
-      class="decan-vessel" 
-      class:collected={$fireCollection.includes('9W')}
-    >
-      9
-    </div>
-    
-    <div 
-      class="decan-vessel" 
-      class:collected={$fireCollection.includes('10W')}
-    >
-      10
-    </div>
+    <FireDecanVessel cardKey="9W"/>
+
+    <FireDecanVessel cardKey="10W"/>
 
     <div class="zodiac-vessel-label">♐</div>
 
@@ -35,26 +21,11 @@
 
   <div class="zodiac-vessel">
 
-    <div 
-      class="decan-vessel" 
-      class:collected={$fireCollection.includes('5W')}
-    >
-      5
-    </div>
+    <FireDecanVessel cardKey="5W"/>
 
-    <div 
-      class="decan-vessel" 
-      class:collected={$fireCollection.includes('6W')}
-    >
-      6
-    </div>
+    <FireDecanVessel cardKey="6W"/>
 
-    <div 
-      class="decan-vessel" 
-      class:collected={$fireCollection.includes('7W')}
-    >
-      7
-    </div>
+    <FireDecanVessel cardKey="7W"/>
 
     <div class="zodiac-vessel-label">♌</div>
   
@@ -62,26 +33,11 @@
 
   <div class="zodiac-vessel">
 
-    <div 
-      class="decan-vessel" 
-      class:collected={$fireCollection.includes('2W')}
-    >
-      2
-    </div>
+    <FireDecanVessel cardKey="2W"/>
 
-    <div 
-      class="decan-vessel" 
-      class:collected={$fireCollection.includes('3W')}
-    >
-      3
-    </div>
+    <FireDecanVessel cardKey="3W"/>
 
-    <div 
-      class="decan-vessel" 
-      class:collected={$fireCollection.includes('4W')}
-    >
-      4
-    </div>
+    <FireDecanVessel cardKey="4W"/>
 
     <div class="zodiac-vessel-label">♈</div>
 
@@ -100,18 +56,6 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-  }
-
-  .decan-vessel {
-    margin: 5px;
-    padding: 5px;
-    border-style: double;
-    border-radius: 10px;
-  }
-
-  .collected {
-    background-color: #000000;
-    color: #ffffff;
   }
 
 </style>

@@ -1,33 +1,19 @@
 <script>
   
   import { airCollection } from '../stores.js';
+  import AirDecanVessel from './AirDecanVessel.svelte';
 
 </script>
 
 <div class="elemental-vessel">
   <div class="elemental-vessel-label">Air</div>
   <div class="zodiac-vessel">
-    
-    <div 
-      class="decan-vessel" 
-      class:collected={$airCollection.includes('8S')}
-    >
-      8
-    </div>
+   
+    <AirDecanVessel cardKey="8S" />
 
-    <div 
-      class="decan-vessel" 
-      class:collected={$airCollection.includes('9S')}
-    >
-      9
-    </div>
-    
-    <div 
-      class="decan-vessel" 
-      class:collected={$airCollection.includes('10S')}
-    >
-      10
-    </div>
+    <AirDecanVessel cardKey="9S"/>
+
+    <AirDecanVessel cardKey="10S"/>
 
     <div class="zodiac-vessel-label">♊</div>
 
@@ -35,26 +21,11 @@
 
   <div class="zodiac-vessel">
 
-    <div 
-      class="decan-vessel" 
-      class:collected={$airCollection.includes('5S')}
-    >
-      5
-    </div>
+    <AirDecanVessel cardKey="5S"/>
 
-    <div 
-      class="decan-vessel" 
-      class:collected={$airCollection.includes('6S')}
-    >
-      6
-    </div>
+    <AirDecanVessel cardKey="6S"/>
 
-    <div 
-      class="decan-vessel" 
-      class:collected={$airCollection.includes('7S')}
-    >
-      7
-    </div>
+    <AirDecanVessel cardKey="7S"/>
 
     <div class="zodiac-vessel-label">♒</div>
   
@@ -62,26 +33,11 @@
 
   <div class="zodiac-vessel">
 
-    <div 
-      class="decan-vessel" 
-      class:collected={$airCollection.includes('2S')}
-    >
-      2
-    </div>
+    <AirDecanVessel cardKey="2S"/>
 
-    <div 
-      class="decan-vessel" 
-      class:collected={$airCollection.includes('3S')}
-    >
-      3
-    </div>
+    <AirDecanVessel cardKey="3S"/>
 
-    <div 
-      class="decan-vessel" 
-      class:collected={$airCollection.includes('4S')}
-    >
-      4
-    </div>
+    <AirDecanVessel cardKey="4S"/>
 
     <div class="zodiac-vessel-label">♎</div>
 

@@ -1,6 +1,7 @@
 <script>
   
   import { earthCollection } from '../stores.js';
+  import EarthDecanVessel from './EarthDecanVessel.svelte';
 
 </script>
 
@@ -8,26 +9,11 @@
   <div class="elemental-vessel-label">Earth</div>
   <div class="zodiac-vessel">
     
-    <div 
-      class="decan-vessel" 
-      class:collected={$earthCollection.includes('8D')}
-    >
-      8
-    </div>
+    <EarthDecanVessel cardKey="8D" />
 
-    <div 
-      class="decan-vessel" 
-      class:collected={$earthCollection.includes('9D')}
-    >
-      9
-    </div>
-    
-    <div 
-      class="decan-vessel" 
-      class:collected={$earthCollection.includes('10D')}
-    >
-      10
-    </div>
+    <EarthDecanVessel cardKey="9D"/>
+
+    <EarthDecanVessel cardKey="10D"/>
 
     <div class="zodiac-vessel-label">♍</div>
 
@@ -35,26 +21,11 @@
 
   <div class="zodiac-vessel">
 
-    <div 
-      class="decan-vessel" 
-      class:collected={$earthCollection.includes('5D')}
-    >
-      5
-    </div>
+    <EarthDecanVessel cardKey="5D"/>
 
-    <div 
-      class="decan-vessel" 
-      class:collected={$earthCollection.includes('6D')}
-    >
-      6
-    </div>
+    <EarthDecanVessel cardKey="6D"/>
 
-    <div 
-      class="decan-vessel" 
-      class:collected={$earthCollection.includes('7D')}
-    >
-      7
-    </div>
+    <EarthDecanVessel cardKey="7D"/>
 
     <div class="zodiac-vessel-label">♉</div>
   
@@ -62,26 +33,11 @@
 
   <div class="zodiac-vessel">
 
-    <div 
-      class="decan-vessel" 
-      class:collected={$earthCollection.includes('2D')}
-    >
-      2
-    </div>
+    <EarthDecanVessel cardKey="2D"/>
 
-    <div 
-      class="decan-vessel" 
-      class:collected={$earthCollection.includes('3D')}
-    >
-      3
-    </div>
+    <EarthDecanVessel cardKey="3D"/>
 
-    <div 
-      class="decan-vessel" 
-      class:collected={$earthCollection.includes('4D')}
-    >
-      4
-    </div>
+    <EarthDecanVessel cardKey="4D"/>
 
     <div class="zodiac-vessel-label">♑</div>
 
