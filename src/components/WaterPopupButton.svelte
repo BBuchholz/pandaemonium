@@ -40,7 +40,7 @@
     font-weight: 700;
     border: solid 3px white;
     color: white;
-    background: transparent;
+    background-color: transparent;
     border-radius: 30px;
     transition: all ease-out .2s;
     cursor: pointer;
@@ -51,6 +51,7 @@
 
   .wiggle {
     animation: wiggle .15s linear 3;
+    background-color: #a9efef;
   }
 
 
