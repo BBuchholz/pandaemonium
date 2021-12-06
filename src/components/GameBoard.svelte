@@ -44,8 +44,20 @@
   }
 
   function loadDeck() {
+
+    const fullDeck = magisterLudi.dealTwelveTrees();
+
+    const newDeckMinusFire = fullDeck.filter(cardKey => !$fireCollection.includes(cardKey));
+
+    const newDeckMinusWater = newDeckMinusFire.filter(cardKey => !$waterCollection.includes(cardKey));
+
+    const newDeckMinusAir = newDeckMinusWater.filter(cardKey => !$airCollection.includes(cardKey));
+
+    const newDeckMinusEarth = newDeckMinusAir.filter(cardKey => !$earthCollection.includes(cardKey));
     
-    $deck = magisterLudi.dealTwelveTrees();
+    $deck = newDeckMinusEarth;
+
+    console.log('deck length: ' + $deck.length);
   }
 
   function playTurn() {
