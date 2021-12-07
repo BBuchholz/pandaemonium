@@ -151,10 +151,19 @@
   }
 
   function outOfCards() {
-    
-    alert('out of cards, reshuffling...');
+
+    const initialDeckCount = 36;
+    const toReshuffle = initialDeckCount - totalCollected();
+    alert('out of cards, reshuffling ' + toReshuffle + ' cards...');
     loadDeck();
     playTurn();
+  }
+
+  function totalCollected() {
+    return $fireCollection.length +
+           $waterCollection.length +
+           $airCollection.length +
+           $earthCollection.length;
   }
 
   function dealCards() {
@@ -166,6 +175,10 @@
     }
 
     var cardsToDeal = 3;
+
+    while((cardsToDeal * 2) > $deck.length){
+      cardsToDeal -= 1;
+    }
 
     $daemonCards = [];
     $playerCards = [];

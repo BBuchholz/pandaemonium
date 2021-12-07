@@ -58,16 +58,4 @@
     justify-content: space-around;
   }
 
-  .decan-vessel {
-    margin: 5px;
-    padding: 5px;
-    border-style: double;
-    border-radius: 10px;
-  }
-
-  .collected {
-    background-color: #000000;
-    color: #ffffff;
-  }
-
 </style>
