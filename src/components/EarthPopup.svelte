@@ -1,6 +1,6 @@
 <script>
   
-  import { earthCollection } from '../stores.js';
+  import { earthCollection, taurusSelected } from '../stores.js';
   import EarthDecanVessel from './EarthDecanVessel.svelte';
 
 </script>
@@ -27,7 +27,13 @@
 
     <EarthDecanVessel cardKey="7D"/>
 
-    <div class="zodiac-vessel-label">♉</div>
+    <div class="zodiac-vessel-label">
+
+      <button on:click={() => $taurusSelected = true }>
+      ♉    
+      </button>
+    
+    </div>
   
   </div>
 
@@ -43,6 +49,9 @@
 
   </div>
 
+  {#if $taurusSelected}
+    <button>Reshuffle Taurus</button>
+  {/if}
 </div>
 
 <style>

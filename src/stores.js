@@ -8,6 +8,8 @@ export const modal = writable(null);
 export const selectedCardsForPlayer = writable([]);
 export const selectedCardsForDaemon = writable([]);
 
+export const taurusSelected = writable(false);
+
 export const playerCards = writable([]);
 export const daemonCards = writable([]);
 export const deck = writable([]);
