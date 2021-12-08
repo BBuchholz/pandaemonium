@@ -1,9 +1,9 @@
 <script>
 
   
-  import { selectedCardsForDaemon, daemonCards, moistureIndex, heatIndex, beforeGame, fireColCount, waterColCount, currentQuadrant } from '../stores.js';
+  import { selectedCardsForDaemon, daemonCards, moistureIndex, heatIndex, beforeGame, fireColCount, waterColCount, currentQuadrant, deck, discardCount } from '../stores.js';
 
-  import Card from './Card.svelte';
+  import Card from './Card.svelte'; 
 
   import WaterPopupButton from './WaterPopupButton.svelte';
   import FirePopupButton from './FirePopupButton.svelte';
@@ -13,7 +13,7 @@
 <div class="daemon-area">
 
   <h1>
-    Q: {$currentQuadrant} MI: {$moistureIndex} HI: {$heatIndex}
+    Q: {$currentQuadrant} MI: {$moistureIndex} HI: {$heatIndex} Deck: {$deck.length} Discard: { $discardCount }
   </h1>
 
   <div class="stats daemon-stats">

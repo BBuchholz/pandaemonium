@@ -1,7 +1,28 @@
 <script>
   
-  import { earthCollection, taurusSelected } from '../stores.js';
+  import { earthCollection, selectedEarthSign } from '../stores.js';
   import EarthDecanVessel from './EarthDecanVessel.svelte';
+
+  function redeemTaurus() {
+
+    const filterTaurus = ['5D', '6D', '7D'];
+    $earthCollection = $earthCollection.filter(cardKey => !filterTaurus.includes(cardKey)); 
+    $selectedEarthSign = '';
+  }
+
+  function redeemVirgo() {
+
+    const filterVirgo = ['8D', '9D', '10D'];
+    $earthCollection = $earthCollection.filter(cardKey => !filterVirgo.includes(cardKey)); 
+    $selectedEarthSign = '';
+  }
+
+  function redeemCapricorn() {
+
+    const filterCapricorn = ['2D', '3D', '4D'];
+    $earthCollection = $earthCollection.filter(cardKey => !filterCapricorn.includes(cardKey)); 
+    $selectedEarthSign = '';
+  }
 
 </script>
 
@@ -15,7 +36,13 @@
 
     <EarthDecanVessel cardKey="10D"/>
 
-    <div class="zodiac-vessel-label">♍</div>
+    <div class="zodiac-vessel-label">
+
+      <button on:click={() => $selectedEarthSign = 'Virgo' }>
+      ♍    
+      </button>
+    
+    </div>
 
   </div>
 
@@ -29,7 +56,7 @@
 
     <div class="zodiac-vessel-label">
 
-      <button on:click={() => $taurusSelected = true }>
+      <button on:click={() => $selectedEarthSign = 'Taurus' }>
       ♉    
       </button>
     
@@ -45,13 +72,30 @@
 
     <EarthDecanVessel cardKey="4D"/>
 
-    <div class="zodiac-vessel-label">♑</div>
+    <div class="zodiac-vessel-label">
+
+      <button on:click={() => $selectedEarthSign = 'Capricorn' }>
+      ♑    
+      </button>
+    
+    </div>
 
   </div>
 
-  {#if $taurusSelected}
-    <button>Reshuffle Taurus</button>
+  {#if $selectedEarthSign === 'Taurus'}
+  
+    <button on:click={redeemTaurus} >Redeem Taurus</button>
+  
+  {:else if $selectedEarthSign === 'Capricorn'}
+  
+    <button on:click={redeemCapricorn} >Redeem Capricorn</button>
+  
+  {:else if $selectedEarthSign === 'Virgo'}
+
+    <button on:click={redeemVirgo} >Redeem Virgo</button>
+  
   {/if}
+
 </div>
 
 <style>

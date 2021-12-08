@@ -8,7 +8,10 @@ export const modal = writable(null);
 export const selectedCardsForPlayer = writable([]);
 export const selectedCardsForDaemon = writable([]);
 
-export const taurusSelected = writable(false);
+export const selectedEarthSign = writable('');
+export const selectedWaterSign = writable('');
+export const selectedAirSign = writable('');
+export const selectedFireSign = writable('');
 
 export const playerCards = writable([]);
 export const daemonCards = writable([]);
@@ -156,6 +159,20 @@ export const selectionIsWet = derived(
 	moistureIndex,
 	($moistureIndex) => {
 		return $moistureIndex > 0;
+	}
+);
+
+export const discardCount = derived(
+	[deck, earthColCount, airColCount, waterColCount, fireColCount, playerCards, daemonCards],
+	([$deck, $earthColCount, $airColCount, $waterColCount, $fireColCount, $playerCards, $daemonCards]) => {
+
+		return 36 - $deck.length - 
+					 $earthColCount - 
+					 $airColCount -
+					 $waterColCount -
+					 $fireColCount -
+					 $playerCards.length -
+					 $daemonCards.length;
 	}
 );
 
