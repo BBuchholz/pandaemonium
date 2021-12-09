@@ -5,14 +5,14 @@
 
   function redeemScorpio() {
 
-    const filterScorpio = ['5C', '6C', '7C'];
+    const filterScorpio = ['8C', '9C', '10C'];
     $waterCollection = $waterCollection.filter(cardKey => !filterScorpio.includes(cardKey)); 
     $selectedWaterSign = '';
   }
 
   function redeemPisces() {
 
-    const filterPisces = ['8C', '9C', '10C'];
+    const filterPisces = ['5C', '6C', '7C'];
     $waterCollection = $waterCollection.filter(cardKey => !filterPisces.includes(cardKey)); 
     $selectedWaterSign = '';
   }
