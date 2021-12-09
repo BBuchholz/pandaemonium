@@ -3,17 +3,18 @@
   import { waterCollection, selectedWaterSign } from '../stores.js';
   import WaterDecanVessel from './WaterDecanVessel.svelte';
 
-  function redeemScorpio() {
-
-    const filterScorpio = ['8C', '9C', '10C'];
-    $waterCollection = $waterCollection.filter(cardKey => !filterScorpio.includes(cardKey)); 
-    $selectedWaterSign = '';
-  }
 
   function redeemPisces() {
 
-    const filterPisces = ['5C', '6C', '7C'];
+    const filterPisces = ['8C', '9C', '10C'];
     $waterCollection = $waterCollection.filter(cardKey => !filterPisces.includes(cardKey)); 
+    $selectedWaterSign = '';
+  }
+  
+  function redeemScorpio() {
+
+    const filterScorpio = ['5C', '6C', '7C'];
+    $waterCollection = $waterCollection.filter(cardKey => !filterScorpio.includes(cardKey)); 
     $selectedWaterSign = '';
   }
 

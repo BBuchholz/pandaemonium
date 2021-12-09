@@ -5,21 +5,21 @@
 
   function redeemGemini() {
 
-    const filterGemini = ['8C', '9C', '10C'];
+    const filterGemini = ['8S', '9S', '10S'];
     $airCollection = $airCollection.filter(cardKey => !filterGemini.includes(cardKey)); 
     $selectedAirSign = '';
   }
 
   function redeemAquarius() {
 
-    const filterAquarius = ['5C', '6C', '7C'];
+    const filterAquarius = ['5S', '6S', '7S'];
     $airCollection = $airCollection.filter(cardKey => !filterAquarius.includes(cardKey)); 
     $selectedAirSign = '';
   }
 
   function redeemLibra() {
 
-    const filterLibra = ['2C', '3C', '4C'];
+    const filterLibra = ['2S', '3S', '4S'];
     $airCollection = $airCollection.filter(cardKey => !filterLibra.includes(cardKey)); 
     $selectedAirSign = '';
   }
