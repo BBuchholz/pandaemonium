@@ -86,7 +86,7 @@
         on:click={selectionConfirmed}
       >
 
-        {$selectionResolutionValue}
+        No Valid Moves
 
       </button>
     

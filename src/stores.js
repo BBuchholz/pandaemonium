@@ -22,6 +22,8 @@ export const earthColCountChanged = writable(false);
 export const fireColCountChanged = writable(false);
 export const waterColCountChanged = writable(false);
 
+export const triedCombos = writable([]);
+
 export const fireCollection = writable([]);
 
 export const fireColCount = derived(
@@ -222,12 +224,26 @@ export const currentQuadrant = derived(
 export const selectionIsValid = derived(
 	[selectedCardsForPlayer,
    selectedCardsForDaemon,
-   currentQuadrant],
+   currentQuadrant,
+   triedCombos],
     ([$selectedCardsForPlayer,
       $selectedCardsForDaemon,
-      $currentQuadrant]) => {
+      $currentQuadrant,
+      $triedCombos]) => {
 
 			let outcome = false;
+
+			const currentCombo = {
+				player: selectedCardsForPlayer,
+				daemon: selectedCardsForDaemon
+			};
+
+			console.log('currentCombo: ' + currentCombo);
+			console.log('tried combos: ' + triedCombos);
+
+			if(!$triedCombos.includes(currentCombo)){
+				$triedCombos = [...$triedCombos, currentCombo];
+			}
 
 			if($currentQuadrant === 'Water'){
 
@@ -455,53 +471,41 @@ export const selectionResolutionValue = derived(
 export const allChoicesTried = derived(
 	[playerCards, 
 	 daemonCards, 
-	 triedCombos],
+	 triedCombos,
+	 currentQuadrant],
 	([$playerCards, 
 	  $daemonCards, 
-	  $triedCombos]) => {
+	  $triedCombos,
+	  $currentQuadrant]) => {
 		
 		let daemonRank = 0;
 		let playerRank = 0;
 		let daemonSuit = '?';
 		let playerSuit = '?';
 
-		
-		for(const cardKey of $selectedCardsForDaemon){
 
-			let cardSuit = magisterLudi.parseSuit(cardKey);
-			let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
-			let cardMoistureDelta = magisterLudi.getMDeltaFromSuit(cardSuit) * cardRank;
-
-			//daemonTotalMoistureIndex += cardMoistureDelta;
-		}
-
-		for(const cardKey of $selectedCardsForPlayer){
-			
-			let cardSuit = magisterLudi.parseSuit(cardKey);
-			let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
-			let cardMoistureDelta = magisterLudi.getMDeltaFromSuit(cardSuit) * cardRank;
-
-			//playerTotalMoistureIndex += cardMoistureDelta;
-		}
-
-		let outcome = [];
-
-		if(!$selectionIsValid){
-
-			return outcome;
-		}
+		let outcome = true;
 
 		if($currentQuadrant === 'Earth'){
-			// implement first
-			// Cooperative and Solitary (Cold and Dry)
-			// one card from each tree
-			// cuz wet should match either suit or rank
-		  	    
-	    let playerCardKey = $selectedCardsForPlayer[0];
-	    let daemonCardKey = $selectedCardsForDaemon[0];
 
-	    outcome.push(playerCardKey);
-	    outcome.push(daemonCardKey);
+			for(const pCardKey of $playerCards){
+
+				for(const dCardKey of $daemonCards){
+
+					let comboRepresentation = {
+						player: [pCardKey],
+						daemon: [dCardKey]
+					};
+
+					if(!$triedCombos.includes(comboRepresentation)){
+						outcome = false;
+
+						console.log('combo not tried: ' + comboRepresentation);
+					}
+
+				}
+				
+			}
 
 		}
 
