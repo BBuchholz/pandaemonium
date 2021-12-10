@@ -21,6 +21,7 @@
     selectionResolutionHValue,
     selectionResolutionValue,
     heatIndex,
+    currentDeckCount,
     moistureIndex,
     turnFinished,
     earthCollection,
@@ -152,8 +153,7 @@
 
   function outOfCards() {
 
-    const initialDeckCount = 36;
-    const toReshuffle = initialDeckCount - totalCollected();
+    const toReshuffle = $currentDeckCount - totalCollected();
     alert('out of cards, reshuffling ' + toReshuffle + ' cards...');
     loadDeck();
     playTurn();
@@ -178,6 +178,12 @@
 
     while((cardsToDeal * 2) > $deck.length){
       cardsToDeal -= 1;
+    }
+
+    if(cardsToDeal == 0){
+
+      outOfCards();
+      return;
     }
 
     $daemonCards = [];

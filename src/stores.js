@@ -60,6 +60,13 @@ export const airColCount = derived(
 	}
 );
 
+export const currentDeckCount = derived(
+	[deck, playerCards, daemonCards],
+	([$deck, $playerCards, $daemonCards]) => {
+		return $deck.length;
+	}
+);
+
 export const beforeGame = writable(true);
 export const turnFinished = writable(false);
 export const moistureIndex = writable(0);
@@ -395,6 +402,63 @@ export const selectionResolutionValue = derived(
 	  $selectedCardsForPlayer, 
 	  $currentQuadrant,
 	  $selectionIsValid]) => {
+		
+		let daemonRank = 0;
+		let playerRank = 0;
+		let daemonSuit = '?';
+		let playerSuit = '?';
+
+		
+		for(const cardKey of $selectedCardsForDaemon){
+
+			let cardSuit = magisterLudi.parseSuit(cardKey);
+			let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
+			let cardMoistureDelta = magisterLudi.getMDeltaFromSuit(cardSuit) * cardRank;
+
+			//daemonTotalMoistureIndex += cardMoistureDelta;
+		}
+
+		for(const cardKey of $selectedCardsForPlayer){
+			
+			let cardSuit = magisterLudi.parseSuit(cardKey);
+			let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
+			let cardMoistureDelta = magisterLudi.getMDeltaFromSuit(cardSuit) * cardRank;
+
+			//playerTotalMoistureIndex += cardMoistureDelta;
+		}
+
+		let outcome = [];
+
+		if(!$selectionIsValid){
+
+			return outcome;
+		}
+
+		if($currentQuadrant === 'Earth'){
+			// implement first
+			// Cooperative and Solitary (Cold and Dry)
+			// one card from each tree
+			// cuz wet should match either suit or rank
+		  	    
+	    let playerCardKey = $selectedCardsForPlayer[0];
+	    let daemonCardKey = $selectedCardsForDaemon[0];
+
+	    outcome.push(playerCardKey);
+	    outcome.push(daemonCardKey);
+
+		}
+
+		return outcome;
+	}
+);
+
+export const allChoicesTried = derived(
+	[playerCards, 
+	 daemonCards, 
+	 triedCombos],
+	([$playerCards, 
+	  $daemonCards, 
+	  $triedCombos]) => {
 		
 		let daemonRank = 0;
 		let playerRank = 0;

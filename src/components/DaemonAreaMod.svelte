@@ -1,7 +1,7 @@
 <script>
 
   
-  import { selectedCardsForDaemon, daemonCards, moistureIndex, heatIndex, beforeGame, fireColCount, waterColCount, currentQuadrant, deck, discardCount } from '../stores.js';
+  import { selectedCardsForDaemon, daemonCards, moistureIndex, heatIndex, beforeGame, fireColCount, waterColCount, currentQuadrant, deck, currentDeckCount, discardCount } from '../stores.js';
 
   import Card from './Card.svelte'; 
 
@@ -13,7 +13,7 @@
 <div class="daemon-area">
 
   <h1>
-    Q: {$currentQuadrant} MI: {$moistureIndex} HI: {$heatIndex} Deck: {$deck.length} Discard: { $discardCount }
+    Q: {$currentQuadrant} MI: {$moistureIndex} HI: {$heatIndex} Deck: {$currentDeckCount} Discard: { $discardCount }
   </h1>
 
   <div class="stats daemon-stats">

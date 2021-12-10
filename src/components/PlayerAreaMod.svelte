@@ -1,6 +1,6 @@
 <script>
   
-  import { selectionResolutionMValue, selectionResolutionHValue, selectedCardsForPlayer, selectedCardsForDaemon, playerCards, beforeGame, heatIndex, turnFinished, nextTurnButtonText, earthColCount, airColCount, selectionResolutionValue, selectionIsValid } from '../stores.js';
+  import { selectionResolutionMValue, selectionResolutionHValue, selectedCardsForPlayer, selectedCardsForDaemon, playerCards, beforeGame, heatIndex, turnFinished, nextTurnButtonText, earthColCount, airColCount, selectionResolutionValue, selectionIsValid, allChoicesTried } from '../stores.js';
 
   import Card from './Card.svelte';
   import ElementalVessel from './ElementalVessel.svelte';
@@ -75,6 +75,23 @@
       {$selectionResolutionValue}
 
     </button>
+
+  {:else}
+
+    {#if $allChoicesTried}
+
+
+      <button 
+        class="confirmSelection"
+        on:click={selectionConfirmed}
+      >
+
+        {$selectionResolutionValue}
+
+      </button>
+    
+
+    {/if}
 
   {/if}
 
