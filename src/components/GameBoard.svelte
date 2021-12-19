@@ -152,9 +152,20 @@
   function outOfCards() {
 
     const toReshuffle = $currentDeckCount + $discardCount;
-    alert('out of cards, reshuffling ' + toReshuffle + ' cards...');
-    loadDeck();
-    playTurn();
+
+    if(toReshuffle > 0) {
+   
+      alert('out of cards, reshuffling ' + toReshuffle + ' cards...');
+      loadDeck();
+      playTurn();
+    
+    } else {
+
+      alert('all cards collected! you rock!');
+      $beforeGame = true;
+
+    }
+
   }
 
   function dealCards() {
