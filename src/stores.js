@@ -22,8 +22,6 @@ export const earthColCountChanged = writable(false);
 export const fireColCountChanged = writable(false);
 export const waterColCountChanged = writable(false);
 
-export const triedCombos = writable([]);
-
 export const fireCollection = writable([]);
 
 export const fireColCount = derived(
@@ -224,106 +222,22 @@ export const currentQuadrant = derived(
 export const selectionIsValid = derived(
 	[selectedCardsForPlayer,
    selectedCardsForDaemon,
-   currentQuadrant,
-   triedCombos],
+   currentQuadrant],
     ([$selectedCardsForPlayer,
       $selectedCardsForDaemon,
-      $currentQuadrant,
-      $triedCombos]) => {
+      $currentQuadrant]) => {
 
 			let outcome = false;
 
-			const currentCombo = {
-				player: selectedCardsForPlayer,
-				daemon: selectedCardsForDaemon
-			};
-
-			console.log('currentCombo: ' + currentCombo);
-			console.log('tried combos: ' + triedCombos);
-
-			if(!$triedCombos.includes(currentCombo)){
-				$triedCombos = [...$triedCombos, currentCombo];
-			}
-
 			if($currentQuadrant === 'Water'){
 
-				///////////COPIED FROM EARTH, MODIFY////////////////////
-
-				// implement first
-				// Contracting and Solitary (Cold and Dry)
-				// one card from each tree
-				// should match either suit or rank
-
-				let isSolitary = $selectedCardsForPlayer.length === 1 &&
-	       		   		  	     $selectedCardsForDaemon.length === 1;
-
-		  	    if(isSolitary){
-
-			  	    let playerCardKey = $selectedCardsForPlayer[0];
-			  	    let daemonCardKey = $selectedCardsForDaemon[0];
-
-			  	    let daemonSuit = magisterLudi.parseSuit(daemonCardKey);
-			  	    let playerSuit = magisterLudi.parseSuit(playerCardKey);
-			  	   
-
-			  	    if(daemonSuit === playerSuit){
-
-			  	    	outcome = true;
-
-			  	    } else {
-
-			  	    	let daemonRank = magisterLudi.parseRank(daemonCardKey, daemonSuit);
-			  	    	let playerRank = magisterLudi.parseRank(playerCardKey, playerSuit);
-
-		  	    		if(playerRank === daemonRank){
-
-		  	    			outcome = true;
-		  	    		}
-			  	    }
-
-		  	    }
-
+				// NOT YET IMPLEMENTED
 			}
 
 
 			if($currentQuadrant === 'Air'){
 
-				///////////COPIED FROM EARTH, MODIFY////////////////////
-				
-				// implement first
-				// Contracting and Solitary (Cold and Dry)
-				// one card from each tree
-				// should match either suit or rank
-
-				let isSolitary = $selectedCardsForPlayer.length === 1 &&
-	       		   		  	     $selectedCardsForDaemon.length === 1;
-
-		  	    if(isSolitary){
-
-			  	    let playerCardKey = $selectedCardsForPlayer[0];
-			  	    let daemonCardKey = $selectedCardsForDaemon[0];
-
-			  	    let daemonSuit = magisterLudi.parseSuit(daemonCardKey);
-			  	    let playerSuit = magisterLudi.parseSuit(playerCardKey);
-			  	   
-
-			  	    if(daemonSuit === playerSuit){
-
-			  	    	outcome = true;
-
-			  	    } else {
-
-			  	    	let daemonRank = magisterLudi.parseRank(daemonCardKey, daemonSuit);
-			  	    	let playerRank = magisterLudi.parseRank(playerCardKey, playerSuit);
-
-		  	    		if(playerRank === daemonRank){
-
-		  	    			outcome = true;
-		  	    		}
-			  	    }
-
-		  	    }
-
+				// NOT YET IMPLEMENTED
 			}
 
 
@@ -367,42 +281,7 @@ export const selectionIsValid = derived(
 
 			if($currentQuadrant === 'Fire'){
 
-				///////////COPIED FROM EARTH, MODIFY////////////////////
-				
-				// implement first
-				// Contracting and Solitary (Cold and Dry)
-				// one card from each tree
-				// should match either suit or rank
-
-				let isSolitary = $selectedCardsForPlayer.length === 1 &&
-	       		   		  	     $selectedCardsForDaemon.length === 1;
-
-		  	    if(isSolitary){
-
-			  	    let playerCardKey = $selectedCardsForPlayer[0];
-			  	    let daemonCardKey = $selectedCardsForDaemon[0];
-
-			  	    let daemonSuit = magisterLudi.parseSuit(daemonCardKey);
-			  	    let playerSuit = magisterLudi.parseSuit(playerCardKey);
-			  	   
-
-			  	    if(daemonSuit === playerSuit){
-
-			  	    	outcome = true;
-
-			  	    } else {
-
-			  	    	let daemonRank = magisterLudi.parseRank(daemonCardKey, daemonSuit);
-			  	    	let playerRank = magisterLudi.parseRank(playerCardKey, playerSuit);
-
-		  	    		if(playerRank === daemonRank){
-
-		  	    			outcome = true;
-		  	    		}
-			  	    }
-
-		  	    }
-
+				// NOT YET IMPLEMENTED
 			}
 
 			return outcome;
@@ -468,48 +347,56 @@ export const selectionResolutionValue = derived(
 	}
 );
 
-export const allChoicesTried = derived(
+export const noValidChoices = derived(
 	[playerCards, 
-	 daemonCards, 
-	 triedCombos,
+	 daemonCards,
 	 currentQuadrant],
 	([$playerCards, 
-	  $daemonCards, 
-	  $triedCombos,
+	  $daemonCards,
 	  $currentQuadrant]) => {
-		
-		let daemonRank = 0;
-		let playerRank = 0;
-		let daemonSuit = '?';
-		let playerSuit = '?';
 
+		if($playerCards.length === 0 ||
+			 $daemonCards.length === 0){
 
-		let outcome = true;
+			// in between deals, no Valid moves not applicable, return false
+			return false;
+		}
 
 		if($currentQuadrant === 'Earth'){
 
-			for(const pCardKey of $playerCards){
+			const allPossible = 
+				magisterLudi.allPossibleCombos($playerCards, $daemonCards);
 
-				for(const dCardKey of $daemonCards){
-
-					let comboRepresentation = {
-						player: [pCardKey],
-						daemon: [dCardKey]
-					};
-
-					if(!$triedCombos.includes(comboRepresentation)){
-						outcome = false;
-
-						console.log('combo not tried: ' + comboRepresentation);
-					}
-
-				}
+			//card selection will be single, so we just need to find one
+			// pairing that shares either a suit or a rank
+			for(const keyPair of allPossible){
 				
+				const pCardKey = keyPair[0];
+				const dCardKey = keyPair[1];
+				
+			  const dSuit = magisterLudi.parseSuit(dCardKey);
+			  const pSuit = magisterLudi.parseSuit(pCardKey);
+
+			  if(dSuit === pSuit){
+
+			  	// noValidChoices is false
+			  	return false;
+			  }
+
+			  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
+			  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
+
+			  if(dRank === pRank){
+
+			  	// noValidChoices is false
+			  	return false;
+			  }
 			}
 
 		}
 
-		return outcome;
+  	// noValidChoices is true
+		return true;
 	}
 );
 

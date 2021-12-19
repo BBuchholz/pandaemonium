@@ -22,6 +22,7 @@
     selectionResolutionValue,
     heatIndex,
     currentDeckCount,
+    discardCount,
     moistureIndex,
     turnFinished,
     earthCollection,
@@ -34,12 +35,9 @@
     earthColCountChanged,
     } from '../stores.js';
 
-  $: console.log("selectedCardsForDaemon: " + $selectedCardsForDaemon);
-  $: console.log("selectedCardsForPlayer: " + $selectedCardsForPlayer);
-
   function startGame() {
     $beforeGame = false;
-    console.log('starting game...');
+    // console.log('starting game...');
     loadDeck(); 
     playTurn();
   }
@@ -58,7 +56,7 @@
     
     $deck = newDeckMinusEarth;
 
-    console.log('deck length: ' + $deck.length);
+    // console.log('deck length: ' + $deck.length);
   }
 
   function playTurn() {
@@ -73,15 +71,15 @@
     $selectedCardsForDaemon = [];
     $playerCards = [];
     $daemonCards = [];
-    console.log('selection reset');
+    // console.log('selection reset');
   }
 
-  function selectCard(cardKey) {
-    console.log('selected ' + cardKey);
-  }
+  // function selectCard(cardKey) {
+  //   console.log('selected ' + cardKey);
+  // }
 
   function handleSelectionConfirmed() {
-    console.log('selection confirmed'); 
+    // console.log('selection confirmed'); 
 
     processCardComparison();
 
@@ -148,22 +146,15 @@
     }
 
     resetSelection();
-    console.log('card comparison processed');
+    // console.log('card comparison processed');
   }
 
   function outOfCards() {
 
-    const toReshuffle = $currentDeckCount - totalCollected();
+    const toReshuffle = $currentDeckCount + $discardCount;
     alert('out of cards, reshuffling ' + toReshuffle + ' cards...');
     loadDeck();
     playTurn();
-  }
-
-  function totalCollected() {
-    return $fireCollection.length +
-           $waterCollection.length +
-           $airCollection.length +
-           $earthCollection.length;
   }
 
   function dealCards() {

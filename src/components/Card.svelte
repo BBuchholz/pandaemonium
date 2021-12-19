@@ -23,9 +23,9 @@
   $: src = getImgSrcFromCardKey(cardPower);
   $: cardTitle = cardKey;
   $: cardPower = cardKey; 
-  $: console.log("isSelected for " + cardKey + ": " + isSelected);
+  // $: console.log("isSelected for " + cardKey + ": " + isSelected);
 
-  $: console.log('resolutionIsHeated' + $resolutionIsHeated);
+  // $: console.log('resolutionIsHeated' + $resolutionIsHeated);
   
 
   function getImgSrcFromCardKey(powerString){
@@ -33,9 +33,8 @@
   }
 
   function handleClick() {
-    // isSelected = !isSelected;
-    // dispatch('cardSelected', cardKey);
-    console.log('clicked' + cardKey);
+
+    // console.log('clicked' + cardKey);
     if(isPlayerCard){
 
       if($selectedCardsForPlayer.includes(cardKey)){

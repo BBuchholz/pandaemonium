@@ -8,7 +8,7 @@
   const { open } = getContext('simple-modal');
 
   const showPopupLong = () => {
-    open(EarthPopup, { message: "It's a popup with long text!" });
+    open(EarthPopup);
   };
 
 </script>

@@ -8,7 +8,7 @@
   const { open } = getContext('simple-modal');
 
   const showPopupLong = () => {
-    open(ElementalPopup, { message: "It's a popup with long text!" });
+    open(ElementalPopup);
   };
 
 </script>
