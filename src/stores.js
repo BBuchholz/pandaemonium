@@ -1,6 +1,8 @@
 import { writable, derived } from 'svelte/store';
 import KnechtController from './myriad/KnechtController.js';
 
+import { keysVirgo, keysTaurus, keysCapricorn } from './constants.js'; 
+
 const magisterLudi = KnechtController();
 
 export const modal = writable(null);
@@ -38,6 +40,54 @@ export const earthColCount = derived(
 	earthCollection,
 	($earthCollection) => {
 		return $earthCollection.length;
+	}
+);
+
+export const collectedVirgo = derived(
+	earthCollection,
+	($earthCollection) => {
+
+		for(const cardKey of keysVirgo){
+
+			if(!$earthCollection.includes(cardKey)){
+
+				return false;
+			}
+		}
+
+		return true;
+	}
+);
+
+export const collectedTaurus = derived(
+	earthCollection,
+	($earthCollection) => {
+
+		for(const cardKey of keysTaurus){
+
+			if(!$earthCollection.includes(cardKey)){
+				
+				return false;
+			}
+		}
+
+		return true;
+	}
+);
+
+export const collectedCapricorn = derived(
+	earthCollection,
+	($earthCollection) => {
+
+		for(const cardKey of keysCapricorn){
+
+			if(!$earthCollection.includes(cardKey)){
+				
+				return false;
+			}
+		}
+
+		return true;
 	}
 );
 

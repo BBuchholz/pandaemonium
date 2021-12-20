@@ -27,10 +27,10 @@
 <style> 
 
   .decan-vessel {
-    margin: 5px;
-    padding: 5px;
+    margin: 1px;
+    padding: 2px;
     border-style: double;
-    border-radius: 10px;
+    border-radius: 7px;
   }
 
   .collected {
