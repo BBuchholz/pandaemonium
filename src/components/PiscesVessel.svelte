@@ -20,7 +20,7 @@
       <div class="zodiac-vessel-label">
 
         <button on:click={redeemPisces}>
-        ♒    
+        ♓    
         </button>
       
       </div>
