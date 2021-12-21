@@ -1,6 +1,6 @@
 <script>
   
-  import { fireCollection } from '../stores.js';
+  import { fireCollection, collectedRecentlyFire } from '../stores.js';
 
   import KnechtController from '../myriad/KnechtController.js';
   const magisterLudi = KnechtController();
@@ -20,6 +20,7 @@
     <div  
       class="decan-vessel" 
       class:collected={$fireCollection.includes(cardKey)}
+      class:wiggle={ $collectedRecentlyFire.includes(cardKey)}
     >
       <a href={"https://dark-shadow-sun-fire.netlify.app/?cardKey=" + cardKey} target="_blank">{cardRank}</a>
     </div>

@@ -1,6 +1,6 @@
 <script>
   
-  import { waterCollection } from '../stores.js';
+  import { waterCollection, collectedRecentlyWater } from '../stores.js';
 
   import KnechtController from '../myriad/KnechtController.js';
   const magisterLudi = KnechtController();
@@ -20,6 +20,7 @@
     <div  
       class="decan-vessel" 
       class:collected={$waterCollection.includes(cardKey)}
+      class:wiggle={ $collectedRecentlyWater.includes(cardKey)}
     >
       <a href={"https://dark-shadow-sun-fire.netlify.app/?cardKey=" + cardKey} target="_blank">{cardRank}</a>
     </div>
