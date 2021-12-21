@@ -33,6 +33,10 @@
     fireColCountChanged,
     waterColCountChanged,
     earthColCountChanged,
+    collectedRecentlyFire,
+    collectedRecentlyWater,
+    collectedRecentlyAir,
+    collectedRecentlyEarth
     } from '../stores.js';
 
   function startGame() {
@@ -93,6 +97,11 @@
     $fireColCountChanged = false;
     $airColCountChanged = false;
     $waterColCountChanged = false;
+
+    $collectedRecentlyFire = [];
+    $collectedRecentlyWater = [];
+    $collectedRecentlyAir = [];
+    $collectedRecentlyEarth = [];
     
     dealCards();
   }
@@ -109,6 +118,7 @@
           
           $earthCollection = [...$earthCollection, cardKey];
           $earthColCountChanged = true;
+          $collectedRecentlyEarth = [...$collectedRecentlyEarth, cardKey];
         }
         
         
@@ -120,6 +130,7 @@
           
           $fireCollection = [...$fireCollection, cardKey];
           $fireColCountChanged = true;
+          $collectedRecentlyFire = [...$collectedRecentlyFire, cardKey];
         }
         
       }
@@ -130,6 +141,7 @@
           
           $airCollection = [...$airCollection, cardKey];
           $airColCountChanged = true;
+          $collectedRecentlyAir = [...$collectedRecentlyAir, cardKey];
         }
         
       }
@@ -140,6 +152,7 @@
           
           $waterCollection = [...$waterCollection, cardKey];
           $waterColCountChanged = true;
+          $collectedRecentlyWater = [...$collectedRecentlyWater, cardKey];
         }
         
       }

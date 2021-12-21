@@ -1,6 +1,6 @@
 <script>
   
-  import { earthCollection } from '../stores.js';
+  import { earthCollection, collectedRecentlyEarth } from '../stores.js';
 
   import KnechtController from '../myriad/KnechtController.js';
   const magisterLudi = KnechtController();
@@ -20,6 +20,7 @@
     <div  
       class="decan-vessel" 
       class:collected={$earthCollection.includes(cardKey)}
+      class:wiggle={ $collectedRecentlyEarth.includes(cardKey)}
     >
       <a href={"https://dark-shadow-sun-fire.netlify.app/?cardKey=" + cardKey} target="_blank">{cardRank}</a>
     </div>
@@ -31,11 +32,35 @@
     padding: 2px;
     border-style: double;
     border-radius: 7px;
+    display: none;
   }
 
   .collected {
-    background-color: #000000;
+    background-color: #e16036;
     color: #ffffff;
+    display: block;
+  }
+
+
+  .wiggle {
+    animation: wiggle .15s linear 3;
+    background-color: #e16036;
+  }
+
+
+  @keyframes wiggle {
+    0% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-5px);
+    }
+    75% {
+      transform: translateX(5px);
+    }
+    100% {
+      transform: translateX(0);
+    }
   }
 
 </style>

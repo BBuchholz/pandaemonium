@@ -27,7 +27,7 @@
   import AirPopupButton from './AirPopupButton.svelte';
 
   import EarthVessel from './EarthVessel.svelte';
-
+  import AirVessel from './AirVessel.svelte';
 
   import { createEventDispatcher } from 'svelte';
   const dispatch = createEventDispatcher();
@@ -50,7 +50,9 @@
 
   <div class="stats player-stats">
   
-    <AirPopupButton />
+    <!-- <AirPopupButton /> -->
+
+    <AirVessel />
 
     <!-- <EarthPopupButton /> -->
 

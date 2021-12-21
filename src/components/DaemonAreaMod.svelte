@@ -22,6 +22,9 @@
   import WaterPopupButton from './WaterPopupButton.svelte';
   import FirePopupButton from './FirePopupButton.svelte';
 
+  import FireVessel from './FireVessel.svelte';
+  import WaterVessel from './WaterVessel.svelte';
+
 </script>
  
 <div class="daemon-area">
@@ -32,9 +35,13 @@
 
   <div class="stats daemon-stats">
   
-    <FirePopupButton />
+    <!-- <FirePopupButton /> -->
+
+    <FireVessel />
     
-    <WaterPopupButton />
+    <!-- <WaterPopupButton /> -->
+
+    <WaterVessel />
   
   </div>
     

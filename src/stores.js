@@ -1,7 +1,20 @@
 import { writable, derived } from 'svelte/store';
 import KnechtController from './myriad/KnechtController.js';
 
-import { keysVirgo, keysTaurus, keysCapricorn } from './constants.js'; 
+import { 
+	keysVirgo, 
+	keysTaurus, 
+	keysCapricorn, 
+	keysLibra, 
+	keysGemini, 
+	keysAquarius,
+	keysPisces, 
+	keysScorpio,
+	keysCancer,
+	keysSagittarius,
+	keysLeo,
+	keysAries
+} from './constants.js'; 
 
 const magisterLudi = KnechtController();
 
@@ -24,12 +37,66 @@ export const earthColCountChanged = writable(false);
 export const fireColCountChanged = writable(false);
 export const waterColCountChanged = writable(false);
 
+export const collectedRecentlyFire = writable([]);
+export const collectedRecentlyWater = writable([]);
+export const collectedRecentlyAir = writable([]);
+export const collectedRecentlyEarth = writable([]);
+
+
 export const fireCollection = writable([]);
 
 export const fireColCount = derived(
 	fireCollection,
 	($fireCollection) => {
 		return $fireCollection.length;
+	}
+);
+
+export const collectedSagittarius = derived(
+	fireCollection,
+	($fireCollection) => {
+
+		for(const cardKey of keysSagittarius){
+
+			if(!$fireCollection.includes(cardKey)){
+				
+				return false;
+			}
+		}
+
+		return true;
+	}
+);
+
+export const collectedLeo = derived(
+	fireCollection,
+	($fireCollection) => {
+
+		for(const cardKey of keysLeo){
+
+			if(!$fireCollection.includes(cardKey)){
+				
+				return false;
+			}
+		}
+
+		return true;
+	}
+);
+
+export const collectedAries = derived(
+	fireCollection,
+	($fireCollection) => {
+
+		for(const cardKey of keysAries){
+
+			if(!$fireCollection.includes(cardKey)){
+				
+				return false;
+			}
+		}
+
+		return true;
 	}
 );
 
@@ -100,6 +167,53 @@ export const waterColCount = derived(
 	}
 );
 
+export const collectedPisces = derived(
+	waterCollection,
+	($waterCollection) => {
+
+		for(const cardKey of keysPisces){
+
+			if(!$waterCollection.includes(cardKey)){
+				
+				return false;
+			}
+		}
+
+		return true;
+	}
+);
+
+export const collectedCancer = derived(
+	waterCollection,
+	($waterCollection) => {
+
+		for(const cardKey of keysCancer){
+
+			if(!$waterCollection.includes(cardKey)){
+				
+				return false;
+			}
+		}
+
+		return true;
+	}
+);
+
+export const collectedScorpio = derived(
+	waterCollection,
+	($waterCollection) => {
+
+		for(const cardKey of keysScorpio){
+
+			if(!$waterCollection.includes(cardKey)){
+				
+				return false;
+			}
+		}
+
+		return true;
+	}
+);
 
 export const airCollection = writable([]);
 
@@ -107,6 +221,54 @@ export const airColCount = derived(
 	airCollection,
 	($airCollection) => {
 		return $airCollection.length;
+	}
+);
+
+export const collectedAquarius = derived(
+	airCollection,
+	($airCollection) => {
+
+		for(const cardKey of keysAquarius){
+
+			if(!$airCollection.includes(cardKey)){
+				
+				return false;
+			}
+		}
+
+		return true;
+	}
+);
+
+export const collectedGemini = derived(
+	airCollection,
+	($airCollection) => {
+
+		for(const cardKey of keysGemini){
+
+			if(!$airCollection.includes(cardKey)){
+				
+				return false;
+			}
+		}
+
+		return true;
+	}
+);
+
+export const collectedLibra = derived(
+	airCollection,
+	($airCollection) => {
+
+		for(const cardKey of keysLibra){
+
+			if(!$airCollection.includes(cardKey)){
+				
+				return false;
+			}
+		}
+
+		return true;
 	}
 );
 

@@ -10,7 +10,6 @@
 </script>
 
 <div class="elemental-vessel">
-  <div class="elemental-vessel-label">Earth</div>
   
   <VirgoVessel />
 

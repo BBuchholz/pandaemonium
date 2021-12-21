@@ -31,11 +31,35 @@
     padding: 5px;
     border-style: double;
     border-radius: 10px;
+    display: none;
   }
 
   .collected {
-    background-color: #000000;
+    background-color: #a9efef;
     color: #ffffff;
+    display: block;
   }
+
+  .wiggle {
+    animation: wiggle .15s linear 3;
+    background-color: #a9efef;
+  }
+
+  @keyframes wiggle {
+    0% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-5px);
+    }
+    75% {
+      transform: translateX(5px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+
 
 </style>
