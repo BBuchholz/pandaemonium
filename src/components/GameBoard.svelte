@@ -39,6 +39,20 @@
     collectedRecentlyEarth
     } from '../stores.js';
 
+
+  import { getNotificationsContext } from 'svelte-notifications';
+  const { addNotification } = getNotificationsContext();
+
+  function notifySelectionResolutionValue(){
+    addNotification({
+      position: 'bottom-right',
+      text: 'collected ' + $selectionResolutionValue,
+      type: 'error',
+      description: 'lorem ipsum',
+      removeAfter: 4000,
+    });
+  }
+
   function startGame() {
     $beforeGame = false;
     // console.log('starting game...');
@@ -158,6 +172,8 @@
       }
     }
 
+    notifySelectionResolutionValue();
+
     resetSelection();
     // console.log('card comparison processed');
   }
@@ -215,14 +231,11 @@
 
   <div class="game-board">
 
-    <DaemonArea 
-      on:cardSelected={ e => selectCard(e.detail) }
-    />
+    <DaemonArea />
 
     <PlayerArea 
       on:startGame={ e => startGame(e.detail) }
       on:nextTurn={ e => nextTurn(e.detail) } 
-      on:cardSelected={ e => selectCard(e.detail) }
       on:selectionConfirmed={ e => handleSelectionConfirmed(e.detail) }
     />
 

@@ -1,6 +1,10 @@
 <script>
   import Modal from 'svelte-simple-modal';
+  import Notifications from 'svelte-notifications';
+
   import { modal } from './stores.js';
+
+  import MyriadNotification from './MyriadNotification.svelte';
 
   import GameBoard from './components/GameBoard.svelte';
 
@@ -10,21 +14,33 @@
 
 </script>
 
-<Modal show={$modal}>
-  <main>
 
-    <GameBoard />
+<Notifications item={MyriadNotification}>
+
+  <Modal show={$modal}>
+    
+    <main>
+
+      <GameBoard />
 
 
-    <div class="winner-section">
-      <div>
-        <span class="winner-message">You have fallen...</span>
-        <button class="restart" onClick="location.reload()">Play Again</button>
-        <button on:click={showStats}>Show Stats</button>
+      <div class="winner-section">
+        
+        <div>
+        
+          <span class="winner-message">You have fallen...</span>
+          <button class="restart" onClick="location.reload()">Play Again</button>
+          <button on:click={showStats}>Show Stats</button>
+        
+        </div>
+
       </div>
-    </div>
-  </main>
-</Modal>
+
+    </main>
+
+  </Modal>
+
+</Notifications>
 
 <style>
 

@@ -22,7 +22,6 @@
   import Card from './Card.svelte';
   import ElementalVessel from './ElementalVessel.svelte';
 
-
   import EarthPopupButton from './EarthPopupButton.svelte';
   import AirPopupButton from './AirPopupButton.svelte';
 
