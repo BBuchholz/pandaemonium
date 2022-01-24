@@ -1,18 +1,42 @@
 <script>
    
+  import { fireCollection, collectedFire } from '../stores.js';
+  import { keysLeo, keysAries, keysSagittarius } from '../constants.js';
+  
   import SagittariusVessel from './SagittariusVessel.svelte';
   import LeoVessel from './LeoVessel.svelte';
   import AriesVessel from './AriesVessel.svelte';
 
+  const keysFire = [...keysAries, ...keysLeo, ...keysSagittarius];
+
+  function redeemFire() {
+
+    $fireCollection = $fireCollection.filter(cardKey => !keysFire.includes(cardKey)); 
+  }
+
 </script>
 
 <div class="elemental-vessel">
-  
-  <SagittariusVessel />
 
-  <LeoVessel />
+  {#if $collectedFire}
 
-  <AriesVessel />
+    <div class="zodiac-vessel-label">
+
+      <button on:click={redeemFire}>
+      🜂    
+      </button>
+    
+    </div>
+
+  {:else}
+      
+    <SagittariusVessel />
+
+    <LeoVessel />
+
+    <AriesVessel />
+
+  {/if}
 
 </div>
 

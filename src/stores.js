@@ -101,6 +101,14 @@ export const collectedAries = derived(
 );
 
 
+export const collectedFire = derived(
+	[collectedAries, collectedLeo, collectedSagittarius],
+	([$collectedAries, $collectedLeo, $collectedSagittarius]) => {
+
+		return $collectedAries && $collectedLeo && collectedSagittarius;
+	}
+);
+
 export const earthCollection = writable([]);
 
 export const earthColCount = derived(

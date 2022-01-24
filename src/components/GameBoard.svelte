@@ -53,6 +53,15 @@
     });
   }
 
+  function notifyElementChange(){
+    // addNotification({
+    //   position: 'bottom-right',
+    //   text: $currentElementRuleText,
+    //   type: 'error',
+    //   description: 'lorem ipsum',
+    // });
+  }
+
   function startGame() {
     $beforeGame = false;
     // console.log('starting game...');
