@@ -4,36 +4,57 @@
   import ScorpioVessel from './ScorpioVessel.svelte';
   import CancerVessel from './CancerVessel.svelte';
 
+  import { 
+    waterCollection, 
+    collectedWater 
+  } from '../stores.js';
+
+  import { 
+    keysCancer, 
+    keysScorpio, 
+    keysPisces 
+  } from '../constants.js';
+  
+  const keysWater = [...keysScorpio, ...keysCancer, ...keysPisces];
+
+  function redeemWater() {
+
+    $waterCollection =  $waterCollection.filter(
+                          cardKey => 
+                          !keysWater.includes(cardKey)
+                        ); 
+  }
+
 </script>
 
 <div class="elemental-vessel">
   
-  <PiscesVessel />
+  {#if $collectedWater}
 
-  <ScorpioVessel />
+    <div class="zodiac-vessel-label">
 
-  <CancerVessel />
+      <button on:click={redeemWater}>
+      🜄    
+      </button>
+    
+    </div>
 
+  {:else}
+
+    <PiscesVessel />
+
+    <ScorpioVessel />
+
+    <CancerVessel />
+  
+  {/if}
+    
 </div>
 
 <style>
 
   .elemental-vessel {
     background-color: '#ffffff';
-  }
-  
-  .zodiac-vessel {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-  }
-
-  .decan-vessel {
-    margin: 0px;
-    padding: 0px;
-    border-style: double;
-    border-radius: 5px;
   }
 
 </style>

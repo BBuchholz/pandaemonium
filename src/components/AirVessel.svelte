@@ -4,16 +4,51 @@
   import AquariusVessel from './AquariusVessel.svelte';
   import LibraVessel from './LibraVessel.svelte';
 
+  import { 
+    airCollection, 
+    collectedAir 
+  } from '../stores.js';
+
+  import { 
+    keysGemini, 
+    keysAquarius, 
+    keysLibra 
+  } from '../constants.js';
+  
+  const keysAir = 
+    [...keysAquarius, ...keysGemini, ...keysLibra];
+
+  function redeemAir() {
+
+    $airCollection =  $airCollection.filter(
+                          cardKey => 
+                          !keysAir.includes(cardKey)
+                        ); 
+  }
 
 </script>
 
 <div class="elemental-vessel">
   
-  <GeminiVessel />
+  {#if $collectedAir}
 
-  <AquariusVessel />
+    <div class="zodiac-vessel-label">
 
-  <LibraVessel />
+      <button on:click={redeemAir}>
+      🜁    
+      </button>
+    
+    </div>
+
+  {:else}
+
+    <GeminiVessel />
+
+    <AquariusVessel />
+
+    <LibraVessel />
+  
+  {/if}
 
 </div>
 
@@ -21,20 +56,6 @@
 
   .elemental-vessel {
     background-color: '#ffffff';
-  }
-  
-  .zodiac-vessel {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-  }
-
-  .decan-vessel {
-    margin: 0px;
-    padding: 0px;
-    border-style: double;
-    border-radius: 5px;
   }
 
 </style>

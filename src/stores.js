@@ -166,6 +166,14 @@ export const collectedCapricorn = derived(
 	}
 );
 
+export const collectedEarth = derived(
+	[collectedVirgo, collectedTaurus, collectedCapricorn],
+	([$collectedVirgo, $collectedTaurus, $collectedCapricorn]) => {
+		
+		return $collectedVirgo && $collectedTaurus && collectedCapricorn;
+	}
+);
+
 export const waterCollection = writable([]);
 
 export const waterColCount = derived(
@@ -223,6 +231,14 @@ export const collectedScorpio = derived(
 	}
 );
 
+export const collectedWater = derived(
+	[collectedScorpio, collectedCancer, collectedPisces],
+	([$collectedScorpio, $collectedCancer, $collectedPisces]) => {
+		
+		return $collectedScorpio && $collectedCancer && collectedPisces;
+	}
+);
+
 export const airCollection = writable([]);
 
 export const airColCount = derived(
@@ -277,6 +293,14 @@ export const collectedLibra = derived(
 		}
 
 		return true;
+	}
+);
+
+export const collectedAir = derived(
+	[collectedLibra, collectedGemini, collectedAquarius],
+	([$collectedLibra, $collectedGemini, $collectedAquarius]) => {
+		
+		return $collectedLibra && $collectedGemini && collectedAquarius;
 	}
 );
 

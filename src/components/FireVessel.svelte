@@ -1,12 +1,12 @@
 <script>
-   
-  import { fireCollection, collectedFire } from '../stores.js';
-  import { keysLeo, keysAries, keysSagittarius } from '../constants.js';
   
   import SagittariusVessel from './SagittariusVessel.svelte';
   import LeoVessel from './LeoVessel.svelte';
   import AriesVessel from './AriesVessel.svelte';
-
+ 
+  import { fireCollection, collectedFire } from '../stores.js';
+  import { keysLeo, keysAries, keysSagittarius } from '../constants.js';
+  
   const keysFire = [...keysAries, ...keysLeo, ...keysSagittarius];
 
   function redeemFire() {
