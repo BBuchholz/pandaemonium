@@ -59,4 +59,21 @@
     background-color: '#ffffff';
   }
 
+  button {
+    font-size: 15px;
+    line-height: 15px;
+    padding: 8px 22px 9px 22px;
+    box-sizing: border-box;
+    font-weight: 700;
+    border: solid 3px white;
+    color: black;
+    background-color: #e16036;
+    border-radius: 30px;
+    transition: all ease-out .2s;
+    cursor: pointer;
+    outline: none;
+    animation: buttonPulse .2s infinite ease-in-out;
+  }
+
+
 </style>

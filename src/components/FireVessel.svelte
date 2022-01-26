@@ -60,4 +60,20 @@
     border-radius: 5px;
   }
 
+  button {
+    font-size: 15px;
+    line-height: 15px;
+    padding: 8px 22px 9px 22px;
+    box-sizing: border-box;
+    font-weight: 700;
+    border: solid 3px gray;
+    color: white;
+    background-color: #e3170a;
+    border-radius: 30px;
+    transition: all ease-out .2s;
+    cursor: pointer;
+    outline: none;
+    animation: buttonPulse .2s infinite ease-in-out;
+  }
+
 </style>
