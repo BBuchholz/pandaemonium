@@ -13,7 +13,7 @@
   const magisterLudi = KnechtController();
 
   export let isPlayerCard = false;
-  export let cardKey = '2D';
+  export let cardKey = 'XX';
   export let i = 0;
   export let isSelected = false;
   let src = '';
