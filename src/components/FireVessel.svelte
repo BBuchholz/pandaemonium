@@ -4,7 +4,11 @@
   import LeoVessel from './LeoVessel.svelte';
   import AriesVessel from './AriesVessel.svelte';
  
-  import { fireCollection, collectedFire } from '../stores.js';
+  import { 
+    fireCollection, 
+    collectedFire,
+    heatIndex,
+    moistureIndex } from '../stores.js';
   import { keysLeo, keysAries, keysSagittarius } from '../constants.js';
   
   const keysFire = [...keysAries, ...keysLeo, ...keysSagittarius];
@@ -12,6 +16,9 @@
   function redeemFire() {
 
     $fireCollection = $fireCollection.filter(cardKey => !keysFire.includes(cardKey)); 
+
+    $heatIndex += 1;
+    $moistureIndex += -1;
   }
 
 </script>
@@ -44,20 +51,6 @@
 
   .elemental-vessel {
     background-color: '#ffffff';
-  }
-  
-  .zodiac-vessel {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-  }
-
-  .decan-vessel {
-    margin: 0px;
-    padding: 0px;
-    border-style: double;
-    border-radius: 5px;
   }
 
   button {

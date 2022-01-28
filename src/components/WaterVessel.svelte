@@ -6,7 +6,9 @@
 
   import { 
     waterCollection, 
-    collectedWater 
+    collectedWater,
+    heatIndex,
+    moistureIndex 
   } from '../stores.js';
 
   import { 
@@ -23,6 +25,9 @@
                           cardKey => 
                           !keysWater.includes(cardKey)
                         ); 
+
+    $heatIndex += -1;
+    $moistureIndex += 1;
   }
 
 </script>

@@ -17,6 +17,7 @@ import {
 } from './constants.js'; 
 
 const magisterLudi = KnechtController();
+const testingElementalVessels = true;
 
 export const modal = writable(null);
 
@@ -105,7 +106,7 @@ export const collectedFire = derived(
 	[collectedAries, collectedLeo, collectedSagittarius],
 	([$collectedAries, $collectedLeo, $collectedSagittarius]) => {
 
-		return $collectedAries && $collectedLeo && collectedSagittarius;
+		return testingElementalVessels || $collectedAries && $collectedLeo && collectedSagittarius;
 	}
 );
 
@@ -170,7 +171,7 @@ export const collectedEarth = derived(
 	[collectedVirgo, collectedTaurus, collectedCapricorn],
 	([$collectedVirgo, $collectedTaurus, $collectedCapricorn]) => {
 		
-		return $collectedVirgo && $collectedTaurus && collectedCapricorn;
+		return testingElementalVessels || $collectedVirgo && $collectedTaurus && collectedCapricorn;
 	}
 );
 
@@ -235,7 +236,7 @@ export const collectedWater = derived(
 	[collectedScorpio, collectedCancer, collectedPisces],
 	([$collectedScorpio, $collectedCancer, $collectedPisces]) => {
 		
-		return $collectedScorpio && $collectedCancer && collectedPisces;
+		return testingElementalVessels || $collectedScorpio && $collectedCancer && collectedPisces;
 	}
 );
 
@@ -300,7 +301,7 @@ export const collectedAir = derived(
 	[collectedLibra, collectedGemini, collectedAquarius],
 	([$collectedLibra, $collectedGemini, $collectedAquarius]) => {
 		
-		return $collectedLibra && $collectedGemini && collectedAquarius;
+		return testingElementalVessels || $collectedLibra && $collectedGemini && collectedAquarius;
 	}
 );
 
@@ -476,12 +477,14 @@ export const selectionIsValid = derived(
 			if($currentQuadrant === 'Water'){
 
 				// NOT YET IMPLEMENTED
+				alert('Water selection validity not implemented yet');
 			}
 
 
 			if($currentQuadrant === 'Air'){
 
 				// NOT YET IMPLEMENTED
+				alert('Air selection validity not implemented yet');
 			}
 
 
@@ -494,38 +497,60 @@ export const selectionIsValid = derived(
 				let isSolitary = $selectedCardsForPlayer.length === 1 &&
 	       		   		  	     $selectedCardsForDaemon.length === 1;
 
-		  	    if(isSolitary){
+  	    if(isSolitary){
 
-			  	    let playerCardKey = $selectedCardsForPlayer[0];
-			  	    let daemonCardKey = $selectedCardsForDaemon[0];
+	  	    let playerCardKey = $selectedCardsForPlayer[0];
+	  	    let daemonCardKey = $selectedCardsForDaemon[0];
 
-			  	    let daemonSuit = magisterLudi.parseSuit(daemonCardKey);
-			  	    let playerSuit = magisterLudi.parseSuit(playerCardKey);
-			  	   
+	  	    let daemonSuit = magisterLudi.parseSuit(daemonCardKey);
+	  	    let playerSuit = magisterLudi.parseSuit(playerCardKey);
+	  	   
 
-			  	    if(daemonSuit === playerSuit){
+	  	    if(daemonSuit === playerSuit){
 
-			  	    	outcome = true;
+	  	    	outcome = true;
 
-			  	    } else {
+	  	    } else {
 
-			  	    	let daemonRank = magisterLudi.parseRank(daemonCardKey, daemonSuit);
-			  	    	let playerRank = magisterLudi.parseRank(playerCardKey, playerSuit);
+	  	    	let daemonRank = magisterLudi.parseRank(daemonCardKey, daemonSuit);
+	  	    	let playerRank = magisterLudi.parseRank(playerCardKey, playerSuit);
 
-		  	    		if(playerRank === daemonRank){
+  	    		if(playerRank === daemonRank){
 
-		  	    			outcome = true;
-		  	    		}
-			  	    }
+  	    			outcome = true;
+  	    		}
+	  	    }
 
-		  	    }
+  	    }
 
 			}
 
 
 			if($currentQuadrant === 'Fire'){
 
-				// NOT YET IMPLEMENTED
+				// COPIED FROM EARTH (MODIFY)
+				// Expanding and Solitary (Hot and Dry)
+				// one card from each tree
+				// valid selection is neither sharing suit or rank
+
+				let isSolitary = $selectedCardsForPlayer.length === 1 &&
+	       		   		  	     $selectedCardsForDaemon.length === 1;
+
+  	    if(isSolitary){
+
+	  	    let playerCardKey = $selectedCardsForPlayer[0];
+	  	    let daemonCardKey = $selectedCardsForDaemon[0];
+
+	  	    let daemonSuit = magisterLudi.parseSuit(daemonCardKey);
+	  	    let playerSuit = magisterLudi.parseSuit(playerCardKey);
+
+  	    	let daemonRank = magisterLudi.parseRank(daemonCardKey, daemonSuit);
+  	    	let playerRank = magisterLudi.parseRank(playerCardKey, playerSuit);
+
+  	    	outcome = 
+  	    		daemonSuit != playerSuit &&
+				 		daemonRank != playerRank;
+  	    }				
 			}
 
 			return outcome;
@@ -587,6 +612,40 @@ export const selectionResolutionValue = derived(
 
 		}
 
+		if($currentQuadrant === 'Fire'){
+
+			// COPIED FROM EARTH (MODIFIED)
+			// Expanding and Solitary (Hot and Dry)
+			// one card from each tree
+			// only collect winning card, higher rank wins
+		  	    
+	    const pCardKey = $selectedCardsForPlayer[0];
+	    const dCardKey = $selectedCardsForDaemon[0];
+
+		  const dSuit = magisterLudi.parseSuit(dCardKey);
+		  const pSuit = magisterLudi.parseSuit(pCardKey);
+
+		  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
+		  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
+
+		  if(dRank > pRank){
+		  	outcome.push(dCardKey);
+		  }else{
+		  	outcome.push(pCardKey);
+		  }
+
+		}
+
+		if($currentQuadrant === 'Water'){
+
+			alert('Water resolution not implemented yet');
+		}
+
+		if($currentQuadrant === 'Air'){
+
+			alert('Air resolution not implemented yet');
+		}
+
 		return outcome;
 	}
 );
@@ -604,6 +663,43 @@ export const noValidChoices = derived(
 
 			// in between deals, no Valid moves not applicable, return false
 			return false;
+		}
+
+
+		if($currentQuadrant === 'Fire'){
+
+			const allPossible = 
+				magisterLudi.allPossibleCombos($playerCards, $daemonCards);
+
+			//card selection will be single, so we just need to find one
+			// pairing that shares neither a suit or a rank
+			for(const keyPair of allPossible){
+				
+				const pCardKey = keyPair[0];
+				const dCardKey = keyPair[1];
+				
+			  const dSuit = magisterLudi.parseSuit(dCardKey);
+			  const pSuit = magisterLudi.parseSuit(pCardKey);
+
+			  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
+			  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
+
+			  if(dSuit != pSuit && dRank != pRank){
+
+			  	// noValidChoices is false
+			  	return false;
+			  }
+			}
+		}
+
+		if($currentQuadrant === 'Water'){
+
+			alert('Water validation not implemented yet');
+		}
+
+		if($currentQuadrant === 'Air'){
+
+			alert('Air validation not implemented yet');
 		}
 
 		if($currentQuadrant === 'Earth'){

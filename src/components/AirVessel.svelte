@@ -7,13 +7,15 @@
 
   import { 
     airCollection, 
-    collectedAir 
+    collectedAir,
+    heatIndex,
+    moistureIndex
   } from '../stores.js';
 
   import { 
     keysGemini, 
     keysAquarius, 
-    keysLibra 
+    keysLibra
   } from '../constants.js';
   
   const keysAir = 
@@ -25,6 +27,9 @@
                           cardKey => 
                           !keysAir.includes(cardKey)
                         ); 
+
+    $heatIndex += 1;
+    $moistureIndex += 1;
   }
 
 </script>
