@@ -135,6 +135,8 @@
 
       let cardSuit = magisterLudi.parseSuit(cardKey);
 
+      console.log('cardSuit: ' + cardSuit);
+
       if(cardSuit === 'D'){
         
         if(!$earthCollection.includes(cardKey)){

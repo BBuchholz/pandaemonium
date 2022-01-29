@@ -17,7 +17,7 @@ import {
 } from './constants.js'; 
 
 const magisterLudi = KnechtController();
-const testingElementalVessels = true;
+const testingElementalVessels = false;
 
 export const modal = writable(null);
 
@@ -622,18 +622,22 @@ export const selectionResolutionValue = derived(
 	    const pCardKey = $selectedCardsForPlayer[0];
 	    const dCardKey = $selectedCardsForDaemon[0];
 
-		  const dSuit = magisterLudi.parseSuit(dCardKey);
-		  const pSuit = magisterLudi.parseSuit(pCardKey);
+	    if(pCardKey && dCardKey){
+		    console.log('pCardKey: ' + pCardKey);
+		    console.log('dCardKey: ' + dCardKey);
 
-		  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
-		  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
+			  const dSuit = magisterLudi.parseSuit(dCardKey);
+			  const pSuit = magisterLudi.parseSuit(pCardKey);
 
-		  if(dRank > pRank){
-		  	outcome.push(dCardKey);
-		  }else{
-		  	outcome.push(pCardKey);
-		  }
+			  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
+			  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
 
+			  if(dRank > pRank){
+			  	outcome.push(dCardKey);
+			  }else{
+			  	outcome.push(pCardKey);
+			  }
+			}
 		}
 
 		if($currentQuadrant === 'Water'){
