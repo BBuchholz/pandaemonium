@@ -1,8 +1,58 @@
 <script>
   import { fade } from 'svelte/transition';
+  import { currentStateText } from './stores.js';
 
   export let notification;
+  export let withoutStyles = false;
   export let onRemove = null;
+
+
+  import { getNotificationsContext } from 'svelte-notifications';
+  const { addNotification } = getNotificationsContext();
+
+  function notifyCopied(){
+    addNotification({
+      position: 'bottom-right',
+      text: 'copied to clipboard',
+      type: 'error',
+      description: 'lorem ipsum',
+      removeAfter: 4000,
+      disableButtons: true,
+      disableDescription: true
+    });
+  }
+  
+  function notifyCopyError(){
+    addNotification({
+      position: 'bottom-right',
+      text: 'error copying to clipboard',
+      type: 'error',
+      description: 'lorem ipsum',
+      removeAfter: 4000,
+      disableButtons: true,
+      disableDescription: true
+    });
+  }
+
+  function copyState() {
+
+    const textToWrite = $currentStateText;
+
+    navigator.clipboard.writeText(textToWrite).then(function() {
+    
+      /* clipboard successfully set */
+      notifyCopied();
+
+    }, function() {
+    
+      /* clipboard write failed */
+      notifyCopyError();
+      
+    });
+
+
+  };
+
 </script>
 
 <style>
@@ -60,14 +110,26 @@
 >
   <div class="notification-content">
     <slot>{notification.text}</slot>
-    <p>{notification.description || 'Custom description'}</p>
+
+    {#if !notification.disableDescription}
+
+      <p>{notification.description || 'Custom description'}</p>
+
+    {/if}
+
   </div>
-  <div class="notification-buttons">
-    <button on:click={onRemove}>
-      Action
-    </button>
-    <button on:click={onRemove}>
-      Close
-    </button>
-  </div>
+
+  {#if !notification.disableButtons}
+
+    <div class="notification-buttons">
+      <button on:click={copyState}>
+        Copy
+      </button>
+      <button on:click={onRemove}>
+        Close
+      </button>
+    </div>
+  
+  {/if}
+
 </div>
