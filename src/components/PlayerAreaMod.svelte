@@ -12,7 +12,7 @@
     turnFinished, 
     nextTurnButtonText, 
     earthColCount, 
-    airColCount, 
+    airColCount,  
     selectionResolutionValue, 
     selectionIsValid, 
     noValidChoices
@@ -22,8 +22,7 @@
   import Card from './Card.svelte';
   import ElementalVessel from './ElementalVessel.svelte';
 
-  import EarthPopupButton from './EarthPopupButton.svelte';
-  import AirPopupButton from './AirPopupButton.svelte';
+  import LibraryPopupButton from './LibraryPopupButton.svelte';
 
   import EarthVessel from './EarthVessel.svelte';
   import AirVessel from './AirVessel.svelte';
@@ -48,12 +47,8 @@
 <div class="player-area">
 
   <div class="stats player-stats">
-  
-    <!-- <AirPopupButton /> -->
 
     <AirVessel />
-
-    <!-- <EarthPopupButton /> -->
 
     <EarthVessel />
   
@@ -111,8 +106,12 @@
         No Valid Moves
 
       </button>
-    
 
+    {:else}
+    
+    <LibraryPopupButton />
+
+  
     {/if}
 
   {/if}
@@ -192,7 +191,7 @@ button.confirmSelection {
   justify-content: center;
   font-size: 20px;
   left: 20px;
-  top: -35px;
+  top: -20px;
 }
 
 button.beforeGame {
