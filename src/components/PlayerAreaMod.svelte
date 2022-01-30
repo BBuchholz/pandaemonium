@@ -107,10 +107,9 @@
 
       </button>
 
-    {:else}
+    {:else if !$beforeGame}
     
-    <LibraryPopupButton />
-
+      <LibraryPopupButton />
   
     {/if}
 

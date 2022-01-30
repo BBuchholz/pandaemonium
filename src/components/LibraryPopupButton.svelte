@@ -17,7 +17,7 @@
   on:click={showPopupLong}
   class:wiggle={ $earthColCountChanged } >
 
-  📔
+  📚
 
 </button>
 
