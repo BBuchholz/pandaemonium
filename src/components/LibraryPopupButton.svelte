@@ -17,7 +17,7 @@
   on:click={showPopupLong}
   class:wiggle={ $earthColCountChanged } >
 
-  📚
+  📓
 
 </button>
 
@@ -37,17 +37,17 @@
     padding: 8px 22px 9px 22px;
     box-sizing: border-box;
     font-weight: 700;
-    border: solid 3px white;
+    border: solid 3px black;
     color: white;
-    background-color: black;
+    background-color: #cc98e6;
     border-radius: 30px;
     transition: all ease-out .2s;
     cursor: pointer;
     outline: none;
     animation: buttonPulse .2s infinite ease-in-out;
     position: absolute;
-    left:  20px;
-    top: -20px;
+    right:  20px;
+    bottom: 20px;
   }
 
 
