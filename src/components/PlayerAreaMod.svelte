@@ -106,10 +106,6 @@
         No Valid Moves
 
       </button>
-
-    {:else if !$beforeGame}
-    
-      <LibraryPopupButton />
   
     {/if}
 

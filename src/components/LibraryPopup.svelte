@@ -1,6 +1,6 @@
 <script>
   
-  import { earthCollection, selectedEarthSign } from '../stores.js';
+  import { earthCollection, selectedEarthSign, moistureIndex, heatIndex } from '../stores.js';
   import EarthDecanVessel from './EarthDecanVessel.svelte';
 
   function redeemTaurus() {
@@ -24,8 +24,36 @@
     $selectedEarthSign = '';
   }
 
+  function redeemFire(){
+    $heatIndex = $heatIndex + 1;
+    $moistureIndex = $moistureIndex - 1;
+  }
+
+  function redeemWater(){
+    $heatIndex = $heatIndex - 1;
+    $moistureIndex = $moistureIndex + 1;
+  }
+  
+  function redeemAir(){
+    $heatIndex = $heatIndex + 1;
+    $moistureIndex = $moistureIndex + 1;
+  }
+
+  function redeemEarth(){
+    $heatIndex = $heatIndex - 1;
+    $moistureIndex = $moistureIndex - 1;
+  }
+
 </script>
 
+<div class="planar-buttons">
+
+    <button on:click={redeemFire} >Redeem Fire</button>
+    <button on:click={redeemWater} >Redeem Water</button>
+    <button on:click={redeemAir} >Redeem Air</button>
+    <button on:click={redeemEarth} >Redeem Earth</button>
+  
+</div>
 <div class="elemental-vessel">
   <div class="elemental-vessel-label">Library</div>
   <div class="zodiac-vessel">

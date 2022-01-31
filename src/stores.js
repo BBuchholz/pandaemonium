@@ -476,8 +476,53 @@ export const selectionIsValid = derived(
 
 			if($currentQuadrant === 'Water'){
 
-				// NOT YET IMPLEMENTED
-				alert('Water selection validity not implemented yet');
+				//assume true
+				outcome = true;
+
+				const affinityMap = new Map();
+
+				// water treats all as one group, so consolidate
+				const allCardKeys = 
+					[
+						...$selectedCardsForPlayer, 
+						...$selectedCardsForDaemon
+					];
+
+				if(allCardKeys.length < 2){
+					outcome = false;
+				}
+
+				for(const cardKey of allCardKeys){
+
+					const cardSuit = magisterLudi.parseSuit(cardKey);
+					const cardRank = magisterLudi.parseRank(cardKey, cardSuit);
+
+					if(!affinityMap.has(cardSuit)){
+						affinityMap.set(cardSuit, 1);
+					} else {
+						affinityMap.set(cardSuit, affinityMap.get(cardSuit) + 1);
+					}
+
+					if(!affinityMap.has(cardRank)){
+						affinityMap.set(cardRank, 1);
+					} else {
+						affinityMap.set(cardRank, affinityMap.get(cardRank) + 1);
+					}
+				}
+
+				// a broken chain can be detected by one card
+				// having no other cards sharing an affinity
+				for(const cardKey of allCardKeys){
+
+					const cardSuit = magisterLudi.parseSuit(cardKey);
+					const cardRank = magisterLudi.parseRank(cardKey, cardSuit);
+
+					if(affinityMap.get(cardSuit) < 2 &&
+						 affinityMap.get(cardRank) < 2){
+						// no connections, broken chain
+						outcome = false;
+					}
+				}
 			}
 
 
@@ -641,8 +686,17 @@ export const selectionResolutionValue = derived(
 		}
 
 		if($currentQuadrant === 'Water'){
+			// water treats all as one group, so consolidate
+			const allCardKeys = 
+				[
+					...$selectedCardsForPlayer, 
+					...$selectedCardsForDaemon
+				];
 
-			alert('Water resolution not implemented yet');
+			for(const cardKey of allCardKeys){
+				outcome.push(cardKey);
+			}
+
 		}
 
 		if($currentQuadrant === 'Air'){
@@ -698,7 +752,37 @@ export const noValidChoices = derived(
 
 		if($currentQuadrant === 'Water'){
 
-			alert('Water validation not implemented yet');
+			// copying from earth, not tested
+
+			const allPossible = 
+				magisterLudi.allPossibleCombos($playerCards, $daemonCards);
+
+			//card selection will be single, so we just need to find one
+			// pairing that shares either a suit or a rank
+			for(const keyPair of allPossible){
+				
+				const pCardKey = keyPair[0];
+				const dCardKey = keyPair[1];
+				
+			  const dSuit = magisterLudi.parseSuit(dCardKey);
+			  const pSuit = magisterLudi.parseSuit(pCardKey);
+
+			  if(dSuit === pSuit){
+
+			  	// noValidChoices is false
+			  	return false;
+			  }
+
+			  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
+			  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
+
+			  if(dRank === pRank){
+
+			  	// noValidChoices is false
+			  	return false;
+			  }
+			}
+
 		}
 
 		if($currentQuadrant === 'Air'){
