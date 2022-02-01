@@ -34,12 +34,6 @@
   <h1>
     Q: {$currentQuadrant} MI: {$moistureIndex} HI: {$heatIndex} Deck: {$currentDeckCount} Discard: { $discardCount }
   </h1>
-  
-  {#if !$beforeGame}
-  
-    <LibraryPopupButton />
-
-  {/if}
 
   <div class="stats daemon-stats">
   

@@ -193,12 +193,17 @@
 
     const toReshuffle = $currentDeckCount + $discardCount;
 
-    if(toReshuffle > 0) {
+    if(toReshuffle > 1) {
    
       alert('out of cards, reshuffling ' + toReshuffle + ' cards...');
       loadDeck();
-      playTurn();
+      playTurn(); 
     
+    } else if (toReshuffle === 1) {
+
+      alert('only one card in deck, need to redeem to continue');
+      $turnFinished = true;
+
     } else {
 
       alert('all cards collected! you rock!');

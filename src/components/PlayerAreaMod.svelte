@@ -113,6 +113,8 @@
 
   {#if $turnFinished}
 
+    <LibraryPopupButton />
+
     <button 
       class="next-turn" 
       on:click={onNextTurn}
@@ -185,7 +187,6 @@ button.confirmSelection {
   align-items: center;
   justify-content: center;
   font-size: 20px;
-  left: 20px;
   top: -20px;
 }
 

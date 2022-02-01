@@ -1,9 +1,14 @@
 <script>
 
+  import { 
+    earthColCountChanged,
+    waterColCountChanged,
+    airColCountChanged,
+    fireColCountChanged
+  } from '../stores.js';
+
   import { getContext } from 'svelte';
   import LibraryPopup from './LibraryPopup.svelte';
-
-  import { earthColCount, earthColCountChanged } from '../stores.js';
 
   const { open } = getContext('simple-modal');
 
@@ -15,7 +20,10 @@
  
 <button 
   on:click={showPopupLong}
-  class:wiggle={ $earthColCountChanged } >
+  class:wiggle-water={ $waterColCountChanged } 
+  class:wiggle-air={ $airColCountChanged } 
+  class:wiggle-earth={ $earthColCountChanged } 
+  class:wiggle-fire={ $fireColCountChanged } >
 
   📓
 
@@ -46,14 +54,29 @@
     outline: none;
     animation: buttonPulse .2s infinite ease-in-out;
     position: absolute;
-    right:  20px;
-    top: 30px;
+    left:  15px;
+    top: -20px;
   }
 
 
-  .wiggle {
+  .wiggle-water {
+    animation: wiggle .15s linear 3;
+    background-color: #a9efef;
+  }
+
+  .wiggle-air {
+    animation: wiggle .15s linear 3;
+    background-color: #ffca3a;
+  }
+
+  .wiggle-earth {
     animation: wiggle .15s linear 3;
     background-color: #e16036;
+  }
+
+  .wiggle-fire {
+    animation: wiggle .15s linear 3;
+    background-color: #e3170a;
   }
 
 
