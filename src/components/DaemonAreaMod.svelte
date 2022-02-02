@@ -24,8 +24,8 @@
 
   import LibraryPopupButton from './LibraryPopupButton.svelte';
 
-  import FireVessel from './FireVessel.svelte';
   import WaterVessel from './WaterVessel.svelte';
+  import AirVessel from './AirVessel.svelte';
 
 </script>
  
@@ -40,11 +40,11 @@
     <!-- <FirePopupButton /> -->
 
 
-    <FireVessel />
+    <WaterVessel />
     
     <!-- <WaterPopupButton /> -->
 
-    <WaterVessel />
+    <AirVessel />
   
   </div>
     
