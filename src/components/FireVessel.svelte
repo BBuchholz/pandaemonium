@@ -59,7 +59,7 @@
     padding: 8px 22px 9px 22px;
     box-sizing: border-box;
     font-weight: 700;
-    border: solid 3px gray;
+    border: solid 3px white;
     color: white;
     background-color: #e3170a;
     border-radius: 30px;
