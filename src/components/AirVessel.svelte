@@ -28,9 +28,9 @@
                           !keysAir.includes(cardKey)
                         ); 
     
-    // // uncomment when implemented
-    // $heatIndex += 1;
-    // $moistureIndex += 1;
+    // uncomment when implemented
+    $heatIndex += 1;
+    $moistureIndex += 1;
   }
 
 </script>

@@ -528,8 +528,70 @@ export const selectionIsValid = derived(
 
 			if($currentQuadrant === 'Air'){
 
-				// NOT YET IMPLEMENTED
-				alert('Air selection validity not implemented yet');
+				//ADAPTED FROM WATER, NOT FULLY TESTED
+
+				const affinityMapPlayer = new Map();
+				const affinityMapDaemon = new Map();
+
+				//assume true, we will test for validity violations
+				//and flip this flag if any are found
+				outcome = true;
+
+				if($selectedCardsForPlayer.length < 1 || 
+					 $selectedCardsForDaemon.length < 1){
+					outcome = false;
+				}
+
+				for(const cardKey of $selectedCardsForPlayer){
+
+					const cardSuit = magisterLudi.parseSuit(cardKey);
+					const cardRank = magisterLudi.parseRank(cardKey, cardSuit);
+
+					if(!affinityMapPlayer.has(cardSuit)){
+						affinityMapPlayer.set(cardSuit, 1);
+					} else {
+						affinityMapPlayer.set(cardSuit, affinityMapPlayer.get(cardSuit) + 1);
+					}
+
+					if(!affinityMapPlayer.has(cardRank)){
+						affinityMapPlayer.set(cardRank, 1);
+					} else {
+						affinityMapPlayer.set(cardRank, affinityMapPlayer.get(cardRank) + 1);
+					}
+				}
+
+				for(const cardKey of $selectedCardsForDaemon){
+
+					const cardSuit = magisterLudi.parseSuit(cardKey);
+					const cardRank = magisterLudi.parseRank(cardKey, cardSuit);
+
+					if(!affinityMapDaemon.has(cardSuit)){
+						affinityMapDaemon.set(cardSuit, 1);
+					} else {
+						affinityMapDaemon.set(cardSuit, affinityMapDaemon.get(cardSuit) + 1);
+					}
+
+					if(!affinityMapDaemon.has(cardRank)){
+						affinityMapDaemon.set(cardRank, 1);
+					} else {
+						affinityMapDaemon.set(cardRank, affinityMapDaemon.get(cardRank) + 1);
+					}
+				}
+
+				for(const [key, value] of affinityMapDaemon){
+
+					if(value > 1){
+						outcome = false;
+					}
+				}
+
+				for(const [key, value] of affinityMapPlayer){
+
+					if(value > 1){
+						outcome = false;
+					}
+				}
+
 			}
 
 
@@ -701,7 +763,30 @@ export const selectionResolutionValue = derived(
 
 		if($currentQuadrant === 'Air'){
 
-			alert('Air resolution not implemented yet');
+			// COPYING FROM FIRE, NOT FULLY TESTED
+				    
+    	for(let i = 0; i < 3; i++){
+
+		    const pCardKey = $selectedCardsForPlayer[i];
+		    const dCardKey = $selectedCardsForDaemon[i];
+
+		    if(pCardKey && dCardKey){
+			    console.log('pCardKey: ' + pCardKey);
+			    console.log('dCardKey: ' + dCardKey);
+
+				  const dSuit = magisterLudi.parseSuit(dCardKey);
+				  const pSuit = magisterLudi.parseSuit(pCardKey);
+
+				  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
+				  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
+
+				  if(dRank > pRank){
+				  	outcome.push(dCardKey);
+				  }else{
+				  	outcome.push(pCardKey);
+				  }
+				}
+			}
 		}
 
 		return outcome;
@@ -752,7 +837,7 @@ export const noValidChoices = derived(
 
 		if($currentQuadrant === 'Water'){
 
-			// copying from earth, not tested
+			// copying from earth, not fully tested
 
 			const allPossible = 
 				magisterLudi.allPossibleCombos($playerCards, $daemonCards);
@@ -787,7 +872,30 @@ export const noValidChoices = derived(
 
 		if($currentQuadrant === 'Air'){
 
-			alert('Air validation not implemented yet');
+			
+			// COPYING FROM FIRE, NOT FULLY TESTED
+			const allPossible = 
+				magisterLudi.allPossibleCombos($playerCards, $playerCards);
+
+			//card selection will be single, so we just need to find one
+			// pairing that shares neither a suit or a rank
+			for(const keyPair of allPossible){
+				
+				const pCardKey = keyPair[0];
+				const dCardKey = keyPair[1];
+				
+			  const dSuit = magisterLudi.parseSuit(dCardKey);
+			  const pSuit = magisterLudi.parseSuit(pCardKey);
+
+			  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
+			  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
+
+			  if(dSuit != pSuit && dRank != pRank){
+
+			  	// noValidChoices is false
+			  	return false;
+			  }
+			}
 		}
 
 		if($currentQuadrant === 'Earth'){
