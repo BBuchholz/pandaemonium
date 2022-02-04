@@ -7,7 +7,8 @@
     selectedCardsForPlayer, 
     selectedCardsForDaemon, 
     playerCards, 
-    beforeGame, 
+    beforeGame,
+    currentQuadrant, 
     heatIndex, 
     turnFinished, 
     nextTurnButtonText, 
@@ -44,7 +45,12 @@
 
 </script>
 
-<div class="player-area">
+<div class="player-area"
+  class:fire-color={$currentQuadrant === 'Fire'}
+  class:water-color={$currentQuadrant === 'Water'}
+  class:air-color={$currentQuadrant === 'Air'}
+  class:earth-color={$currentQuadrant === 'Earth'}
+  >
 
   <div class="stats player-stats">
 
@@ -218,5 +224,21 @@ button {
   animation: buttonPulse .2s infinite ease-in-out;
 }
 
+/* Elemental Styles */
+.fire-color {
+  background-color: #fa8c85;
+}
+
+.air-color {
+  background-color: #ffdd80;
+}
+
+.water-color {
+  background-color: #d4f7f7;
+}
+
+.earth-color {
+  background-color: #eea890;
+}
 
 </style>

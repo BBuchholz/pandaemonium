@@ -29,7 +29,13 @@
 
 </script>
  
-<div class="daemon-area">
+<div 
+  class="daemon-area"
+  class:fire-color={$currentQuadrant === 'Fire'}
+  class:water-color={$currentQuadrant === 'Water'}
+  class:air-color={$currentQuadrant === 'Air'}
+  class:earth-color={$currentQuadrant === 'Earth'}
+  >
 
   <h1>
     Q: {$currentQuadrant} MI: {$moistureIndex} HI: {$heatIndex} Deck: {$currentDeckCount} Discard: { $discardCount }
@@ -113,6 +119,22 @@
     background: rgba(0,0,0,.3);
   }
 
+/* Elemental Styles */
+.fire-color {
+  background-color: #7a0d05;
+}
+
+.air-color {
+  background-color: #805e00;
+}
+
+.water-color {
+  background-color: #20acac;
+}
+
+.earth-color {
+  background-color: #6f2811;
+}
 
 
 </style>
