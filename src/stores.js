@@ -21,6 +21,9 @@ const testingElementalVessels = false;
 
 export const modal = writable(null);
 
+export const rulesIncludeElementalShiftsOnAllCollections =
+	writable(true);
+
 export const selectedCardsForPlayer = writable([]);
 export const selectedCardsForDaemon = writable([]);
 

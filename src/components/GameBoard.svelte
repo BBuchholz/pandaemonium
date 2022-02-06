@@ -36,7 +36,8 @@
     collectedRecentlyFire,
     collectedRecentlyWater,
     collectedRecentlyAir,
-    collectedRecentlyEarth
+    collectedRecentlyEarth,
+    rulesIncludeElementalShiftsOnAllCollections
     } from '../stores.js';
 
 
@@ -108,7 +109,7 @@
   function handleSelectionConfirmed() {
     // console.log('selection confirmed'); 
 
-    processCardComparison();
+    processCardCollection();
 
     $turnFinished = true;
   }
@@ -129,7 +130,7 @@
     dealCards();
   }
 
-  function processCardComparison() {
+  function processCardCollection() {
 
     for(const cardKey of $selectionResolutionValue){
 
@@ -144,6 +145,12 @@
           $earthCollection = [...$earthCollection, cardKey];
           $earthColCountChanged = true;
           $collectedRecentlyEarth = [...$collectedRecentlyEarth, cardKey];
+
+          if($rulesIncludeElementalShiftsOnAllCollections){
+
+            $heatIndex = $heatIndex - 1;
+            $moistureIndex = $moistureIndex - 1;
+          }
         }
         
         
@@ -156,6 +163,12 @@
           $fireCollection = [...$fireCollection, cardKey];
           $fireColCountChanged = true;
           $collectedRecentlyFire = [...$collectedRecentlyFire, cardKey];
+
+          if($rulesIncludeElementalShiftsOnAllCollections){
+
+            $heatIndex = $heatIndex + 1;
+            $moistureIndex = $moistureIndex - 1;
+          }
         }
         
       }
@@ -167,6 +180,12 @@
           $airCollection = [...$airCollection, cardKey];
           $airColCountChanged = true;
           $collectedRecentlyAir = [...$collectedRecentlyAir, cardKey];
+
+          if($rulesIncludeElementalShiftsOnAllCollections){
+
+            $heatIndex = $heatIndex + 1;
+            $moistureIndex = $moistureIndex + 1;
+          }
         }
         
       }
@@ -178,6 +197,12 @@
           $waterCollection = [...$waterCollection, cardKey];
           $waterColCountChanged = true;
           $collectedRecentlyWater = [...$collectedRecentlyWater, cardKey];
+
+          if($rulesIncludeElementalShiftsOnAllCollections){
+
+            $heatIndex = $heatIndex - 1;
+            $moistureIndex = $moistureIndex + 1;
+          }
         }
         
       }
