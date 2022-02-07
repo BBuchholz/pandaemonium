@@ -1,5 +1,8 @@
 <script>
   
+  import { getNotificationsContext } from 'svelte-notifications';
+  const { addNotification } = getNotificationsContext();
+
   import { earthCollection, selectedEarthSign, moistureIndex, heatIndex } from '../stores.js';
   import EarthDecanVessel from './EarthDecanVessel.svelte';
 
@@ -44,6 +47,61 @@
     $moistureIndex = $moistureIndex - 1;
   }
 
+  function setItem(itemKey, itemValue) {
+    try {
+        let now = new Date();
+        let jsonData = JSON.stringify({time: now, data: itemValue});
+
+        window.localStorage.setItem(itemKey, jsonData);
+        return true;
+    } catch(e) {
+        return false;
+    }
+  }
+
+  function getItem(itemKey) {
+    try {
+        let jsonObjectString = window.localStorage.getItem(itemKey);
+        let parsedData = JSON.parse(jsonObjectString);
+
+        return parsedData.data;
+    } catch(e) {
+        return null;
+    }
+  }
+
+  function saveGame(){
+
+    // IN PROGRESS, WILL SAVE TO LOCAL STORAGE AND NOTIFY
+    let gameData = {someDevStubKey: "just a dev stub"};
+    if(setItem("gameData", gameData)){
+      notifyWithoutExpire("saved to local storage");
+    } else {
+      notifyWithoutExpire("error saving to local storage");
+    }
+  }
+
+  function loadGame(){
+
+    const gameData = getItem("gameData");
+    if(gameData){
+      notifyWithoutExpire("loaded " + JSON.stringify(gameData));
+    } else {
+      notifyWithoutExpire("no saved data found");
+    }
+  }
+
+  function notifyWithoutExpire(textValue){
+    addNotification({
+      position: 'bottom-right',
+      text: textValue,
+      type: 'error',
+      description: 'lorem ipsum',
+      disableButtons: false,
+      disableDescription: true
+    });
+  }
+
 </script>
 
 <div class="planar-buttons">
@@ -52,6 +110,8 @@
     <button on:click={redeemWater} >Redeem Water</button>
     <button on:click={redeemAir} >Redeem Air</button>
     <button on:click={redeemEarth} >Redeem Earth</button>
+    <button on:click={saveGame} >Save Game</button>
+    <button on:click={loadGame} >Load Game</button>
   
 </div>
 <div class="elemental-vessel">
