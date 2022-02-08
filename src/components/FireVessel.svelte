@@ -17,8 +17,8 @@
 
     $fireCollection = $fireCollection.filter(cardKey => !keysFire.includes(cardKey)); 
 
-    $heatIndex += 1;
-    $moistureIndex += -1;
+    $heatIndex += 9;
+    $moistureIndex += -9;
   }
 
 </script>

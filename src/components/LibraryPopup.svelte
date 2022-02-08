@@ -28,23 +28,23 @@
   }
 
   function redeemFire(){
-    $heatIndex = $heatIndex + 1;
-    $moistureIndex = $moistureIndex - 1;
+    $heatIndex = $heatIndex + 9;
+    $moistureIndex = $moistureIndex - 9;
   }
 
   function redeemWater(){
-    $heatIndex = $heatIndex - 1;
-    $moistureIndex = $moistureIndex + 1;
+    $heatIndex = $heatIndex - 9;
+    $moistureIndex = $moistureIndex + 9;
   }
   
   function redeemAir(){
-    $heatIndex = $heatIndex + 1;
-    $moistureIndex = $moistureIndex + 1;
+    $heatIndex = $heatIndex + 9;
+    $moistureIndex = $moistureIndex + 9;
   }
 
   function redeemEarth(){
-    $heatIndex = $heatIndex - 1;
-    $moistureIndex = $moistureIndex - 1;
+    $heatIndex = $heatIndex - 9;
+    $moistureIndex = $moistureIndex - 9;
   }
 
   function setItem(itemKey, itemValue) {
@@ -197,18 +197,6 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
-  }
-
-  .decan-vessel {
-    margin: 5px;
-    padding: 5px;
-    border-style: double;
-    border-radius: 10px;
-  }
-
-  .collected {
-    background-color: #000000;
-    color: #ffffff;
   }
 
 </style>
