@@ -13,3 +13,8 @@ export const keysCancer = ['2C', '3C', '4C'];
 export const keysSagittarius = ['8W', '9W', '10W'];
 export const keysLeo = ['5W', '6W', '7W'];
 export const keysAries = ['2W', '3W', '4W'];
+
+// export const cardImagePath = '/images/';
+// //Replace with this for Marseilles images
+export const cardImagePath = '/images/cbdt/';
+// //TODO: NEED TO COPY THEM TO THE FOLDER FIRST

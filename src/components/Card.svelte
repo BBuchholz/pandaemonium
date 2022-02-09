@@ -9,6 +9,10 @@
     resolutionIsHeated
     } from '../stores.js';
 
+  import {
+    cardImagePath
+  } from '../constants.js'
+
   import KnechtController from '../myriad/KnechtController.js';
   const magisterLudi = KnechtController();
 
@@ -29,7 +33,8 @@
   
 
   function getImgSrcFromCardKey(powerString){
-    return '/images/' + powerString + '.jpg';
+    // return '/images/' + powerString + '.jpg';
+    return cardImagePath + powerString + '.jpg';
   }
 
   function handleClick() {
@@ -106,10 +111,10 @@
 
 .card {
   opacity: 1;
-  margin: 0 10px;
+  margin: 10px;
   width: 150px;
   height: 200px;
-  padding: 10px 15px;
+  padding: 10px;
   color: black;
   font-size: 14px;
   line-height: 18px;
@@ -171,9 +176,15 @@
   background-position: center;
 }
 
-img {
+/*img {
   width: 10vw;
   height: 20vh;
+  object-fit: contain;
+}*/
+
+img {
+  width: 140px;
+  height: 160px;
   object-fit: contain;
 }
 
