@@ -7,6 +7,11 @@
   import MyriadNotification from './MyriadNotification.svelte';
 
   import GameBoard from './components/GameBoard.svelte';
+  import DaedalusLab from './components/DaedalusLab.svelte';
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const hasPassPhrase = urlParams.has('passPhrase');
+  const passPhrase = urlParams.get('passPhrase');
 
   function showStats() {
     alert('showStats() in App.svelte is not yet implemented');
@@ -21,20 +26,29 @@
     
     <main>
 
-      <GameBoard />
+      {#if hasPassPhrase}
+
+        <DaedalusLab {passPhrase}/>
+
+      {:else}
+
+        <GameBoard />
 
 
-      <div class="winner-section">
-        
-        <div>
-        
-          <span class="winner-message">You have fallen...</span>
-          <button class="restart" onClick="location.reload()">Play Again</button>
-          <button on:click={showStats}>Show Stats</button>
-        
+        <div class="winner-section">
+          
+          <div>
+          
+            <span class="winner-message">You have fallen...</span>
+            <button class="restart" onClick="location.reload()">Play Again</button>
+            <button on:click={showStats}>Show Stats</button>
+          
+          </div>
+
         </div>
 
-      </div>
+      {/if}
+
 
     </main>
 
