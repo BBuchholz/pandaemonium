@@ -177,8 +177,8 @@
 }
 
 img {
-  width: 15vw;
-  height: 25vh;
+  width: 10vw;
+  height: 20vh;
   object-fit: contain;
 }
 
