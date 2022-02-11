@@ -176,15 +176,9 @@
   background-position: center;
 }
 
-/*img {
-  width: 10vw;
-  height: 20vh;
-  object-fit: contain;
-}*/
-
 img {
-  width: 140px;
-  height: 160px;
+  width: 15vw;
+  height: 25vh;
   object-fit: contain;
 }
 
