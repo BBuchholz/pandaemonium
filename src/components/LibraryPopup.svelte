@@ -81,6 +81,11 @@
     }
   }
 
+  function generateDaedalusLabUrl(){
+
+    return "https://pandaemonium.studio/?passPhrase=daedalus";
+  }
+
   function loadGame(){
 
     const gameData = getItem("gameData");
@@ -112,6 +117,8 @@
     <button on:click={redeemEarth} >Redeem Earth</button>
     <button on:click={saveGame} >Save Game</button>
     <button on:click={loadGame} >Load Game</button>
+
+    <a href={generateDaedalusLabUrl()} target="_blank">Daedalus Lab</a>
   
 </div>
 <div class="elemental-vessel">
