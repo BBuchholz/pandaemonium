@@ -11,7 +11,7 @@
 
   const urlParams = new URLSearchParams(window.location.search);
   const hasPassPhrase = urlParams.has('passPhrase');
-  const passPhrase = urlParams.get('passPhrase');
+  const passPhrase = hasPassPhrase ? urlParams.get('passPhrase') : "BASELINE";
 
   function showStats() {
     alert('showStats() in App.svelte is not yet implemented');
@@ -26,7 +26,7 @@
     
     <main>
 
-      {#if hasPassPhrase}
+      {#if true || hasPassPhrase}
 
         <DaedalusLab {passPhrase}/>
 
