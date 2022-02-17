@@ -26,7 +26,7 @@
     
     <main>
 
-      {#if true || hasPassPhrase}
+      {#if hasPassPhrase}
 
         <DaedalusLab {passPhrase}/>
 

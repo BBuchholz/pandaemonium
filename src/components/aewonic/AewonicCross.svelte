@@ -6,13 +6,13 @@
     selectedCardsForDaemon, 
     daemonCards
 
-  } from './daedalus-stores.js';
-
-  import Card from './Card.svelte';
+  } from './aewonic-stores.js';
+ 
+  import Card from '../Card.svelte';
 
 </script>
 
-[Two Trees Go Here]
+[AeWoNiC Cross Goes Here]
 <!-- TODO: Create Class AewonicCross.svelte for the two 
 trees component, create a separate stores file just for it as
 aewonic-cross-stores.js and move the relevant to it -->
