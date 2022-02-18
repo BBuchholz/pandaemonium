@@ -1,19 +1,32 @@
 <script>
 
-  import AewonicCross from './aewonic/AewonicCross.svelte';
+  import WitchesCradle from './aewonic/WitchesCradle.svelte';
+  import ModCard from './aewonic/ModCard.svelte';
 
   const passPhraseDefault = '[passPhrase not set]';
   export let passPhrase = passPhraseDefault;
 
 
+
+  import { 
+
+    selectedCardsForDaemon, 
+    daemonCards
+
+  } from './aewonic/aewonic-stores.js';
+
+
   let labComponents = [
     "ModCard",
-    "AewonicCross",
+    "WitchesCradle",
   ];
 
   let selectedComponent;
+  let cardKey = '2D';
 
-
+  function loadDaemonCards() {
+    $daemonCards = ['2D', '2C', '2S'];
+  }
   
 </script>
 
@@ -23,29 +36,40 @@
 
 {:else}
 
-  <p>pass phrase {passPhrase} found!</p>
+  <div class="utility-panel">
 
-  <select 
-    bind:value={selectedComponent}
-  >
-    {#each labComponents as component}
-      <option value={component}>
-        {component}
-      </option>
-    {/each}
-  </select>
-  
-  {#if selectedComponent === "AewonicCross"}
+    <p>pass phrase {passPhrase} found!</p>
 
-      <!-- If selected component is AewonicCross, insert here (added to separate file) -->
-    <AewonicCross />
+    <select 
+      bind:value={selectedComponent}
+    >
+      {#each labComponents as component}
+        <option value={component}>
+          {component}
+        </option>
+      {/each}
+    </select>
+
+  </div>
+
+  {#if selectedComponent === "WitchesCradle"}
+
+    <button on:click={loadDaemonCards}>Load Daemon Cards</button>
+
+      <!-- If selected component is WitchesCradle, insert here (added to separate file) -->
+    <WitchesCradle />
   
   {:else if selectedComponent === "ModCard"}
 
     <!-- TODO: move this to its own file like the other -->
-    [MOD CARD GOES HERE]
+    
+    <ModCard {cardKey}/>
 
   {/if}
 
 
 {/if}
+
+<style>
+  
+</style>
