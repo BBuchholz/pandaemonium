@@ -4,15 +4,18 @@
   import { 
 
     selectedCardsForDaemon, 
-    daemonCards
+    daemonCards,
+    playerCards
 
   } from './aewonic-stores.js';
  
-  import Card from '../Card.svelte';
+  import Card from './ModCard.svelte';
 
 </script>
 
-[Witches Cradle Goes Here]
+[Witches Cradle]
+
+<div class="witches-cradle">
 
   <div class="daemon-cards">
   
@@ -28,4 +31,34 @@
 
     {/each}      
 
-  </div>   
+  </div>  
+
+  <div class="player-cards">
+  
+    {#each $playerCards as cardKey, i}
+
+      <Card 
+        isPlayerCard={false} 
+        {cardKey}
+        {i}
+        on:cardSelected
+        isSelected={$selectedCardsForDaemon.includes(cardKey)}
+      />
+
+    {/each}      
+
+  </div>  
+
+</div>
+
+<style>
+
+  .daemon-cards {
+    display: flex;
+  }
+
+  .player-cards {
+    display: flex;
+  }
+
+</style> 

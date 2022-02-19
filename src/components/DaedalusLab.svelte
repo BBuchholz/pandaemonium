@@ -11,22 +11,26 @@
   import { 
 
     selectedCardsForDaemon, 
-    daemonCards
+    daemonCards,
+    playerCards
 
   } from './aewonic/aewonic-stores.js';
 
 
   let labComponents = [
-    "ModCard",
     "WitchesCradle",
+    "ModCard",
   ];
 
   let selectedComponent;
   let cardKey = '2D';
 
-  function loadDaemonCards() {
+  function loadCards() {
     $daemonCards = ['2D', '2C', '2S'];
+    $playerCards = ['3D', '3C', '3S'];
   }
+
+  loadCards();
   
 </script>
 
@@ -53,8 +57,6 @@
   </div>
 
   {#if selectedComponent === "WitchesCradle"}
-
-    <button on:click={loadDaemonCards}>Load Daemon Cards</button>
 
       <!-- If selected component is WitchesCradle, insert here (added to separate file) -->
     <WitchesCradle />
