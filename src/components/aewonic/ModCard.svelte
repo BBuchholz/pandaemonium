@@ -23,10 +23,12 @@
   let src = '';
   let cardTitle = 'card title';
   let cardPower = 'zw';
+  let cardSuit = '?';
 
-  $: src = getImgSrcFromCardKey(cardPower);
+  $: src = getImgSrcFromCardKey(cardKey);
   $: cardTitle = cardKey;
-  $: cardPower = cardKey; 
+  $: cardPower = getElementalSymbolFromCardKey(cardKey); 
+  $: cardSuit = magisterLudi.parseSuit(cardKey);
   // $: console.log("isSelected for " + cardKey + ": " + isSelected);
 
   // $: console.log('resolutionIsHeated' + $resolutionIsHeated);
@@ -35,6 +37,22 @@
   function getImgSrcFromCardKey(powerString){
     // return '/images/' + powerString + '.jpg';
     return cardImagePath + powerString + '.jpg';
+  }
+
+  function getElementalSymbolFromCardKey(cardKey){
+    const suit = magisterLudi.parseSuit(cardKey);
+    switch(suit){
+      case 'C':
+        return '🜄';
+      case 'W':
+        return '🜂';
+      case 'D':
+        return '🜃';
+      case 'S':
+        return '🜁';
+      default:  
+        return '';
+    }
   }
 
   function handleClick() {
@@ -96,10 +114,10 @@
   class:played-card-daemon-hot={isSelected && !isPlayerCard && $resolutionIsHeated}
   class:played-card-daemon-cold={isSelected && !isPlayerCard && !$resolutionIsHeated}
   class:played-card-player-cold={isSelected && isPlayerCard && !$resolutionIsHeated}
-  class:fire-color={magisterLudi.parseSuit(cardKey) === 'W'}
-  class:water-color={magisterLudi.parseSuit(cardKey) === 'C'}
-  class:air-color={magisterLudi.parseSuit(cardKey) === 'S'}
-  class:earth-color={magisterLudi.parseSuit(cardKey) === 'D'}
+  class:fire-color={cardSuit === 'W'}
+  class:water-color={cardSuit === 'C'}
+  class:air-color={cardSuit === 'S'}
+  class:earth-color={cardSuit === 'D'}
   on:click={handleClick}
 >
   <div class="text">{cardTitle}</div>
@@ -112,8 +130,10 @@
 .card {
   opacity: 1;
   margin: 10px;
-  width: 150px;
-  height: 200px;
+  width: 90%;
+  height: 90%;
+  max-height: 300px;
+  max-width: 150px;
   padding: 10px;
   color: black;
   font-size: 14px;
@@ -121,12 +141,12 @@
   font-weight: bold;
   position: relative;
   box-sizing: border-box;
-  text-align: left;
+  text-align: center;
   transition: all .15s ease-out;
   box-shadow: 0px 5px 5px rgba(0,0,0,.3);
   overflow: hidden;
 }
-
+/*
 .card:after {
   content: "";
   position: absolute;
@@ -138,7 +158,7 @@
   animation: sheen infinite .5s ease-in-out;
   display: none;
   transform: rotate(-7deg);
-}
+}*/
 
 .played-card-player-cold {
   transform: translateY(-30px);
@@ -170,32 +190,16 @@
   height: 30px;
   text-align: center;
   border-radius: 50%;
-  color: rgba(0,0,0,0);
+  color: black;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
 }
 
 img {
-  width: 90%;
-  height: 90%;
+  width: 70%;
+  height: 70%;
   object-fit: contain;
-}
-
-.daemon-color { 
-  background-color: #2a79d0;
-}
-
-.daemon-card .power {
-  background-image: url("/images/shield.svg");
-}
-
-.player-color {
-  background-color: #272727;
-}
-
-.player-card .power {
-  background-image: url("/images/skull.svg");
 }
 
 /* Elemental Styles */
