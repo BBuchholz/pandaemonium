@@ -16,10 +16,10 @@
   import KnechtController from '../../myriad/KnechtController.js';
   const magisterLudi = KnechtController();
 
-  export let isPlayerCard = false;
   export let cardKey = 'XX';
+  export let cardState = 'centered';
+  export let cardMode = 'agency';
   export let i = 0;
-  export let isSelected = false;
   let src = '';
   let cardTitle = 'card title';
   let cardPower = 'zw';
@@ -29,10 +29,9 @@
   $: cardTitle = cardKey;
   $: cardPower = getElementalSymbolFromCardKey(cardKey); 
   $: cardSuit = magisterLudi.parseSuit(cardKey);
+  $: console.log("cardState: " + cardState);
   // $: console.log("isSelected for " + cardKey + ": " + isSelected);
 
-  // $: console.log('resolutionIsHeated' + $resolutionIsHeated);
-  
 
   function getImgSrcFromCardKey(powerString){
     // return '/images/' + powerString + '.jpg';
@@ -55,50 +54,78 @@
     }
   }
 
-  function handleClick() {
+  function cycleState(){
+    if(cardState === 'centered'){
+      cardState = 'elevated';
+      return;
+    }
+    if(cardState === 'elevated'){
+      cardState = 'lowered';
+      return;
+    }
+    if(cardState === 'lowered'){
+      cardState = 'centered';
+      return;
+    } 
+  }
 
-    // console.log('clicked' + cardKey);
-    if(isPlayerCard){
+  function handleClick(){
 
-      if($selectedCardsForPlayer.includes(cardKey)){
+    if(cardMode === 'agency'){
 
-        $selectedCardsForPlayer = 
-          $selectedCardsForPlayer.filter(cKey => cKey !== cardKey);
+      cycleState();
+    }
 
-      }else{
+    if(cardMode === 'dependency'){
 
-        if($selectionIsWet){
-          
-          $selectedCardsForPlayer = 
-            [...$selectedCardsForPlayer, cardKey];
-
-        }else{
-
-          $selectedCardsForPlayer = [cardKey];
-        }
-
-      }
-
-    }else{
-
-      if($selectedCardsForDaemon.includes(cardKey)){
-
-        $selectedCardsForDaemon = $selectedCardsForDaemon.filter(cKey => cKey !== cardKey);
-
-      }else{
-      
-        if($selectionIsWet) {
-          
-          $selectedCardsForDaemon = 
-            [...$selectedCardsForDaemon, cardKey];
-
-        }else{
-
-          $selectedCardsForDaemon = [cardKey];
-        }
-      }
+      alert('cards in dependency mode will not respond to clicks. (REMOVE THIS MESSAGE FROM ModCard ONCE TUTORIAL IMPLEMENTED)');
     }
   }
+
+  // function handleClickPreviousImplementation() {
+
+  //   // console.log('clicked' + cardKey);
+  //   if(isPlayerCard){
+
+  //     if($selectedCardsForPlayer.includes(cardKey)){
+
+  //       $selectedCardsForPlayer = 
+  //         $selectedCardsForPlayer.filter(cKey => cKey !== cardKey);
+
+  //     }else{
+
+  //       if($selectionIsWet){
+          
+  //         $selectedCardsForPlayer = 
+  //           [...$selectedCardsForPlayer, cardKey];
+
+  //       }else{
+
+  //         $selectedCardsForPlayer = [cardKey];
+  //       }
+
+  //     }
+
+  //   }else{
+
+  //     if($selectedCardsForDaemon.includes(cardKey)){
+
+  //       $selectedCardsForDaemon = $selectedCardsForDaemon.filter(cKey => cKey !== cardKey);
+
+  //     }else{
+      
+  //       if($selectionIsWet) {
+          
+  //         $selectedCardsForDaemon = 
+  //           [...$selectedCardsForDaemon, cardKey];
+
+  //       }else{
+
+  //         $selectedCardsForDaemon = [cardKey];
+  //       }
+  //     }
+  //   }
+  // }
 
 </script>
 
@@ -106,14 +133,8 @@
   class="card"
   in:fly="{{ y: 200, duration: 2000, delay: i*200 }}" 
   out:fade
-  class:player-card={isPlayerCard}
-  class:player-color={isPlayerCard}
-  class:daemon-card={!isPlayerCard}
-  class:daemon-color={!isPlayerCard}
-  class:played-card-player-hot={isSelected && isPlayerCard && $resolutionIsHeated}
-  class:played-card-daemon-hot={isSelected && !isPlayerCard && $resolutionIsHeated}
-  class:played-card-daemon-cold={isSelected && !isPlayerCard && !$resolutionIsHeated}
-  class:played-card-player-cold={isSelected && isPlayerCard && !$resolutionIsHeated}
+  class:card-up={cardState === 'elevated'}
+  class:card-down={cardState === 'lowered'}
   class:fire-color={cardSuit === 'W'}
   class:water-color={cardSuit === 'C'}
   class:air-color={cardSuit === 'S'}
@@ -160,23 +181,13 @@
   transform: rotate(-7deg);
 }*/
 
-.played-card-player-cold {
+.card-up {
   transform: translateY(-30px);
   box-shadow: 0px 15px 15px rgba(0,0,0,.3);
 }
 
-.played-card-player-hot {
+.card-down {
   transform: translateY(30px);
-  box-shadow: 0px 15px 15px rgba(0,0,0,.3);
-}
-
-.played-card-daemon-cold {
-  transform: translateY(30px);
-  box-shadow: 0px 15px 15px rgba(0,0,0,.3);
-}
-
-.played-card-daemon-hot {
-  transform: translateY(-30px);
   box-shadow: 0px 15px 15px rgba(0,0,0,.3);
 }
 

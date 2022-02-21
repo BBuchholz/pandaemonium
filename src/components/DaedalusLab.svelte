@@ -18,8 +18,8 @@
 
 
   let labComponents = [
-    "WitchesCradle",
     "ModCard",
+    "WitchesCradle",
   ];
 
   let selectedComponent;
