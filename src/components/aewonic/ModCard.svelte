@@ -150,12 +150,12 @@
 
 .card {
   opacity: 1;
-  margin: 10px;
+  margin: 20px 10px;
   width: 90%;
   height: 90%;
   max-height: 300px;
   max-width: 150px;
-  padding: 10px;
+  padding: 3px;
   color: black;
   font-size: 14px;
   line-height: 18px;
@@ -182,12 +182,12 @@
 }*/
 
 .card-up {
-  transform: translateY(-30px);
+  transform: translateY(-20px);
   box-shadow: 0px 15px 15px rgba(0,0,0,.3);
 }
 
 .card-down {
-  transform: translateY(30px);
+  transform: translateY(20px);
   box-shadow: 0px 15px 15px rgba(0,0,0,.3);
 }
 

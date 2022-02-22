@@ -67,7 +67,8 @@
     $beforeGame = false;
     // console.log('starting game...');
     loadDeck(); 
-    playTurn();
+    // playTurn();
+    dealCards();
   }
 
   function loadDeck() {
@@ -87,10 +88,10 @@
     // console.log('deck length: ' + $deck.length);
   }
 
-  function playTurn() {
+  // function playTurn() {
 
-    dealCards();
-  }
+  //   dealCards();
+  // }
 
   function resetSelection() {
 
