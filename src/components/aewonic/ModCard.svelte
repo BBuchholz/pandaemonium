@@ -141,9 +141,20 @@
   class:earth-color={cardSuit === 'D'}
   on:click={handleClick}
 >
-  <div class="text">{cardTitle}</div>
+  <div 
+    class="text"
+    class:fire-color={cardSuit === 'W'}
+    class:water-color={cardSuit === 'C'}
+    class:air-color={cardSuit === 'S'}
+    class:earth-color={cardSuit === 'D'}
+  >{cardTitle}</div>
   <img class="image" alt={cardTitle} {src}/>
-  <div class="power">{cardPower}</div>
+  <div class="power"
+    class:fire-color={cardSuit === 'W'}
+    class:water-color={cardSuit === 'C'}
+    class:air-color={cardSuit === 'S'}
+    class:earth-color={cardSuit === 'D'}
+  >{cardPower}</div>
 </div>
 
 <style>
@@ -161,6 +172,7 @@
   line-height: 18px;
   font-weight: bold;
   position: relative;
+  border-radius: 3%;
   box-sizing: border-box;
   text-align: center;
   transition: all .15s ease-out;
@@ -194,13 +206,32 @@
 .card .power {
   font-size: 30px;
   position: absolute;
-  bottom: 12px;
+  bottom: 0px;
   line-height: 30px;
-  left: 10px;
+  left: 0px;
   width: 30px;
   height: 30px;
+  padding: 3px;
   text-align: center;
-  border-radius: 50%;
+  border-radius: 12%;
+  color: black;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.card .text {
+  font-size: 30px;
+  position: absolute;
+  top: 0px;
+  line-height: 30px;
+  right: 6px;
+  width: 30px;
+  height: 30px;
+  padding: 3px;
+  text-align: center;
+  border-radius: 12%;
+  border-spacing: 12px;
   color: black;
   background-size: contain;
   background-repeat: no-repeat;
@@ -210,6 +241,7 @@
 img {
   width: 70%;
   height: 70%;
+  vertical-align: center;
   object-fit: contain;
 }
 
