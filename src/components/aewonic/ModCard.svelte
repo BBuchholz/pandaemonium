@@ -26,9 +26,9 @@
   let cardSuit = '?';
 
   $: src = getImgSrcFromCardKey(cardKey);
-  $: cardTitle = cardKey;
   $: cardPower = getElementalSymbolFromCardKey(cardKey); 
   $: cardSuit = magisterLudi.parseSuit(cardKey);
+  $: cardTitle = magisterLudi.parseRank(cardKey, cardSuit);
   $: console.log("cardState: " + cardState);
   // $: console.log("isSelected for " + cardKey + ": " + isSelected);
 
