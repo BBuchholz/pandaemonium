@@ -21,7 +21,6 @@
   } from '../stores.js';
 
   import Card from './Card.svelte';
-  import ElementalVessel from './ElementalVessel.svelte';
 
   import LibraryPopupButton from './LibraryPopupButton.svelte';
 
