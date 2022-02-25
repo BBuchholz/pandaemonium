@@ -123,11 +123,11 @@
   <div class="elemental-vessel-label">Library</div>
   <div class="zodiac-vessel">
     
-    <EarthDecanVessel cardKey="8D" />
+    {#each keysVirgo as cardKey, i}
 
-    <EarthDecanVessel cardKey="9D"/>
+      <EarthDecanVessel {cardKey}/>
 
-    <EarthDecanVessel cardKey="10D"/>
+    {/each}
 
     <div class="zodiac-vessel-label">
 
@@ -141,11 +141,11 @@
 
   <div class="zodiac-vessel">
 
-    <EarthDecanVessel cardKey="5D"/>
+    {#each keysTaurus as cardKey, i}
 
-    <EarthDecanVessel cardKey="6D"/>
+      <EarthDecanVessel {cardKey}/>
 
-    <EarthDecanVessel cardKey="7D"/>
+    {/each}
 
     <div class="zodiac-vessel-label">
 
@@ -159,11 +159,11 @@
 
   <div class="zodiac-vessel">
 
-    <EarthDecanVessel cardKey="2D"/>
+    {#each keysCapricorn as cardKey, i}
 
-    <EarthDecanVessel cardKey="3D"/>
+      <EarthDecanVessel {cardKey}/>
 
-    <EarthDecanVessel cardKey="4D"/>
+    {/each}
 
     <div class="zodiac-vessel-label">
 

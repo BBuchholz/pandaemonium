@@ -9,10 +9,8 @@
     collectedFire,
     heatIndex,
     moistureIndex } from '../stores.js';
-  import { keysLeo, keysAries, keysSagittarius } from '../constants.js';
+  import { keysLeo, keysAries, keysSagittarius, keysFire } from '../constants.js';
   
-  const keysFire = [...keysAries, ...keysLeo, ...keysSagittarius];
-
   function redeemFire() {
 
     $fireCollection = $fireCollection.filter(cardKey => !keysFire.includes(cardKey)); 

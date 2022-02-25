@@ -14,10 +14,11 @@
   import { 
     keysCancer, 
     keysScorpio, 
-    keysPisces 
+    keysPisces,
+    keysWater 
   } from '../constants.js';
   
-  const keysWater = [...keysScorpio, ...keysCancer, ...keysPisces];
+  
 
   function redeemWater() {
 

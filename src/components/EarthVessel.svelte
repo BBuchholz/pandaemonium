@@ -15,11 +15,10 @@
   import { 
     keysVirgo, 
     keysTaurus, 
-    keysCapricorn 
+    keysCapricorn,
+    keysEarth 
   } from '../constants.js';
   
-  const keysEarth = 
-    [...keysTaurus, ...keysVirgo, ...keysCapricorn];
 
   function redeemEarth() {
 
