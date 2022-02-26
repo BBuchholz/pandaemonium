@@ -15,11 +15,11 @@
   import { 
     keysGemini, 
     keysAquarius, 
-    keysLibra
+    keysLibra,
+    keysAir
   } from '../constants.js';
   
-  const keysAir = 
-    [...keysAquarius, ...keysGemini, ...keysLibra];
+  
 
   function redeemAir() {
 

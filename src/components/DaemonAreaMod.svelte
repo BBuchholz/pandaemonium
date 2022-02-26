@@ -19,9 +19,6 @@
 
   import Card from './Card.svelte'; 
 
-  import WaterPopupButton from './WaterPopupButton.svelte';
-  import FirePopupButton from './FirePopupButton.svelte';
-
   import LibraryPopupButton from './LibraryPopupButton.svelte';
 
   import WaterVessel from './WaterVessel.svelte';

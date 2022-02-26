@@ -4,26 +4,24 @@
   const { addNotification } = getNotificationsContext();
 
   import { earthCollection, selectedEarthSign, moistureIndex, heatIndex } from '../stores.js';
+  import { keysTaurus, keysVirgo, keysCapricorn } from '../constants.js';
   import EarthDecanVessel from './EarthDecanVessel.svelte';
 
   function redeemTaurus() {
 
-    const filterTaurus = ['5D', '6D', '7D'];
-    $earthCollection = $earthCollection.filter(cardKey => !filterTaurus.includes(cardKey)); 
+    $earthCollection = $earthCollection.filter(cardKey => !keysTaurus.includes(cardKey)); 
     $selectedEarthSign = '';
   }
 
   function redeemVirgo() {
 
-    const filterVirgo = ['8D', '9D', '10D'];
-    $earthCollection = $earthCollection.filter(cardKey => !filterVirgo.includes(cardKey)); 
+    $earthCollection = $earthCollection.filter(cardKey => !keysVirgo.includes(cardKey)); 
     $selectedEarthSign = '';
   }
 
   function redeemCapricorn() {
 
-    const filterCapricorn = ['2D', '3D', '4D'];
-    $earthCollection = $earthCollection.filter(cardKey => !filterCapricorn.includes(cardKey)); 
+    $earthCollection = $earthCollection.filter(cardKey => !keysCapricorn.includes(cardKey)); 
     $selectedEarthSign = '';
   }
 
@@ -125,11 +123,11 @@
   <div class="elemental-vessel-label">Library</div>
   <div class="zodiac-vessel">
     
-    <EarthDecanVessel cardKey="8D" />
+    {#each keysVirgo as cardKey, i}
 
-    <EarthDecanVessel cardKey="9D"/>
+      <EarthDecanVessel {cardKey}/>
 
-    <EarthDecanVessel cardKey="10D"/>
+    {/each}
 
     <div class="zodiac-vessel-label">
 
@@ -143,11 +141,11 @@
 
   <div class="zodiac-vessel">
 
-    <EarthDecanVessel cardKey="5D"/>
+    {#each keysTaurus as cardKey, i}
 
-    <EarthDecanVessel cardKey="6D"/>
+      <EarthDecanVessel {cardKey}/>
 
-    <EarthDecanVessel cardKey="7D"/>
+    {/each}
 
     <div class="zodiac-vessel-label">
 
@@ -161,11 +159,11 @@
 
   <div class="zodiac-vessel">
 
-    <EarthDecanVessel cardKey="2D"/>
+    {#each keysCapricorn as cardKey, i}
 
-    <EarthDecanVessel cardKey="3D"/>
+      <EarthDecanVessel {cardKey}/>
 
-    <EarthDecanVessel cardKey="4D"/>
+    {/each}
 
     <div class="zodiac-vessel-label">
 

@@ -1,26 +1,25 @@
 <script>
   
   import { earthCollection, selectedEarthSign } from '../stores.js';
+  import { keysVirgo, keysTaurus, keysCapricorn } from '../constants.js';
+
   import EarthDecanVessel from './EarthDecanVessel.svelte';
 
   function redeemTaurus() {
 
-    const filterTaurus = ['5D', '6D', '7D'];
-    $earthCollection = $earthCollection.filter(cardKey => !filterTaurus.includes(cardKey)); 
+    $earthCollection = $earthCollection.filter(cardKey => !keysTaurus.includes(cardKey)); 
     $selectedEarthSign = '';
   }
 
   function redeemVirgo() {
 
-    const filterVirgo = ['8D', '9D', '10D'];
-    $earthCollection = $earthCollection.filter(cardKey => !filterVirgo.includes(cardKey)); 
+    $earthCollection = $earthCollection.filter(cardKey => !keysVirgo.includes(cardKey)); 
     $selectedEarthSign = '';
   }
 
   function redeemCapricorn() {
 
-    const filterCapricorn = ['2D', '3D', '4D'];
-    $earthCollection = $earthCollection.filter(cardKey => !filterCapricorn.includes(cardKey)); 
+    $earthCollection = $earthCollection.filter(cardKey => !keysCapricorn.includes(cardKey)); 
     $selectedEarthSign = '';
   }
 

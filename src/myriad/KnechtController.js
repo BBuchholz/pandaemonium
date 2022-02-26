@@ -1,3 +1,7 @@
+
+// //FOR SOME REASON IT BREAKS IF I DO IT THIS WAY, INVESTIGATE?
+// import { keysElemental } from '../constants.js';
+
 const KnechtController = () => {
 
   const self = {
@@ -47,19 +51,19 @@ const KnechtController = () => {
 
     parseSuit: (cardValue) => {
 
-      if(cardValue.endsWith("D")){
+      if(cardValue && cardValue.endsWith("D")){
         return "D";
       }
 
-      if(cardValue.endsWith("C")){
+      if(cardValue && cardValue.endsWith("C")){
         return "C";
       }
 
-      if(cardValue.endsWith("S")){
+      if(cardValue && cardValue.endsWith("S")){
         return "S";
       } 
 
-      if(cardValue.endsWith("W")){
+      if(cardValue && cardValue.endsWith("W")){
         return "W";
       }
 
@@ -93,19 +97,26 @@ const KnechtController = () => {
         '6D', '5S', '3D', '2W',
         '9D', '6W', '8C', '4S',
         '5C', '8D', '3S', '2D',
-        '7D', '5D', '3W', '10S',
+        '7D', '5D', '3W', '1S',
         '7W', '8W', '6S', '9S',
-        '7C', '10D', '9W', '2C',
-        '10W', '10C', '9C', '4C',
+        '7C', '1D', '9W', '2C',
+        '1W', '1C', '9C', '4C',
         '8S', '7S', '4W', '6C',
       ];
+
+      // //FOR SOME REASON IT BREAKS IF I DO IT THIS WAY, INVESTIGATE?
+      // let seed = keysElemental;
 
       self.shuffle(seed);
       return seed;
     },
 
     parseRank: (cardValue, suitKey) => {
-      return parseInt(cardValue.replace(suitKey, ''));
+      let rank = '';
+      if(cardValue){
+        rank = parseInt(cardValue.replace(suitKey, ''))
+      }
+      return rank;
     },
 
     suitKeyToName: (suitKey) => {
@@ -497,4 +508,4 @@ const KnechtController = () => {
 
 };
 
-module.exports = KnechtController;
+export default KnechtController;
