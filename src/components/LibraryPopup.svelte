@@ -117,6 +117,8 @@
     <button on:click={loadGame} >Load Game</button>
 
     <a href={generateDaedalusLabUrl()} target="_blank">Daedalus Lab</a>
+
+    <p>This is an open source project based on another under GPL licensing, and subject to those conditions, contact me through the github site, hosted at <a href='https://github.com/BBuchholz/pandaemonium'>github.com/BBuchholz/pandaemonium</a>, for details </p>
   
 </div>
 <div class="elemental-vessel">

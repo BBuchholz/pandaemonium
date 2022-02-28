@@ -2,18 +2,13 @@
   
   import { 
 
-    selectionResolutionMValue, 
-    selectionResolutionHValue, 
     selectedCardsForPlayer, 
     selectedCardsForDaemon, 
     playerCards, 
     beforeGame,
-    currentQuadrant, 
-    heatIndex, 
+    currentQuadrant,  
     turnFinished, 
-    nextTurnButtonText, 
-    earthColCount, 
-    airColCount,  
+    nextTurnButtonText,  
     selectionResolutionValue, 
     selectionIsValid, 
     noValidChoices

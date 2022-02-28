@@ -33,6 +33,18 @@
   // $: console.log("isSelected for " + cardKey + ": " + isSelected);
 
 
+  import { createEventDispatcher } from 'svelte';
+  const dispatch = createEventDispatcher();
+
+  // function handleClick() {
+
+  //   dispatch('cardClicked', {
+  //     cardKey: cardKey,
+  //     cardMode: cardMode
+  //   });
+  // }
+
+
   function getImgSrcFromCardKey(powerString){
     // return '/images/' + powerString + '.jpg';
     return cardImagePath + powerString + '.jpg';
@@ -71,15 +83,24 @@
 
   function handleClick(){
 
+    let message = '';
+
     if(cardMode === 'agency'){
 
       cycleState();
+
     }
 
-    if(cardMode === 'dependency'){
+    if(cardMode === 'circumstance'){
 
-      alert('cards in dependency mode will not respond to clicks. (REMOVE THIS MESSAGE FROM ModCard ONCE TUTORIAL IMPLEMENTED)');
+      // 'cards in circumstance mode will not respond to clicks. (REMOVE THIS MESSAGE FROM ModCard ONCE TUTORIAL IMPLEMENTED)'
     }
+
+    dispatch('cardClicked', {
+      cardKey: cardKey,
+      cardMode: cardMode,
+      cardState: cardState
+    });
   }
 
   // function handleClickPreviousImplementation() {

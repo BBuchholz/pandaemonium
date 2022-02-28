@@ -21,6 +21,19 @@
   import KnechtController from '../../myriad/KnechtController.js';
   const magisterLudi = KnechtController();
 
+  import { getNotificationsContext } from 'svelte-notifications';
+  const { addNotification } = getNotificationsContext();
+
+  function notifyClicked(title, description){
+    addNotification({
+      position: 'bottom-right',
+      text: title,
+      type: 'info',
+      description: description,
+      removeAfter: 4000,
+    });
+  }
+
   function loadDeck(){
 
     $deck = magisterLudi.dealTwelveTrees();
@@ -62,11 +75,22 @@
     // dispatch('selectionConfirmed', 'no details');
   }
 
+  function handleCardClicked(event) {
+
+    let title = 'clicked ' + event.detail.cardKey;
+    let description = 'cardMode: ' + event.detail.cardMode;
+    description += " cardState: " + event.detail.cardState;
+
+    notifyClicked(title, description);
+  }
+
 </script>
 
 Deck Count: {$currentDeckCount}
 
-<div class="witches-cradle">
+<div 
+  class="witches-cradle"
+>
 
   {#if $beforeGame}
 
@@ -90,8 +114,7 @@ Deck Count: {$currentDeckCount}
           isPlayerCard={false} 
           {cardKey}
           {i}
-          on:cardSelected
-          isSelected={$selectedCardsForDaemon.includes(cardKey)}
+          on:cardClicked={handleCardClicked}
         />
 
       {/each}      
@@ -106,8 +129,7 @@ Deck Count: {$currentDeckCount}
           isPlayerCard={false} 
           {cardKey}
           {i}
-          on:cardSelected
-          isSelected={$selectedCardsForDaemon.includes(cardKey)}
+          on:cardClicked={handleCardClicked}
         />
 
       {/each}      
