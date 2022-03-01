@@ -26,7 +26,7 @@
 
   function notifyClicked(title, description){
     addNotification({
-      position: 'bottom-right',
+      position: 'top-right',
       text: title,
       type: 'info',
       description: description,
@@ -84,10 +84,26 @@
     notifyClicked(title, description);
   }
 
+  let selectedQuadrant;
+  let elementalQuadrants = [
+    { value: "earth", text: "Earth" },
+    { value: "freePlay", text: "FreePlay" },
+  ];  
+
 </script>
 
-Deck Count: {$currentDeckCount}
-
+<div class="top-controls">
+  Deck Count: {$currentDeckCount} - Quadrant: 
+  <select 
+    bind:value={selectedQuadrant}
+  >
+    {#each elementalQuadrants as quadrant}
+      <option value={quadrant.value}>
+        {quadrant.text}
+      </option>
+    {/each}
+  </select>
+</div>
 <div 
   class="witches-cradle"
 >
@@ -99,7 +115,7 @@ Deck Count: {$currentDeckCount}
       class:beforeGame
       on:click={onStartGame}
     >
-      Play the Game!
+      Deal Two Trees
     </button>
 
   {:else}
