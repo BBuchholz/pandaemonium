@@ -41,6 +41,8 @@
 
   function newDeal(){
 
+    resetCardStates();
+    
     if($currentDeckCount < 6){
 
       loadDeck();
@@ -80,14 +82,36 @@
     let title = 'clicked ' + event.detail.cardKey;
     let description = 'cardMode: ' + event.detail.cardMode;
     description += " cardState: " + event.detail.cardState;
+    changeStateForClick(event.detail.cardKey);
 
     notifyClicked(title, description);
   }
 
-  let selectedQuadrant;
+  function changeStateForClick(cardKey){
+
+    //TODO: change what happens here based on toggle settings
+    cardStatesByKey.set(cardKey, 'elevated');
+  }
+
+  function resetCardStates(){
+    cardStatesByKey.clear();
+  }
+
+  let cardStatesByKey = new Map();
+
+  function cardStateByKey(cardKey){
+
+    if(cardStatesByKey.has(cardKey)){
+      return cardStatesByKey.get(cardKey);
+    }
+
+    return 'centered';
+  }
+
+  $: selectedQuadrant = 'void';
   let elementalQuadrants = [
     { value: "earth", text: "Earth" },
-    { value: "freePlay", text: "FreePlay" },
+    { value: "void", text: "Void" },
   ];  
 
 </script>
@@ -127,7 +151,9 @@
       {#each $daemonCards as cardKey, i}
 
         <Card 
-          isPlayerCard={false} 
+          isPlayerCard={false}
+          cardMode={selectedQuadrant === 'void' ? 'agency' : 'circumstance'} 
+          cardState={cardStateByKey(cardKey)}
           {cardKey}
           {i}
           on:cardClicked={handleCardClicked}
@@ -143,6 +169,7 @@
 
         <Card 
           isPlayerCard={false} 
+          cardState={cardStateByKey(cardKey)}
           {cardKey}
           {i}
           on:cardClicked={handleCardClicked}
