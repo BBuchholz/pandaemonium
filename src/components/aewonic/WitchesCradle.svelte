@@ -13,7 +13,8 @@
     noValidChoices,
     selectionResolutionValue,
     beforeGame,
-    selectionIsValid
+    selectionIsValid,
+    selectedQuadrant
   } from './aewonic-stores.js';
  
   import Card from './ModCard.svelte';
@@ -67,6 +68,13 @@
     newDeal();
   }
 
+  function endGame(){
+    $beforeGame = true;
+    $selectedQuadrant = '';
+    $daemonCards = [];
+    $playerCards = [];
+  }
+
   function onNextTurn() {
     // // COPIED FROM PlayerAreaMod, NEEDS PORTING
     // dispatch('nextTurn', 'no details');
@@ -84,7 +92,7 @@
     description += " cardState: " + event.detail.cardState;
     changeStateForClick(event.detail.cardKey);
 
-    notifyClicked(title, description);
+    // notifyClicked(title, description);
   }
 
   function changeStateForClick(cardKey){
@@ -108,31 +116,40 @@
     return 'centered';
   }
 
-  $: selectedQuadrant = 'void';
-  let elementalQuadrants = [
-    { value: "earth", text: "Earth" },
-    { value: "void", text: "Void" },
-  ];  
+  function selectFireQuad(){
+    $selectedQuadrant = 'Fire';
+  }
+
+  function selectEarthQuad(){
+    $selectedQuadrant = 'Earth';
+  }
 
 </script>
 
 <div class="top-controls">
-  Deck Count: {$currentDeckCount} - Quadrant: 
-  <select 
-    bind:value={selectedQuadrant}
-  >
-    {#each elementalQuadrants as quadrant}
-      <option value={quadrant.value}>
-        {quadrant.text}
-      </option>
-    {/each}
-  </select>
+  Deck Count: {$currentDeckCount} - Quadrant: {$selectedQuadrant}
 </div>
 <div 
   class="witches-cradle"
 >
 
-  {#if $beforeGame}
+  {#if $beforeGame && !$selectedQuadrant}
+
+    <button 
+      class="fireQuad"
+      on:click={selectFireQuad}
+    >
+     🜂
+    </button>
+
+    <button 
+      class="earthQuad"
+      on:click={selectEarthQuad}
+    >
+     🜃
+    </button>
+
+  {:else if $beforeGame && $selectedQuadrant}
 
     <button 
       class="start-game"
@@ -142,44 +159,60 @@
       Deal Two Trees
     </button>
 
+  {:else if $currentDeckCount === 0}
+
+    <button 
+      class="dealTwoTrees"
+      on:click={endGame}
+    >
+      End Game
+    </button>
+
   {:else}
 
-    <button on:click={newDeal}>Deal Two Trees</button>
+    <button 
+      class="dealTwoTrees"
+      on:click={newDeal}
+    >
+      Deal Two Trees
+    </button>
 
-    <div class="daemon-cards">    
-    
-      {#each $daemonCards as cardKey, i}
-
-        <Card 
-          isPlayerCard={false}
-          cardMode={selectedQuadrant === 'void' ? 'agency' : 'circumstance'} 
-          cardState={cardStateByKey(cardKey)}
-          {cardKey}
-          {i}
-          on:cardClicked={handleCardClicked}
-        />
-
-      {/each}      
-
-    </div>  
-
-    <div class="player-cards">
-    
-      {#each $playerCards as cardKey, i}
-
-        <Card 
-          isPlayerCard={false} 
-          cardState={cardStateByKey(cardKey)}
-          {cardKey}
-          {i}
-          on:cardClicked={handleCardClicked}
-        />
-
-      {/each}      
-
-    </div>  
 
   {/if}
+
+  <div class="daemon-cards">    
+
+    {#each $daemonCards as cardKey, i}
+
+      <Card 
+        isPlayerCard={false}
+        cardMode={$selectedQuadrant === 'Void' ? 'agency' : 'circumstance'} 
+        cardState={cardStateByKey(cardKey)}
+        {cardKey}
+        {i}
+        on:cardClicked={handleCardClicked}
+      />
+
+    {/each}      
+
+  </div>  
+
+  <div class="player-cards">
+
+    {#each $playerCards as cardKey, i}
+
+      <Card 
+        isPlayerCard={false} 
+        cardState={cardStateByKey(cardKey)}
+        {cardKey}
+        {i}
+        on:cardClicked={handleCardClicked}
+      />
+
+    {/each}      
+
+  </div>  
+
 
 
 
@@ -246,6 +279,10 @@ button.start-game {
   background: black;
   display: block;
   align-items: center;
+}
+
+button.dealTwoTrees {
+  background: black;
 }
 
 button.confirmSelection {

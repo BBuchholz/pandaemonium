@@ -32,6 +32,8 @@ export const selectedWaterSign = writable('');
 export const selectedAirSign = writable('');
 export const selectedFireSign = writable('');
 
+export const selectedQuadrant = writable('');
+
 export const playerCards = writable([]);
 export const daemonCards = writable([]);
 export const deck = writable([]);

@@ -24,13 +24,6 @@
 
   let selectedComponent;
   let cardKey = '2D';
-
-  function loadCards() {
-    $daemonCards = ['2D', '2C', '2S'];
-    $playerCards = ['3D', '3C', '3S'];
-  }
-
-  loadCards();
   
 </script>
 
