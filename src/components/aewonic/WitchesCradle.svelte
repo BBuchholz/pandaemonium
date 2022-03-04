@@ -116,19 +116,40 @@
     return 'centered';
   }
 
-  function selectFireQuad(){
-    $selectedQuadrant = 'Fire';
+  function selectWaterQuad(){
+    $selectedQuadrant = 'Water';
   }
+
+  function selectAirQuad(){
+    $selectedQuadrant = 'Air';
+  } 
 
   function selectEarthQuad(){
     $selectedQuadrant = 'Earth';
   }
 
+  function selectFireQuad(){
+    $selectedQuadrant = 'Fire';
+  }
+
 </script>
 
 <div class="top-controls">
-  Deck Count: {$currentDeckCount} - Quadrant: {$selectedQuadrant}
+
+  Deck Count: {$currentDeckCount} - 
+
+  {#if $selectedQuadrant}
+
+    Quadrant: {$selectedQuadrant}
+
+  {:else}
+
+    No Quadrant Selected
+
+  {/if}
+
 </div>
+
 <div 
   class="witches-cradle"
 >
@@ -136,17 +157,31 @@
   {#if $beforeGame && !$selectedQuadrant}
 
     <button 
-      class="fireQuad"
-      on:click={selectFireQuad}
+      class="colorWater"
+      on:click={selectWaterQuad}
     >
-     🜂
+     🜄
     </button>
 
     <button 
-      class="earthQuad"
+      class="colorAir"
+      on:click={selectAirQuad}
+    >
+     🜁
+    </button>
+
+    <button 
+      class="colorEarth"
       on:click={selectEarthQuad}
     >
      🜃
+    </button>
+
+    <button 
+      class="colorFire"
+      on:click={selectFireQuad}
+    >
+     🜂
     </button>
 
   {:else if $beforeGame && $selectedQuadrant}
@@ -154,6 +189,10 @@
     <button 
       class="start-game"
       class:beforeGame
+      class:colorWater={$selectedQuadrant === 'Water'}
+      class:colorAir={$selectedQuadrant === 'Air'}
+      class:colorEarth={$selectedQuadrant === 'Earth'}
+      class:colorFire={$selectedQuadrant === 'Fire'}
       on:click={onStartGame}
     >
       Deal Two Trees
@@ -163,6 +202,10 @@
 
     <button 
       class="dealTwoTrees"
+      class:colorWater={$selectedQuadrant === 'Water'}
+      class:colorAir={$selectedQuadrant === 'Air'}
+      class:colorEarth={$selectedQuadrant === 'Earth'}
+      class:colorFire={$selectedQuadrant === 'Fire'}
       on:click={endGame}
     >
       End Game
@@ -172,6 +215,10 @@
 
     <button 
       class="dealTwoTrees"
+      class:colorWater={$selectedQuadrant === 'Water'}
+      class:colorAir={$selectedQuadrant === 'Air'}
+      class:colorEarth={$selectedQuadrant === 'Earth'}
+      class:colorFire={$selectedQuadrant === 'Fire'}
       on:click={newDeal}
     >
       Deal Two Trees
@@ -316,6 +363,70 @@ button {
   border: solid 3px white;
   color: white;
   background: transparent;
+  border-radius: 30px;
+  transition: all ease-out .2s;
+  cursor: pointer;
+  outline: none;
+  animation: buttonPulse .2s infinite ease-in-out;
+}
+
+button.colorWater {
+  font-size: 15px;
+  line-height: 15px;
+  padding: 8px 22px 9px 22px;
+  box-sizing: border-box;
+  font-weight: 700;
+  border: solid 3px darkgray;
+  color: black;
+  background-color: #a9efef;
+  border-radius: 30px;
+  transition: all ease-out .2s;
+  cursor: pointer;
+  outline: none;
+  animation: buttonPulse .2s infinite ease-in-out;
+}
+
+button.colorAir {
+  font-size: 15px;
+  line-height: 15px;
+  padding: 8px 22px 9px 22px;
+  box-sizing: border-box;
+  font-weight: 700;
+  border: solid 3px gray;
+  color: black;
+  background-color: #ffca3a;
+  border-radius: 30px;
+  transition: all ease-out .2s;
+  cursor: pointer;
+  outline: none;
+  animation: buttonPulse .2s infinite ease-in-out;
+}
+
+button.colorEarth {
+  font-size: 15px;
+  line-height: 15px;
+  padding: 8px 22px 9px 22px;
+  box-sizing: border-box;
+  font-weight: 700;
+  border: solid 3px lightgray;
+  color: black;
+  background-color: #e16036;
+  border-radius: 30px;
+  transition: all ease-out .2s;
+  cursor: pointer;
+  outline: none;
+  animation: buttonPulse .2s infinite ease-in-out;
+}
+
+button.colorFire {
+  font-size: 15px;
+  line-height: 15px;
+  padding: 8px 22px 9px 22px;
+  box-sizing: border-box;
+  font-weight: 700;
+  border: solid 3px white;
+  color: white;
+  background-color: #e3170a;
   border-radius: 30px;
   transition: all ease-out .2s;
   cursor: pointer;
