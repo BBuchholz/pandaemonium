@@ -24,6 +24,7 @@ export const modal = writable(null);
 export const rulesIncludeElementalShiftsOnAllCollections =
 	writable(true);
 
+export const selectedCards = writable([]);
 export const selectedCardsForPlayer = writable([]);
 export const selectedCardsForDaemon = writable([]);
 

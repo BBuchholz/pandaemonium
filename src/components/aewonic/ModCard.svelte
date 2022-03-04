@@ -6,7 +6,8 @@
     selectedCardsForPlayer, 
     selectedCardsForDaemon,
     selectionIsWet,
-    resolutionIsHeated
+    resolutionIsHeated,
+    selectedCards
     } from './aewonic-stores.js';
 
   import {
@@ -66,28 +67,46 @@
     }
   }
 
-  function cycleState(){
-    if(cardState === 'centered'){
-      cardState = 'elevated';
-      return;
-    }
-    if(cardState === 'elevated'){
-      cardState = 'lowered';
-      return;
-    }
-    if(cardState === 'lowered'){
-      cardState = 'centered';
-      return;
-    } 
+  function cardUp(){
+
+    if(cardSuit === 'S' || cardSuit === 'W'){
+      return true;
+    }    
   }
+
+  function cardDown(){
+
+
+    if(cardSuit === 'D' || cardSuit === 'C'){
+      return true;
+    }
+
+  }
+
+  function respondToClick(){
+
+    if(!$selectedCards.includes(cardKey)){
+      // $selectedCards = [...$selectedCards, cardKey];
+      $selectedCards = [cardKey];
+    }else{
+      $selectedCards = $selectedCards.filter(cKey => cardKey != cKey); 
+    }
+
+    dispatch('cardClicked', {
+      cardKey: cardKey,
+      cardMode: cardMode,
+      cardState: cardState,
+      message: 'test message (remove notifications when working)'
+    });
+  }
+
+
 
   function handleClick(){
 
-    let message = '';
-
     if(cardMode === 'agency'){
 
-      cycleState();
+      respondToClick();
 
     }
 
@@ -96,11 +115,6 @@
       // 'cards in circumstance mode will not respond to clicks. (REMOVE THIS MESSAGE FROM ModCard ONCE TUTORIAL IMPLEMENTED)'
     }
 
-    dispatch('cardClicked', {
-      cardKey: cardKey,
-      cardMode: cardMode,
-      cardState: cardState
-    });
   }
 
   // function handleClickPreviousImplementation() {
@@ -154,8 +168,8 @@
   class="card"
   in:fly="{{ y: 200, duration: 2000, delay: i*200 }}" 
   out:fade
-  class:card-up={cardState === 'elevated'}
-  class:card-down={cardState === 'lowered'}
+  class:card-up={$selectedCards.includes(cardKey) && cardUp(cardKey)}
+  class:card-down={$selectedCards.includes(cardKey) && cardDown(cardKey)}
   class:fire-color={cardSuit === 'W'}
   class:water-color={cardSuit === 'C'}
   class:air-color={cardSuit === 'S'}

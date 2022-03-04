@@ -90,6 +90,7 @@
     let title = 'clicked ' + event.detail.cardKey;
     let description = 'cardMode: ' + event.detail.cardMode;
     description += " cardState: " + event.detail.cardState;
+    description += " message: " + event.detail.message;
     changeStateForClick(event.detail.cardKey);
 
     // notifyClicked(title, description);
@@ -131,6 +132,13 @@
   function selectFireQuad(){
     $selectedQuadrant = 'Fire';
   }
+
+  // THIS CONTROLS WHAT STILL GETS A DEAL BUTTON DURING PLAY
+  // AS QUADRANTS ARE IMPLEMENTED FULLY, WE WON"T NEED A DEAL
+  // BUTTON BECAUSE NO VALID MOVES WILL TRIGGER A DEAL OPTION
+  // REMOVE QUADRANTS FROM THIS LIST AS THEY ARE FULLY READY 
+  // AND TESTED
+  const toBeImplemented = ['Water', 'Air', 'Earth', 'Fire'];
 
 </script>
 
@@ -211,7 +219,7 @@
       End Game
     </button>
 
-  {:else}
+  {:else if toBeImplemented.includes($selectedQuadrant)}
 
     <button 
       class="dealTwoTrees"
