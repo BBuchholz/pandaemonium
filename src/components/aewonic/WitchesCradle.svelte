@@ -1,5 +1,4 @@
 <script>
-  
 
   import { 
 
@@ -14,7 +13,8 @@
     selectionResolutionValue,
     beforeGame,
     selectionIsValid,
-    selectedQuadrant
+    selectedQuadrant,
+    selectedCards
   } from './aewonic-stores.js';
  
   import Card from './ModCard.svelte';
@@ -42,7 +42,7 @@
 
   function newDeal(){
 
-    resetCardStates();
+    // resetCardStates();
     
     if($currentDeckCount < 6){
 
@@ -91,30 +91,17 @@
     let description = 'cardMode: ' + event.detail.cardMode;
     description += " cardState: " + event.detail.cardState;
     description += " message: " + event.detail.message;
-    changeStateForClick(event.detail.cardKey);
 
+    let currentPlayerCardKey = event.detail.cardKey;
+    //TODO: cycle through valid moves here
+    $selectedCards = 
+      magisterLudi.getNextValidSelection(
+          currentPlayerCardKey,
+          $selectedCards,
+          $daemonCards,
+          $selectedQuadrant
+        );
     // notifyClicked(title, description);
-  }
-
-  function changeStateForClick(cardKey){
-
-    //TODO: change what happens here based on toggle settings
-    cardStatesByKey.set(cardKey, 'elevated');
-  }
-
-  function resetCardStates(){
-    cardStatesByKey.clear();
-  }
-
-  let cardStatesByKey = new Map();
-
-  function cardStateByKey(cardKey){
-
-    if(cardStatesByKey.has(cardKey)){
-      return cardStatesByKey.get(cardKey);
-    }
-
-    return 'centered';
   }
 
   function selectWaterQuad(){
@@ -240,9 +227,7 @@
     {#each $daemonCards as cardKey, i}
 
       <Card 
-        isPlayerCard={false}
         cardMode={$selectedQuadrant === 'Void' ? 'agency' : 'circumstance'} 
-        cardState={cardStateByKey(cardKey)}
         {cardKey}
         {i}
         on:cardClicked={handleCardClicked}
@@ -257,8 +242,6 @@
     {#each $playerCards as cardKey, i}
 
       <Card 
-        isPlayerCard={false} 
-        cardState={cardStateByKey(cardKey)}
         {cardKey}
         {i}
         on:cardClicked={handleCardClicked}

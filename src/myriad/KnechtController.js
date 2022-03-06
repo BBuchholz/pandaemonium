@@ -15,6 +15,29 @@ const KnechtController = () => {
       }
     },
 
+    getNextValidSelection: (currentPlayerCardKey, selectedCards, daemonCards, currentQuadrant) => {
+
+      let returnSet = [];
+
+      if(selectedCards.length === 1){
+        returnSet = [currentPlayerCardKey];
+      }
+
+      if(currentQuadrant === 'Fire'){
+        // let i = 0;
+        // let found = false;
+        // while(!found){
+        //   if(selectedCards.includes(daemonCards[i])){
+        //     found = true;
+
+        //   }
+        // }
+        //TODO: SETUP A TEST SPEC FOR THIS
+      }
+
+      return returnSet;
+    },    
+
     allPossibleCombos: (setOne, setTwo) => {
 
       let allPossible = [];
