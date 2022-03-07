@@ -6,17 +6,6 @@
   const passPhraseDefault = '[passPhrase not set]';
   export let passPhrase = passPhraseDefault;
 
-
-
-  import { 
-
-    selectedCardsForDaemon, 
-    daemonCards,
-    playerCards
-
-  } from './aewonic/aewonic-stores.js';
-
-
   let labComponents = [
     "WitchesCradle",
     "ModCard",

@@ -14,8 +14,8 @@
     cardImagePath
   } from '../../constants.js'
 
-  import KnechtController from '../../myriad/KnechtController.js';
-  const magisterLudi = KnechtController();
+  import { Knechtor } from '../../myriad/Knechtor.js';
+  const magisterLudi = new Knechtor();
 
   export let cardKey = 'XX';
   export let cardState = 'centered';

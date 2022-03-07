@@ -3,8 +3,7 @@
   import { 
 
     selectedCardsForDaemon, 
-    daemonCards,
-    playerCards,
+    aewonicCross,
     deck, 
     currentDeckCount, 
     nextTurnButtonText,
@@ -19,8 +18,8 @@
  
   import Card from './ModCard.svelte';
 
-  import KnechtController from '../../myriad/KnechtController.js';
-  const magisterLudi = KnechtController();
+  import { Knechtor } from '../../myriad/Knechtor.js';
+  const magisterLudi = new Knechtor();
 
   import { getNotificationsContext } from 'svelte-notifications';
   const { addNotification } = getNotificationsContext();
@@ -49,14 +48,12 @@
       loadDeck();
     }
 
-    $daemonCards = [];
-    $playerCards = [];
+    $aewonicCross = [];
 
-    const cardsToDeal = 3;
+    const cardsToDeal = 6;
 
     for(let i = 0; i < cardsToDeal; i++){
-      $daemonCards = [...$daemonCards, $deck.pop()];
-      $playerCards = [...$playerCards, $deck.pop()];
+      $aewonicCross = [...$aewonicCross, $deck.pop()];
     }
 
   }
@@ -71,8 +68,9 @@
   function endGame(){
     $beforeGame = true;
     $selectedQuadrant = '';
-    $daemonCards = [];
-    $playerCards = [];
+    // $daemonCards = [];
+    // $playerCards = [];
+    $aewonicCross = [];
   }
 
   function onNextTurn() {
@@ -98,7 +96,7 @@
       magisterLudi.getNextValidSelection(
           currentPlayerCardKey,
           $selectedCards,
-          $daemonCards,
+          $aewonicCross,
           $selectedQuadrant
         );
     // notifyClicked(title, description);
@@ -222,36 +220,56 @@
 
   {/if}
 
-  <div class="daemon-cards">    
 
-    {#each $daemonCards as cardKey, i}
+  {#if $aewonicCross.length === 6}  
 
-      <Card 
-        cardMode={$selectedQuadrant === 'Void' ? 'agency' : 'circumstance'} 
-        {cardKey}
-        {i}
+    <div class="daemon-cards">  
+
+      <Card
+        cardMode={$selectedQuadrant === 'Void' ? 'agency' : 'circumstance'}  
+        cardKey={$aewonicCross[0]}
+        i=0
+        on:cardClicked={handleCardClicked}
+      />
+      
+      <Card
+        cardMode={$selectedQuadrant === 'Void' ? 'agency' : 'circumstance'}  
+        cardKey={$aewonicCross[2]}
+        i=1
         on:cardClicked={handleCardClicked}
       />
 
-    {/each}      
-
-  </div>  
-
-  <div class="player-cards">
-
-    {#each $playerCards as cardKey, i}
-
-      <Card 
-        {cardKey}
-        {i}
+      <Card
+        cardMode={$selectedQuadrant === 'Void' ? 'agency' : 'circumstance'}  
+        cardKey={$aewonicCross[4]}
+        i=2
         on:cardClicked={handleCardClicked}
       />
 
-    {/each}      
+    </div>  
 
-  </div>  
+    <div class="player-cards">
 
+      <Card 
+        cardKey={$aewonicCross[1]}
+        i=0
+        on:cardClicked={handleCardClicked}
+      />
+      
+      <Card 
+        cardKey={$aewonicCross[3]}
+        i=1
+        on:cardClicked={handleCardClicked}
+      />
 
+      <Card 
+        cardKey={$aewonicCross[5]}
+        i=2
+        on:cardClicked={handleCardClicked}
+      />
+    </div>  
+
+  {/if}
 
 
   {#if $selectionIsValid }

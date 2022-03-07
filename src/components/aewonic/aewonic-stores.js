@@ -35,9 +35,15 @@ export const selectedFireSign = writable('');
 
 export const selectedQuadrant = writable('');
 
-export const playerCards = writable([]);
-export const daemonCards = writable([]);
+// export const playerCards = writable([]);
+// export const daemonCards = writable([]);
 export const deck = writable([]);
+// THIS WILL REPLACE playerCards and daemonCards
+// just a six value array, in deal order,
+// starting with the daemon, so indices 0, 2, and 4 
+// are daemon cards, while indices 1, 3, and 5
+// are player cards
+export const aewonicCross = writable([]);
 
 export const airColCountChanged = writable(false);
 export const earthColCountChanged = writable(false);
@@ -312,8 +318,8 @@ export const collectedAir = derived(
 );
 
 export const currentDeckCount = derived(
-	[deck, playerCards, daemonCards],
-	([$deck, $playerCards, $daemonCards]) => {
+	[deck, aewonicCross],
+	([$deck, $aewonicCross]) => {
 		return $deck.length;
 	}
 );
@@ -420,19 +426,19 @@ export const selectionIsWet = derived(
 	}
 );
 
-export const discardCount = derived(
-	[deck, earthColCount, airColCount, waterColCount, fireColCount, playerCards, daemonCards],
-	([$deck, $earthColCount, $airColCount, $waterColCount, $fireColCount, $playerCards, $daemonCards]) => {
+// export const discardCount = derived(
+// 	[deck, earthColCount, airColCount, waterColCount, fireColCount, playerCards, daemonCards],
+// 	([$deck, $earthColCount, $airColCount, $waterColCount, $fireColCount, $playerCards, $daemonCards]) => {
 
-		return 36 - $deck.length - 
-					 $earthColCount - 
-					 $airColCount -
-					 $waterColCount -
-					 $fireColCount -
-					 $playerCards.length -
-					 $daemonCards.length;
-	}
-);
+// 		return 36 - $deck.length - 
+// 					 $earthColCount - 
+// 					 $airColCount -
+// 					 $waterColCount -
+// 					 $fireColCount -
+// 					 $playerCards.length -
+// 					 $daemonCards.length;
+// 	}
+// );
 
 export const currentQuadrant = derived(
 	[selectionIsWet, resolutionIsHeated],
@@ -800,142 +806,140 @@ export const selectionResolutionValue = derived(
 );
 
 export const noValidChoices = derived(
-	[playerCards, 
-	 daemonCards,
+	[aewonicCross,
 	 currentQuadrant],
-	([$playerCards, 
-	  $daemonCards,
+	([$aewonicCross,
 	  $currentQuadrant]) => {
 
-		if($playerCards.length === 0 ||
-			 $daemonCards.length === 0){
+		// if($playerCards.length === 0 ||
+		// 	 $daemonCards.length === 0){
 
-			// in between deals, no Valid moves not applicable, return false
-			return false;
-		}
+		// 	// in between deals, no Valid moves not applicable, return false
+		// 	return false;
+		// }
 
 
-		if($currentQuadrant === 'Fire'){
+		// if($currentQuadrant === 'Fire'){
 
-			const allPossible = 
-				magisterLudi.allPossibleCombos($playerCards, $daemonCards);
+		// 	const allPossible = 
+		// 		magisterLudi.allPossibleCombos($playerCards, $daemonCards);
 
-			//card selection will be single, so we just need to find one
-			// pairing that shares neither a suit or a rank
-			for(const keyPair of allPossible){
+		// 	//card selection will be single, so we just need to find one
+		// 	// pairing that shares neither a suit or a rank
+		// 	for(const keyPair of allPossible){
 				
-				const pCardKey = keyPair[0];
-				const dCardKey = keyPair[1];
+		// 		const pCardKey = keyPair[0];
+		// 		const dCardKey = keyPair[1];
 				
-			  const dSuit = magisterLudi.parseSuit(dCardKey);
-			  const pSuit = magisterLudi.parseSuit(pCardKey);
+		// 	  const dSuit = magisterLudi.parseSuit(dCardKey);
+		// 	  const pSuit = magisterLudi.parseSuit(pCardKey);
 
-			  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
-			  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
+		// 	  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
+		// 	  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
 
-			  if(dSuit != pSuit && dRank != pRank){
+		// 	  if(dSuit != pSuit && dRank != pRank){
 
-			  	// noValidChoices is false
-			  	return false;
-			  }
-			}
-		}
+		// 	  	// noValidChoices is false
+		// 	  	return false;
+		// 	  }
+		// 	}
+		// }
 
-		if($currentQuadrant === 'Water'){
+		// if($currentQuadrant === 'Water'){
 
-			// copying from earth, not fully tested
+		// 	// copying from earth, not fully tested
 
-			const allPossible = 
-				magisterLudi.allPossibleCombos($playerCards, $daemonCards);
+		// 	const allPossible = 
+		// 		magisterLudi.allPossibleCombos($playerCards, $daemonCards);
 
-			//card selection will be single, so we just need to find one
-			// pairing that shares either a suit or a rank
-			for(const keyPair of allPossible){
+		// 	//card selection will be single, so we just need to find one
+		// 	// pairing that shares either a suit or a rank
+		// 	for(const keyPair of allPossible){
 				
-				const pCardKey = keyPair[0];
-				const dCardKey = keyPair[1];
+		// 		const pCardKey = keyPair[0];
+		// 		const dCardKey = keyPair[1];
 				
-			  const dSuit = magisterLudi.parseSuit(dCardKey);
-			  const pSuit = magisterLudi.parseSuit(pCardKey);
+		// 	  const dSuit = magisterLudi.parseSuit(dCardKey);
+		// 	  const pSuit = magisterLudi.parseSuit(pCardKey);
 
-			  if(dSuit === pSuit){
+		// 	  if(dSuit === pSuit){
 
-			  	// noValidChoices is false
-			  	return false;
-			  }
+		// 	  	// noValidChoices is false
+		// 	  	return false;
+		// 	  }
 
-			  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
-			  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
+		// 	  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
+		// 	  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
 
-			  if(dRank === pRank){
+		// 	  if(dRank === pRank){
 
-			  	// noValidChoices is false
-			  	return false;
-			  }
-			}
+		// 	  	// noValidChoices is false
+		// 	  	return false;
+		// 	  }
+		// 	}
 
-		}
+		// }
 
-		if($currentQuadrant === 'Air'){
+		// if($currentQuadrant === 'Air'){
 
 			
-			// COPYING FROM FIRE, NOT FULLY TESTED
-			const allPossible = 
-				magisterLudi.allPossibleCombos($playerCards, $playerCards);
+		// 	// COPYING FROM FIRE, NOT FULLY TESTED
+		// 	const allPossible = 
+		// 		magisterLudi.allPossibleCombos($playerCards, $playerCards);
 
-			//card selection will be single, so we just need to find one
-			// pairing that shares neither a suit or a rank
-			for(const keyPair of allPossible){
+		// 	//card selection will be single, so we just need to find one
+		// 	// pairing that shares neither a suit or a rank
+		// 	for(const keyPair of allPossible){
 				
-				const pCardKey = keyPair[0];
-				const dCardKey = keyPair[1];
+		// 		const pCardKey = keyPair[0];
+		// 		const dCardKey = keyPair[1];
 				
-			  const dSuit = magisterLudi.parseSuit(dCardKey);
-			  const pSuit = magisterLudi.parseSuit(pCardKey);
+		// 	  const dSuit = magisterLudi.parseSuit(dCardKey);
+		// 	  const pSuit = magisterLudi.parseSuit(pCardKey);
 
-			  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
-			  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
+		// 	  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
+		// 	  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
 
-			  if(dSuit != pSuit && dRank != pRank){
+		// 	  if(dSuit != pSuit && dRank != pRank){
 
-			  	// noValidChoices is false
-			  	return false;
-			  }
-			}
-		}
+		// 	  	// noValidChoices is false
+		// 	  	return false;
+		// 	  }
+		// 	}
+		// }
 
-		if($currentQuadrant === 'Earth'){
+		// if($currentQuadrant === 'Earth'){
 
-			const allPossible = 
-				magisterLudi.allPossibleCombos($playerCards, $daemonCards);
+		// 	const allPossible = 
+		// 		magisterLudi.allPossibleCombos($playerCards, $daemonCards);
 
-			//card selection will be single, so we just need to find one
-			// pairing that shares either a suit or a rank
-			for(const keyPair of allPossible){
+		// 	//card selection will be single, so we just need to find one
+		// 	// pairing that shares either a suit or a rank
+		// 	for(const keyPair of allPossible){
 				
-				const pCardKey = keyPair[0];
-				const dCardKey = keyPair[1];
+		// 		const pCardKey = keyPair[0];
+		// 		const dCardKey = keyPair[1];
 				
-			  const dSuit = magisterLudi.parseSuit(dCardKey);
-			  const pSuit = magisterLudi.parseSuit(pCardKey);
+		// 	  const dSuit = magisterLudi.parseSuit(dCardKey);
+		// 	  const pSuit = magisterLudi.parseSuit(pCardKey);
 
-			  if(dSuit === pSuit){
+		// 	  if(dSuit === pSuit){
 
-			  	// noValidChoices is false
-			  	return false;
-			  }
+		// 	  	// noValidChoices is false
+		// 	  	return false;
+		// 	  }
 
-			  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
-			  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
+		// 	  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
+		// 	  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
 
-			  if(dRank === pRank){
+		// 	  if(dRank === pRank){
 
-			  	// noValidChoices is false
-			  	return false;
-			  }
-			}
+		// 	  	// noValidChoices is false
+		// 	  	return false;
+		// 	  }
+		// 	}
 
-		}
+		// }
 
   	// noValidChoices is true
 		return true;
