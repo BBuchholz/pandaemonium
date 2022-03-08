@@ -811,39 +811,22 @@ export const noValidChoices = derived(
 	([$aewonicCross,
 	  $currentQuadrant]) => {
 
-		// if($playerCards.length === 0 ||
-		// 	 $daemonCards.length === 0){
+		// assume there are none, flip it if found
+		let noValidChoicesFound = true;
 
-		// 	// in between deals, no Valid moves not applicable, return false
-		// 	return false;
-		// }
+		if($aewonicCross.length !== 6){
+
+			// in between deals, no Valid moves not applicable, return false
+			return noValidChoicesFound;
+		}
 
 
-		// if($currentQuadrant === 'Fire'){
+		if($currentQuadrant === 'Fire'){
 
-		// 	const allPossible = 
-		// 		magisterLudi.allPossibleCombos($playerCards, $daemonCards);
-
-		// 	//card selection will be single, so we just need to find one
-		// 	// pairing that shares neither a suit or a rank
-		// 	for(const keyPair of allPossible){
-				
-		// 		const pCardKey = keyPair[0];
-		// 		const dCardKey = keyPair[1];
-				
-		// 	  const dSuit = magisterLudi.parseSuit(dCardKey);
-		// 	  const pSuit = magisterLudi.parseSuit(pCardKey);
-
-		// 	  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
-		// 	  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
-
-		// 	  if(dSuit != pSuit && dRank != pRank){
-
-		// 	  	// noValidChoices is false
-		// 	  	return false;
-		// 	  }
-		// 	}
-		// }
+			return magisterLudi
+				.getAllValidSelections($aewonicCross, 
+															 $currentQuadrant);
+		}
 
 		// if($currentQuadrant === 'Water'){
 
@@ -942,7 +925,7 @@ export const noValidChoices = derived(
 		// }
 
   	// noValidChoices is true
-		return true;
+		return noValidChoicesFound;
 	}
 );
 

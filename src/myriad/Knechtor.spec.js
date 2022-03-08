@@ -42,61 +42,38 @@ it('should have at least one spec', () => {
 //   });
 // });
 
-// describe('scenarios', () => {
+describe('selections', () => {
 
-//   const expectedScenarios = 
-//     [
-//       [0, '4D', '5W', '3C', '2S'],
-//       [1, '6D', '5S', '3D', '2W'],
-//       [2, '9D', '6W', '8C', '4S'],
-//       [3, '5C', '8D', '3S', '2D'],
-//       [4, '7D', '5D', '3W', '10S'],
-//       [5, '7W', '8W', '6S', '9S'],
-//       [6, '7C', '10D', '9W', '2C'],
-//       [7, '10W', '10C', '9C', '4C'],
-//       [8, '8S', '7S', '4W', '6C']
-//     ];
 
-//   var scenarios = magisterLudi.getScenarios();      
 
-//   test.each(expectedScenarios)(
-//     "given scenario index %p, returns four cards, %p, %p, %p, and %p",
-//     (scenarioIndex, daemonCard, playerCardOne, playerCardTwo, playerCardThree) => {
+  it('should have valid selections', () => {
 
-//       var scenario = scenarios[scenarioIndex];
-//       expect(scenario.daemonCard.power).toBe(daemonCard);
-//       expect(scenario.daemonCard.description).toBe(magisterLudi.cardToDescription(scenario.daemonCard.power));
-//       expect(scenario.playerCards[0].power).toBe(playerCardOne);
-//       expect(scenario.playerCards[0].description).toBe(magisterLudi.cardToDescription(scenario.playerCards[0].power));
-//       expect(scenario.playerCards[1].power).toBe(playerCardTwo);
-//       expect(scenario.playerCards[1].description).toBe(magisterLudi.cardToDescription(scenario.playerCards[1].power));
-//       expect(scenario.playerCards[2].power).toBe(playerCardThree);
-//       expect(scenario.playerCards[2].description).toBe(magisterLudi.cardToDescription(scenario.playerCards[2].power));
+    let aewonicCross = ['9C','1C','8W','3C','5S','6C'];
 
-//     }
-//   );
-// });
+    let currentQuadrant = 'Fire';
 
-//     (suitArg, expectedResult) => {
-//       const result  = magisterLudi.getHDeltaFromSuit(suitArg);
-//       expect(result).toEqual(expectedResult);
-//     }
-//   );
+    let expectedSelections = 
+      [
+        ['6C', '5S'],
+        ['6C', '8W'],
+        ['6C', '9C'],
+        ['3C', '5S'],
+        ['3C', '8W'],
+        ['3C', '9C'],
+        ['1C', '5S'],
+        ['1C', '8W'],
+        ['1C', '9C'],
+      ];
 
-//   const suitToMDeltaCases = 
-//     [
-//       ['W', -1], 
-//       ['C', 1], 
-//       ['S', 1], 
-//       ['D', -1], 
-//       ['?', 0]
-//     ];
+    let validSelections = magisterLudi.getAllValidSelections(aewonicCross, currentQuadrant);      
 
-//   test.each(suitToMDeltaCases)(
-//     "given suit %p as arg, returns MDelta of %p",
-//     (suitArg, expectedResult) => {
-//       const result  = magisterLudi.getMDeltaFromSuit(suitArg);
-//       expect(result).toEqual(expectedResult);
-//     }
-//   );
-// });
+    for(const selection of expectedSelections){
+      console.log(selection);
+      expect(validSelections.includes(selection)).toBe(true);
+
+    }
+
+  });
+
+});
+

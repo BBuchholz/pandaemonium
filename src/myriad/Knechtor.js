@@ -79,8 +79,31 @@ export class Knechtor {
     return array;
   }
 
-  getNextValidSelection(){
+  getAllValidSelections(
+    aewonicCross,
+    currentQuadrant
+  ){
 
+    let validSelections = [];
+
+    if(currentQuadrant === 'Fire'){
+
+      let daemonCards = [
+        aewonicCross[0],
+        aewonicCross[2],
+        aewonicCross[4],
+      ];
+
+      let playerCards = [
+        aewonicCross[1],
+        aewonicCross[3],
+        aewonicCross[5],
+      ];
+
+      
+    }
+
+    return validSelections;
   }
 
   getNextValidSelection(
