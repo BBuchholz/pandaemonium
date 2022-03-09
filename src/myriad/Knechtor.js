@@ -79,6 +79,28 @@ export class Knechtor {
     return array;
   }
 
+  getPlayerCards(aewonicCross){
+
+    const playerCards = [
+      aewonicCross[5],
+      aewonicCross[3],
+      aewonicCross[1],
+    ];
+
+    return playerCards;
+  }
+
+  getDaemonCards(aewonicCross){
+
+    const daemonCards = [
+      aewonicCross[0],
+      aewonicCross[2],
+      aewonicCross[4],
+    ];
+
+    return daemonCards;
+  }
+
   getAllValidSelections(
     aewonicCross,
     currentQuadrant
@@ -88,21 +110,19 @@ export class Knechtor {
 
     if(currentQuadrant === 'Fire'){
 
-      let daemonCards = [
-        aewonicCross[0],
-        aewonicCross[2],
-        aewonicCross[4],
-      ];
+      const daemonCards = this.getDaemonCards(aewonicCross);
 
-      let playerCards = [
-        aewonicCross[1],
-        aewonicCross[3],
-        aewonicCross[5],
-      ];
+      const playerCards = this.getPlayerCards(aewonicCross);
+
+      for(const cardKey of playerCards){
+        for(const dKey of daemonCards){
+          validSelections.push([cardKey, dKey]);
+        }
+      }
 
       
     }
-
+ 
     return validSelections;
   }
 
@@ -114,24 +134,27 @@ export class Knechtor {
   ){
 
     let returnSet = [];
+    const daemonCards = this.getDaemonCards(aewonicCross);
 
     if(selectedCards.length === 1){
+
+      for(const cKey of daemonCards){
+
+      }
+
       returnSet = [currentPlayerCardKey];
     }
 
     if(currentQuadrant === 'Fire'){
-      // let i = 0;
-      // let found = false;
+      let i = 0;
+      let found = false;
       // while(!found){
       //   if(selectedCards.includes(daemonCards[i])){
       //     found = true;
 
       //   }
       // }
-      //TODO: SETUP A TEST SPEC FOR THIS
-
-      //FIRST: let's modify to use all cards instead of
-      // daemonCards, like let's change how they are implemented
+      
     }
 
     return returnSet;
