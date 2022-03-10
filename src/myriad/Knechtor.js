@@ -133,30 +133,29 @@ export class Knechtor {
     currentQuadrant
   ){
 
-    let returnSet = [];
-    const daemonCards = this.getDaemonCards(aewonicCross);
+    const possibleSelectionsForCardKey = 
+      this.getAllValidSelections(
+        aewonicCross, 
+        'Fire'
+      ).filter(
+        (selection) => 
+        selection.includes(currentPlayerCardKey));
+
+      
 
     if(selectedCards.length === 1){
 
-      for(const cKey of daemonCards){
-
-      }
-
-      returnSet = [currentPlayerCardKey];
+      return possibleSelectionsForCardKey[0];
     }
 
     if(currentQuadrant === 'Fire'){
+    
       let i = 0;
-      let found = false;
-      // while(!found){
-      //   if(selectedCards.includes(daemonCards[i])){
-      //     found = true;
-
-      //   }
-      // }
       
+      return possibleSelectionsForCardKey[1];
+
     }
 
-    return returnSet;
+    return [];
   }
 }
