@@ -18,8 +18,8 @@
   const magisterLudi = new Knechtor();
 
   export let cardKey = 'XX';
-  export let cardState = 'centered';
-  export let cardMode = 'agency';
+  // export let cardState = 'centered';
+  // export let cardMode = 'agency';
   export let i = 0;
   let src = '';
   let cardTitle = 'card title';
@@ -37,13 +37,12 @@
   import { createEventDispatcher } from 'svelte';
   const dispatch = createEventDispatcher();
 
-  // function handleClick() {
+  function handleClick() {
 
-  //   dispatch('cardClicked', {
-  //     cardKey: cardKey,
-  //     cardMode: cardMode
-  //   });
-  // }
+    dispatch('cardClicked', {
+      cardKey: cardKey
+    });
+  }
 
 
   function getImgSrcFromCardKey(powerString){
@@ -83,39 +82,54 @@
 
   }
 
-  function respondToClick(){
-
-    if(!$selectedCards.includes(cardKey)){
-      // $selectedCards = [...$selectedCards, cardKey];
-      $selectedCards = [cardKey];
-    }else{
-      $selectedCards = $selectedCards.filter(cKey => cardKey != cKey); 
-    }
-
-    dispatch('cardClicked', {
-      cardKey: cardKey,
-      cardMode: cardMode,
-      cardState: cardState,
-      message: 'test message (remove notifications when working)'
-    });
-  }
 
 
+  // function handleClickNewerPreviousImplementation(){
 
-  function handleClick(){
+  //   if(cardMode === 'agency'){
 
-    if(cardMode === 'agency'){
+  //     respondToClick();
 
-      respondToClick();
+  //   }
 
-    }
+  //   if(cardMode === 'circumstance'){
 
-    if(cardMode === 'circumstance'){
+  //     // 'cards in circumstance mode will not respond to clicks. (REMOVE THIS MESSAGE FROM ModCard ONCE TUTORIAL IMPLEMENTED)'
+  //   }
 
-      // 'cards in circumstance mode will not respond to clicks. (REMOVE THIS MESSAGE FROM ModCard ONCE TUTORIAL IMPLEMENTED)'
-    }
+  // }
 
-  }
+  // function respondToClick(){
+
+  //   if(!$selectedCards.includes(cardKey)){
+  //     // $selectedCards = [...$selectedCards, cardKey];
+  //     $selectedCards = [cardKey];
+  //   }else{
+  //     $selectedCards = $selectedCards.filter(cKey => cardKey != cKey); 
+  //   }
+
+  //   dispatch('cardClicked', {
+  //     cardKey: cardKey,
+  //     cardMode: cardMode,
+  //     cardState: cardState,
+  //     message: 'test message (remove notifications when working)'
+  //   });
+  // }
+
+  // function handleClick(){
+
+  //   if($selectionIsSingular){
+
+  //     $selectedCardsForPlayer = [cardKey];
+
+  //   }else{
+      
+  //     $selectedCardsForPlayer = 
+  //       [...$selectedCardsForPlayer, cardKey];
+
+  //   }
+
+  // }
 
   // function handleClickPreviousImplementation() {
 
@@ -170,6 +184,7 @@
   out:fade
   class:card-up={$selectedCards.includes(cardKey) && cardUp(cardKey)}
   class:card-down={$selectedCards.includes(cardKey) && cardDown(cardKey)}
+  class:card-selected={$selectedCards.includes(cardKey)}
   class:fire-color={cardSuit === 'W'}
   class:water-color={cardSuit === 'C'}
   class:air-color={cardSuit === 'S'}
@@ -197,9 +212,9 @@
 .card {
   opacity: 1;
   margin: 20px 10px;
-  width: 90%;
-  height: 90%;
-  max-height: 300px;
+  width: 95%;
+  height: 95%;
+  max-height: 250px;
   max-width: 150px;
   padding: 3px;
   color: black;
@@ -236,6 +251,12 @@
 .card-down {
   transform: translateY(20px);
   box-shadow: 0px 15px 15px rgba(0,0,0,.3);
+}
+
+.card-selected {
+  border: solid;
+  border-color: white;
+  border-width: 2px;
 }
 
 .card .power {

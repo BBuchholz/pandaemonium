@@ -2,7 +2,8 @@
 
   import { 
 
-    selectedCardsForDaemon, 
+    selectedCardsForDaemon,
+    selectedCardsForPlayer, 
     aewonicCross,
     deck, 
     currentDeckCount, 
@@ -13,7 +14,8 @@
     beforeGame,
     selectionIsValid,
     selectedQuadrant,
-    selectedCards
+    selectedCards,
+    selectionIsSingular
   } from './aewonic-stores.js';
  
   import Card from './ModCard.svelte';
@@ -83,23 +85,95 @@
     // dispatch('selectionConfirmed', 'no details');
   }
 
+  function handlePlayerCardClicked(cardKey){
+
+    if($selectedCardsForPlayer.includes(cardKey)){
+
+      $selectedCardsForPlayer = 
+        $selectedCardsForPlayer.filter(cKey => cKey !== cardKey);
+
+    }else{
+
+      if($selectionIsSingular){
+        
+        $selectedCardsForPlayer = [cardKey];
+
+      }else{
+
+        $selectedCardsForPlayer = 
+          [...$selectedCardsForPlayer, cardKey];
+
+      }
+
+    }
+
+  }
+
+  function handleDaemonCardClicked(cardKey){
+
+    if($selectedCardsForDaemon.includes(cardKey)){
+
+      $selectedCardsForDaemon = $selectedCardsForDaemon.filter(cKey => cKey !== cardKey);
+
+    }else{
+    
+      if($selectionIsSingular) {
+
+        $selectedCardsForDaemon = [cardKey];
+
+      }else{
+        
+        $selectedCardsForDaemon = 
+          [...$selectedCardsForDaemon, cardKey];
+      }
+    }
+
+  }
+
+  // function handleClickPreviousImplementation(cardKey) {
+
+  //   // console.log('clicked' + cardKey);
+  //   if(isPlayerCard(cardKey)){
+ 
+  //   }else{
+
+  //   }
+  // }
+
+  // function isPlayerCard(cardKey){
+  //   return true;
+  // }
+
   function handleCardClicked(event) {
 
     let title = 'clicked ' + event.detail.cardKey;
     let description = 'cardMode: ' + event.detail.cardMode;
     description += " cardState: " + event.detail.cardState;
     description += " message: " + event.detail.message;
+    const cardKey = event.detail.cardKey;
 
-    let currentPlayerCardKey = event.detail.cardKey;
-    //TODO: cycle through valid moves here
-    $selectedCards = 
-      magisterLudi.getNextValidSelection(
-          currentPlayerCardKey,
-          $selectedCards,
-          $aewonicCross,
-          $selectedQuadrant
-        );
-    // notifyClicked(title, description);
+    handleClickPreviousImplementation(cardKey);
+
+    // const currentPlayerCardKey = event.detail.cardKey;
+    // const currentSelectedCards = $selectedCards;
+    // const currentAewonicCross = $aewonicCross;
+    // const currentSelectedQuadrant = $selectedQuadrant;
+
+    // //TODO: THIS ISNT WORKING 
+    // // test is fine but its not working like this
+    // // what if we somehow built a derived store for
+    // // each card that would store the value and
+    // // then the click handler of that card would just
+    // // change the selected cards
+    // let newSelectedCards = 
+    //   magisterLudi.getNextValidSelection(
+    //       currentPlayerCardKey,
+    //       currentSelectedCards,
+    //       currentAewonicCross,
+    //       currentSelectedQuadrant
+    //     );
+    // $selectedCards = newSelectedCards;
+    // // notifyClicked(title, description);
   }
 
   function selectWaterQuad(){
@@ -226,24 +300,21 @@
     <div class="daemon-cards">  
 
       <Card
-        cardMode={$selectedQuadrant === 'Void' ? 'agency' : 'circumstance'}  
         cardKey={$aewonicCross[0]}
         i=0
-        on:cardClicked={handleCardClicked}
+        on:cardClicked={handleDaemonCardClicked($aewonicCross[0])}
       />
       
       <Card
-        cardMode={$selectedQuadrant === 'Void' ? 'agency' : 'circumstance'}  
         cardKey={$aewonicCross[2]}
         i=1
-        on:cardClicked={handleCardClicked}
+        on:cardClicked={handleDaemonCardClicked($aewonicCross[2])}
       />
 
       <Card
-        cardMode={$selectedQuadrant === 'Void' ? 'agency' : 'circumstance'}  
         cardKey={$aewonicCross[4]}
         i=2
-        on:cardClicked={handleCardClicked}
+        on:cardClicked={handleDaemonCardClicked($aewonicCross[4])}
       />
 
     </div>  
@@ -253,19 +324,19 @@
       <Card 
         cardKey={$aewonicCross[1]}
         i=0
-        on:cardClicked={handleCardClicked}
+        on:cardClicked={handlePlayerCardClicked($aewonicCross[1])}
       />
       
       <Card 
         cardKey={$aewonicCross[3]}
         i=1
-        on:cardClicked={handleCardClicked}
+        on:cardClicked={handlePlayerCardClicked($aewonicCross[3])}
       />
 
       <Card 
         cardKey={$aewonicCross[5]}
         i=2
-        on:cardClicked={handleCardClicked}
+        on:cardClicked={handlePlayerCardClicked($aewonicCross[5])}
       />
     </div>  
 

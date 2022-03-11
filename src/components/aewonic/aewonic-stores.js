@@ -24,9 +24,16 @@ export const modal = writable(null);
 export const rulesIncludeElementalShiftsOnAllCollections =
 	writable(true);
 
-export const selectedCards = writable([]);
+// export const selectedCards = writable([]);
 export const selectedCardsForPlayer = writable([]);
 export const selectedCardsForDaemon = writable([]);
+
+export const selectedCards = derived(
+	[selectedCardsForDaemon, selectedCardsForPlayer],
+	([$selectedCardsForDaemon, $selectedCardsForPlayer]) => {
+		return [...$selectedCardsForDaemon, ...$selectedCardsForPlayer];
+	}
+);
 
 export const selectedEarthSign = writable('');
 export const selectedWaterSign = writable('');
@@ -423,6 +430,13 @@ export const selectionIsWet = derived(
 	moistureIndex,
 	($moistureIndex) => {
 		return $moistureIndex > 0;
+	}
+);
+
+export const selectionIsSingular = derived(
+	moistureIndex,
+	($moistureIndex) => {
+		return $moistureIndex < 1;
 	}
 );
 

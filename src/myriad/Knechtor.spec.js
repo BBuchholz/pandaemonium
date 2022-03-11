@@ -17,7 +17,7 @@ describe('selections', () => {
       ['1C', '8W'],
       ['1C', '5S'],
     ];
-    
+
   // CASES GET ALL ////////////////////////////////////////////
   const casesGetAll = [
     [aewonicCross1, 'Fire', expectedSelectionsAC1Fire]
@@ -37,15 +37,15 @@ describe('selections', () => {
     ['6C', ['6C'], aewonicCross1, 'Fire', ['6C', '9C']],
     ['6C', ['6C', '9C'], aewonicCross1, 'Fire', ['6C', '8W']],
     ['6C', ['6C', '8W'], aewonicCross1, 'Fire', ['6C', '5S']],
-    ['6C', ['6C', '5S'], aewonicCross1, 'Fire', ['6C']],
+    ['6C', ['6C', '5S'], aewonicCross1, 'Fire', []],
     ['3C', ['3C'], aewonicCross1, 'Fire', ['3C', '9C']],
     ['3C', ['3C', '9C'], aewonicCross1, 'Fire', ['3C', '8W']],
     ['3C', ['3C', '8W'], aewonicCross1, 'Fire', ['3C', '5S']],
-    ['3C', ['3C', '5S'], aewonicCross1, 'Fire', ['3C']],
+    ['3C', ['3C', '5S'], aewonicCross1, 'Fire', []],
     ['1C', ['1C'], aewonicCross1, 'Fire', ['1C', '9C']],
     ['1C', ['1C', '9C'], aewonicCross1, 'Fire', ['1C', '8W']],
     ['1C', ['1C', '8W'], aewonicCross1, 'Fire', ['1C', '5S']],
-    ['1C', ['1C', '5S'], aewonicCross1, 'Fire', ['1C']],
+    ['1C', ['1C', '5S'], aewonicCross1, 'Fire', []],
   ];
 
   test.each(casesGetNext)(

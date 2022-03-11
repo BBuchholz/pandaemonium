@@ -1,7 +1,14 @@
 <script>
+  
+  import { 
+
+    selectedCardsForDaemon,
+    selectionIsSingular,
+
+  } from './aewonic/aewonic-stores.js';
 
   import WitchesCradle from './aewonic/WitchesCradle.svelte';
-  import ModCard from './aewonic/ModCard.svelte';
+  import Card from './aewonic/ModCard.svelte';
 
   const passPhraseDefault = '[passPhrase not set]';
   export let passPhrase = passPhraseDefault;
@@ -13,7 +20,28 @@
 
   let selectedComponent;
   let cardKey = '2D';
-  
+
+  function handleCardClicked(){
+
+    if($selectedCardsForDaemon.includes(cardKey)){
+
+      $selectedCardsForDaemon = $selectedCardsForDaemon.filter(cKey => cKey !== cardKey);
+
+    }else{
+    
+      if($selectionIsSingular) {
+
+        $selectedCardsForDaemon = [cardKey];
+
+      }else{
+        
+        $selectedCardsForDaemon = 
+          [...$selectedCardsForDaemon, cardKey];
+      }
+    }
+
+  }
+
 </script>
 
 {#if passPhrase === passPhraseDefault}
@@ -47,7 +75,9 @@
 
     <!-- TODO: move this to its own file like the other -->
     
-    <ModCard {cardKey}/>
+    <Card 
+      {cardKey}
+      on:cardClicked={handleCardClicked} />
 
   {/if}
 

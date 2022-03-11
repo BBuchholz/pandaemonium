@@ -149,9 +149,32 @@ export class Knechtor {
     }
 
     if(currentQuadrant === 'Fire'){
-    
-      let i = 0;
-      
+
+      for(let i = 0; i < possibleSelectionsForCardKey.length; i++){
+
+        let thisSelection = possibleSelectionsForCardKey[i];
+
+        // console.log(selectedCards + " " + thisSelection);
+
+        if(JSON.stringify(selectedCards) === JSON.stringify(thisSelection)){
+          
+          // console.log('found selectedCards');
+          
+
+          if(i !== possibleSelectionsForCardKey.length - 1){
+
+            //if it's not the last one, return the next one
+            return possibleSelectionsForCardKey[i + 1];
+
+          }else{
+            
+            //if it's the last one, return nothing
+            return [];
+          }          
+        }
+
+      }
+
       return possibleSelectionsForCardKey[1];
 
     }
