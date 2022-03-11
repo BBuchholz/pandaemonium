@@ -1,5 +1,5 @@
 import { writable, derived } from 'svelte/store';
-import KnechtController from '../../myriad/KnechtController.js';
+// import KnechtController from '../../myriad/KnechtController.js';
 
 import { 
 	keysVirgo, 
@@ -16,7 +16,12 @@ import {
 	keysAries
 } from '../../constants.js'; 
 
-const magisterLudi = KnechtController();
+// const magisterLudi = KnechtController();
+
+
+import { Knechtor } from '../../myriad/Knechtor.js';
+const magisterLudi = new Knechtor();
+
 const testingElementalVessels = false;
 
 export const modal = writable(null);
@@ -344,87 +349,87 @@ export const resolutionIsHeated = derived(
 	}
 );
 
-export const selectionResolutionHValue = derived(
-	[selectedCardsForDaemon, selectedCardsForPlayer, resolutionIsHeated],
-	([$selectedCardsForDaemon, $selectedCardsForPlayer, $resolutionIsHeated]) => {
+// export const selectionResolutionHValue = derived(
+// 	[selectedCardsForDaemon, selectedCardsForPlayer, resolutionIsHeated],
+// 	([$selectedCardsForDaemon, $selectedCardsForPlayer, $resolutionIsHeated]) => {
 		
-		let daemonTotalHeatIndex = 0;
-		let playerTotalHeatIndex = 0;
+// 		let daemonTotalHeatIndex = 0;
+// 		let playerTotalHeatIndex = 0;
 		
-		for(const cardKey of $selectedCardsForDaemon){
+// 		for(const cardKey of $selectedCardsForDaemon){
 
-			let cardSuit = magisterLudi.parseSuit(cardKey);
-			let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
-			let cardHeatDelta = magisterLudi.getHDeltaFromSuit(cardSuit) * cardRank;
+// 			let cardSuit = magisterLudi.parseSuit(cardKey);
+// 			let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
+// 			let cardHeatDelta = magisterLudi.getHDeltaFromSuit(cardSuit) * cardRank;
 
-			daemonTotalHeatIndex += cardHeatDelta;
-		}
+// 			daemonTotalHeatIndex += cardHeatDelta;
+// 		}
 
-		for(const cardKey of $selectedCardsForPlayer){
+// 		for(const cardKey of $selectedCardsForPlayer){
 			
-			let cardSuit = magisterLudi.parseSuit(cardKey);
-			let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
-			let cardHeatDelta = magisterLudi.getHDeltaFromSuit(cardSuit) * cardRank;
+// 			let cardSuit = magisterLudi.parseSuit(cardKey);
+// 			let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
+// 			let cardHeatDelta = magisterLudi.getHDeltaFromSuit(cardSuit) * cardRank;
 
-			playerTotalHeatIndex += cardHeatDelta;
-		}
+// 			playerTotalHeatIndex += cardHeatDelta;
+// 		}
 
-		let outcome = 0;
+// 		let outcome = 0;
 
-		if($resolutionIsHeated){
+// 		if($resolutionIsHeated){
 
-			outcome = playerTotalHeatIndex - daemonTotalHeatIndex;
+// 			outcome = playerTotalHeatIndex - daemonTotalHeatIndex;
 
-		}else{
+// 		}else{
 
-			outcome = playerTotalHeatIndex + daemonTotalHeatIndex;
+// 			outcome = playerTotalHeatIndex + daemonTotalHeatIndex;
 
-		}
+// 		}
 
-		return outcome;
-	}
-);
+// 		return outcome;
+// 	}
+// );
 
-export const selectionResolutionMValue = derived(
-	[selectedCardsForDaemon, selectedCardsForPlayer, resolutionIsHeated],
-	([$selectedCardsForDaemon, $selectedCardsForPlayer, $resolutionIsHeated]) => {
+// export const selectionResolutionMValue = derived(
+// 	[selectedCardsForDaemon, selectedCardsForPlayer, resolutionIsHeated],
+// 	([$selectedCardsForDaemon, $selectedCardsForPlayer, $resolutionIsHeated]) => {
 		
-		let daemonTotalMoistureIndex = 0;
-		let playerTotalMoistureIndex = 0;
+// 		let daemonTotalMoistureIndex = 0;
+// 		let playerTotalMoistureIndex = 0;
 		
-		for(const cardKey of $selectedCardsForDaemon){
+// 		for(const cardKey of $selectedCardsForDaemon){
 
-			let cardSuit = magisterLudi.parseSuit(cardKey);
-			let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
-			let cardMoistureDelta = magisterLudi.getMDeltaFromSuit(cardSuit) * cardRank;
+// 			let cardSuit = magisterLudi.parseSuit(cardKey);
+// 			let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
+// 			let cardMoistureDelta = magisterLudi.getMDeltaFromSuit(cardSuit) * cardRank;
 
-			daemonTotalMoistureIndex += cardMoistureDelta;
-		}
+// 			daemonTotalMoistureIndex += cardMoistureDelta;
+// 		}
 
-		for(const cardKey of $selectedCardsForPlayer){
+// 		for(const cardKey of $selectedCardsForPlayer){
 			
-			let cardSuit = magisterLudi.parseSuit(cardKey);
-			let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
-			let cardMoistureDelta = magisterLudi.getMDeltaFromSuit(cardSuit) * cardRank;
+// 			let cardSuit = magisterLudi.parseSuit(cardKey);
+// 			let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
+// 			let cardMoistureDelta = magisterLudi.getMDeltaFromSuit(cardSuit) * cardRank;
 
-			playerTotalMoistureIndex += cardMoistureDelta;
-		}
+// 			playerTotalMoistureIndex += cardMoistureDelta;
+// 		}
 
-		let outcome = 0;
+// 		let outcome = 0;
 
-		if($resolutionIsHeated){
+// 		if($resolutionIsHeated){
 
-			outcome = playerTotalMoistureIndex - daemonTotalMoistureIndex;
+// 			outcome = playerTotalMoistureIndex - daemonTotalMoistureIndex;
 
-		}else{
+// 		}else{
 
-			outcome = playerTotalMoistureIndex + daemonTotalMoistureIndex;
+// 			outcome = playerTotalMoistureIndex + daemonTotalMoistureIndex;
 
-		}
+// 		}
 
-		return outcome;
-	}
-);
+// 		return outcome;
+// 	}
+// );
 
 export const selectionIsWet = derived(
 	moistureIndex,
@@ -710,7 +715,7 @@ export const selectionResolutionValue = derived(
 
 			let cardSuit = magisterLudi.parseSuit(cardKey);
 			let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
-			let cardMoistureDelta = magisterLudi.getMDeltaFromSuit(cardSuit) * cardRank;
+			// let cardMoistureDelta = magisterLudi.getMDeltaFromSuit(cardSuit) * cardRank;
 
 			//daemonTotalMoistureIndex += cardMoistureDelta;
 		}
@@ -719,7 +724,7 @@ export const selectionResolutionValue = derived(
 			
 			let cardSuit = magisterLudi.parseSuit(cardKey);
 			let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
-			let cardMoistureDelta = magisterLudi.getMDeltaFromSuit(cardSuit) * cardRank;
+			// let cardMoistureDelta = magisterLudi.getMDeltaFromSuit(cardSuit) * cardRank;
 
 			//playerTotalMoistureIndex += cardMoistureDelta;
 		}
@@ -825,121 +830,18 @@ export const noValidChoices = derived(
 	([$aewonicCross,
 	  $currentQuadrant]) => {
 
-		// assume there are none, flip it if found
-		let noValidChoicesFound = true;
-
 		if($aewonicCross.length !== 6){
 
-			// in between deals, no Valid moves not applicable, return false
-			return noValidChoicesFound;
+			// in between deals, no Valid moves not applicable
+			return false;
 		}
 
-
-		if($currentQuadrant === 'Fire'){
-
-			return magisterLudi
+		const allValid = 
+			magisterLudi
 				.getAllValidSelections($aewonicCross, 
-															 $currentQuadrant);
-		}
+														 	 $currentQuadrant);
 
-		// if($currentQuadrant === 'Water'){
-
-		// 	// copying from earth, not fully tested
-
-		// 	const allPossible = 
-		// 		magisterLudi.allPossibleCombos($playerCards, $daemonCards);
-
-		// 	//card selection will be single, so we just need to find one
-		// 	// pairing that shares either a suit or a rank
-		// 	for(const keyPair of allPossible){
-				
-		// 		const pCardKey = keyPair[0];
-		// 		const dCardKey = keyPair[1];
-				
-		// 	  const dSuit = magisterLudi.parseSuit(dCardKey);
-		// 	  const pSuit = magisterLudi.parseSuit(pCardKey);
-
-		// 	  if(dSuit === pSuit){
-
-		// 	  	// noValidChoices is false
-		// 	  	return false;
-		// 	  }
-
-		// 	  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
-		// 	  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
-
-		// 	  if(dRank === pRank){
-
-		// 	  	// noValidChoices is false
-		// 	  	return false;
-		// 	  }
-		// 	}
-
-		// }
-
-		// if($currentQuadrant === 'Air'){
-
-			
-		// 	// COPYING FROM FIRE, NOT FULLY TESTED
-		// 	const allPossible = 
-		// 		magisterLudi.allPossibleCombos($playerCards, $playerCards);
-
-		// 	//card selection will be single, so we just need to find one
-		// 	// pairing that shares neither a suit or a rank
-		// 	for(const keyPair of allPossible){
-				
-		// 		const pCardKey = keyPair[0];
-		// 		const dCardKey = keyPair[1];
-				
-		// 	  const dSuit = magisterLudi.parseSuit(dCardKey);
-		// 	  const pSuit = magisterLudi.parseSuit(pCardKey);
-
-		// 	  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
-		// 	  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
-
-		// 	  if(dSuit != pSuit && dRank != pRank){
-
-		// 	  	// noValidChoices is false
-		// 	  	return false;
-		// 	  }
-		// 	}
-		// }
-
-		// if($currentQuadrant === 'Earth'){
-
-		// 	const allPossible = 
-		// 		magisterLudi.allPossibleCombos($playerCards, $daemonCards);
-
-		// 	//card selection will be single, so we just need to find one
-		// 	// pairing that shares either a suit or a rank
-		// 	for(const keyPair of allPossible){
-				
-		// 		const pCardKey = keyPair[0];
-		// 		const dCardKey = keyPair[1];
-				
-		// 	  const dSuit = magisterLudi.parseSuit(dCardKey);
-		// 	  const pSuit = magisterLudi.parseSuit(pCardKey);
-
-		// 	  if(dSuit === pSuit){
-
-		// 	  	// noValidChoices is false
-		// 	  	return false;
-		// 	  }
-
-		// 	  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
-		// 	  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
-
-		// 	  if(dRank === pRank){
-
-		// 	  	// noValidChoices is false
-		// 	  	return false;
-		// 	  }
-		// 	}
-
-		// }
-
-  	// noValidChoices is true
-		return noValidChoicesFound;
+		return allValid.length > 0;
 	}
 );
 

@@ -278,7 +278,7 @@
       End Game
     </button>
 
-  {:else if toBeImplemented.includes($selectedQuadrant)}
+  {:else if toBeImplemented.includes($selectedQuadrant) && $selectedCards.length < 2}
 
     <button 
       class="dealTwoTrees"
@@ -418,7 +418,6 @@ button.confirmSelection {
   align-items: center;
   justify-content: center;
   font-size: 20px;
-  
 }
 
 button.beforeGame {
