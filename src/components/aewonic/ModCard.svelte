@@ -18,8 +18,6 @@
   const magisterLudi = new Knechtor();
 
   export let cardKey = 'XX';
-  // export let cardState = 'centered';
-  // export let cardMode = 'agency';
   export let i = 0;
   let src = '';
   let cardTitle = 'card title';
@@ -30,9 +28,6 @@
   $: cardPower = getElementalSymbolFromCardKey(cardKey); 
   $: cardSuit = magisterLudi.parseSuit(cardKey);
   $: cardTitle = magisterLudi.parseRank(cardKey, cardSuit);
-  // $: console.log("cardState: " + cardState);
-  // $: console.log("isSelected for " + cardKey + ": " + isSelected);
-
 
   import { createEventDispatcher } from 'svelte';
   const dispatch = createEventDispatcher();
@@ -82,100 +77,6 @@
 
   }
 
-
-
-  // function handleClickNewerPreviousImplementation(){
-
-  //   if(cardMode === 'agency'){
-
-  //     respondToClick();
-
-  //   }
-
-  //   if(cardMode === 'circumstance'){
-
-  //     // 'cards in circumstance mode will not respond to clicks. (REMOVE THIS MESSAGE FROM ModCard ONCE TUTORIAL IMPLEMENTED)'
-  //   }
-
-  // }
-
-  // function respondToClick(){
-
-  //   if(!$selectedCards.includes(cardKey)){
-  //     // $selectedCards = [...$selectedCards, cardKey];
-  //     $selectedCards = [cardKey];
-  //   }else{
-  //     $selectedCards = $selectedCards.filter(cKey => cardKey != cKey); 
-  //   }
-
-  //   dispatch('cardClicked', {
-  //     cardKey: cardKey,
-  //     cardMode: cardMode,
-  //     cardState: cardState,
-  //     message: 'test message (remove notifications when working)'
-  //   });
-  // }
-
-  // function handleClick(){
-
-  //   if($selectionIsSingular){
-
-  //     $selectedCardsForPlayer = [cardKey];
-
-  //   }else{
-      
-  //     $selectedCardsForPlayer = 
-  //       [...$selectedCardsForPlayer, cardKey];
-
-  //   }
-
-  // }
-
-  // function handleClickPreviousImplementation() {
-
-  //   // console.log('clicked' + cardKey);
-  //   if(isPlayerCard){
-
-  //     if($selectedCardsForPlayer.includes(cardKey)){
-
-  //       $selectedCardsForPlayer = 
-  //         $selectedCardsForPlayer.filter(cKey => cKey !== cardKey);
-
-  //     }else{
-
-  //       if($selectionIsWet){
-          
-  //         $selectedCardsForPlayer = 
-  //           [...$selectedCardsForPlayer, cardKey];
-
-  //       }else{
-
-  //         $selectedCardsForPlayer = [cardKey];
-  //       }
-
-  //     }
-
-  //   }else{
-
-  //     if($selectedCardsForDaemon.includes(cardKey)){
-
-  //       $selectedCardsForDaemon = $selectedCardsForDaemon.filter(cKey => cKey !== cardKey);
-
-  //     }else{
-      
-  //       if($selectionIsWet) {
-          
-  //         $selectedCardsForDaemon = 
-  //           [...$selectedCardsForDaemon, cardKey];
-
-  //       }else{
-
-  //         $selectedCardsForDaemon = [cardKey];
-  //       }
-  //     }
-  //   }
-  // }
-
 </script>
 
 <div 
@@ -184,7 +85,6 @@
   out:fade
   class:card-up={$selectedCards.includes(cardKey) && cardUp(cardKey)}
   class:card-down={$selectedCards.includes(cardKey) && cardDown(cardKey)}
-  class:card-selected={$selectedCards.includes(cardKey)}
   class:fire-color={cardSuit === 'W'}
   class:water-color={cardSuit === 'C'}
   class:air-color={cardSuit === 'S'}
@@ -197,6 +97,7 @@
     class:water-color={cardSuit === 'C'}
     class:air-color={cardSuit === 'S'}
     class:earth-color={cardSuit === 'D'}
+    class:card-selected-invisible={$selectedCards.includes(cardKey)}
   >{cardTitle}</div>
   <img class="image" alt={cardTitle} {src}/>
   <div class="power"
@@ -204,6 +105,7 @@
     class:water-color={cardSuit === 'C'}
     class:air-color={cardSuit === 'S'}
     class:earth-color={cardSuit === 'D'}
+    class:card-selected-invisible={$selectedCards.includes(cardKey)}
   >{cardPower}</div>
 </div>
 
@@ -229,19 +131,6 @@
   box-shadow: 0px 5px 5px rgba(0,0,0,.3);
   overflow: hidden;
 }
-/*
-.card:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -20%;
-  width: 140%;
-  height: 0%;
-  background: white;
-  animation: sheen infinite .5s ease-in-out;
-  display: none;
-  transform: rotate(-7deg);
-}*/
 
 .card-up {
   transform: translateY(-20px);
@@ -251,12 +140,6 @@
 .card-down {
   transform: translateY(20px);
   box-shadow: 0px 15px 15px rgba(0,0,0,.3);
-}
-
-.card-selected {
-  border: solid;
-  border-color: white;
-  border-width: 2px;
 }
 
 .card .power {
@@ -292,6 +175,10 @@
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.card-selected-invisible {
+  display: none;
 }
 
 img {

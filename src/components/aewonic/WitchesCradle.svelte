@@ -221,6 +221,54 @@
   class="witches-cradle"
 >
 
+  {#if $aewonicCross.length === 6}  
+
+    <div class="daemon-cards">  
+
+      <Card
+        cardKey={$aewonicCross[0]}
+        i=0
+        on:cardClicked={handleDaemonCardClicked($aewonicCross[0])}
+      />
+      
+      <Card
+        cardKey={$aewonicCross[2]}
+        i=1
+        on:cardClicked={handleDaemonCardClicked($aewonicCross[2])}
+      />
+
+      <Card
+        cardKey={$aewonicCross[4]}
+        i=2
+        on:cardClicked={handleDaemonCardClicked($aewonicCross[4])}
+      />
+
+    </div>  
+
+    <div class="player-cards">
+
+      <Card 
+        cardKey={$aewonicCross[1]}
+        i=0
+        on:cardClicked={handlePlayerCardClicked($aewonicCross[1])}
+      />
+      
+      <Card 
+        cardKey={$aewonicCross[3]}
+        i=1
+        on:cardClicked={handlePlayerCardClicked($aewonicCross[3])}
+      />
+
+      <Card 
+        cardKey={$aewonicCross[5]}
+        i=2
+        on:cardClicked={handlePlayerCardClicked($aewonicCross[5])}
+      />
+    </div>  
+
+  {/if}
+
+
   {#if $beforeGame && !$selectedQuadrant}
 
     <button 
@@ -291,54 +339,6 @@
       Deal Two Trees
     </button>
 
-
-  {/if}
-
-
-  {#if $aewonicCross.length === 6}  
-
-    <div class="daemon-cards">  
-
-      <Card
-        cardKey={$aewonicCross[0]}
-        i=0
-        on:cardClicked={handleDaemonCardClicked($aewonicCross[0])}
-      />
-      
-      <Card
-        cardKey={$aewonicCross[2]}
-        i=1
-        on:cardClicked={handleDaemonCardClicked($aewonicCross[2])}
-      />
-
-      <Card
-        cardKey={$aewonicCross[4]}
-        i=2
-        on:cardClicked={handleDaemonCardClicked($aewonicCross[4])}
-      />
-
-    </div>  
-
-    <div class="player-cards">
-
-      <Card 
-        cardKey={$aewonicCross[1]}
-        i=0
-        on:cardClicked={handlePlayerCardClicked($aewonicCross[1])}
-      />
-      
-      <Card 
-        cardKey={$aewonicCross[3]}
-        i=1
-        on:cardClicked={handlePlayerCardClicked($aewonicCross[3])}
-      />
-
-      <Card 
-        cardKey={$aewonicCross[5]}
-        i=2
-        on:cardClicked={handlePlayerCardClicked($aewonicCross[5])}
-      />
-    </div>  
 
   {/if}
 
@@ -414,7 +414,7 @@ button.dealTwoTrees {
 
 button.confirmSelection {
   background: black;
-  display: block;
+  display: inline-block;
   align-items: center;
   justify-content: center;
   font-size: 20px;
