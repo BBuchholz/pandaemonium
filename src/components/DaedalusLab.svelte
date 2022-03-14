@@ -44,46 +44,55 @@
 
 </script>
 
-{#if passPhrase === passPhraseDefault}
+<div class="daedalus-lab">
 
-  <p>pass phrase not set</p>
+  {#if passPhrase === passPhraseDefault}
 
-{:else}
+    <p>pass phrase not set</p>
 
-  <div class="utility-panel">
+  {:else}
 
-    <p>pass phrase {passPhrase} found!</p>
+    <div class="utility-panel">
 
-    <select 
-      bind:value={selectedComponent}
-    >
-      {#each labComponents as component}
-        <option value={component}>
-          {component}
-        </option>
-      {/each}
-    </select>
+      <p>pass phrase {passPhrase} found!</p>
 
-  </div>
+      <select 
+        bind:value={selectedComponent}
+      >
+        {#each labComponents as component}
+          <option value={component}>
+            {component}
+          </option>
+        {/each}
+      </select>
 
-  {#if selectedComponent === "WitchesCradle"}
+    </div>
 
-      <!-- If selected component is WitchesCradle, insert here (added to separate file) -->
-    <WitchesCradle />
-  
-  {:else if selectedComponent === "ModCard"}
+    {#if selectedComponent === "WitchesCradle"}
 
-    <!-- TODO: move this to its own file like the other -->
+        <!-- If selected component is WitchesCradle, insert here (added to separate file) -->
+      <WitchesCradle />
     
-    <Card 
-      {cardKey}
-      on:cardClicked={handleCardClicked} />
+    {:else if selectedComponent === "ModCard"}
+
+      <!-- TODO: move this to its own file like the other -->
+      
+      <Card 
+        {cardKey}
+        on:cardClicked={handleCardClicked} />
+
+    {/if}
+
 
   {/if}
 
-
-{/if}
+</div>
 
 <style>
+
+  .daedalus-lab {
+    display: flex;
+    flex-flow: column;
+  }
   
 </style>

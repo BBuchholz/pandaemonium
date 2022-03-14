@@ -15,7 +15,8 @@
     selectionIsValid,
     selectedQuadrant,
     selectedCards,
-    selectionIsSingular
+    selectionIsSingular,
+    buttonCounts
   } from './aewonic-stores.js';
  
   import Card from './ModCard.svelte';
@@ -34,6 +35,26 @@
       description: description,
       removeAfter: 4000,
     });
+  }
+
+  function notifySelectionResolutionValue(){
+    addNotification({
+      position: 'bottom-right',
+      text: 'collected ' + $selectionResolutionValue,
+      type: 'error',
+      description: 'lorem ipsum',
+      removeAfter: 4000,
+    });
+  }
+
+
+  function resetSelection() {
+
+    // roundFinished = true;
+    $selectedCardsForPlayer = [];
+    $selectedCardsForDaemon = [];
+    $aewonicCross = [];;
+    // console.log('selection reset');
   }
 
   function loadDeck(){
@@ -76,13 +97,111 @@
   }
 
   function onNextTurn() {
-    // // COPIED FROM PlayerAreaMod, NEEDS PORTING
-    // dispatch('nextTurn', 'no details');
+    
+    $turnFinished = false;
+    // $earthColCountChanged = false;
+    // $fireColCountChanged = false;
+    // $airColCountChanged = false;
+    // $waterColCountChanged = false;
+
+    // $collectedRecentlyFire = [];
+    // $collectedRecentlyWater = [];
+    // $collectedRecentlyAir = [];
+    // $collectedRecentlyEarth = [];
+    
+    newDeal();
   }
 
   function selectionConfirmed() {
-    // // COPIED FROM PlayerAreaMod, NEEDS PORTING
-    // dispatch('selectionConfirmed', 'no details');
+    
+
+    processCardCollection();
+
+    $turnFinished = true;
+  }
+
+  function processCardCollection() {
+
+    for(const cardKey of $selectionResolutionValue){
+
+      let cardSuit = magisterLudi.parseSuit(cardKey);
+
+      console.log('cardSuit: ' + cardSuit);
+
+      if(cardSuit === 'D'){
+        
+        // if(!$earthCollection.includes(cardKey)){
+          
+        //   $earthCollection = [...$earthCollection, cardKey];
+        //   $earthColCountChanged = true;
+        //   $collectedRecentlyEarth = [...$collectedRecentlyEarth, cardKey];
+
+        //   if($rulesIncludeElementalShiftsOnAllCollections){
+
+        //     $heatIndex = $heatIndex - 1;
+        //     $moistureIndex = $moistureIndex - 1;
+        //   }
+        // }
+        
+        
+      }
+
+      if(cardSuit === 'W'){
+        
+        // if(!$fireCollection.includes(cardKey)){
+          
+        //   $fireCollection = [...$fireCollection, cardKey];
+        //   $fireColCountChanged = true;
+        //   $collectedRecentlyFire = [...$collectedRecentlyFire, cardKey];
+
+        //   if($rulesIncludeElementalShiftsOnAllCollections){
+
+        //     $heatIndex = $heatIndex + 1;
+        //     $moistureIndex = $moistureIndex - 1;
+        //   }
+        // }
+        
+      }
+
+      if(cardSuit === 'S'){
+        
+        // if(!$airCollection.includes(cardKey)){
+          
+        //   $airCollection = [...$airCollection, cardKey];
+        //   $airColCountChanged = true;
+        //   $collectedRecentlyAir = [...$collectedRecentlyAir, cardKey];
+
+        //   if($rulesIncludeElementalShiftsOnAllCollections){
+
+        //     $heatIndex = $heatIndex + 1;
+        //     $moistureIndex = $moistureIndex + 1;
+        //   }
+        // }
+        
+      }
+
+      if(cardSuit === 'C'){
+        
+        // if(!$waterCollection.includes(cardKey)){
+          
+        //   $waterCollection = [...$waterCollection, cardKey];
+        //   $waterColCountChanged = true;
+        //   $collectedRecentlyWater = [...$collectedRecentlyWater, cardKey];
+
+        //   if($rulesIncludeElementalShiftsOnAllCollections){
+
+        //     $heatIndex = $heatIndex - 1;
+        //     $moistureIndex = $moistureIndex + 1;
+        //   }
+        // }
+        
+      }
+    }
+
+    notifySelectionResolutionValue();
+
+    resetSelection();
+    // console.log('card comparison processed');
   }
 
   function handlePlayerCardClicked(cardKey){
@@ -200,7 +319,7 @@
   const toBeImplemented = ['Water', 'Air', 'Earth', 'Fire'];
 
 </script>
-
+<!-- 
 <div class="top-controls">
 
   Deck Count: {$currentDeckCount} - 
@@ -215,7 +334,7 @@
 
   {/if}
 
-</div>
+</div> -->
 
 <div 
   class="witches-cradle"
@@ -310,7 +429,7 @@
       class:colorFire={$selectedQuadrant === 'Fire'}
       on:click={onStartGame}
     >
-      Deal Two Trees
+      Deal Two Trees {$buttonCounts}
     </button>
 
   {:else if $currentDeckCount === 0}
@@ -326,7 +445,7 @@
       End Game
     </button>
 
-  {:else if toBeImplemented.includes($selectedQuadrant) && $selectedCards.length < 2}
+  {:else if toBeImplemented.includes($selectedQuadrant) && $selectedCards.length < 1 && !$turnFinished}
 
     <button 
       class="dealTwoTrees"
@@ -336,7 +455,7 @@
       class:colorFire={$selectedQuadrant === 'Fire'}
       on:click={newDeal}
     >
-      Deal Two Trees
+      Deal Two Trees {$buttonCounts}
     </button>
 
 
@@ -387,12 +506,22 @@
 
 <style>
 
+.witches-cradle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-flow: column;
+}
+
 .daemon-cards {
   display: flex;
+  flex-flow: row;
 }
 
 .player-cards {
   display: flex;
+  flex-flow: row;
 }
 
 button.next-turn {
@@ -410,6 +539,7 @@ button.start-game {
 
 button.dealTwoTrees {
   background: black;
+  position: absolute;
 }
 
 button.confirmSelection {
@@ -418,6 +548,7 @@ button.confirmSelection {
   align-items: center;
   justify-content: center;
   font-size: 20px;
+  position: absolute;
 }
 
 button.beforeGame {

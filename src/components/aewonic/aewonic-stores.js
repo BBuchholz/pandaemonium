@@ -865,3 +865,22 @@ export const currentStateText = derived(
 `;
 	}
 );
+
+export const buttonCounts = derived(
+	[currentDeckCount,
+	 selectedQuadrant],
+	([$currentDeckCount,
+		$selectedQuadrant]) => {
+	
+		const counts = '(' + $currentDeckCount + ')';
+
+		// let counts = "DC:" + $currentDeckCount;
+
+		// if($selectedQuadrant){
+
+		// 	counts += " Q:" + $selectedQuadrant;	
+		// }
+
+		return counts;
+	}
+);
