@@ -6,6 +6,8 @@ export class Knechtor {
 
   parseSuit(cardValue){
 
+    try{
+
       if(cardValue && cardValue.endsWith("D")){
         return "D";
       }
@@ -21,6 +23,12 @@ export class Knechtor {
       if(cardValue && cardValue.endsWith("W")){
         return "W";
       }
+
+    }catch(error){
+
+      console.log(error);
+      return '?';
+    }
 
       return '?';
   }
@@ -180,5 +188,45 @@ export class Knechtor {
     }
 
     return [];
+  }
+
+  resolveFireSelections(dCardKey, pCardKey){
+
+    let resolutionKeys = [];
+
+    const dSuit = this.parseSuit(dCardKey);
+    const pSuit = this.parseSuit(pCardKey);
+
+    const dRank = this.parseRank(dCardKey, dSuit);
+    const pRank = this.parseRank(pCardKey, pSuit);
+
+    // CHANGE THIS, SHOULD BE NEW WAY
+
+    if(dSuit === pSuit){
+      // same suit, in fire, the primordial takes precedence
+      // within its own domain, so lower ranks resolve over
+      // higher ranks (earlier numbers over latter)
+
+      if(dRank < pRank){
+        resolutionKeys.push(dCardKey);
+      }else{
+        resolutionKeys.push(pCardKey);
+      }
+
+    }else{
+
+      // different suit, will favors development
+      // hence higher ranks will resolve over lower ranks
+      // ties go to the daemon (will doesn't share well)
+
+      if(dRank < pRank){
+        resolutionKeys.push(pCardKey);
+      }else{
+        resolutionKeys.push(dCardKey);
+      }
+    }
+
+
+    return resolutionKeys;
   }
 }
