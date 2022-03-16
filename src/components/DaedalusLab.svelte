@@ -14,8 +14,8 @@
   export let passPhrase = passPhraseDefault;
 
   let labComponents = [
-    "WitchesCradle",
     "ModCard",
+    "WitchesCradle",
   ];
 
   let selectedComponent;
@@ -93,6 +93,7 @@
   .daedalus-lab {
     display: flex;
     flex-flow: column;
+    align-items: center;
   }
   
 </style>

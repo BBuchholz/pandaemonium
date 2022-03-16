@@ -32,14 +32,16 @@
   export let cardKey = 'XX';
   export let i = 0;
   let src = '';
-  let cardTitle = 'card title';
-  let cardPower = 'zw';
+  let cardRank = 'card rank';
+  let cardElement = 'zw';
   let cardSuit = '?';
+  let cardZodiac = 'zz';
 
   $: src = getImgSrcFromCardKey(cardKey);
-  $: cardPower = getElementalSymbolFromCardKey(cardKey); 
+  $: cardElement = getElementalSymbolFromCardKey(cardKey); 
+  $: cardZodiac = getZodiacalSymbolFromCardKey(cardKey);
   $: cardSuit = magisterLudi.parseSuit(cardKey);
-  $: cardTitle = magisterLudi.parseRank(cardKey, cardSuit);
+  $: cardRank = magisterLudi.parseRank(cardKey, cardSuit);
 
   import { createEventDispatcher } from 'svelte';
   const dispatch = createEventDispatcher();
@@ -158,21 +160,29 @@ function getZodiacalSymbolFromCardKey(cardKey){
   on:click={handleClick}
 >
   <div 
-    class="text"
+    class="card-zodiac"
     class:fire-color={cardSuit === 'W'}
     class:water-color={cardSuit === 'C'}
     class:air-color={cardSuit === 'S'}
     class:earth-color={cardSuit === 'D'}
     class:card-selected-invisible={$selectedCards.includes(cardKey)}
-  >{cardTitle}</div>
-  <img class="image" alt={cardTitle} {src}/>
-  <div class="power"
+  >{cardZodiac}</div>
+  <div 
+    class="card-rank"
     class:fire-color={cardSuit === 'W'}
     class:water-color={cardSuit === 'C'}
     class:air-color={cardSuit === 'S'}
     class:earth-color={cardSuit === 'D'}
     class:card-selected-invisible={$selectedCards.includes(cardKey)}
-  >{cardPower}</div>
+  >{cardRank}</div>
+  <img class="image" alt={cardRank} {src}/>
+  <div class="card-element"
+    class:fire-color={cardSuit === 'W'}
+    class:water-color={cardSuit === 'C'}
+    class:air-color={cardSuit === 'S'}
+    class:earth-color={cardSuit === 'D'}
+    class:card-selected-invisible={$selectedCards.includes(cardKey)}
+  >{cardElement}</div>
 </div>
 
 <style>
@@ -208,7 +218,7 @@ function getZodiacalSymbolFromCardKey(cardKey){
   box-shadow: 0px 15px 15px rgba(0,0,0,.3);
 }
 
-.card .power {
+.card-element {
   font-size: 30px;
   position: absolute;
   bottom: 0px;
@@ -225,7 +235,7 @@ function getZodiacalSymbolFromCardKey(cardKey){
   background-position: center;
 }
 
-.card .text {
+.card-rank {
   font-size: 30px;
   position: absolute;
   top: 0px;
@@ -243,6 +253,25 @@ function getZodiacalSymbolFromCardKey(cardKey){
   background-position: center;
 }
 
+.card-zodiac {
+  font-size: 20px;
+  position: absolute;
+  align-content: center;
+  align-items: center;
+  top: 0px;
+  line-height: 30px;
+  left: 4px;
+  width: 30px;
+  height: 30px;
+  padding: 3px;
+  text-align: center;
+  border-radius: 12%;
+  border-spacing: 12px;
+  color: black;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
 .card-selected-invisible {
   display: none;
 }
