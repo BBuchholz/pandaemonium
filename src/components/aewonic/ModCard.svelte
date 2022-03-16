@@ -11,7 +11,19 @@
     } from './aewonic-stores.js';
 
   import {
-    cardImagePath
+    cardImagePath,
+    keysVirgo,
+    keysTaurus,
+    keysCapricorn,
+    keysGemini,
+    keysAquarius,
+    keysLibra,
+    keysPisces,
+    keysScorpio,
+    keysCancer,
+    keysSagittarius,
+    keysLeo,
+    keysAries
   } from '../../constants.js'
 
   import { Knechtor } from '../../myriad/Knechtor.js';
@@ -60,6 +72,60 @@
         return '';
     }
   }
+
+function getZodiacalSymbolFromCardKey(cardKey){
+    
+    if(keysVirgo.includes(cardKey)){
+      return "♍";
+    }
+
+    if(keysTaurus.includes(cardKey)){
+      return "♉";
+    }
+    
+    if(keysScorpio.includes(cardKey)){
+      return "♏";
+    }
+    
+    if(keysSagittarius.includes(cardKey)){
+      return "♐";
+    }
+    
+    if(keysPisces.includes(cardKey)){
+      return "♓";
+    }
+    
+    if(keysLibra.includes(cardKey)){
+      return "♎";
+    }
+    
+    if(keysLeo.includes(cardKey)){
+      return "♌";
+    }
+    
+    if(keysGemini.includes(cardKey)){
+      return "♊";
+    }
+    
+    if(keysCapricorn.includes(cardKey)){
+      return "♑";
+    }
+    
+    if(keysCancer.includes(cardKey)){
+      return "♋";
+    }
+    
+    if(keysAries.includes(cardKey)){
+      return "♈";
+    }
+    
+    if(keysAquarius.includes(cardKey)){
+      return "♒";
+    }
+    
+  }
+
+
 
   function cardUp(){
 
