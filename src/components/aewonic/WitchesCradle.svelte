@@ -337,61 +337,16 @@
 </div> -->
 
 <div 
-  class="witches-cradle"
+  class="witches-cradle" 
 >
 
-  {#if $aewonicCross.length === 6}  
-
-    <div class="daemon-cards">  
-
-      <Card
-        cardKey={$aewonicCross[0]}
-        i=0
-        on:cardClicked={handleDaemonCardClicked($aewonicCross[0])}
-      />
-      
-      <Card
-        cardKey={$aewonicCross[2]}
-        i=1
-        on:cardClicked={handleDaemonCardClicked($aewonicCross[2])}
-      />
-
-      <Card
-        cardKey={$aewonicCross[4]}
-        i=2
-        on:cardClicked={handleDaemonCardClicked($aewonicCross[4])}
-      />
-
-    </div>  
-
-    <div class="player-cards">
-
-      <Card 
-        cardKey={$aewonicCross[1]}
-        i=0
-        on:cardClicked={handlePlayerCardClicked($aewonicCross[1])}
-      />
-      
-      <Card 
-        cardKey={$aewonicCross[3]}
-        i=1
-        on:cardClicked={handlePlayerCardClicked($aewonicCross[3])}
-      />
-
-      <Card 
-        cardKey={$aewonicCross[5]}
-        i=2
-        on:cardClicked={handlePlayerCardClicked($aewonicCross[5])}
-      />
-    </div>  
-
-  {/if}
 
 
-  {#if $beforeGame && !$selectedQuadrant}
+  <!-- {#if $beforeGame && !$selectedQuadrant} -->
 
     <button 
       class="colorWater"
+      class:hidden={!$beforeGame && $selectedQuadrant}
       on:click={selectWaterQuad}
     >
      🜄
@@ -399,6 +354,7 @@
 
     <button 
       class="colorAir"
+      class:hidden={!$beforeGame && $selectedQuadrant}
       on:click={selectAirQuad}
     >
      🜁
@@ -406,6 +362,7 @@
 
     <button 
       class="colorEarth"
+      class:hidden={!$beforeGame && $selectedQuadrant}
       on:click={selectEarthQuad}
     >
      🜃
@@ -413,12 +370,13 @@
 
     <button 
       class="colorFire"
+      class:hidden={!$beforeGame && $selectedQuadrant}
       on:click={selectFireQuad}
     >
      🜂
     </button>
 
-  {:else if $beforeGame && $selectedQuadrant}
+  {#if $beforeGame && $selectedQuadrant}
 
     <button 
       class="start-game"
@@ -432,7 +390,7 @@
       Deal Two Trees {$buttonCounts}
     </button>
 
-  {:else if $currentDeckCount === 0}
+  {:else if $currentDeckCount === 0 && !$beforeGame}
 
     <button 
       class="dealTwoTrees"
@@ -460,6 +418,56 @@
 
 
   {/if}
+
+  <div 
+    class="daemon-cards"
+    class:hidden={$aewonicCross.length !== 6}>  
+
+    <Card
+      cardKey={$aewonicCross[0]}
+      i=0
+      on:cardClicked={handleDaemonCardClicked($aewonicCross[0])}
+    />
+    
+    <Card
+      cardKey={$aewonicCross[2]}
+      i=1
+      on:cardClicked={handleDaemonCardClicked($aewonicCross[2])}
+    />
+
+    <Card
+      cardKey={$aewonicCross[4]}
+      i=2
+      on:cardClicked={handleDaemonCardClicked($aewonicCross[4])}
+    />
+
+  </div>  
+
+  <div 
+    class="player-cards"
+    class:hidden={$aewonicCross.length !== 6}>
+
+    <Card 
+      cardKey={$aewonicCross[1]}
+      i=0
+      on:cardClicked={handlePlayerCardClicked($aewonicCross[1])}
+    />
+    
+    <Card 
+      cardKey={$aewonicCross[3]}
+      i=1
+      on:cardClicked={handlePlayerCardClicked($aewonicCross[3])}
+    />
+
+    <Card 
+      cardKey={$aewonicCross[5]}
+      i=2
+      on:cardClicked={handlePlayerCardClicked($aewonicCross[5])}
+    />
+  </div>  
+
+
+
 
 
   {#if $selectionIsValid }
@@ -522,6 +530,10 @@
 .player-cards {
   display: flex;
   flex-flow: row;
+}
+
+.hidden {
+  visibility: hidden;
 }
 
 button.next-turn {

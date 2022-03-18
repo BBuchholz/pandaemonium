@@ -14,8 +14,8 @@
   export let passPhrase = passPhraseDefault;
 
   let labComponents = [
-    "ModCard",
     "WitchesCradle",
+    "ModCard",
   ];
 
   let selectedComponent;

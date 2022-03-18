@@ -1,6 +1,6 @@
 <script>
  
-  const testingDaedalus = false;
+  const testingDaedalus = true;
 
   import Modal from 'svelte-simple-modal';
   import Notifications from 'svelte-notifications';
