@@ -348,51 +348,53 @@
 >
 
 
+  <div class="elemental-vessels">
+    <!-- {#if $beforeGame && !$selectedQuadrant} -->
 
-  <!-- {#if $beforeGame && !$selectedQuadrant} -->
+    {#if !usingVessels}
 
-  {#if !usingVessels}
+      <button 
+        class="colorWater"
+        class:hidden={!$beforeGame && $selectedQuadrant}
+        on:click={selectWaterQuad}
+      >
+       🜄
+      </button>
 
-    <button 
-      class="colorWater"
-      class:hidden={!$beforeGame && $selectedQuadrant}
-      on:click={selectWaterQuad}
-    >
-     🜄
-    </button>
+      <button 
+        class="colorAir"
+        class:hidden={!$beforeGame && $selectedQuadrant}
+        on:click={selectAirQuad}
+      >
+       🜁
+      </button>
 
-    <button 
-      class="colorAir"
-      class:hidden={!$beforeGame && $selectedQuadrant}
-      on:click={selectAirQuad}
-    >
-     🜁
-    </button>
+      <button 
+        class="colorEarth"
+        class:hidden={!$beforeGame && $selectedQuadrant}
+        on:click={selectEarthQuad}
+      >
+       🜃
+      </button>
 
-    <button 
-      class="colorEarth"
-      class:hidden={!$beforeGame && $selectedQuadrant}
-      on:click={selectEarthQuad}
-    >
-     🜃
-    </button>
+      <button 
+        class="colorFire"
+        class:hidden={!$beforeGame && $selectedQuadrant}
+        on:click={selectFireQuad}
+      >
+       🜂
+      </button>
 
-    <button 
-      class="colorFire"
-      class:hidden={!$beforeGame && $selectedQuadrant}
-      on:click={selectFireQuad}
-    >
-     🜂
-    </button>
+    {:else}
 
-  {:else}
+      <WaterVessel />
+      <AirVessel />
+      <EarthVessel />
+      <FireVessel />
 
-    <WaterVessel />
-    <AirVessel />
-    <EarthVessel />
-    <FireVessel />
+    {/if}
 
-  {/if}
+  </div>
 
   {#if $beforeGame && $selectedQuadrant}
 
@@ -538,6 +540,14 @@
   justify-content: center;
   text-align: center;
   flex-flow: column;
+}
+
+.elemental-vessels {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-flow: row;
 }
 
 .daemon-cards {
