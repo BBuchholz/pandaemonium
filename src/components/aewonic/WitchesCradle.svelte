@@ -1,5 +1,7 @@
 <script>
 
+  const usingVessels = true;
+
   import { 
 
     selectedCardsForDaemon,
@@ -15,11 +17,16 @@
     selectionIsValid,
     selectedQuadrant,
     selectedCards,
-    selectionIsSingular,
+    selectionIsSingular, 
     buttonCounts
   } from './aewonic-stores.js';
  
   import Card from './ModCard.svelte';
+
+  import WaterVessel from './WaterVessel.svelte';
+  import AirVessel from './AirVessel.svelte';
+  import EarthVessel from './EarthVessel.svelte';
+  import FireVessel from './FireVessel.svelte';
 
   import { Knechtor } from '../../myriad/Knechtor.js';
   const magisterLudi = new Knechtor();
@@ -344,6 +351,8 @@
 
   <!-- {#if $beforeGame && !$selectedQuadrant} -->
 
+  {#if !usingVessels}
+
     <button 
       class="colorWater"
       class:hidden={!$beforeGame && $selectedQuadrant}
@@ -375,6 +384,15 @@
     >
      🜂
     </button>
+
+  {:else}
+
+    <WaterVessel />
+    <AirVessel />
+    <EarthVessel />
+    <FireVessel />
+
+  {/if}
 
   {#if $beforeGame && $selectedQuadrant}
 
