@@ -28,7 +28,7 @@
                           !keysEarth.includes(cardKey)
                         ); 
 
-    $selectedQuadrant = 'Fire';
+    $selectedQuadrant = 'Earth';
   }
 
 </script>
@@ -40,7 +40,7 @@
     <div class="zodiac-vessel-label">
 
       <button on:click={redeemEarth}>
-      🜃    
+      🜃 {$earthCollection.length > 0 ? $earthCollection.length : ''}   
       </button>
     
     </div>
@@ -61,6 +61,11 @@
 
   .elemental-vessel {
     background-color: '#ffffff';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-flow: row;
   }
 
   button {

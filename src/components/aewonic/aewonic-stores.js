@@ -597,9 +597,11 @@ export const selectionResolutionValue = derived(
 		    console.log('dCardKey: ' + dCardKey);
 
 
-				outcome.push(
-					magisterLudi.resolveFireSelections(
-						dCardKey, pCardKey));
+		    for(const res of magisterLudi.resolveFireSelections(
+						dCardKey, pCardKey)){
+
+					outcome.push(res);	
+		    }
 
 			  // const dSuit = magisterLudi.parseSuit(dCardKey);
 			  // const pSuit = magisterLudi.parseSuit(pCardKey);

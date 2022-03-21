@@ -40,7 +40,7 @@
     <div class="zodiac-vessel-label">
 
       <button on:click={redeemWater}>
-      🜄    
+      🜄 {$waterCollection.length > 0 ? $waterCollection.length : ''}   
       </button>
     
     </div>
@@ -61,6 +61,11 @@
 
   .elemental-vessel {
     background-color: '#ffffff';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-flow: row;
   }
 
   button {

@@ -1,6 +1,6 @@
 <script>
 
-  const usingVessels = true;
+  //const usingVessels = true;
 
   import { 
 
@@ -18,7 +18,19 @@
     selectedQuadrant,
     selectedCards,
     selectionIsSingular, 
-    buttonCounts
+    buttonCounts,
+    waterCollection,
+    airCollection,
+    earthCollection,
+    fireCollection,
+    waterColCountChanged,
+    airColCountChanged,
+    earthColCountChanged,
+    fireColCountChanged,
+    collectedRecentlyWater,
+    collectedRecentlyAir,
+    collectedRecentlyEarth,
+    collectedRecentlyFire
   } from './aewonic-stores.js';
  
   import Card from './ModCard.svelte';
@@ -106,15 +118,15 @@
   function onNextTurn() {
     
     $turnFinished = false;
-    // $earthColCountChanged = false;
-    // $fireColCountChanged = false;
-    // $airColCountChanged = false;
-    // $waterColCountChanged = false;
+    $earthColCountChanged = false;
+    $fireColCountChanged = false;
+    $airColCountChanged = false;
+    $waterColCountChanged = false;
 
-    // $collectedRecentlyFire = [];
-    // $collectedRecentlyWater = [];
-    // $collectedRecentlyAir = [];
-    // $collectedRecentlyEarth = [];
+    $collectedRecentlyFire = [];
+    $collectedRecentlyWater = [];
+    $collectedRecentlyAir = [];
+    $collectedRecentlyEarth = [];
     
     newDeal();
   }
@@ -129,7 +141,12 @@
 
   function processCardCollection() {
 
+    console.log('res: ' + $selectionResolutionValue);
+    console.log('length: ' + $selectionResolutionValue.length);
+
     for(const cardKey of $selectionResolutionValue){
+
+      console.log('cardkey: ' + cardKey);
 
       let cardSuit = magisterLudi.parseSuit(cardKey);
 
@@ -137,70 +154,46 @@
 
       if(cardSuit === 'D'){
         
-        // if(!$earthCollection.includes(cardKey)){
+        if(!$earthCollection.includes(cardKey)){
           
-        //   $earthCollection = [...$earthCollection, cardKey];
-        //   $earthColCountChanged = true;
-        //   $collectedRecentlyEarth = [...$collectedRecentlyEarth, cardKey];
-
-        //   if($rulesIncludeElementalShiftsOnAllCollections){
-
-        //     $heatIndex = $heatIndex - 1;
-        //     $moistureIndex = $moistureIndex - 1;
-        //   }
-        // }
+          $earthCollection = [...$earthCollection, cardKey];
+          $earthColCountChanged = true;
+          $collectedRecentlyEarth = [...$collectedRecentlyEarth, cardKey];
+        }
         
         
       }
 
       if(cardSuit === 'W'){
         
-        // if(!$fireCollection.includes(cardKey)){
+        if(!$fireCollection.includes(cardKey)){
           
-        //   $fireCollection = [...$fireCollection, cardKey];
-        //   $fireColCountChanged = true;
-        //   $collectedRecentlyFire = [...$collectedRecentlyFire, cardKey];
-
-        //   if($rulesIncludeElementalShiftsOnAllCollections){
-
-        //     $heatIndex = $heatIndex + 1;
-        //     $moistureIndex = $moistureIndex - 1;
-        //   }
-        // }
+          $fireCollection = [...$fireCollection, cardKey];
+          $fireColCountChanged = true;
+          $collectedRecentlyFire = [...$collectedRecentlyFire, cardKey];
+        }
         
       }
 
       if(cardSuit === 'S'){
         
-        // if(!$airCollection.includes(cardKey)){
+        if(!$airCollection.includes(cardKey)){
           
-        //   $airCollection = [...$airCollection, cardKey];
-        //   $airColCountChanged = true;
-        //   $collectedRecentlyAir = [...$collectedRecentlyAir, cardKey];
-
-        //   if($rulesIncludeElementalShiftsOnAllCollections){
-
-        //     $heatIndex = $heatIndex + 1;
-        //     $moistureIndex = $moistureIndex + 1;
-        //   }
-        // }
+          $airCollection = [...$airCollection, cardKey];
+          $airColCountChanged = true;
+          $collectedRecentlyAir = [...$collectedRecentlyAir, cardKey];
+        }
         
       }
 
       if(cardSuit === 'C'){
         
-        // if(!$waterCollection.includes(cardKey)){
+        if(!$waterCollection.includes(cardKey)){
           
-        //   $waterCollection = [...$waterCollection, cardKey];
-        //   $waterColCountChanged = true;
-        //   $collectedRecentlyWater = [...$collectedRecentlyWater, cardKey];
-
-        //   if($rulesIncludeElementalShiftsOnAllCollections){
-
-        //     $heatIndex = $heatIndex - 1;
-        //     $moistureIndex = $moistureIndex + 1;
-        //   }
-        // }
+          $waterCollection = [...$waterCollection, cardKey];
+          $waterColCountChanged = true;
+          $collectedRecentlyWater = [...$collectedRecentlyWater, cardKey];
+        }
         
       }
     }
@@ -303,27 +296,38 @@
   }
 
   function selectWaterQuad(){
+    console.log('changing to water');
     $selectedQuadrant = 'Water';
   }
 
   function selectAirQuad(){
+    console.log('changing to air');
     $selectedQuadrant = 'Air';
   } 
 
   function selectEarthQuad(){
+    console.log('changing to earth');
     $selectedQuadrant = 'Earth';
   }
 
   function selectFireQuad(){
+    console.log('changing to fire');
     $selectedQuadrant = 'Fire';
   }
+
+  // $: console.log('quad: ' + $selectedQuadrant);
 
   // THIS CONTROLS WHAT STILL GETS A DEAL BUTTON DURING PLAY
   // AS QUADRANTS ARE IMPLEMENTED FULLY, WE WON"T NEED A DEAL
   // BUTTON BECAUSE NO VALID MOVES WILL TRIGGER A DEAL OPTION
   // REMOVE QUADRANTS FROM THIS LIST AS THEY ARE FULLY READY 
   // AND TESTED
-  const toBeImplemented = ['Water', 'Air', 'Earth', 'Fire'];
+  ////// CURRENT PROGRESS /////////////
+  // Water - NOT STARTED
+  // Air - NOT STARTED
+  // Earth - IN PROGRESS
+  // Fire - READY FOR TESTING
+  const toBeImplemented = ['Water', 'Air', 'Earth'];
 
 </script>
 <!-- 
@@ -351,8 +355,7 @@
   <div class="elemental-vessels">
     <!-- {#if $beforeGame && !$selectedQuadrant} -->
 
-    {#if !usingVessels}
-
+    <!-- {#if !usingVessels}
       <button 
         class="colorWater"
         class:hidden={!$beforeGame && $selectedQuadrant}
@@ -360,7 +363,6 @@
       >
        🜄
       </button>
-
       <button 
         class="colorAir"
         class:hidden={!$beforeGame && $selectedQuadrant}
@@ -392,7 +394,13 @@
       <EarthVessel />
       <FireVessel />
 
-    {/if}
+    {/if} -->
+
+    <WaterVessel />
+    <AirVessel />
+    <EarthVessel />
+    <FireVessel />
+
 
   </div>
 
@@ -410,7 +418,7 @@
       Deal Two Trees {$buttonCounts}
     </button>
 
-  {:else if $currentDeckCount === 0 && !$beforeGame}
+  {:else if $currentDeckCount === 0 && !$beforeGame && $turnFinished}
 
     <button 
       class="dealTwoTrees"
@@ -519,7 +527,7 @@
 
   {/if}
 
-  {#if $turnFinished}
+  {#if $turnFinished && !$beforeGame}
 
     <button 
       class="next-turn" 
@@ -580,6 +588,7 @@ button.start-game {
 button.dealTwoTrees {
   background: black;
   position: absolute;
+  z-index: 7;
 }
 
 button.confirmSelection {
@@ -605,15 +614,16 @@ button:active {
 }
 
 button {
-  font-size: 15px;
-  line-height: 15px;
-  padding: 8px 22px 9px 22px;
+  font-size: 20px;
+  margin: 0.5em;
+  line-height: 20px;
+  padding: 5px 22px 5px 22px;
   box-sizing: border-box;
-  font-weight: 700;
+  font-weight: 600;
   border: solid 3px white;
   color: white;
   background: transparent;
-  border-radius: 30px;
+  border-radius: 30em;
   transition: all ease-out .2s;
   cursor: pointer;
   outline: none;

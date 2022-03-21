@@ -1,6 +1,11 @@
 const { Knechtor } = require('./Knechtor.js');
 const magisterLudi = new Knechtor();
 
+it('should parse suit', () => {
+
+  expect('W').toEqual(magisterLudi.parseSuit('5W'));
+});
+
 describe('selections', () => {
 
   const aewonicCross1 = ['9C','1C','8W','3C','5S','6C'];
