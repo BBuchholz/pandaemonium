@@ -190,8 +190,8 @@ function getZodiacalSymbolFromCardKey(cardKey){
 .card {
   opacity: 1;
   margin: 20px 10px;
-  width: 95%;
-  height: 95%;
+  width: 100%;
+  height: 100%;
   max-height: 250px;
   max-width: 150px;
   padding: 3px;

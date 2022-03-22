@@ -329,6 +329,15 @@ export const collectedAir = derived(
 	}
 );
 
+
+export const collectedSpirit = derived(
+	[collectedWater, collectedAir, collectedEarth, collectedFire],
+	([$collectedWater, $collectedAir, $collectedEarth, $collectedFire]) => {
+		
+		return $collectedWater && $collectedAir && $collectedEarth && $collectedFire;
+	}
+);
+
 export const currentDeckCount = derived(
 	[deck, aewonicCross],
 	([$deck, $aewonicCross]) => {
@@ -340,7 +349,6 @@ export const beforeGame = writable(true);
 export const turnFinished = writable(false);
 export const moistureIndex = writable(0);
 export const heatIndex = writable(0);
-export const nextTurnButtonText = writable('Next!');
 
 export const resolutionIsHeated = derived(
 	heatIndex,
@@ -445,19 +453,58 @@ export const selectionIsSingular = derived(
 	}
 );
 
-// export const discardCount = derived(
-// 	[deck, earthColCount, airColCount, waterColCount, fireColCount, playerCards, daemonCards],
-// 	([$deck, $earthColCount, $airColCount, $waterColCount, $fireColCount, $playerCards, $daemonCards]) => {
+export const playerCards = derived(
+	aewonicCross,
+	($aewonicCross) => {
 
-// 		return 36 - $deck.length - 
-// 					 $earthColCount - 
-// 					 $airColCount -
-// 					 $waterColCount -
-// 					 $fireColCount -
-// 					 $playerCards.length -
-// 					 $daemonCards.length;
-// 	}
-// );
+		let pCards = [];
+
+		for(let i = 1; i < 6; i += 2){
+			if($aewonicCross[i]){
+				pCards.push($aewonicCross[i]);
+			}
+		}
+
+		return pCards;
+	}
+);
+
+export const daemonCards = derived(
+	aewonicCross,
+	($aewonicCross) => {
+
+		let dCards = [];
+
+		for(let i = 0; i < 6; i += 2){
+			if($aewonicCross[i]){
+				dCards.push($aewonicCross[i]);
+			}
+		}
+
+		return dCards;
+	}
+);
+
+export const discardCount = derived(
+	[deck, earthColCount, airColCount, waterColCount, fireColCount, playerCards, daemonCards],
+	([$deck, $earthColCount, $airColCount, $waterColCount, $fireColCount, $playerCards, $daemonCards]) => {
+
+		return 36 - $deck.length - 
+					 $earthColCount - 
+					 $airColCount -
+					 $waterColCount -
+					 $fireColCount -
+					 $playerCards.length -
+					 $daemonCards.length;
+	}
+);
+
+export const nextTurnButtonText = derived(
+	[currentDeckCount, discardCount],
+	([$currentDeckCount, $discardCount]) => {
+		return 'Next (Deck: ' + $currentDeckCount + ' Discard: ' + $discardCount + ')';
+	}
+);
 
 export const currentQuadrant = derived(
 	[selectionIsWet, resolutionIsHeated],

@@ -8,7 +8,8 @@
     selectedCardsForPlayer, 
     aewonicCross,
     deck, 
-    currentDeckCount, 
+    currentDeckCount,
+    discardCount, 
     nextTurnButtonText,
     turnFinished,
     noValidChoices,
@@ -30,7 +31,8 @@
     collectedRecentlyWater,
     collectedRecentlyAir,
     collectedRecentlyEarth,
-    collectedRecentlyFire
+    collectedRecentlyFire,
+    collectedSpirit
   } from './aewonic-stores.js';
  
   import Card from './ModCard.svelte';
@@ -81,18 +83,57 @@
     $deck = magisterLudi.dealTwelveTrees();
   }
 
-  function newDeal(){
 
-    // resetCardStates();
-    
-    if($currentDeckCount < 6){
+  function outOfCards() {
 
+    const toReshuffle = $currentDeckCount + $discardCount;
+
+    if(toReshuffle > 1) {
+   
+      notifyClicked('Deck Info!', 'out of cards, reshuffling ' + toReshuffle + ' cards...');
       loadDeck();
+      newDeal(); 
+    
+    } else if (toReshuffle === 1) {
+
+      notifyClicked('Deck Info!', 'only one card in deck, need to redeem to continue');
+      $turnFinished = true;
+
+    } else {
+
+      notifyClicked('Deck Info!', 'all cards collected! you rock!');
+      $beforeGame = true;
+
+    }
+
+  }
+
+  function newDeal(){
+ 
+    // if($currentDeckCount < 6){
+
+    //   loadDeck();
+    // }
+
+    if($deck.length == 0){
+
+      outOfCards();
+      return;
     }
 
     $aewonicCross = [];
 
     const cardsToDeal = 6;
+
+    while(cardsToDeal > $deck.length){
+      cardsToDeal -= 2;
+    }
+
+    if(cardsToDeal == 0){
+
+      outOfCards();
+      return;
+    }
 
     for(let i = 0; i < cardsToDeal; i++){
       $aewonicCross = [...$aewonicCross, $deck.pop()];
@@ -418,7 +459,7 @@
       Deal Two Trees {$buttonCounts}
     </button>
 
-  {:else if $currentDeckCount === 0 && !$beforeGame && $turnFinished}
+  {:else if $currentDeckCount === 0 && !$beforeGame && $turnFinished && $collectedSpirit}
 
     <button 
       class="dealTwoTrees"
@@ -448,50 +489,93 @@
   {/if}
 
   <div 
-    class="daemon-cards"
-    class:hidden={$aewonicCross.length !== 6}>  
+    class="daemon-cards">
 
-    <Card
-      cardKey={$aewonicCross[0]}
-      i=0
-      on:cardClicked={handleDaemonCardClicked($aewonicCross[0])}
-    />
+    <div 
+      class="card-stead"
+      class:hidden={!$aewonicCross[0]}
+    >  
+
+      <Card
+        cardKey={$aewonicCross[0]}
+        i=0
+        on:cardClicked={handleDaemonCardClicked($aewonicCross[0])}
+      />
+
+    </div>
     
-    <Card
-      cardKey={$aewonicCross[2]}
-      i=1
-      on:cardClicked={handleDaemonCardClicked($aewonicCross[2])}
-    />
+    <div 
+      class="card-stead"
+      class:hidden={!$aewonicCross[2]}
+    >
 
-    <Card
-      cardKey={$aewonicCross[4]}
-      i=2
-      on:cardClicked={handleDaemonCardClicked($aewonicCross[4])}
-    />
+      <Card
+        cardKey={$aewonicCross[2]}
+        i=1
+        on:cardClicked={handleDaemonCardClicked($aewonicCross[2])}
+      />
+
+    </div>
+    
+    <div 
+      class="card-stead"
+      class:hidden={!$aewonicCross[4]}
+    >
+
+      <Card
+        cardKey={$aewonicCross[4]}
+        i=2
+        on:cardClicked={handleDaemonCardClicked($aewonicCross[4])}
+      />
+
+    </div>
 
   </div>  
 
   <div 
     class="player-cards"
-    class:hidden={$aewonicCross.length !== 6}>
+  >
 
-    <Card 
-      cardKey={$aewonicCross[1]}
-      i=0
-      on:cardClicked={handlePlayerCardClicked($aewonicCross[1])}
-    />
+    <div 
+      class="card-stead"
+      class:hidden={!$aewonicCross[1]}
+    >
+
+      <Card 
+        cardKey={$aewonicCross[1]}
+        i=0
+        on:cardClicked={handlePlayerCardClicked($aewonicCross[1])}
+      />
     
-    <Card 
-      cardKey={$aewonicCross[3]}
-      i=1
-      on:cardClicked={handlePlayerCardClicked($aewonicCross[3])}
-    />
+    </div>
+    
+    <div 
+      class="card-stead"
+      class:hidden={!$aewonicCross[3]}
+    >
 
-    <Card 
-      cardKey={$aewonicCross[5]}
-      i=2
-      on:cardClicked={handlePlayerCardClicked($aewonicCross[5])}
-    />
+      <Card 
+        cardKey={$aewonicCross[3]}
+        i=1
+        on:cardClicked={handlePlayerCardClicked($aewonicCross[3])}
+      />
+
+    </div>
+      
+    <div 
+      class="card-stead"
+      class:hidden={!$aewonicCross[5]}
+    >
+
+      <Card 
+        cardKey={$aewonicCross[5]}
+        i=2
+        on:cardClicked={handlePlayerCardClicked($aewonicCross[5])}
+      />
+
+    </div>
+    
+
   </div>  
 
 
@@ -543,6 +627,32 @@
 <style>
 
 .witches-cradle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-flow: column;
+}
+
+.card-stead {
+  opacity: 1;
+  margin: 20px 10px;
+  width: 95%;
+  height: 95%;
+  max-height: 250px;
+  max-width: 150px;
+  padding: 3px;
+  color: black;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: bold;
+  position: relative;
+  border-radius: 3%;
+  box-sizing: border-box;
+  text-align: center;
+  transition: all .15s ease-out;
+  box-shadow: 0px 5px 5px rgba(0,0,0,.3);
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
