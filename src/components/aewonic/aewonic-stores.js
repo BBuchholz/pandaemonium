@@ -565,13 +565,25 @@ export const selectionIsValid = derived(
 
 			if($selectedQuadrant === 'Earth'){
 				
+				if($selectedCardsForDaemon.length === 1 && 
+					 $selectedCardsForPlayer.length === 1){
 
+			    const pCardKey = $selectedCardsForPlayer[0];
+			    const dCardKey = $selectedCardsForDaemon[0];
+
+			    outcome =  
+			    	magisterLudi.validateEarthSelections(
+			    		dCardKey, pCardKey);
+
+				}
 			}
 
 
 			if($selectedQuadrant === 'Fire'){
 				
-				outcome = $selectedCardsForDaemon.length === 1 && $selectedCardsForPlayer.length === 1;
+				outcome = 
+					$selectedCardsForDaemon.length === 1 && 
+					$selectedCardsForPlayer.length === 1;
 			}
 
 			return outcome;
@@ -619,18 +631,31 @@ export const selectionResolutionValue = derived(
 			return outcome;
 		}
 
+		if($selectedQuadrant === 'Water'){
+
+		}
+
+		if($selectedQuadrant === 'Air'){
+
+		}
+
 		if($selectedQuadrant === 'Earth'){
-			// // implement first
-			// // Cooperative and Solitary (Cold and Dry)
-			// // one card from each tree
-			// // cuz wet should match either suit or rank
+
 		  	    
-	  //   let playerCardKey = $selectedCardsForPlayer[0];
-	  //   let daemonCardKey = $selectedCardsForDaemon[0];
+	    const pCardKey = $selectedCardsForPlayer[0];
+	    const dCardKey = $selectedCardsForDaemon[0];
 
-	  //   outcome.push(playerCardKey);
-	  //   outcome.push(daemonCardKey);
+	    if(pCardKey && dCardKey){
+		    console.log('pCardKey: ' + pCardKey);
+		    console.log('dCardKey: ' + dCardKey);
 
+
+		    for(const res of magisterLudi.resolveEarthSelections(
+						dCardKey, pCardKey)){
+
+					outcome.push(res);	
+		    }
+			}
 		}
 
 		if($selectedQuadrant === 'Fire'){
@@ -649,61 +674,7 @@ export const selectionResolutionValue = derived(
 
 					outcome.push(res);	
 		    }
-
-			  // const dSuit = magisterLudi.parseSuit(dCardKey);
-			  // const pSuit = magisterLudi.parseSuit(pCardKey);
-
-			  // const dRank = magisterLudi.parseRank(dCardKey, dSuit);
-			  // const pRank = magisterLudi.parseRank(pCardKey, pSuit);
-
-			  // if(dRank > pRank){
-			  // 	outcome.push(dCardKey);
-			  // }else{
-			  // 	outcome.push(pCardKey);
-			  // }
 			}
-		}
-
-		if($selectedQuadrant === 'Water'){
-			// // water treats all as one group, so consolidate
-			// const allCardKeys = 
-			// 	[
-			// 		...$selectedCardsForPlayer, 
-			// 		...$selectedCardsForDaemon
-			// 	];
-
-			// for(const cardKey of allCardKeys){
-			// 	outcome.push(cardKey);
-			// }
-
-		}
-
-		if($selectedQuadrant === 'Air'){
-
-			// // COPYING FROM FIRE, NOT FULLY TESTED
-				    
-   //  	for(let i = 0; i < 3; i++){
-
-		 //    const pCardKey = $selectedCardsForPlayer[i];
-		 //    const dCardKey = $selectedCardsForDaemon[i];
-
-		 //    if(pCardKey && dCardKey){
-			//     console.log('pCardKey: ' + pCardKey);
-			//     console.log('dCardKey: ' + dCardKey);
-
-			// 	  const dSuit = magisterLudi.parseSuit(dCardKey);
-			// 	  const pSuit = magisterLudi.parseSuit(pCardKey);
-
-			// 	  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
-			// 	  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
-
-			// 	  if(dRank > pRank){
-			// 	  	outcome.push(dCardKey);
-			// 	  }else{
-			// 	  	outcome.push(pCardKey);
-			// 	  }
-			// 	}
-			// }
 		}
 
 		return outcome;

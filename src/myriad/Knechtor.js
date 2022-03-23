@@ -190,6 +190,32 @@ export class Knechtor {
     return [];
   }
 
+  validateEarthSelections(dCardKey, pCardKey){
+
+    const dSuit = this.parseSuit(dCardKey);
+    const pSuit = this.parseSuit(pCardKey);
+
+    const dRank = this.parseRank(dCardKey, dSuit);
+    const pRank = this.parseRank(pCardKey, pSuit);
+
+    return (dSuit === pSuit || dRank === pRank);
+
+  }
+
+  resolveEarthSelections(dCardKey, pCardKey){
+
+    // validate earth selections takes care of
+    // making sure its a valid combination,
+    // so we just return the pairing
+
+    let resolutionKeys = [];
+
+    resolutionKeys.push(pCardKey);
+    resolutionKeys.push(dCardKey);
+
+    return resolutionKeys;
+  }
+
   resolveFireSelections(dCardKey, pCardKey){
 
     let resolutionKeys = [];
