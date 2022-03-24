@@ -20,6 +20,7 @@ const magisterLudi = KnechtController();
 const testingElementalVessels = false;
 
 export const modal = writable(null);
+export const passPhrase = writable('');
 
 export const rulesIncludeElementalShiftsOnAllCollections =
 	writable(false);

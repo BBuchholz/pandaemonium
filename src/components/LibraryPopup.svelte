@@ -1,29 +1,33 @@
 <script>
   
+  import { getContext } from 'svelte';
+
+  const { close } = getContext('simple-modal');
+
   import { getNotificationsContext } from 'svelte-notifications';
   const { addNotification } = getNotificationsContext();
 
-  import { earthCollection, selectedEarthSign, moistureIndex, heatIndex } from '../stores.js';
+  import { earthCollection, selectedEarthSign, moistureIndex, heatIndex, passPhrase } from '../stores.js';
   import { keysTaurus, keysVirgo, keysCapricorn } from '../constants.js';
   import EarthDecanVessel from './EarthDecanVessel.svelte';
 
-  function redeemTaurus() {
+  // function redeemTaurus() {
 
-    $earthCollection = $earthCollection.filter(cardKey => !keysTaurus.includes(cardKey)); 
-    $selectedEarthSign = '';
-  }
+  //   $earthCollection = $earthCollection.filter(cardKey => !keysTaurus.includes(cardKey)); 
+  //   $selectedEarthSign = '';
+  // }
 
-  function redeemVirgo() {
+  // function redeemVirgo() {
 
-    $earthCollection = $earthCollection.filter(cardKey => !keysVirgo.includes(cardKey)); 
-    $selectedEarthSign = '';
-  }
+  //   $earthCollection = $earthCollection.filter(cardKey => !keysVirgo.includes(cardKey)); 
+  //   $selectedEarthSign = '';
+  // }
 
-  function redeemCapricorn() {
+  // function redeemCapricorn() {
 
-    $earthCollection = $earthCollection.filter(cardKey => !keysCapricorn.includes(cardKey)); 
-    $selectedEarthSign = '';
-  }
+  //   $earthCollection = $earthCollection.filter(cardKey => !keysCapricorn.includes(cardKey)); 
+  //   $selectedEarthSign = '';
+  // }
 
   function redeemFire(){
     $heatIndex = $heatIndex + 9;
@@ -105,6 +109,11 @@
     });
   }
 
+  function handleDaedalusLabClick(){
+    $passPhrase = 'daedalus';
+    close();
+  }
+
 </script>
 
 <div class="planar-buttons">
@@ -116,94 +125,19 @@
     <button on:click={saveGame} >Save Game</button>
     <button on:click={loadGame} >Load Game</button>
 
-    <a href={generateDaedalusLabUrl()} target="_blank">Daedalus Lab</a>
 
     <p>This is an open source project based on another under GPL licensing, and subject to those conditions, contact me through the github site, hosted at <a href='https://github.com/BBuchholz/pandaemonium'>github.com/BBuchholz/pandaemonium</a>, for details </p>
   
 </div>
-<div class="elemental-vessel">
-  <div class="elemental-vessel-label">Library</div>
-  <div class="zodiac-vessel">
-    
-    {#each keysVirgo as cardKey, i}
+<div class='daedalus-lab'>
 
-      <EarthDecanVessel {cardKey}/>
-
-    {/each}
-
-    <div class="zodiac-vessel-label">
-
-      <button on:click={() => $selectedEarthSign = 'Virgo' }>
-      ♍    
-      </button>
-    
-    </div>
-
-  </div>
-
-  <div class="zodiac-vessel">
-
-    {#each keysTaurus as cardKey, i}
-
-      <EarthDecanVessel {cardKey}/>
-
-    {/each}
-
-    <div class="zodiac-vessel-label">
-
-      <button on:click={() => $selectedEarthSign = 'Taurus' }>
-      ♉    
-      </button>
-    
-    </div>
-  
-  </div>
-
-  <div class="zodiac-vessel">
-
-    {#each keysCapricorn as cardKey, i}
-
-      <EarthDecanVessel {cardKey}/>
-
-    {/each}
-
-    <div class="zodiac-vessel-label">
-
-      <button on:click={() => $selectedEarthSign = 'Capricorn' }>
-      ♑    
-      </button>
-    
-    </div>
-
-  </div>
-
-  {#if $selectedEarthSign === 'Taurus'}
-  
-    <button on:click={redeemTaurus} >Redeem Taurus</button>
-  
-  {:else if $selectedEarthSign === 'Capricorn'}
-  
-    <button on:click={redeemCapricorn} >Redeem Capricorn</button>
-  
-  {:else if $selectedEarthSign === 'Virgo'}
-
-    <button on:click={redeemVirgo} >Redeem Virgo</button>
-  
-  {/if}
-
+    <a href="#daedalusLab" on:click={handleDaedalusLabClick}>Daedalus Lab</a>  
 </div>
 
 <style>
 
-  .elemental-vessel {
-    background-color: '#ffffff';
-  }
-  
-  .zodiac-vessel {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-  }
+.daedalus-lab {
+  border: solid;
+}
 
 </style>

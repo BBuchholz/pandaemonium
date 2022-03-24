@@ -1,20 +1,29 @@
 <script>
  
-  const testingDaedalus = false;
+  // const testingDaedalus = true;
 
   import Modal from 'svelte-simple-modal';
   import Notifications from 'svelte-notifications';
 
-  import { modal } from './stores.js';
+  import { modal, passPhrase } from './stores.js';
 
   import MyriadNotification from './MyriadNotification.svelte';
 
   import GameBoard from './components/GameBoard.svelte';
   import DaedalusLab from './components/DaedalusLab.svelte';
 
-  const urlParams = new URLSearchParams(window.location.search);
-  const hasPassPhrase = urlParams.has('passPhrase');
-  const passPhrase = hasPassPhrase ? urlParams.get('passPhrase') : "BASELINE";
+  initializePassphrase();
+
+  function initializePassphrase(){
+
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    if(urlParams.has('passPhrase')){
+
+      $passPhrase = urlParams.get('passPhrase');
+      console.log('passPhrase found: ' + $passPhrase);
+    }
+  }
 
 </script>
 
@@ -25,9 +34,9 @@
     
     <main>
 
-      {#if testingDaedalus || hasPassPhrase}
+      {#if $passPhrase === 'daedalus'}
 
-        <DaedalusLab {passPhrase}/>
+        <DaedalusLab {$passPhrase}/>
 
       {:else}
 

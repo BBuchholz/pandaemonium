@@ -1,5 +1,6 @@
 <script>
   
+  import { passPhrase } from '../stores.js';
   import { 
 
     selectedCardsForDaemon,
@@ -10,8 +11,6 @@
   import WitchesCradle from './aewonic/WitchesCradle.svelte';
   import Card from './aewonic/ModCard.svelte';
 
-  const passPhraseDefault = '[passPhrase not set]';
-  export let passPhrase = passPhraseDefault;
 
   let labComponents = [
     "WitchesCradle",
@@ -46,7 +45,7 @@
 
 <div class="daedalus-lab">
 
-  {#if passPhrase === passPhraseDefault}
+  {#if !$passPhrase}
 
     <p>pass phrase not set</p>
 
@@ -54,7 +53,8 @@
 
     <div class="utility-panel">
 
-      <p>pass phrase {passPhrase} found!</p>
+      <p>TODO: replace this with a notification</p>
+      <p>pass phrase {$passPhrase} found!</p>
 
       <select 
         bind:value={selectedComponent}
