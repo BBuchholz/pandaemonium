@@ -1,6 +1,6 @@
 <script>
  
-  // const testingDaedalus = true;
+  const devMode = false;
 
   import Modal from 'svelte-simple-modal';
   import Notifications from 'svelte-notifications';
@@ -12,16 +12,24 @@
   import GameBoard from './components/GameBoard.svelte';
   import DaedalusLab from './components/DaedalusLab.svelte';
 
-  initializePassphrase();
+  import BoardAC from './BoardAC.svelte'; 
 
-  function initializePassphrase(){
+  $: console.log('passPhrase found: ' + $passPhrase);
+
+  initialize();
+
+  function initialize(){
 
     const urlParams = new URLSearchParams(window.location.search);
     
     if(urlParams.has('passPhrase')){
 
       $passPhrase = urlParams.get('passPhrase');
-      console.log('passPhrase found: ' + $passPhrase);
+    }
+
+    if(devMode){
+
+      $passPhrase = 'leMat';
     }
   }
 
@@ -37,6 +45,19 @@
       {#if $passPhrase === 'daedalus'}
 
         <DaedalusLab {$passPhrase}/>
+
+      {:else if $passPhrase === 'leAC'}
+
+        <BoardAC />
+
+      {:else if $passPhrase === 'leMat'}
+
+        BoardMat here
+        <!-- <BoardMat /> -->
+
+      {:else if $passPhrase === 'leMonde'}
+
+        BoardMonde here
 
       {:else}
 

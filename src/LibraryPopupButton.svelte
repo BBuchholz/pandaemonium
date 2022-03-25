@@ -5,7 +5,7 @@
     waterColCountChanged,
     airColCountChanged,
     fireColCountChanged
-  } from '../stores.js';
+  } from './stores.js';
 
   import { getContext } from 'svelte';
   import LibraryPopup from './LibraryPopup.svelte';

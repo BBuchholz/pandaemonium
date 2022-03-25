@@ -7,9 +7,9 @@
   import { getNotificationsContext } from 'svelte-notifications';
   const { addNotification } = getNotificationsContext();
 
-  import { earthCollection, selectedEarthSign, moistureIndex, heatIndex, passPhrase } from '../stores.js';
-  import { keysTaurus, keysVirgo, keysCapricorn } from '../constants.js';
-  import EarthDecanVessel from './EarthDecanVessel.svelte';
+  import { earthCollection, selectedEarthSign, moistureIndex, heatIndex, passPhrase } from './stores.js';
+  import { keysTaurus, keysVirgo, keysCapricorn } from './constants.js';
+  // import EarthDecanVessel from './EarthDecanVessel.svelte';
 
   // function redeemTaurus() {
 
@@ -114,6 +114,20 @@
     close();
   }
 
+  function handleBoardACClick(){
+    $passPhrase = 'leAC';
+    close();
+  }
+
+  function handleBoardMatClick(){
+    $passPhrase = 'leMat';
+    close();
+  }
+
+  function handleBoardMondeClick(){
+    $passPhrase = 'leMonde';
+    close();
+  }
 </script>
 
 <div class="planar-buttons">
@@ -130,8 +144,40 @@
   
 </div>
 <div class='daedalus-lab'>
-
-    <a href="#daedalusLab" on:click={handleDaedalusLabClick}>Daedalus Lab</a>  
+  <ul>
+    <li>
+      <a 
+        href="#DaedalusLab"
+        on:click={handleDaedalusLabClick}
+      > 
+        Daedalus Lab 
+      </a>
+    </li>
+    <li>
+      <a 
+        href="#boardAC"
+        on:click={handleBoardACClick}
+      > 
+        Board AC 
+      </a>
+    </li>
+    <li>
+      <a 
+        href="#boardMat"
+        on:click={handleBoardMatClick}
+      > 
+        Board Mat 
+      </a>
+    </li>
+    <li>
+      <a 
+        href="#boardMonde"
+        on:click={handleBoardMondeClick}
+      > 
+        Board Monde 
+      </a>
+    </li>
+  </ul>
 </div>
 
 <style>
