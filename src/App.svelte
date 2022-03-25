@@ -1,6 +1,6 @@
 <script>
  
-  const devMode = false;
+  const devMode = true;
 
   import Modal from 'svelte-simple-modal';
   import Notifications from 'svelte-notifications';
@@ -14,7 +14,8 @@
 
   import BoardAC from './BoardAC.svelte';
   import BoardMat from './BoardMat.svelte'; 
-
+  import BoardMonde from './BoardMonde.svelte'; 
+ 
   $: console.log('passPhrase found: ' + $passPhrase);
 
   initialize();
@@ -30,7 +31,7 @@
 
     if(devMode){
 
-      $passPhrase = 'leMat';
+      $passPhrase = 'leMonde';
     }
   }
 
@@ -57,7 +58,7 @@
 
       {:else if $passPhrase === 'leMonde'}
 
-        BoardMonde here
+        <BoardMonde />
 
       {:else}
 
