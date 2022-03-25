@@ -1,6 +1,6 @@
 <script>
  
-  const devMode = true;
+  const devMode = false;
 
   import Modal from 'svelte-simple-modal';
   import Notifications from 'svelte-notifications';
