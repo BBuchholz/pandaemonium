@@ -12,7 +12,8 @@
   import GameBoard from './components/GameBoard.svelte';
   import DaedalusLab from './components/DaedalusLab.svelte';
 
-  import BoardAC from './BoardAC.svelte'; 
+  import BoardAC from './BoardAC.svelte';
+  import BoardMat from './BoardMat.svelte'; 
 
   $: console.log('passPhrase found: ' + $passPhrase);
 
@@ -52,8 +53,7 @@
 
       {:else if $passPhrase === 'leMat'}
 
-        BoardMat here
-        <!-- <BoardMat /> -->
+        <BoardMat />
 
       {:else if $passPhrase === 'leMonde'}
 
