@@ -1,6 +1,6 @@
 <script>
   
-  import { waterCollection, collectedRecentlyWater } from '../stores.js';
+  import { waterCollection, collectedRecentlyWater } from './stores.js';
 
   import KnechtController from '../myriad/KnechtController.js';
   const magisterLudi = KnechtController();

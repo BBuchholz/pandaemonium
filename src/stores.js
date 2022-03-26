@@ -25,6 +25,8 @@ export const passPhrase = writable('');
 export const rulesIncludeElementalShiftsOnAllCollections =
 	writable(false);
 
+export const devMode = writable(false);
+
 export const selectedCardsForPlayer = writable([]);
 export const selectedCardsForDaemon = writable([]);
 

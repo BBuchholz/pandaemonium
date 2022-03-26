@@ -5,10 +5,18 @@
 
   import Card from './boardMat/Card.svelte';
   import WaterVessel from './vessels/WaterVessel.svelte';
+  import AirVessel from './vessels/AirVessel.svelte';
+  import EarthVessel from './vessels/EarthVessel.svelte';
+  import FireVessel from './vessels/FireVessel.svelte';
   
   import { 
     passPhrase,
-    deck 
+    deck,
+    devMode,
+    waterCollection,
+    airCollection,
+    earthCollection,
+    fireCollection
   } from './stores.js';
 
   import { 
@@ -29,6 +37,16 @@
       text: 'Pass Phrase Found',
       type: 'error',
       description: 'pass phrase: ' + $passPhrase,
+      removeAfter: 10000,
+    });
+  } 
+
+  function notifyDevMode(){
+    addNotification({
+      position: 'top-right',
+      text: 'Dev Mode Detected',
+      type: 'error',
+      description: 'Check console for output logs',
       removeAfter: 10000,
     });
   } 
@@ -82,6 +100,25 @@
 
     if($passPhrase === 'leMonde'){
       notifyPassPhraseFound();
+
+      if(!$devMode){
+        $devMode = true;
+      }
+    }
+
+    if($devMode){
+
+      notifyDevMode();
+
+      $waterCollection = ['1C', '2C', '3C', '4C'];
+      $airCollection = ['1S', '2S', '3S', '4S'];
+      $earthCollection = ['1D', '2D', '3D', '4D'];
+      $fireCollection = ['1W', '2W', '3W', '4W'];
+
+      console.log('waterCollection: ' + $waterCollection);
+      console.log('airCollection: ' + $airCollection);
+      console.log('earthCollection: ' + $earthCollection);
+      console.log('fireCollection: ' + $fireCollection);
     }
   }
 
@@ -91,18 +128,18 @@
 
   <div class="game-board">
 
-    <div class="top-vessels">
+    <div class="vessels top">
       <WaterVessel />
-      <p>Air Goes Here</p>
+      <AirVessel />
     </div>
 
     <div class="aewonic-cross">
       <p>Aewonic Cross Goes Here</p>
     </div>
 
-    <div class="bottom-vessels">
-      <p>Earth Goes Here</p>
-      <p>Fire Goes Here</p>
+    <div class="vessels bottom">
+      <EarthVessel />
+      <FireVessel />
     </div>
 
   </div> 
@@ -112,18 +149,37 @@
 
 .game-board {
   height: 100%;
+  min-height: 100%;
   width: 100%;
   display: flex;
   flex-flow: column;
   align-items: center;
 }
 
-.top-vessels {
+.aewonic-cross {
+  flex: auto;
+  overflow-y: scroll;
+}
+
+.vessels {
 
   display: flex;
+  flex: none;
+  width: 100%;
+  margin: 10px;
   flex-flow: row;
   justify-content: space-around;
 
+}
+
+.top {
+  position: absolute;
+  top: 0;
+}
+
+.bottom {
+  position: absolute;
+  bottom: 0;
 }
 
 </style>

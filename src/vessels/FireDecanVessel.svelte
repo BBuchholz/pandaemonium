@@ -1,6 +1,6 @@
 <script>
   
-  import { fireCollection, collectedRecentlyFire } from '../stores.js';
+  import { fireCollection, collectedRecentlyFire } from './stores.js';
 
   import KnechtController from '../myriad/KnechtController.js';
   const magisterLudi = KnechtController();

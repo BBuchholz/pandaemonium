@@ -1,9 +1,12 @@
 <script>
   
-  import { waterCollection, collectedScorpio } from '../stores.js';
+  import { 
+    waterCollection, 
+    collectedScorpio 
+  } from './stores.js';
   import { keysScorpio } from '../constants.js';
   import WaterDecanVessel from './WaterDecanVessel.svelte';
-
+ 
   function redeemScorpio() {
 
     $waterCollection = $waterCollection.filter(cardKey => !keysScorpio.includes(cardKey)); 

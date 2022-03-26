@@ -9,7 +9,7 @@
     collectedWater,
     heatIndex,
     moistureIndex 
-  } from './vessels-stores.js';
+  } from './stores.js';
  
   import { 
     keysCancer, 

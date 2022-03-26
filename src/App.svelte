@@ -1,11 +1,20 @@
 <script>
- 
-  const devMode = false;
 
   import Modal from 'svelte-simple-modal';
   import Notifications from 'svelte-notifications';
 
-  import { modal, passPhrase } from './stores.js';
+  import { 
+    modal, 
+    passPhrase,
+    devMode
+  } from './stores.js';
+
+  import {
+    waterCollection,
+    airCollection,
+    earthCollection,
+    fireCollection,
+  } from './vessels/stores.js';
 
   import MyriadNotification from './MyriadNotification.svelte';
 
@@ -22,6 +31,8 @@
 
   function initialize(){
 
+    $devMode = false;
+
     const urlParams = new URLSearchParams(window.location.search);
     
     if(urlParams.has('passPhrase')){
@@ -29,7 +40,7 @@
       $passPhrase = urlParams.get('passPhrase');
     }
 
-    if(devMode){
+    if($devMode){
 
       $passPhrase = 'leMonde';
     }

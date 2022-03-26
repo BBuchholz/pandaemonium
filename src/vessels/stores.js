@@ -17,13 +17,6 @@ import {
 } from '../constants.js'; 
 
 const magisterLudi = KnechtController();
-const testingElementalVessels = true;
-
-if(testingElementalVessels){
-
-	console.log('testingElementalVessels set to ' + testingElementalVessels);
-
-}
 
 export const modal = writable(null);
 export const passPhrase = writable('');
@@ -116,7 +109,7 @@ export const collectedFire = derived(
 	[collectedAries, collectedLeo, collectedSagittarius],
 	([$collectedAries, $collectedLeo, $collectedSagittarius]) => {
 
-		return testingElementalVessels || $collectedAries && $collectedLeo && $collectedSagittarius;
+		return $collectedAries && $collectedLeo && $collectedSagittarius;
 	}
 );
 
@@ -181,7 +174,7 @@ export const collectedEarth = derived(
 	[collectedVirgo, collectedTaurus, collectedCapricorn],
 	([$collectedVirgo, $collectedTaurus, $collectedCapricorn]) => {
 		
-		return testingElementalVessels || $collectedVirgo && $collectedTaurus && $collectedCapricorn;
+		return $collectedVirgo && $collectedTaurus && $collectedCapricorn;
 	}
 );
 
@@ -246,7 +239,7 @@ export const collectedWater = derived(
 	[collectedScorpio, collectedCancer, collectedPisces],
 	([$collectedScorpio, $collectedCancer, $collectedPisces]) => {
 		
-		return testingElementalVessels || $collectedScorpio && $collectedCancer && $collectedPisces;
+		return $collectedScorpio && $collectedCancer && $collectedPisces;
 	}
 );
 
@@ -311,7 +304,7 @@ export const collectedAir = derived(
 	[collectedLibra, collectedGemini, collectedAquarius],
 	([$collectedLibra, $collectedGemini, $collectedAquarius]) => {
 		
-		return testingElementalVessels || $collectedLibra && $collectedGemini && $collectedAquarius;
+		return $collectedLibra && $collectedGemini && $collectedAquarius;
 	}
 );
 

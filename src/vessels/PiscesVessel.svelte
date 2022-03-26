@@ -1,6 +1,9 @@
 <script>
   
-  import { waterCollection, collectedPisces } from '../stores.js';
+  import { 
+    waterCollection, 
+    collectedPisces 
+  } from './stores.js';
   import { keysPisces } from '../constants.js';
   import WaterDecanVessel from './WaterDecanVessel.svelte';
 
