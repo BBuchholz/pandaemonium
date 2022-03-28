@@ -16,29 +16,28 @@
 
 <div class="elemental-vessel">
   
-  <div class="zodiac-vessel">
+  {#if $collectedLibra}
+  
+    <div class="sign-vessel">
 
-    {#if $collectedLibra}
-    
-      <div class="zodiac-vessel-label">
-
-        <button on:click={redeemLibra}>
+      <a 
+        href="#collectedLibra"
+        on:click={redeemLibra}
+      >
         ♎    
-        </button>
-      
-      </div>
+      </a>
+    
+    </div>
 
-    {:else}
+  {:else}
 
-      {#each keysLibra as cardKey, i}
+    {#each keysLibra as cardKey, i}
 
-        <AirDecanVessel {cardKey} />
+      <AirDecanVessel {cardKey} />
 
-      {/each}
+    {/each}
 
-    {/if}
-
-  </div>
+  {/if}
 
 </div>
 
@@ -46,13 +45,15 @@
 
   .elemental-vessel {
     background-color: '#ffffff';
+    display: flex;
+    flex-flow: row;
   }
   
-  .zodiac-vessel {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
+  .sign-vessel {
+    margin: 5px;
+    padding: 5px;
+    border-style: solid;
+    border-radius: 10px;
   }
 
   .decan-vessel {

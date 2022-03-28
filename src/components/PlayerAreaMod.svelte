@@ -57,6 +57,8 @@
     
   {#if $beforeGame}
 
+    <LibraryPopupButton />
+
     <button 
       class="start-game"
       class:beforeGame

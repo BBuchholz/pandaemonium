@@ -16,36 +16,28 @@
 
 <div class="elemental-vessel">
   
-  <div class="zodiac-vessel">
+  {#if $collectedPisces}
+  
+    <div class="sign-vessel">
 
-    {#if $collectedPisces}
+      <a 
+        href="#collectedPisces"
+        on:click={redeemPisces}
+      >
+        ♓
+      </a>
     
-      <div class="zodiac-vessel">
-<!-- 
-        <button on:click={redeemPisces}>
-        ♓    
-        </button> -->
+    </div>
 
-        <a 
-          href="#collectedPisces"
-          on:click={redeemPisces}
-        >
-          ♓
-        </a>
-      
-      </div>
+  {:else}
 
-    {:else}
+    {#each keysPisces as cardKey, i}
 
-      {#each keysPisces as cardKey, i}
+      <WaterDecanVessel {cardKey} />
 
-        <WaterDecanVessel {cardKey} />
+    {/each}
 
-      {/each}
-
-    {/if}
-
-  </div>
+  {/if}
 
 </div>
 
@@ -53,17 +45,15 @@
 
   .elemental-vessel {
     background-color: '#ffffff';
+    display: flex;
+    flex-flow: row;
   }
   
-  .zodiac-vessel {
-    margin: 1px;
-    padding: 1px;
+  .sign-vessel {
+    margin: 5px;
+    padding: 5px;
     border-style: solid;
     border-radius: 10px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
   }
 
   .decan-vessel {
@@ -77,25 +67,5 @@
     background-color: #000000;
     color: #ffffff;
   }
-
-  
-  
-button {
-  display: block;
-  font-size: 15px;
-  line-height: 15px;
-  padding: 3px;
-  box-sizing: border-box;
-  font-weight: 700;
-  border: solid 3px white;
-  color: white;
-  background: transparent;
-  border-radius: 30px;
-  transition: all ease-out .2s;
-  cursor: pointer;
-  outline: none;
-  animation: buttonPulse .2s infinite ease-in-out;
-}
-
 
 </style>

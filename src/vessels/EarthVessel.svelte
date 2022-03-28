@@ -1,6 +1,5 @@
 <script>
   
-  import EarthDecanVessel from './EarthDecanVessel.svelte';
   import VirgoVessel from './VirgoVessel.svelte';
   import TaurusVessel from './TaurusVessel.svelte';
   import CapricornVessel from './CapricornVessel.svelte';
@@ -55,7 +54,8 @@
 <style>
 
   .elemental-vessel {
-    background-color: '#ffffff';
+    display: flex;
+    flex-flow: row;
   }
 
   button {

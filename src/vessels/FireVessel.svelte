@@ -8,15 +8,19 @@
     fireCollection, 
     collectedFire,
     heatIndex,
-    moistureIndex } from '../stores.js';
-  import { keysLeo, keysAries, keysSagittarius, keysFire } from '../constants.js';
+    moistureIndex 
+  } from './stores.js';
+
+  import { 
+    keysLeo, 
+    keysAries, 
+    keysSagittarius, 
+    keysFire 
+  } from '../constants.js';
   
   function redeemFire() {
 
     $fireCollection = $fireCollection.filter(cardKey => !keysFire.includes(cardKey)); 
-
-    $heatIndex += 9;
-    $moistureIndex += -9;
   }
 
 </script>
@@ -48,7 +52,8 @@
 <style>
 
   .elemental-vessel {
-    background-color: '#ffffff';
+    display: flex;
+    flex-flow: row;
   }
 
   button {

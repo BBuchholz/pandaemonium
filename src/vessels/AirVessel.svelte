@@ -1,4 +1,3 @@
-
 <script>
   
   import GeminiVessel from './GeminiVessel.svelte';

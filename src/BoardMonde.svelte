@@ -38,7 +38,7 @@
       text: 'Pass Phrase Found',
       type: 'error',
       description: 'pass phrase: ' + $passPhrase,
-      removeAfter: 10000,
+      removeAfter: 1000,
     });
   } 
 
@@ -48,7 +48,7 @@
       text: 'Dev Mode Detected',
       type: 'error',
       description: 'Check console for output logs',
-      removeAfter: 10000,
+      removeAfter: 3000,
     });
   } 
 
@@ -185,10 +185,9 @@
 .vessels {
 
   display: flex;
-  flex: none;
   width: 100%;
   margin: 10px;
-  flex-flow: row;
+  flex-flow: row wrap;
   justify-content: space-around;
 
 }
