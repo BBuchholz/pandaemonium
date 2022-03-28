@@ -20,11 +20,18 @@
 
     {#if $collectedPisces}
     
-      <div class="zodiac-vessel-label">
-
+      <div class="zodiac-vessel">
+<!-- 
         <button on:click={redeemPisces}>
         ♓    
-        </button>
+        </button> -->
+
+        <a 
+          href="#collectedPisces"
+          on:click={redeemPisces}
+        >
+          ♓
+        </a>
       
       </div>
 
@@ -49,6 +56,10 @@
   }
   
   .zodiac-vessel {
+    margin: 1px;
+    padding: 1px;
+    border-style: solid;
+    border-radius: 10px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -70,9 +81,10 @@
   
   
 button {
+  display: block;
   font-size: 15px;
   line-height: 15px;
-  padding: 8px 22px 9px 22px;
+  padding: 3px;
   box-sizing: border-box;
   font-weight: 700;
   border: solid 3px white;

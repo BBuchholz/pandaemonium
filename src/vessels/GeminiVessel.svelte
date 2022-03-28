@@ -1,6 +1,9 @@
 <script>
   
-  import { airCollection, collectedGemini } from '../stores.js';
+  import { 
+    airCollection, 
+    collectedGemini 
+  } from './stores.js';
   import { keysGemini } from '../constants.js';
   import AirDecanVessel from './AirDecanVessel.svelte';
 

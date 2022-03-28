@@ -1,6 +1,9 @@
 <script>
   
-  import { airCollection, collectedLibra } from '../stores.js';
+  import { 
+    airCollection, 
+    collectedLibra 
+  } from './stores.js';
   import { keysLibra } from '../constants.js';
   import AirDecanVessel from './AirDecanVessel.svelte';
 

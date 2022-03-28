@@ -8,9 +8,7 @@
   import { 
     airCollection, 
     collectedAir,
-    heatIndex,
-    moistureIndex
-  } from '../stores.js';
+  } from './stores.js';
 
   import { 
     keysGemini, 
@@ -27,10 +25,6 @@
                           cardKey => 
                           !keysAir.includes(cardKey)
                         ); 
-    
-    // uncomment when implemented
-    $heatIndex += 9;
-    $moistureIndex += 9;
   }
 
 </script>
@@ -62,7 +56,8 @@
 <style>
 
   .elemental-vessel {
-    background-color: '#ffffff';
+    display: flex;
+    flex-flow: row;
   }
 
   button {

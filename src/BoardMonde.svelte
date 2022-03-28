@@ -11,20 +11,21 @@
   
   import { 
     passPhrase,
-    deck,
     devMode,
+  } from './stores.js';
+
+  import {
     waterCollection,
     airCollection,
     earthCollection,
     fireCollection
-  } from './stores.js';
+  } from './vessels/stores.js'
 
   import { 
-
+    deck,
     selectedCardsForDaemon,
     selectionIsSingular,
     singleSteadCardKey
-
   } from './boardMat/boardMat-stores.js';
 
 
@@ -96,6 +97,8 @@
 
   }
 
+  initialize();
+
   function initialize(){
 
     if($passPhrase === 'leMonde'){
@@ -110,10 +113,30 @@
 
       notifyDevMode();
 
-      $waterCollection = ['1C', '2C', '3C', '4C'];
-      $airCollection = ['1S', '2S', '3S', '4S'];
-      $earthCollection = ['1D', '2D', '3D', '4D'];
-      $fireCollection = ['1W', '2W', '3W', '4W'];
+      $waterCollection = [
+        '1C', '2C', '3C', 
+        '4C', '5C', //'6C',
+        '7C', '8C', '9C'
+      ];
+
+      $airCollection = [
+        '1S', '2S', '3S', 
+        '4S', '5S', //'6S',
+        '7S', '8S', '9S'
+      ];
+
+      $earthCollection = [
+        '1D', '2D', '3D', 
+        '4D', '5D', //'6D',
+        '7D', '8D', '9D'
+      ];
+
+      $fireCollection = [
+        '1W', '2W', '3W', 
+        '4W', '5W', //'6W',
+        '7W', '8W', '9W'
+      ];
+
 
       console.log('waterCollection: ' + $waterCollection);
       console.log('airCollection: ' + $airCollection);
@@ -121,8 +144,6 @@
       console.log('fireCollection: ' + $fireCollection);
     }
   }
-
-  initialize();
 
 </script>
 

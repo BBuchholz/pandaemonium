@@ -8,9 +8,7 @@
   import { 
     earthCollection, 
     collectedEarth,
-    heatIndex,
-    moistureIndex
-  } from '../stores.js';
+  } from './stores.js';
 
   import { 
     keysVirgo, 
@@ -26,9 +24,6 @@
                           cardKey => 
                           !keysEarth.includes(cardKey)
                         ); 
-
-    $heatIndex += -9;
-    $moistureIndex += -9;
   }
 
 </script>

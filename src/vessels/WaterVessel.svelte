@@ -7,8 +7,6 @@
   import { 
     waterCollection, 
     collectedWater,
-    heatIndex,
-    moistureIndex 
   } from './stores.js';
  
   import { 
@@ -26,10 +24,6 @@
                           cardKey => 
                           !keysWater.includes(cardKey)
                         ); 
-
-    // uncomment when implemented
-    $heatIndex += -9;
-    $moistureIndex += 9;
   }
 
 </script>
@@ -61,7 +55,8 @@
 <style>
 
   .elemental-vessel {
-    background-color: '#ffffff';
+    flex-direction: row;
+    display: flex;
   }
 
   button {

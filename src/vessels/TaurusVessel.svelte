@@ -1,6 +1,9 @@
 <script>
   
-  import { earthCollection, collectedTaurus } from '../stores.js';
+  import { 
+    earthCollection, 
+    collectedTaurus 
+  } from './stores.js';
   import { keysTaurus } from '../constants.js';
   import EarthDecanVessel from './EarthDecanVessel.svelte';
 
