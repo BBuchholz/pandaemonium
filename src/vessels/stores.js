@@ -27,14 +27,26 @@ export const rulesIncludeElementalShiftsOnAllCollections =
 export const selectedCardsForPlayer = writable([]);
 export const selectedCardsForDaemon = writable([]);
 
+
+export const selectedCards = derived(
+	[selectedCardsForDaemon, selectedCardsForPlayer],
+	([$selectedCardsForDaemon, $selectedCardsForPlayer]) => {
+		return [...$selectedCardsForDaemon, ...$selectedCardsForPlayer];
+	}
+);
+
 export const selectedEarthSign = writable('');
 export const selectedWaterSign = writable('');
 export const selectedAirSign = writable('');
 export const selectedFireSign = writable('');
 
+export const selectedQuadrant = writable('');
+
 export const playerCards = writable([]);
 export const daemonCards = writable([]);
 export const deck = writable([]);
+
+export const aewonicCross = writable([]);
 
 export const airColCountChanged = writable(false);
 export const earthColCountChanged = writable(false);
@@ -308,6 +320,15 @@ export const collectedAir = derived(
 	}
 );
 
+
+export const collectedSpirit = derived(
+	[collectedWater, collectedAir, collectedEarth, collectedFire],
+	([$collectedWater, $collectedAir, $collectedEarth, $collectedFire]) => {
+		
+		return $collectedWater && $collectedAir && $collectedEarth && $collectedFire;
+	}
+);
+
 export const currentDeckCount = derived(
 	[deck, playerCards, daemonCards],
 	([$deck, $playerCards, $daemonCards]) => {
@@ -414,6 +435,14 @@ export const selectionIsWet = derived(
 	moistureIndex,
 	($moistureIndex) => {
 		return $moistureIndex > 0;
+	}
+);
+
+
+export const selectionIsSingular = derived(
+	moistureIndex,
+	($moistureIndex) => {
+		return $moistureIndex < 1;
 	}
 );
 
@@ -957,5 +986,25 @@ export const currentStateText = derived(
 ` +
 					 "Earth Collection: [" + $earthCollection + `] 
 `;
+	}
+);
+
+
+export const buttonCounts = derived(
+	[currentDeckCount,
+	 selectedQuadrant],
+	([$currentDeckCount,
+		$selectedQuadrant]) => {
+	
+		const counts = '(' + $currentDeckCount + ')';
+
+		// let counts = "DC:" + $currentDeckCount;
+
+		// if($selectedQuadrant){
+
+		// 	counts += " Q:" + $selectedQuadrant;	
+		// }
+
+		return counts;
 	}
 );

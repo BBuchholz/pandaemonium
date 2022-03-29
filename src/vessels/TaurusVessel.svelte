@@ -16,29 +16,28 @@
 
 <div class="elemental-vessel">
   
-  <div class="zodiac-vessel">
+  {#if $collectedTaurus}
+  
+    <div class="sign-vessel">
 
-    {#if $collectedTaurus}
-    
-      <div class="zodiac-vessel-label">
-
-        <button on:click={redeemTaurus}>
+      <a 
+        href="#collectedTaurus"
+        on:click={redeemTaurus}
+      >
         ♉    
-        </button>
-      
-      </div>
+      </a>
+    
+    </div>
 
-    {:else}
+  {:else}
 
-      {#each keysTaurus as cardKey, i}
+    {#each keysTaurus as cardKey, i}
 
-        <EarthDecanVessel {cardKey} />
+      <EarthDecanVessel {cardKey} />
 
-      {/each}
+    {/each}
 
-    {/if}
-
-  </div>
+  {/if}
 
 </div>
 
@@ -46,29 +45,15 @@
 
   .elemental-vessel {
     background-color: '#ffffff';
+    display: flex;
+    flex-flow: row;
   }
   
-  .zodiac-vessel {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-  }
-    
-  button {
-    font-size: 15px;
-    line-height: 15px;
-    padding: 8px 22px 9px 22px;
-    box-sizing: border-box;
-    font-weight: 700;
-    border: solid 3px white;
-    color: white;
-    background: transparent;
-    border-radius: 30px;
-    transition: all ease-out .2s;
-    cursor: pointer;
-    outline: none;
-    animation: buttonPulse .2s infinite ease-in-out;
+  .sign-vessel {
+    margin: 5px;
+    padding: 5px;
+    border-style: solid;
+    border-radius: 10px;
   }
 
 </style>

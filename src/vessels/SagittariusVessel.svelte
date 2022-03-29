@@ -1,6 +1,9 @@
 <script>
   
-  import { fireCollection, collectedSagittarius } from '../stores.js';
+  import { 
+    fireCollection, 
+    collectedSagittarius 
+  } from './stores.js';
   import { keysSagittarius } from '../constants.js';
   import FireDecanVessel from './FireDecanVessel.svelte';
 
@@ -13,29 +16,28 @@
 
 <div class="elemental-vessel">
   
-  <div class="zodiac-vessel">
+  {#if $collectedSagittarius}
+  
+    <div class="sign-vessel">
 
-    {#if $collectedSagittarius}
-    
-      <div class="zodiac-vessel-label">
-
-        <button on:click={redeemSagittarius}>
+      <a 
+        href="#collectedSagittarius"
+        on:click={redeemSagittarius}
+      >
         ♐    
-        </button>
-      
-      </div>
+      </a>
+    
+    </div>
 
-    {:else}
+  {:else}
 
-      {#each keysSagittarius as cardKey, i}
+    {#each keysSagittarius as cardKey, i}
 
-        <FireDecanVessel {cardKey} />
+      <FireDecanVessel {cardKey} />
 
-      {/each}
+    {/each}
 
-    {/if}
-
-  </div>
+  {/if}
 
 </div>
 
@@ -43,43 +45,15 @@
 
   .elemental-vessel {
     background-color: '#ffffff';
+    display: flex;
+    flex-flow: row;
   }
   
-  .zodiac-vessel {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-  }
-
-  .decan-vessel {
+  .sign-vessel {
     margin: 5px;
     padding: 5px;
-    border-style: double;
+    border-style: solid;
     border-radius: 10px;
   }
-
-  .collected {
-    background-color: #000000;
-    color: #ffffff;
-  }
-
-  
-  
-button {
-  font-size: 15px;
-  line-height: 15px;
-  padding: 8px 22px 9px 22px;
-  box-sizing: border-box;
-  font-weight: 700;
-  border: solid 3px white;
-  color: white;
-  background: transparent;
-  border-radius: 30px;
-  transition: all ease-out .2s;
-  cursor: pointer;
-  outline: none;
-  animation: buttonPulse .2s infinite ease-in-out;
-}
 
 </style>

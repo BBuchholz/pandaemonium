@@ -6,9 +6,7 @@
  
   import { 
     fireCollection, 
-    collectedFire,
-    heatIndex,
-    moistureIndex 
+    collectedFire
   } from './stores.js';
 
   import { 
