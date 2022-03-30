@@ -1,5 +1,8 @@
 <script>
 
+  import { createEventDispatcher } from 'svelte';
+  const dispatch = createEventDispatcher();
+  
   import PiscesVessel from './PiscesVessel.svelte';
   import ScorpioVessel from './ScorpioVessel.svelte';
   import CancerVessel from './CancerVessel.svelte';
@@ -7,6 +10,7 @@
   import { 
     waterCollection, 
     collectedWater,
+    selectedQuadrant,
   } from './stores.js';
  
   import { 
@@ -15,15 +19,10 @@
     keysPisces,
     keysWater 
   } from '../constants.js';
-  
-  
 
   function redeemWater() {
 
-    $waterCollection =  $waterCollection.filter(
-                          cardKey => 
-                          !keysWater.includes(cardKey)
-                        ); 
+    dispatch('redeemWater', 'no details');
   }
 
 </script>

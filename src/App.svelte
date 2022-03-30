@@ -9,13 +9,6 @@
     devMode
   } from './stores.js';
 
-  import {
-    waterCollection,
-    airCollection,
-    earthCollection,
-    fireCollection,
-  } from './vessels/stores.js';
-
   import MyriadNotification from './MyriadNotification.svelte';
 
   import GameBoard from './components/GameBoard.svelte';
@@ -24,8 +17,6 @@
   import BoardAC from './BoardAC.svelte';
   import BoardMat from './BoardMat.svelte'; 
   import BoardMonde from './BoardMonde.svelte'; 
- 
-  $: console.log('passPhrase found: ' + $passPhrase);
 
   initialize();
 

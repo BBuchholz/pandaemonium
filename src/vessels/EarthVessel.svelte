@@ -1,4 +1,7 @@
 <script>
+
+  import { createEventDispatcher } from 'svelte';
+  const dispatch = createEventDispatcher();
   
   import VirgoVessel from './VirgoVessel.svelte';
   import TaurusVessel from './TaurusVessel.svelte';
@@ -7,6 +10,7 @@
   import { 
     earthCollection, 
     collectedEarth,
+    selectedQuadrant,
   } from './stores.js';
 
   import { 
@@ -19,10 +23,7 @@
 
   function redeemEarth() {
 
-    $earthCollection =  $earthCollection.filter(
-                          cardKey => 
-                          !keysEarth.includes(cardKey)
-                        ); 
+    dispatch('redeemEarth', 'no details');
   }
 
 </script>

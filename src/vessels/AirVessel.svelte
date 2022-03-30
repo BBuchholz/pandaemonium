@@ -1,5 +1,8 @@
 <script>
   
+  import { createEventDispatcher } from 'svelte';
+  const dispatch = createEventDispatcher();
+  
   import GeminiVessel from './GeminiVessel.svelte';
   import AquariusVessel from './AquariusVessel.svelte';
   import LibraVessel from './LibraVessel.svelte';
@@ -7,6 +10,7 @@
   import { 
     airCollection, 
     collectedAir,
+    selectedQuadrant,
   } from './stores.js';
 
   import { 
@@ -15,15 +19,10 @@
     keysLibra,
     keysAir
   } from '../constants.js';
-  
-  
 
   function redeemAir() {
 
-    $airCollection =  $airCollection.filter(
-                          cardKey => 
-                          !keysAir.includes(cardKey)
-                        ); 
+    dispatch('redeemAir', 'no details');
   }
 
 </script>

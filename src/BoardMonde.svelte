@@ -9,26 +9,30 @@
   import EarthVessel from './vessels/EarthVessel.svelte';
   import FireVessel from './vessels/FireVessel.svelte';
   import AewonicCross from './vessels/AewonicCross.svelte';
+  import ButtonsVessel from './vessels/ButtonsVessel.svelte';
    
   import { 
     passPhrase,
     devMode,
   } from './stores.js';
 
+
+  import { 
+    keysWater, 
+    keysAir, 
+    keysEarth, 
+    keysFire,
+  } from './constants.js';
+  
+
   import {
     waterCollection,
     airCollection,
     earthCollection,
-    fireCollection
+    fireCollection,
+    selectedQuadrant,
+    collectedSpirit,
   } from './vessels/stores.js'
-
-  import { 
-    deck,
-    selectedCardsForDaemon,
-    selectionIsSingular,
-    singleSteadCardKey
-  } from './boardMat/boardMat-stores.js';
-
 
   import { getNotificationsContext } from 'svelte-notifications';
   const { addNotification } = getNotificationsContext();
@@ -63,38 +67,111 @@
     });
   }
 
-  function handleCardClicked(){
+  function redeemSpirit() {
 
-    if($selectedCardsForDaemon.includes($singleSteadCardKey)){
-
-      $selectedCardsForDaemon = $selectedCardsForDaemon.filter(cKey => cKey !== $singleSteadCardKey);
-
-    }else{
-    
-      if($selectionIsSingular) {
-
-        $selectedCardsForDaemon = [$singleSteadCardKey];
-
-      }else{
-        
-        $selectedCardsForDaemon = 
-          [...$selectedCardsForDaemon, $singleSteadCardKey];
-      }
-    }
-
+    $waterCollection = [];
+    $airCollection = [];
+    $earthCollection = [];
+    $fireCollection = [];
   }
 
-  function dealRandomCard(){
+  function redeemWater() {
 
-
-    if($deck.length == 0){
+    if($collectedSpirit){
       
-      notifyDeckInfo('Out of Cards, reshuffling');
-      $deck = magisterLudi.dealTwelveTrees();
-    }
+      redeemSpirit()
 
-    //select one
-    $singleSteadCardKey = $deck.pop();
+    }else{
+
+      $waterCollection =  $waterCollection.filter(
+                            cardKey => 
+                            !keysWater.includes(cardKey)
+                          ); 
+    }
+      
+    $selectedQuadrant = 'Water';
+    
+  }
+
+  function redeemAir() {
+
+    if($collectedSpirit){
+      
+      redeemSpirit()
+
+    }else{
+
+      $airCollection =  $airCollection.filter(
+                            cardKey => 
+                            !keysAir.includes(cardKey)
+                          ); 
+    }
+      
+    $selectedQuadrant = 'Air';
+    
+  }
+
+  function redeemEarth() {
+
+    if($collectedSpirit){
+      
+      redeemSpirit()
+
+    }else{
+
+      $earthCollection =  $earthCollection.filter(
+                            cardKey => 
+                            !keysEarth.includes(cardKey)
+                          ); 
+
+    }
+      
+    $selectedQuadrant = 'Earth';
+    
+  }
+  
+  function redeemFire() {
+
+    if($collectedSpirit){
+      
+      redeemSpirit()
+
+    }else{
+
+      $fireCollection = $fireCollection.filter(
+                          cardKey => 
+                          !keysFire.includes(cardKey)); 
+
+    }
+    
+    $selectedQuadrant = 'Fire';
+  }
+
+  function loadElementalVessels(){
+
+      $waterCollection = [
+        '1C', '2C', '3C', 
+        '4C', '5C', '6C',
+        '7C', '8C', '9C'
+      ];
+
+      $airCollection = [
+        '1S', '2S', '3S', 
+        '4S', '5S', '6S',
+        '7S', '8S', '9S'
+      ];
+
+      $earthCollection = [
+        '1D', '2D', '3D', 
+        '4D', '5D', '6D',
+        '7D', '8D', '9D'
+      ];
+
+      $fireCollection = [
+        '1W', '2W', '3W', 
+        '4W', '5W', '6W',
+        '7W', '8W', '9W'
+      ];
 
   }
 
@@ -110,39 +187,16 @@
       }
     }
 
+    loadElementalVessels();
+
     if($devMode){
 
       notifyDevMode();
 
-      $waterCollection = [
-        '1C', //'2C', '3C', 
-        '4C', //'5C', '6C',
-        '7C', //'8C', '9C'
-      ];
-
-      $airCollection = [
-        '1S', //'2S', '3S', 
-        '4S', //'5S', '6S',
-        '7S', //'8S', '9S'
-      ];
-
-      $earthCollection = [
-        '1D', //'2D', '3D', 
-        '4D', //'5D', '6D',
-        '7D', //'8D', '9D'
-      ];
-
-      $fireCollection = [
-        '1W', //'2W', '3W', 
-        '4W', //'5W', '6W',
-        '7W', //'8W', '9W'
-      ];
-
-
-      console.log('waterCollection: ' + $waterCollection);
-      console.log('airCollection: ' + $airCollection);
-      console.log('earthCollection: ' + $earthCollection);
-      console.log('fireCollection: ' + $fireCollection);
+      // console.log('waterCollection: ' + $waterCollection);
+      // console.log('airCollection: ' + $airCollection);
+      // console.log('earthCollection: ' + $earthCollection);
+      // console.log('fireCollection: ' + $fireCollection);
     }
   }
 
@@ -151,17 +205,21 @@
   <div class="game-board">
 
     <div class="vessels top">
-      <WaterVessel />
-      <AirVessel />
+      <WaterVessel on:redeemWater={redeemWater} />
+      <AirVessel on:redeemAir={redeemAir} />
     </div>
 
     <div class="aewonic-cross">
       <AewonicCross />
     </div>
 
+    <div class="buttons">
+      <ButtonsVessel />
+    </div>
+
     <div class="vessels bottom">
-      <EarthVessel />
-      <FireVessel />
+      <EarthVessel on:redeemEarth={redeemEarth} />
+      <FireVessel on:redeemFire={redeemFire} />
     </div>
 
   </div> 

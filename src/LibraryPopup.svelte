@@ -9,25 +9,6 @@
 
   import { earthCollection, selectedEarthSign, moistureIndex, heatIndex, passPhrase } from './stores.js';
   import { keysTaurus, keysVirgo, keysCapricorn } from './constants.js';
-  // import EarthDecanVessel from './EarthDecanVessel.svelte';
-
-  // function redeemTaurus() {
-
-  //   $earthCollection = $earthCollection.filter(cardKey => !keysTaurus.includes(cardKey)); 
-  //   $selectedEarthSign = '';
-  // }
-
-  // function redeemVirgo() {
-
-  //   $earthCollection = $earthCollection.filter(cardKey => !keysVirgo.includes(cardKey)); 
-  //   $selectedEarthSign = '';
-  // }
-
-  // function redeemCapricorn() {
-
-  //   $earthCollection = $earthCollection.filter(cardKey => !keysCapricorn.includes(cardKey)); 
-  //   $selectedEarthSign = '';
-  // }
 
   function redeemFire(){
     $heatIndex = $heatIndex + 9;
@@ -144,46 +125,57 @@
   
 </div>
 <div class='daedalus-lab'>
-  <ul>
-    <li>
+  
+    <div class="lab-item">
       <a 
         href="#DaedalusLab"
         on:click={handleDaedalusLabClick}
       > 
         Daedalus Lab 
       </a>
-    </li>
-    <li>
+    </div>
+    <div class="lab-item">
       <a 
         href="#boardAC"
         on:click={handleBoardACClick}
       > 
         Board AC 
       </a>
-    </li>
-    <li>
+    </div>
+    <div class="lab-item">
       <a 
         href="#boardMat"
         on:click={handleBoardMatClick}
       > 
         Board Mat 
       </a>
-    </li>
-    <li>
+    </div>
+    <div class="lab-item">
       <a 
         href="#boardMonde"
         on:click={handleBoardMondeClick}
       > 
         Board Monde 
       </a>
-    </li>
-  </ul>
+    </div>
+  
 </div>
 
 <style>
 
 .daedalus-lab {
   border: solid;
+  border-radius: 10px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.lab-item {
+  margin: 10px;
+  padding: 10px;
+  border: thin solid;
+  border-radius: 10px;
 }
 
 </style>

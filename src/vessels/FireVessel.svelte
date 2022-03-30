@@ -1,24 +1,19 @@
 <script>
   
+  import { createEventDispatcher } from 'svelte';
+  const dispatch = createEventDispatcher();
+  
   import SagittariusVessel from './SagittariusVessel.svelte';
   import LeoVessel from './LeoVessel.svelte';
   import AriesVessel from './AriesVessel.svelte';
  
-  import { 
-    fireCollection, 
-    collectedFire
+  import {  
+    collectedFire,
   } from './stores.js';
 
-  import { 
-    keysLeo, 
-    keysAries, 
-    keysSagittarius, 
-    keysFire 
-  } from '../constants.js';
-  
   function redeemFire() {
 
-    $fireCollection = $fireCollection.filter(cardKey => !keysFire.includes(cardKey)); 
+    dispatch('redeemFire', 'no details');
   }
 
 </script>

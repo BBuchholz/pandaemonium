@@ -62,181 +62,181 @@
   }
 
 
-  function resetSelection() {
+  // function resetSelection() {
 
-    // roundFinished = true;
-    $selectedCardsForPlayer = [];
-    $selectedCardsForDaemon = [];
-    $aewonicCross = [];;
-    // console.log('selection reset');
-  }
+  //   // roundFinished = true;
+  //   $selectedCardsForPlayer = [];
+  //   $selectedCardsForDaemon = [];
+  //   $aewonicCross = [];;
+  //   // console.log('selection reset');
+  // }
 
-  function loadDeck(){
+  // function loadDeck(){
 
-    $deck = magisterLudi.dealTwelveTrees();
-  }
+  //   $deck = magisterLudi.dealTwelveTrees();
+  // }
 
 
-  function outOfCards() {
+  // function outOfCards() {
 
-    const toReshuffle = $currentDeckCount + $discardCount;
+  //   const toReshuffle = $currentDeckCount + $discardCount;
 
-    if(toReshuffle > 1) {
+  //   if(toReshuffle > 1) {
    
-      notifyClicked('Deck Info!', 'out of cards, reshuffling ' + toReshuffle + ' cards...');
-      loadDeck();
-      newDeal(); 
+  //     notifyClicked('Deck Info!', 'out of cards, reshuffling ' + toReshuffle + ' cards...');
+  //     loadDeck();
+  //     newDeal(); 
     
-    } else if (toReshuffle === 1) {
+  //   } else if (toReshuffle === 1) {
 
-      notifyClicked('Deck Info!', 'only one card in deck, need to redeem to continue');
-      $turnFinished = true;
+  //     notifyClicked('Deck Info!', 'only one card in deck, need to redeem to continue');
+  //     $turnFinished = true;
 
-    } else {
+  //   } else {
 
-      notifyClicked('Deck Info!', 'all cards collected! you rock!');
-      $beforeGame = true;
+  //     notifyClicked('Deck Info!', 'all cards collected! you rock!');
+  //     $beforeGame = true;
 
-    }
+  //   }
 
-  }
+  // }
 
-  function newDeal(){
+  // function newDeal(){
  
-    // if($currentDeckCount < 6){
+  //   // if($currentDeckCount < 6){
 
-    //   loadDeck();
-    // }
+  //   //   loadDeck();
+  //   // }
 
-    if($deck.length == 0){
+  //   if($deck.length == 0){
 
-      outOfCards();
-      return;
-    }
+  //     outOfCards();
+  //     return;
+  //   }
 
-    $aewonicCross = [];
+  //   $aewonicCross = [];
 
-    const cardsToDeal = 6;
+  //   const cardsToDeal = 6;
 
-    while(cardsToDeal > $deck.length){
-      cardsToDeal -= 2;
-    }
+  //   while(cardsToDeal > $deck.length){
+  //     cardsToDeal -= 2;
+  //   }
 
-    if(cardsToDeal == 0){
+  //   if(cardsToDeal == 0){
 
-      outOfCards();
-      return;
-    }
+  //     outOfCards();
+  //     return;
+  //   }
 
-    for(let i = 0; i < cardsToDeal; i++){
-      $aewonicCross = [...$aewonicCross, $deck.pop()];
-    }
+  //   for(let i = 0; i < cardsToDeal; i++){
+  //     $aewonicCross = [...$aewonicCross, $deck.pop()];
+  //   }
 
-  }
+  // }
 
 
-  function onStartGame() {
+  // function onStartGame() {
 
-    $beforeGame = false;
-    newDeal();
-  }
+  //   $beforeGame = false;
+  //   newDeal();
+  // }
 
-  function endGame(){
-    $beforeGame = true;
-    $selectedQuadrant = '';
-    // $daemonCards = [];
-    // $playerCards = [];
-    $aewonicCross = [];
-  }
+  // function endGame(){
+  //   $beforeGame = true;
+  //   $selectedQuadrant = '';
+  //   // $daemonCards = [];
+  //   // $playerCards = [];
+  //   $aewonicCross = [];
+  // }
 
-  function onNextTurn() {
+  // function onNextTurn() {
     
-    $turnFinished = false;
-    $earthColCountChanged = false;
-    $fireColCountChanged = false;
-    $airColCountChanged = false;
-    $waterColCountChanged = false;
+  //   $turnFinished = false;
+  //   $earthColCountChanged = false;
+  //   $fireColCountChanged = false;
+  //   $airColCountChanged = false;
+  //   $waterColCountChanged = false;
 
-    $collectedRecentlyFire = [];
-    $collectedRecentlyWater = [];
-    $collectedRecentlyAir = [];
-    $collectedRecentlyEarth = [];
+  //   $collectedRecentlyFire = [];
+  //   $collectedRecentlyWater = [];
+  //   $collectedRecentlyAir = [];
+  //   $collectedRecentlyEarth = [];
     
-    newDeal();
-  }
+  //   newDeal();
+  // }
 
-  function selectionConfirmed() {
+  // function selectionConfirmed() {
     
 
-    processCardCollection();
+  //   processCardCollection();
 
-    $turnFinished = true;
-  }
+  //   $turnFinished = true;
+  // }
 
-  function processCardCollection() {
+  // function processCardCollection() {
 
-    console.log('res: ' + $selectionResolutionValue);
-    console.log('length: ' + $selectionResolutionValue.length);
+  //   console.log('res: ' + $selectionResolutionValue);
+  //   console.log('length: ' + $selectionResolutionValue.length);
 
-    for(const cardKey of $selectionResolutionValue){
+  //   for(const cardKey of $selectionResolutionValue){
 
-      console.log('cardkey: ' + cardKey);
+  //     console.log('cardkey: ' + cardKey);
 
-      let cardSuit = magisterLudi.parseSuit(cardKey);
+  //     let cardSuit = magisterLudi.parseSuit(cardKey);
 
-      console.log('cardSuit: ' + cardSuit);
+  //     console.log('cardSuit: ' + cardSuit);
 
-      if(cardSuit === 'D'){
+  //     if(cardSuit === 'D'){
         
-        if(!$earthCollection.includes(cardKey)){
+  //       if(!$earthCollection.includes(cardKey)){
           
-          $earthCollection = [...$earthCollection, cardKey];
-          $earthColCountChanged = true;
-          $collectedRecentlyEarth = [...$collectedRecentlyEarth, cardKey];
-        }
+  //         $earthCollection = [...$earthCollection, cardKey];
+  //         $earthColCountChanged = true;
+  //         $collectedRecentlyEarth = [...$collectedRecentlyEarth, cardKey];
+  //       }
         
         
-      }
+  //     }
 
-      if(cardSuit === 'W'){
+  //     if(cardSuit === 'W'){
         
-        if(!$fireCollection.includes(cardKey)){
+  //       if(!$fireCollection.includes(cardKey)){
           
-          $fireCollection = [...$fireCollection, cardKey];
-          $fireColCountChanged = true;
-          $collectedRecentlyFire = [...$collectedRecentlyFire, cardKey];
-        }
+  //         $fireCollection = [...$fireCollection, cardKey];
+  //         $fireColCountChanged = true;
+  //         $collectedRecentlyFire = [...$collectedRecentlyFire, cardKey];
+  //       }
         
-      }
+  //     }
 
-      if(cardSuit === 'S'){
+  //     if(cardSuit === 'S'){
         
-        if(!$airCollection.includes(cardKey)){
+  //       if(!$airCollection.includes(cardKey)){
           
-          $airCollection = [...$airCollection, cardKey];
-          $airColCountChanged = true;
-          $collectedRecentlyAir = [...$collectedRecentlyAir, cardKey];
-        }
+  //         $airCollection = [...$airCollection, cardKey];
+  //         $airColCountChanged = true;
+  //         $collectedRecentlyAir = [...$collectedRecentlyAir, cardKey];
+  //       }
         
-      }
+  //     }
 
-      if(cardSuit === 'C'){
+  //     if(cardSuit === 'C'){
         
-        if(!$waterCollection.includes(cardKey)){
+  //       if(!$waterCollection.includes(cardKey)){
           
-          $waterCollection = [...$waterCollection, cardKey];
-          $waterColCountChanged = true;
-          $collectedRecentlyWater = [...$collectedRecentlyWater, cardKey];
-        }
+  //         $waterCollection = [...$waterCollection, cardKey];
+  //         $waterColCountChanged = true;
+  //         $collectedRecentlyWater = [...$collectedRecentlyWater, cardKey];
+  //       }
         
-      }
-    }
+  //     }
+  //   }
 
-    notifySelectionResolutionValue();
+  //   notifySelectionResolutionValue();
 
-    resetSelection();
-    // console.log('card comparison processed');
-  }
+  //   resetSelection();
+  //   // console.log('card comparison processed');
+  // }
 
   function handlePlayerCardClicked(cardKey){
 
@@ -283,152 +283,28 @@
 
   }
 
-  // function handleClickPreviousImplementation(cardKey) {
 
-  //   // console.log('clicked' + cardKey);
-  //   if(isPlayerCard(cardKey)){
- 
-  //   }else{
+  // function handleCardClicked(event) {
 
-  //   }
+  //   let title = 'clicked ' + event.detail.cardKey;
+  //   let description = 'cardMode: ' + event.detail.cardMode;
+  //   description += " cardState: " + event.detail.cardState;
+  //   description += " message: " + event.detail.message;
+  //   const cardKey = event.detail.cardKey;
+
+  //   handleClickPreviousImplementation(cardKey);
+
   // }
 
-  // function isPlayerCard(cardKey){
-  //   return true;
-  // }
 
-  function handleCardClicked(event) {
-
-    let title = 'clicked ' + event.detail.cardKey;
-    let description = 'cardMode: ' + event.detail.cardMode;
-    description += " cardState: " + event.detail.cardState;
-    description += " message: " + event.detail.message;
-    const cardKey = event.detail.cardKey;
-
-    handleClickPreviousImplementation(cardKey);
-
-    // const currentPlayerCardKey = event.detail.cardKey;
-    // const currentSelectedCards = $selectedCards;
-    // const currentAewonicCross = $aewonicCross;
-    // const currentSelectedQuadrant = $selectedQuadrant;
-
-    // //TODO: THIS ISNT WORKING 
-    // // test is fine but its not working like this
-    // // what if we somehow built a derived store for
-    // // each card that would store the value and
-    // // then the click handler of that card would just
-    // // change the selected cards
-    // let newSelectedCards = 
-    //   magisterLudi.getNextValidSelection(
-    //       currentPlayerCardKey,
-    //       currentSelectedCards,
-    //       currentAewonicCross,
-    //       currentSelectedQuadrant
-    //     );
-    // $selectedCards = newSelectedCards;
-    // // notifyClicked(title, description);
-  }
-
-  function selectWaterQuad(){
-    console.log('changing to water');
-    $selectedQuadrant = 'Water';
-  }
-
-  function selectAirQuad(){
-    console.log('changing to air');
-    $selectedQuadrant = 'Air';
-  } 
-
-  function selectEarthQuad(){
-    console.log('changing to earth');
-    $selectedQuadrant = 'Earth';
-  }
-
-  function selectFireQuad(){
-    console.log('changing to fire');
-    $selectedQuadrant = 'Fire';
-  }
-
-  // $: console.log('quad: ' + $selectedQuadrant);
-
-  // THIS CONTROLS WHAT STILL GETS A DEAL BUTTON DURING PLAY
-  // AS QUADRANTS ARE IMPLEMENTED FULLY, WE WON"T NEED A DEAL
-  // BUTTON BECAUSE NO VALID MOVES WILL TRIGGER A DEAL OPTION
-  // REMOVE QUADRANTS FROM THIS LIST AS THEY ARE FULLY READY 
-  // AND TESTED
-  ////// CURRENT PROGRESS /////////////
-  // Water - NOT STARTED
-  // Air - NOT STARTED
-  // Earth - IN PROGRESS
-  // Fire - READY FOR TESTING
-  const toBeImplemented = ['Water', 'Air', 'Earth'];
 
 </script>
-<!-- 
-<div class="top-controls">
-
-  Deck Count: {$currentDeckCount} - 
-
-  {#if $selectedQuadrant}
-
-    Quadrant: {$selectedQuadrant}
-
-  {:else}
-
-    No Quadrant Selected
-
-  {/if}
-
-</div> -->
 
 <div 
   class="witches-cradle" 
 >
 
 
-  
-  {#if $beforeGame && $selectedQuadrant}
-
-    <button 
-      class="start-game"
-      class:beforeGame
-      class:colorWater={$selectedQuadrant === 'Water'}
-      class:colorAir={$selectedQuadrant === 'Air'}
-      class:colorEarth={$selectedQuadrant === 'Earth'}
-      class:colorFire={$selectedQuadrant === 'Fire'}
-      on:click={onStartGame}
-    >
-      Deal Two Trees {$buttonCounts}
-    </button>
-
-  {:else if $currentDeckCount === 0 && !$beforeGame && $turnFinished && $collectedSpirit}
-
-    <button 
-      class="dealTwoTrees"
-      class:colorWater={$selectedQuadrant === 'Water'}
-      class:colorAir={$selectedQuadrant === 'Air'}
-      class:colorEarth={$selectedQuadrant === 'Earth'}
-      class:colorFire={$selectedQuadrant === 'Fire'}
-      on:click={endGame}
-    >
-      End Game
-    </button>
-
-  {:else if toBeImplemented.includes($selectedQuadrant) && $selectedCards.length < 1 && !$turnFinished}
-
-    <button 
-      class="dealTwoTrees"
-      class:colorWater={$selectedQuadrant === 'Water'}
-      class:colorAir={$selectedQuadrant === 'Air'}
-      class:colorEarth={$selectedQuadrant === 'Earth'}
-      class:colorFire={$selectedQuadrant === 'Fire'}
-      on:click={newDeal}
-    >
-      Deal Two Trees {$buttonCounts}
-    </button>
-
-
-  {/if}
 
   <div 
     class="daemon-cards">
@@ -524,45 +400,6 @@
 
 
 
-  {#if $selectionIsValid }
-
-    <button 
-      class="confirmSelection"
-      on:click={selectionConfirmed}
-    >
-
-      {$selectionResolutionValue}
-
-    </button>
-
-  {:else}
-
-    {#if $noValidChoices && !$beforeGame}
-
-
-      <button 
-        class="confirmSelection"
-        on:click={selectionConfirmed}
-      >
-
-        No Valid Moves
-
-      </button>
-  
-    {/if}
-
-  {/if}
-
-  {#if $turnFinished && !$beforeGame}
-
-    <button 
-      class="next-turn" 
-      on:click={onNextTurn}
-    >
-      {$nextTurnButtonText}
-    </button>
-
-  {/if}
 
 </div>
 
