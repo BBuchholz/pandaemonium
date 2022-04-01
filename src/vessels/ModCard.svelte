@@ -56,7 +56,12 @@
 
   function getImgSrcFromCardKey(powerString){
     // return '/images/' + powerString + '.jpg';
-    return cardImagePath + powerString + '.jpg';
+
+    if(powerString){
+      return cardImagePath + powerString + '.jpg';
+    }else{
+      return cardImagePath + 'XX.jpg';
+    }
   }
 
   function getElementalSymbolFromCardKey(cardKey){
@@ -77,6 +82,10 @@
 
 function getZodiacalSymbolFromCardKey(cardKey){
     
+    if(!cardKey){
+      return '';
+    }
+
     if(keysVirgo.includes(cardKey)){
       return "♍";
     }

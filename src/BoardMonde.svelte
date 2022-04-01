@@ -19,15 +19,14 @@
     selectedQuadrant,
   } from './stores.js';
 
-
   import { 
     keysWater, 
     keysAir, 
     keysEarth, 
     keysFire,
   } from './constants.js';
-  
 
+  
   import {
     waterCollection,
     airCollection,
@@ -262,6 +261,7 @@
 <style>
 
 .game-board {
+
   height: 100%;
   min-height: 100%;
   width: 100%;
@@ -271,6 +271,7 @@
 }
 
 .aewonic-cross {
+
   flex: auto;
   overflow-y: scroll;
 }
@@ -286,11 +287,13 @@
 }
 
 .top {
+
   position: absolute;
   top: 0;
 }
 
 .bottom {
+  
   position: absolute;
   bottom: 0;
 }

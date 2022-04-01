@@ -264,10 +264,10 @@
     <button 
       class="start-game"
       class:beforeGame
-      class:colorWater={$selectedQuadrant === 'Water'}
-      class:colorAir={$selectedQuadrant === 'Air'}
-      class:colorEarth={$selectedQuadrant === 'Earth'}
-      class:colorFire={$selectedQuadrant === 'Fire'}
+      class:water-color={$selectedQuadrant === 'Water'}
+      class:air-color={$selectedQuadrant === 'Air'}
+      class:earth-color={$selectedQuadrant === 'Earth'}
+      class:fire-color={$selectedQuadrant === 'Fire'}
       on:click={onStartGame}
     >
       Deal Two Trees {$buttonCounts}
@@ -277,10 +277,10 @@
 
     <button 
       class="dealTwoTrees"
-      class:colorWater={$selectedQuadrant === 'Water'}
-      class:colorAir={$selectedQuadrant === 'Air'}
-      class:colorEarth={$selectedQuadrant === 'Earth'}
-      class:colorFire={$selectedQuadrant === 'Fire'}
+      class:water-color={$selectedQuadrant === 'Water'}
+      class:air-color={$selectedQuadrant === 'Air'}
+      class:earth-color={$selectedQuadrant === 'Earth'}
+      class:fire-color={$selectedQuadrant === 'Fire'}
       on:click={endGame}
     >
       End Game
@@ -322,6 +322,10 @@
 
     <button 
       class="next-turn" 
+      class:fire-color={$selectedQuadrant === 'Fire'}
+      class:water-color={$selectedQuadrant === 'Water'}
+      class:air-color={$selectedQuadrant === 'Air'}
+      class:earth-color={$selectedQuadrant === 'Earth'}
       on:click={onNextTurn}
     >
       {$nextTurnButtonText}
@@ -334,13 +338,60 @@
 <style>
   
 .buttons-vessel {
+
   position: absolute;
   min-height: 2em;
   min-width: 10em;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: solid;
+  border: none;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+button {
+  font-size: 15px;
+  line-height: 15px;
+  padding: 8px 22px 9px 22px;
+  box-sizing: border-box;
+  font-weight: 700;
+  border: solid 3px white;
+  color: black;
+  border-radius: 30px;
+  transition: all ease-out .2s;
+  cursor: pointer;
+  outline: none;
+  animation: buttonPulse .2s infinite ease-in-out;
+  margin: 0em;
+}
+
+/* Elemental Styles */
+
+.water-color {
+    border: solid 3px darkgray;
+    color: black;
+    background-color: #a9efef;
+}
+
+.air-color {
+    border: solid 3px gray;
+    color: black;
+    background-color: #ffca3a;
+}
+
+.earth-color {
+    border: solid 3px lightgray;
+    color: black;
+    background-color: #e16036;
+}
+
+.fire-color {
+    border: solid 3px white;
+    color: white;
+    background-color: #e3170a;
 }
 
 </style>
