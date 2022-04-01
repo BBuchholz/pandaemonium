@@ -8,9 +8,12 @@
   import CapricornVessel from './CapricornVessel.svelte';
 
   import { 
+    selectedQuadrant,
+  } from '../stores.js';
+
+  import { 
     earthCollection, 
     collectedEarth,
-    selectedQuadrant,
   } from './stores.js';
 
   import { 

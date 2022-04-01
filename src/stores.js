@@ -1,3 +1,7 @@
+/////////////////////////////////
+// TOP LEVEL STORES
+/////////////////////////////////
+
 import { writable, derived } from 'svelte/store';
 import KnechtController from './myriad/KnechtController.js';
 
@@ -25,10 +29,20 @@ export const passPhrase = writable('');
 export const rulesIncludeElementalShiftsOnAllCollections =
 	writable(false);
 
+export const selectedQuadrant = writable('');
+
 export const devMode = writable(false);
 
 export const selectedCardsForPlayer = writable([]);
 export const selectedCardsForDaemon = writable([]);
+
+
+export const selectedCards = derived(
+	[selectedCardsForDaemon, selectedCardsForPlayer],
+	([$selectedCardsForDaemon, $selectedCardsForPlayer]) => {
+		return [...$selectedCardsForDaemon, ...$selectedCardsForPlayer];
+	}
+);
 
 export const selectedEarthSign = writable('');
 export const selectedWaterSign = writable('');
@@ -318,6 +332,17 @@ export const currentDeckCount = derived(
 	}
 );
 
+
+export const buttonCounts = derived(
+	[currentDeckCount],
+	([$currentDeckCount]) => {
+	
+		const counts = '(' + $currentDeckCount + ')';
+
+		return counts;
+	}
+);
+
 export const beforeGame = writable(true);
 export const turnFinished = writable(false);
 export const moistureIndex = writable(0);
@@ -328,6 +353,14 @@ export const resolutionIsHeated = derived(
 	heatIndex,
 	($heatIndex) => {
 		return $heatIndex > 0;
+	}
+);
+
+
+export const selectionIsSingular = derived(
+	moistureIndex,
+	($moistureIndex) => {
+		return $moistureIndex < 1;
 	}
 );
 

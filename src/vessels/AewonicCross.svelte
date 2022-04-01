@@ -1,36 +1,46 @@
 <script>
 
+  ///////////////////////////////////////////////////////////
+  //
+  // NB: This feels like the way they should be broken up, at 
+  //     least for the time being.
+  //     Stick to this until further notice, and if anything 
+  //     DOES needs to change, do it in accordance 
+  //     with this division of responsibility
+  //
+  //     When something better presents itself, 
+  //     change it here as well (and in ButtonsVessel)
+  //
+  ///////////////////////////////////////////////////////////
+  
   import { 
-
-    selectedCardsForDaemon,
-    selectedCardsForPlayer, 
-    aewonicCross,
     deck, 
-    currentDeckCount,
-    discardCount, 
-    nextTurnButtonText,
-    turnFinished,
-    noValidChoices,
-    selectionResolutionValue,
-    beforeGame,
-    selectionIsValid,
     selectedQuadrant,
+    beforeGame,
     selectedCards,
-    selectionIsSingular, 
+    selectionIsSingular,
+    selectionResolutionValue, 
     buttonCounts,
-    waterCollection,
-    airCollection,
-    earthCollection,
-    fireCollection,
-    waterColCountChanged,
-    airColCountChanged,
-    earthColCountChanged,
-    fireColCountChanged,
+    turnFinished,
+    selectedCardsForDaemon,
+    selectedCardsForPlayer,
+  } from '../stores.js';
+
+  import {
+    aewonicCross,
+    collectedSpirit,
     collectedRecentlyWater,
     collectedRecentlyAir,
     collectedRecentlyEarth,
     collectedRecentlyFire,
-    collectedSpirit
+    waterColCountChanged,
+    airColCountChanged,
+    earthColCountChanged,
+    fireColCountChanged,
+    waterCollection,
+    airCollection,
+    earthCollection,
+    fireCollection,
   } from './stores.js';
  
   import Card from './ModCard.svelte';
@@ -60,183 +70,6 @@
       removeAfter: 4000,
     });
   }
-
-
-  // function resetSelection() {
-
-  //   // roundFinished = true;
-  //   $selectedCardsForPlayer = [];
-  //   $selectedCardsForDaemon = [];
-  //   $aewonicCross = [];;
-  //   // console.log('selection reset');
-  // }
-
-  // function loadDeck(){
-
-  //   $deck = magisterLudi.dealTwelveTrees();
-  // }
-
-
-  // function outOfCards() {
-
-  //   const toReshuffle = $currentDeckCount + $discardCount;
-
-  //   if(toReshuffle > 1) {
-   
-  //     notifyClicked('Deck Info!', 'out of cards, reshuffling ' + toReshuffle + ' cards...');
-  //     loadDeck();
-  //     newDeal(); 
-    
-  //   } else if (toReshuffle === 1) {
-
-  //     notifyClicked('Deck Info!', 'only one card in deck, need to redeem to continue');
-  //     $turnFinished = true;
-
-  //   } else {
-
-  //     notifyClicked('Deck Info!', 'all cards collected! you rock!');
-  //     $beforeGame = true;
-
-  //   }
-
-  // }
-
-  // function newDeal(){
- 
-  //   // if($currentDeckCount < 6){
-
-  //   //   loadDeck();
-  //   // }
-
-  //   if($deck.length == 0){
-
-  //     outOfCards();
-  //     return;
-  //   }
-
-  //   $aewonicCross = [];
-
-  //   const cardsToDeal = 6;
-
-  //   while(cardsToDeal > $deck.length){
-  //     cardsToDeal -= 2;
-  //   }
-
-  //   if(cardsToDeal == 0){
-
-  //     outOfCards();
-  //     return;
-  //   }
-
-  //   for(let i = 0; i < cardsToDeal; i++){
-  //     $aewonicCross = [...$aewonicCross, $deck.pop()];
-  //   }
-
-  // }
-
-
-  // function onStartGame() {
-
-  //   $beforeGame = false;
-  //   newDeal();
-  // }
-
-  // function endGame(){
-  //   $beforeGame = true;
-  //   $selectedQuadrant = '';
-  //   // $daemonCards = [];
-  //   // $playerCards = [];
-  //   $aewonicCross = [];
-  // }
-
-  // function onNextTurn() {
-    
-  //   $turnFinished = false;
-  //   $earthColCountChanged = false;
-  //   $fireColCountChanged = false;
-  //   $airColCountChanged = false;
-  //   $waterColCountChanged = false;
-
-  //   $collectedRecentlyFire = [];
-  //   $collectedRecentlyWater = [];
-  //   $collectedRecentlyAir = [];
-  //   $collectedRecentlyEarth = [];
-    
-  //   newDeal();
-  // }
-
-  // function selectionConfirmed() {
-    
-
-  //   processCardCollection();
-
-  //   $turnFinished = true;
-  // }
-
-  // function processCardCollection() {
-
-  //   console.log('res: ' + $selectionResolutionValue);
-  //   console.log('length: ' + $selectionResolutionValue.length);
-
-  //   for(const cardKey of $selectionResolutionValue){
-
-  //     console.log('cardkey: ' + cardKey);
-
-  //     let cardSuit = magisterLudi.parseSuit(cardKey);
-
-  //     console.log('cardSuit: ' + cardSuit);
-
-  //     if(cardSuit === 'D'){
-        
-  //       if(!$earthCollection.includes(cardKey)){
-          
-  //         $earthCollection = [...$earthCollection, cardKey];
-  //         $earthColCountChanged = true;
-  //         $collectedRecentlyEarth = [...$collectedRecentlyEarth, cardKey];
-  //       }
-        
-        
-  //     }
-
-  //     if(cardSuit === 'W'){
-        
-  //       if(!$fireCollection.includes(cardKey)){
-          
-  //         $fireCollection = [...$fireCollection, cardKey];
-  //         $fireColCountChanged = true;
-  //         $collectedRecentlyFire = [...$collectedRecentlyFire, cardKey];
-  //       }
-        
-  //     }
-
-  //     if(cardSuit === 'S'){
-        
-  //       if(!$airCollection.includes(cardKey)){
-          
-  //         $airCollection = [...$airCollection, cardKey];
-  //         $airColCountChanged = true;
-  //         $collectedRecentlyAir = [...$collectedRecentlyAir, cardKey];
-  //       }
-        
-  //     }
-
-  //     if(cardSuit === 'C'){
-        
-  //       if(!$waterCollection.includes(cardKey)){
-          
-  //         $waterCollection = [...$waterCollection, cardKey];
-  //         $waterColCountChanged = true;
-  //         $collectedRecentlyWater = [...$collectedRecentlyWater, cardKey];
-  //       }
-        
-  //     }
-  //   }
-
-  //   notifySelectionResolutionValue();
-
-  //   resetSelection();
-  //   // console.log('card comparison processed');
-  // }
 
   function handlePlayerCardClicked(cardKey){
 

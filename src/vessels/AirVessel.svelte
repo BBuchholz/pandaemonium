@@ -6,11 +6,14 @@
   import GeminiVessel from './GeminiVessel.svelte';
   import AquariusVessel from './AquariusVessel.svelte';
   import LibraVessel from './LibraVessel.svelte';
+  
+  import { 
+    selectedQuadrant,
+  } from '../stores.js';
 
   import { 
     airCollection, 
     collectedAir,
-    selectedQuadrant,
   } from './stores.js';
 
   import { 

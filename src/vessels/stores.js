@@ -1,3 +1,8 @@
+/////////////////////////////////
+// VESSELS STORES
+/////////////////////////////////
+
+
 import { writable, derived } from 'svelte/store';
 import KnechtController from '../myriad/KnechtController.js';
 
@@ -28,19 +33,19 @@ export const selectedCardsForPlayer = writable([]);
 export const selectedCardsForDaemon = writable([]);
 
 
-export const selectedCards = derived(
-	[selectedCardsForDaemon, selectedCardsForPlayer],
-	([$selectedCardsForDaemon, $selectedCardsForPlayer]) => {
-		return [...$selectedCardsForDaemon, ...$selectedCardsForPlayer];
-	}
-);
+// export const selectedCards = derived(
+// 	[selectedCardsForDaemon, selectedCardsForPlayer],
+// 	([$selectedCardsForDaemon, $selectedCardsForPlayer]) => {
+// 		return [...$selectedCardsForDaemon, ...$selectedCardsForPlayer];
+// 	}
+// );
 
 export const selectedEarthSign = writable('');
 export const selectedWaterSign = writable('');
 export const selectedAirSign = writable('');
 export const selectedFireSign = writable('');
 
-export const selectedQuadrant = writable('');
+// export const selectedQuadrant = writable('');
 
 export const playerCards = writable([]);
 export const daemonCards = writable([]);
@@ -439,12 +444,12 @@ export const selectionIsWet = derived(
 );
 
 
-export const selectionIsSingular = derived(
-	moistureIndex,
-	($moistureIndex) => {
-		return $moistureIndex < 1;
-	}
-);
+// export const selectionIsSingular = derived(
+// 	moistureIndex,
+// 	($moistureIndex) => {
+// 		return $moistureIndex < 1;
+// 	}
+// );
 
 export const discardCount = derived(
 	[deck, earthColCount, airColCount, waterColCount, fireColCount, playerCards, daemonCards],
@@ -990,21 +995,21 @@ export const currentStateText = derived(
 );
 
 
-export const buttonCounts = derived(
-	[currentDeckCount,
-	 selectedQuadrant],
-	([$currentDeckCount,
-		$selectedQuadrant]) => {
+// export const buttonCounts = derived(
+// 	[currentDeckCount,
+// 	 selectedQuadrant],
+// 	([$currentDeckCount,
+// 		$selectedQuadrant]) => {
 	
-		const counts = '(' + $currentDeckCount + ')';
+// 		const counts = '(' + $currentDeckCount + ')';
 
-		// let counts = "DC:" + $currentDeckCount;
+// 		// let counts = "DC:" + $currentDeckCount;
 
-		// if($selectedQuadrant){
+// 		// if($selectedQuadrant){
 
-		// 	counts += " Q:" + $selectedQuadrant;	
-		// }
+// 		// 	counts += " Q:" + $selectedQuadrant;	
+// 		// }
 
-		return counts;
-	}
-);
+// 		return counts;
+// 	}
+// );

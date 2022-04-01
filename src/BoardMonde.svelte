@@ -14,6 +14,9 @@
   import { 
     passPhrase,
     devMode,
+    deck,
+    discardCount,
+    selectedQuadrant,
   } from './stores.js';
 
 
@@ -30,7 +33,6 @@
     airCollection,
     earthCollection,
     fireCollection,
-    selectedQuadrant,
     collectedSpirit,
   } from './vessels/stores.js'
 
@@ -57,15 +59,47 @@
     });
   } 
 
-  function notifyDeckInfo(description){
+  function notifyQuadrantInfo(quadrantName){
+
+    let descriptionText;
+
+    if(quadrantName){
+
+      descriptionText = 'Current Quadrant: ' + quadrantName;
+
+    }else{
+
+      descriptionText = 'No Quadrant Selected';
+    }
+
+    addNotification({
+      position: 'top-right',
+      text: 'Quadrant Info',
+      type: 'info',
+      description: descriptionText,
+      removeAfter: 4000,
+    });
+  }
+
+  $: notifyQuadrantInfo($selectedQuadrant);
+
+  function notifyDeckInfo(deck, discardCount){
+
+    let deckCount = deck.length;
+
+    let descriptionText = 'Deck Count: ' + deckCount;
+    descriptionText += '\nDiscard Count: ' + discardCount;
+
     addNotification({
       position: 'top-right',
       text: 'Deck Info',
       type: 'info',
-      description: description,
+      description: descriptionText,
       removeAfter: 4000,
     });
   }
+
+  $: notifyDeckInfo($deck, $discardCount);
 
   function redeemSpirit() {
 

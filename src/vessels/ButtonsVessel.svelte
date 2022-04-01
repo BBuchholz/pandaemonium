@@ -1,37 +1,51 @@
-<script>
+<script>  
+
+  ///////////////////////////////////////////////////////////
+  //
+  // NB: This feels like the way they should be broken up, at 
+  //     least for the time being.
+  //     Stick to this until further notice, and if anything 
+  //     DOES needs to change, do it in accordance 
+  //     with this division of responsibility
+  //
+  //     When something better presents itself, 
+  //     change it here as well (and in AewonicCross)
+  //
+  ///////////////////////////////////////////////////////////
   
-
   import { 
-
-    selectedCardsForDaemon,
-    selectedCardsForPlayer, 
-    aewonicCross,
     deck, 
-    currentDeckCount,
-    discardCount, 
-    nextTurnButtonText,
-    turnFinished,
-    noValidChoices,
-    selectionResolutionValue,
-    beforeGame,
-    selectionIsValid,
     selectedQuadrant,
+    beforeGame,
     selectedCards,
-    selectionIsSingular, 
+    selectionIsSingular,
+    selectionResolutionValue, 
     buttonCounts,
-    waterCollection,
-    airCollection,
-    earthCollection,
-    fireCollection,
-    waterColCountChanged,
-    airColCountChanged,
-    earthColCountChanged,
-    fireColCountChanged,
+    turnFinished,
+    discardCount,
+    currentDeckCount,
+    selectedCardsForDaemon,
+    selectedCardsForPlayer,
+    selectionIsValid,
+    noValidChoices,
+    nextTurnButtonText,
+  } from '../stores.js';
+
+  import {
+    aewonicCross,
+    collectedSpirit,
     collectedRecentlyWater,
     collectedRecentlyAir,
     collectedRecentlyEarth,
     collectedRecentlyFire,
-    collectedSpirit
+    waterColCountChanged,
+    airColCountChanged,
+    earthColCountChanged,
+    fireColCountChanged,
+    waterCollection,
+    airCollection,
+    earthCollection,
+    fireCollection,
   } from './stores.js';
 
   import { Knechtor } from '../myriad/Knechtor.js';

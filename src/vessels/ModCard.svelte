@@ -8,7 +8,7 @@
     selectionIsWet,
     resolutionIsHeated,
     selectedCards
-    } from './stores.js';
+    } from '../stores.js';
 
   import {
     cardImagePath,

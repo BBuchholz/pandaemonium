@@ -8,11 +8,14 @@
   import CancerVessel from './CancerVessel.svelte';
 
   import { 
+    selectedQuadrant,
+  } from '../stores.js';
+  
+  import { 
     waterCollection, 
     collectedWater,
-    selectedQuadrant,
   } from './stores.js';
- 
+
   import { 
     keysCancer, 
     keysScorpio, 

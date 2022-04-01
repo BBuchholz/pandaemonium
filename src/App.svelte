@@ -6,7 +6,7 @@
   import { 
     modal, 
     passPhrase,
-    devMode
+    devMode,
   } from './stores.js';
 
   import MyriadNotification from './MyriadNotification.svelte';
@@ -48,7 +48,7 @@
 
       {#if $passPhrase === 'daedalus'}
 
-        <DaedalusLab {$passPhrase}/>
+        <DaedalusLab {$passPhrase} />
 
       {:else if $passPhrase === 'leAC'}
 
@@ -67,7 +67,6 @@
         <GameBoard />
 
       {/if}
-
 
     </main>
 
