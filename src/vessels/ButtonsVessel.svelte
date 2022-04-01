@@ -27,12 +27,14 @@
     selectedCardsForDaemon,
     selectedCardsForPlayer,
     selectionIsValid,
-    noValidChoices,
     nextTurnButtonText,
   } from '../stores.js';
 
   import {
     aewonicCross,
+    playerCards,
+    daemonCards,
+    noValidChoices,
     collectedSpirit,
     collectedRecentlyWater,
     collectedRecentlyAir,
@@ -78,11 +80,9 @@
 
   function resetSelection() {
 
-    // roundFinished = true;
     $selectedCardsForPlayer = [];
     $selectedCardsForDaemon = [];
     $aewonicCross = [];;
-    // console.log('selection reset');
   }
 
   function loadDeck(){
@@ -143,6 +143,7 @@
     }
 
     for(let i = 0; i < cardsToDeal; i++){
+      
       $aewonicCross = [...$aewonicCross, $deck.pop()];
     }
 
@@ -252,8 +253,12 @@
     // console.log('card comparison processed');
   }
 
-  $: console.log('beforeGame: ' + $beforeGame);
-  $: console.log('selectedQuadrant: ' + $selectedQuadrant);
+  $: console.log('playerCards: ' + $playerCards);
+  $: console.log('daemonCards: ' + $daemonCards);
+  $: console.log('noValidChoices: ' + $noValidChoices);
+
+  // $: console.log('beforeGame: ' + $beforeGame);
+  // $: console.log('selectedQuadrant: ' + $selectedQuadrant);
 
 </script>
 

@@ -47,11 +47,43 @@ export const selectedFireSign = writable('');
 
 // export const selectedQuadrant = writable('');
 
-export const playerCards = writable([]);
-export const daemonCards = writable([]);
+// export const playerCards = writable([]);
+// export const daemonCards = writable([]);
 export const deck = writable([]);
 
 export const aewonicCross = writable([]);
+
+export const playerCards = derived(
+	aewonicCross,
+	($aewonicCross) => {
+
+		let pCards = [];
+
+		for(let i = 1; i < 6; i += 2){
+			if($aewonicCross[i]){
+				pCards.push($aewonicCross[i]);
+			}
+		}
+
+		return pCards;
+	}
+);
+
+export const daemonCards = derived(
+	aewonicCross,
+	($aewonicCross) => {
+
+		let dCards = [];
+
+		for(let i = 0; i < 6; i += 2){
+			if($aewonicCross[i]){
+				dCards.push($aewonicCross[i]);
+			}
+		}
+
+		return dCards;
+	}
+);
 
 export const airColCountChanged = writable(false);
 export const earthColCountChanged = writable(false);
