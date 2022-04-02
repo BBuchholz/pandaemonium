@@ -7,16 +7,15 @@
   
   import { 
     passPhrase,
-    deck 
   } from './stores.js';
 
   import { 
 
     selectedCardsForDaemon,
     selectionIsSingular,
-    singleSteadCardKey
-
-  } from './boardMat/boardMat-stores.js';
+    singleSteadCardKey,
+    deck,
+  } from './boardMat/stores.js';
 
 
   import { getNotificationsContext } from 'svelte-notifications';

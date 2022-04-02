@@ -14,16 +14,12 @@
   ///////////////////////////////////////////////////////////
   
   import { 
-    deck, 
     selectedQuadrant,
     beforeGame,
     selectedCards,
     selectionIsSingular,
     selectionResolutionValue, 
-    buttonCounts,
     turnFinished,
-    discardCount,
-    currentDeckCount,
     selectedCardsForDaemon,
     selectedCardsForPlayer,
     selectionIsValid,
@@ -31,9 +27,13 @@
   } from '../stores.js';
 
   import {
+    deck, 
     aewonicCross,
+    buttonCounts,
+    currentDeckCount,
     playerCards,
     daemonCards,
+    discardCount,
     noValidChoices,
     collectedSpirit,
     collectedRecentlyWater,
@@ -50,9 +50,18 @@
     fireCollection,
   } from './stores.js';
 
+  import { getContext } from 'svelte';
+
   import { Knechtor } from '../myriad/Knechtor.js';
   const magisterLudi = new Knechtor();
 
+  import LibraryPopup from '../LibraryPopup.svelte';
+
+  const { open } = getContext('simple-modal');
+
+  const showPopupLong = () => {
+    open(LibraryPopup);
+  };
 
   import { getNotificationsContext } from 'svelte-notifications';
   const { addNotification } = getNotificationsContext();
@@ -77,7 +86,6 @@
     });
   }
 
-
   function resetSelection() {
 
     $selectedCardsForPlayer = [];
@@ -87,9 +95,21 @@
 
   function loadDeck(){
 
-    $deck = magisterLudi.dealTwelveTrees();
+    const fullDeck = magisterLudi.dealTwelveTrees();
+
+    const newDeckMinusFire = fullDeck.filter(cardKey => !$fireCollection.includes(cardKey));
+
+    const newDeckMinusWater = newDeckMinusFire.filter(cardKey => !$waterCollection.includes(cardKey));
+
+    const newDeckMinusAir = newDeckMinusWater.filter(cardKey => !$airCollection.includes(cardKey));
+
+    const newDeckMinusEarth = newDeckMinusAir.filter(cardKey => !$earthCollection.includes(cardKey));
+    
+    $deck = newDeckMinusEarth;
   }
 
+  $: console.log('currentDeckCount: ' + $currentDeckCount);
+  $: console.log('discardCount: ' + $discardCount);
 
   function outOfCards() {
 
@@ -130,7 +150,7 @@
 
     $aewonicCross = [];
 
-    const cardsToDeal = 6;
+    let cardsToDeal = 6;
 
     while(cardsToDeal > $deck.length){
       cardsToDeal -= 2;
@@ -142,10 +162,33 @@
       return;
     }
 
-    for(let i = 0; i < cardsToDeal; i++){
+    switch(cardsToDeal){
       
-      $aewonicCross = [...$aewonicCross, $deck.pop()];
+      case 6:
+
+        for(let i = 0; i < cardsToDeal; i++){
+          
+          $aewonicCross = [...$aewonicCross, $deck.pop()];
+        }
+
+        break;
+
+      case 4:
+
+        $aewonicCross[0] = $deck.pop();
+        $aewonicCross[1] = $deck.pop();
+        $aewonicCross[4] = $deck.pop();
+        $aewonicCross[5] = $deck.pop();
+
+        break;
+
+      case 2:
+      
+        $aewonicCross[2] = $deck.pop();
+        $aewonicCross[3] = $deck.pop();
+        break;
     }
+
 
   }
 
@@ -190,16 +233,16 @@
 
   function processCardCollection() {
 
-    console.log('res: ' + $selectionResolutionValue);
-    console.log('length: ' + $selectionResolutionValue.length);
+    // console.log('res: ' + $selectionResolutionValue);
+    // console.log('length: ' + $selectionResolutionValue.length);
 
     for(const cardKey of $selectionResolutionValue){
 
-      console.log('cardkey: ' + cardKey);
+      // console.log('cardkey: ' + cardKey);
 
       let cardSuit = magisterLudi.parseSuit(cardKey);
 
-      console.log('cardSuit: ' + cardSuit);
+      // console.log('cardSuit: ' + cardSuit);
 
       if(cardSuit === 'D'){
         
@@ -253,19 +296,27 @@
     // console.log('card comparison processed');
   }
 
-  $: console.log('playerCards: ' + $playerCards);
-  $: console.log('daemonCards: ' + $daemonCards);
-  $: console.log('noValidChoices: ' + $noValidChoices);
+  // $: console.log('playerCards: ' + $playerCards);
+  // $: console.log('daemonCards: ' + $daemonCards);
+  // $: console.log('noValidChoices: ' + $noValidChoices);
 
   // $: console.log('beforeGame: ' + $beforeGame);
   // $: console.log('selectedQuadrant: ' + $selectedQuadrant);
+
 
 </script>
 
 <div class="buttons-vessel">
 
-  {#if $beforeGame && $selectedQuadrant}
+  {#if $beforeGame && !$selectedQuadrant}
 
+    <button 
+      on:click={showPopupLong}
+    >
+      📓
+    </button>
+
+  {:else if $beforeGame && $selectedQuadrant}
     <button 
       class="start-game"
       class:beforeGame

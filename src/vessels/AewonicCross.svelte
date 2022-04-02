@@ -14,20 +14,20 @@
   ///////////////////////////////////////////////////////////
   
   import { 
-    deck, 
     selectedQuadrant,
     beforeGame,
     selectedCards,
     selectionIsSingular,
     selectionResolutionValue, 
-    buttonCounts,
     turnFinished,
     selectedCardsForDaemon,
     selectedCardsForPlayer,
   } from '../stores.js';
 
   import {
+    deck,
     aewonicCross,
+    buttonCounts,
     collectedSpirit,
     collectedRecentlyWater,
     collectedRecentlyAir,

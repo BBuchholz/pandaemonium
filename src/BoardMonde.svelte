@@ -14,8 +14,6 @@
   import { 
     passPhrase,
     devMode,
-    deck,
-    discardCount,
     selectedQuadrant,
   } from './stores.js';
 
@@ -28,6 +26,8 @@
 
   
   import {
+    deck,
+    discardCount,
     waterCollection,
     airCollection,
     earthCollection,

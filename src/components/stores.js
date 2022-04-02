@@ -1,7 +1,6 @@
 /////////////////////////////////
-// VESSELS STORES
+// COMPONENT STORES
 /////////////////////////////////
-
 
 import { writable, derived } from 'svelte/store';
 import KnechtController from '../myriad/KnechtController.js';
@@ -22,6 +21,7 @@ import {
 } from '../constants.js'; 
 
 const magisterLudi = KnechtController();
+const testingElementalVessels = false;
 
 export const modal = writable(null);
 export const passPhrase = writable('');
@@ -29,61 +29,29 @@ export const passPhrase = writable('');
 export const rulesIncludeElementalShiftsOnAllCollections =
 	writable(false);
 
+export const selectedQuadrant = writable('');
+
+export const devMode = writable(false);
+
 export const selectedCardsForPlayer = writable([]);
 export const selectedCardsForDaemon = writable([]);
 
 
-// export const selectedCards = derived(
-// 	[selectedCardsForDaemon, selectedCardsForPlayer],
-// 	([$selectedCardsForDaemon, $selectedCardsForPlayer]) => {
-// 		return [...$selectedCardsForDaemon, ...$selectedCardsForPlayer];
-// 	}
-// );
+export const selectedCards = derived(
+	[selectedCardsForDaemon, selectedCardsForPlayer],
+	([$selectedCardsForDaemon, $selectedCardsForPlayer]) => {
+		return [...$selectedCardsForDaemon, ...$selectedCardsForPlayer];
+	}
+);
 
 export const selectedEarthSign = writable('');
 export const selectedWaterSign = writable('');
 export const selectedAirSign = writable('');
 export const selectedFireSign = writable('');
 
-// export const selectedQuadrant = writable('');
-
-// export const playerCards = writable([]);
-// export const daemonCards = writable([]);
+export const playerCards = writable([]);
+export const daemonCards = writable([]);
 export const deck = writable([]);
-
-export const aewonicCross = writable([]);
-
-export const playerCards = derived(
-	aewonicCross,
-	($aewonicCross) => {
-
-		let pCards = [];
-
-		for(let i = 1; i < 6; i += 2){
-			if($aewonicCross[i]){
-				pCards.push($aewonicCross[i]);
-			}
-		}
-
-		return pCards;
-	}
-);
-
-export const daemonCards = derived(
-	aewonicCross,
-	($aewonicCross) => {
-
-		let dCards = [];
-
-		for(let i = 0; i < 6; i += 2){
-			if($aewonicCross[i]){
-				dCards.push($aewonicCross[i]);
-			}
-		}
-
-		return dCards;
-	}
-);
 
 export const airColCountChanged = writable(false);
 export const earthColCountChanged = writable(false);
@@ -158,7 +126,7 @@ export const collectedFire = derived(
 	[collectedAries, collectedLeo, collectedSagittarius],
 	([$collectedAries, $collectedLeo, $collectedSagittarius]) => {
 
-		return $collectedAries && $collectedLeo && $collectedSagittarius;
+		return testingElementalVessels || $collectedAries && $collectedLeo && $collectedSagittarius;
 	}
 );
 
@@ -223,7 +191,7 @@ export const collectedEarth = derived(
 	[collectedVirgo, collectedTaurus, collectedCapricorn],
 	([$collectedVirgo, $collectedTaurus, $collectedCapricorn]) => {
 		
-		return $collectedVirgo && $collectedTaurus && $collectedCapricorn;
+		return testingElementalVessels || $collectedVirgo && $collectedTaurus && $collectedCapricorn;
 	}
 );
 
@@ -288,7 +256,7 @@ export const collectedWater = derived(
 	[collectedScorpio, collectedCancer, collectedPisces],
 	([$collectedScorpio, $collectedCancer, $collectedPisces]) => {
 		
-		return $collectedScorpio && $collectedCancer && $collectedPisces;
+		return testingElementalVessels || $collectedScorpio && $collectedCancer && $collectedPisces;
 	}
 );
 
@@ -353,16 +321,7 @@ export const collectedAir = derived(
 	[collectedLibra, collectedGemini, collectedAquarius],
 	([$collectedLibra, $collectedGemini, $collectedAquarius]) => {
 		
-		return $collectedLibra && $collectedGemini && $collectedAquarius;
-	}
-);
-
-
-export const collectedSpirit = derived(
-	[collectedWater, collectedAir, collectedEarth, collectedFire],
-	([$collectedWater, $collectedAir, $collectedEarth, $collectedFire]) => {
-		
-		return $collectedWater && $collectedAir && $collectedEarth && $collectedFire;
+		return testingElementalVessels || $collectedLibra && $collectedGemini && $collectedAquarius;
 	}
 );
 
@@ -372,6 +331,7 @@ export const currentDeckCount = derived(
 		return $deck.length;
 	}
 );
+
 
 export const buttonCounts = derived(
 	[currentDeckCount],
@@ -393,6 +353,14 @@ export const resolutionIsHeated = derived(
 	heatIndex,
 	($heatIndex) => {
 		return $heatIndex > 0;
+	}
+);
+
+
+export const selectionIsSingular = derived(
+	moistureIndex,
+	($moistureIndex) => {
+		return $moistureIndex < 1;
 	}
 );
 
@@ -484,14 +452,6 @@ export const selectionIsWet = derived(
 		return $moistureIndex > 0;
 	}
 );
-
-
-// export const selectionIsSingular = derived(
-// 	moistureIndex,
-// 	($moistureIndex) => {
-// 		return $moistureIndex < 1;
-// 	}
-// );
 
 export const discardCount = derived(
 	[deck, earthColCount, airColCount, waterColCount, fireColCount, playerCards, daemonCards],
@@ -1035,23 +995,3 @@ export const currentStateText = derived(
 `;
 	}
 );
-
-
-// export const buttonCounts = derived(
-// 	[currentDeckCount,
-// 	 selectedQuadrant],
-// 	([$currentDeckCount,
-// 		$selectedQuadrant]) => {
-	
-// 		const counts = '(' + $currentDeckCount + ')';
-
-// 		// let counts = "DC:" + $currentDeckCount;
-
-// 		// if($selectedQuadrant){
-
-// 		// 	counts += " Q:" + $selectedQuadrant;	
-// 		// }
-
-// 		return counts;
-// 	}
-// );

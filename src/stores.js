@@ -51,7 +51,7 @@ export const selectedFireSign = writable('');
 
 export const playerCards = writable([]);
 export const daemonCards = writable([]);
-export const deck = writable([]);
+// export const deck = writable([]);
 
 export const airColCountChanged = writable(false);
 export const earthColCountChanged = writable(false);
@@ -325,23 +325,23 @@ export const collectedAir = derived(
 	}
 );
 
-export const currentDeckCount = derived(
-	[deck, playerCards, daemonCards],
-	([$deck, $playerCards, $daemonCards]) => {
-		return $deck.length;
-	}
-);
+// export const currentDeckCount = derived(
+// 	[deck, playerCards, daemonCards],
+// 	([$deck, $playerCards, $daemonCards]) => {
+// 		return $deck.length;
+// 	}
+// );
 
 
-export const buttonCounts = derived(
-	[currentDeckCount],
-	([$currentDeckCount]) => {
+// export const buttonCounts = derived(
+// 	[currentDeckCount],
+// 	([$currentDeckCount]) => {
 	
-		const counts = '(' + $currentDeckCount + ')';
+// 		const counts = '(' + $currentDeckCount + ')';
 
-		return counts;
-	}
-);
+// 		return counts;
+// 	}
+// );
 
 export const beforeGame = writable(true);
 export const turnFinished = writable(false);
@@ -453,19 +453,19 @@ export const selectionIsWet = derived(
 	}
 );
 
-export const discardCount = derived(
-	[deck, earthColCount, airColCount, waterColCount, fireColCount, playerCards, daemonCards],
-	([$deck, $earthColCount, $airColCount, $waterColCount, $fireColCount, $playerCards, $daemonCards]) => {
+// export const discardCount = derived(
+// 	[deck, earthColCount, airColCount, waterColCount, fireColCount, playerCards, daemonCards],
+// 	([$deck, $earthColCount, $airColCount, $waterColCount, $fireColCount, $playerCards, $daemonCards]) => {
 
-		return 36 - $deck.length - 
-					 $earthColCount - 
-					 $airColCount -
-					 $waterColCount -
-					 $fireColCount -
-					 $playerCards.length -
-					 $daemonCards.length;
-	}
-);
+// 		return 36 - $deck.length - 
+// 					 $earthColCount - 
+// 					 $airColCount -
+// 					 $waterColCount -
+// 					 $fireColCount -
+// 					 $playerCards.length -
+// 					 $daemonCards.length;
+// 	}
+// );
 
 export const currentQuadrant = derived(
 	[selectionIsWet, resolutionIsHeated],

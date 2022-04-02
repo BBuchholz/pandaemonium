@@ -38,7 +38,7 @@
     collectedRecentlyAir,
     collectedRecentlyEarth,
     rulesIncludeElementalShiftsOnAllCollections
-    } from '../stores.js';
+    } from './stores.js';
 
 
   import { getNotificationsContext } from 'svelte-notifications';

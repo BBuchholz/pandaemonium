@@ -10,12 +10,12 @@
     beforeGame, 
     fireColCount, 
     waterColCount, 
-    currentQuadrant, 
+    currentQuadrant,
     deck, 
     currentDeckCount, 
     discardCount
 
-  } from '../stores.js';
+  } from './stores.js';
 
   import Card from './Card.svelte'; 
 
