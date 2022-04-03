@@ -248,7 +248,7 @@
       <DeckVessel />
     </div>
 
-    <div class="aewonic-cross">
+    <div class="aewonic-cross middle">
       <AewonicCross />
     </div>
 
@@ -296,6 +296,13 @@
 
 }
 
+.top, .upper-middle, .lower-middle, .bottom {
+  height: 10%;
+}
+
+
+
+/*
 .top {
 
   position: absolute;
@@ -306,6 +313,6 @@
   
   position: absolute;
   bottom: 0;
-}
+}*/
 
 </style>
