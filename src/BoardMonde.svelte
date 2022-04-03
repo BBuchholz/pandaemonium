@@ -10,6 +10,8 @@
   import FireVessel from './vessels/FireVessel.svelte';
   import AewonicCross from './vessels/AewonicCross.svelte';
   import ButtonsVessel from './vessels/ButtonsVessel.svelte';
+  import DeckVessel from './vessels/DeckVessel.svelte';
+  import DiscardVessel from './vessels/DiscardVessel.svelte';
    
   import { 
     passPhrase,
@@ -27,7 +29,7 @@
   
   import {
     deck,
-    discardCount,
+    // discardCount,
     waterCollection,
     airCollection,
     earthCollection,
@@ -38,67 +40,67 @@
   import { getNotificationsContext } from 'svelte-notifications';
   const { addNotification } = getNotificationsContext();
 
-  function notifyPassPhraseFound(){
-    addNotification({
-      position: 'top-right',
-      text: 'Pass Phrase Found',
-      type: 'error',
-      description: 'pass phrase: ' + $passPhrase,
-      removeAfter: 1000,
-    });
-  } 
+  // function notifyPassPhraseFound(){
+  //   addNotification({
+  //     position: 'top-right',
+  //     text: 'Pass Phrase Found',
+  //     type: 'error',
+  //     description: 'pass phrase: ' + $passPhrase,
+  //     removeAfter: 1000,
+  //   });
+  // } 
 
-  function notifyDevMode(){
-    addNotification({
-      position: 'top-right',
-      text: 'Dev Mode Detected',
-      type: 'error',
-      description: 'Check console for output logs',
-      removeAfter: 3000,
-    });
-  } 
+  // function notifyDevMode(){
+  //   addNotification({
+  //     position: 'top-right',
+  //     text: 'Dev Mode Detected',
+  //     type: 'error',
+  //     description: 'Check console for output logs',
+  //     removeAfter: 3000,
+  //   });
+  // } 
 
-  function notifyQuadrantInfo(quadrantName){
+  // function notifyQuadrantInfo(quadrantName){
 
-    let descriptionText;
+  //   let descriptionText;
 
-    if(quadrantName){
+  //   if(quadrantName){
 
-      descriptionText = 'Current Quadrant: ' + quadrantName;
+  //     descriptionText = 'Current Quadrant: ' + quadrantName;
 
-    }else{
+  //   }else{
 
-      descriptionText = 'No Quadrant Selected';
-    }
+  //     descriptionText = 'No Quadrant Selected';
+  //   }
 
-    addNotification({
-      position: 'top-right',
-      text: 'Quadrant Info',
-      type: 'info',
-      description: descriptionText,
-      removeAfter: 4000,
-    });
-  }
+  //   addNotification({
+  //     position: 'top-right',
+  //     text: 'Quadrant Info',
+  //     type: 'info',
+  //     description: descriptionText,
+  //     removeAfter: 4000,
+  //   });
+  // }
 
-  $: notifyQuadrantInfo($selectedQuadrant);
+  // $: notifyQuadrantInfo($selectedQuadrant);
 
-  function notifyDeckInfo(deck, discardCount){
+  // function notifyDeckInfo(deck, discardCount){
 
-    let deckCount = deck.length;
+  //   let deckCount = deck.length;
 
-    let descriptionText = 'Deck Count: ' + deckCount;
-    descriptionText += '\nDiscard Count: ' + discardCount;
+  //   let descriptionText = 'Deck Count: ' + deckCount;
+  //   descriptionText += '\nDiscard Count: ' + discardCount;
 
-    addNotification({
-      position: 'top-right',
-      text: 'Deck Info',
-      type: 'info',
-      description: descriptionText,
-      removeAfter: 4000,
-    });
-  }
+  //   addNotification({
+  //     position: 'top-right',
+  //     text: 'Deck Info',
+  //     type: 'info',
+  //     description: descriptionText,
+  //     removeAfter: 4000,
+  //   });
+  // }
 
-  $: notifyDeckInfo($deck, $discardCount);
+  // $: notifyDeckInfo($deck, $discardCount);
 
   function redeemSpirit() {
 
@@ -242,12 +244,20 @@
       <AirVessel on:redeemAir={redeemAir} />
     </div>
 
+    <div class="vessels upper-middle">
+      <DeckVessel />
+    </div>
+
     <div class="aewonic-cross">
       <AewonicCross />
     </div>
 
     <div class="buttons">
       <ButtonsVessel />
+    </div>
+
+    <div class="vessels lower-middle">
+      <DiscardVessel />
     </div>
 
     <div class="vessels bottom">

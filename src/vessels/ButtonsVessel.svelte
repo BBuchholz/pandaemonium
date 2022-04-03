@@ -66,15 +66,15 @@
   import { getNotificationsContext } from 'svelte-notifications';
   const { addNotification } = getNotificationsContext();
 
-  function notifyClicked(title, description){
-    addNotification({
-      position: 'top-right',
-      text: title,
-      type: 'info',
-      description: description,
-      removeAfter: 4000,
-    });
-  }
+  // function notifyClicked(title, description){
+  //   addNotification({
+  //     position: 'top-right',
+  //     text: title,
+  //     type: 'info',
+  //     description: description,
+  //     removeAfter: 4000,
+  //   });
+  // }
 
   function notifySelectionResolutionValue(){
     addNotification({
@@ -117,18 +117,18 @@
 
     if(toReshuffle > 1) {
    
-      notifyClicked('Deck Info!', 'out of cards, reshuffling ' + toReshuffle + ' cards...');
+      // notifyClicked('Deck Info!', 'out of cards, reshuffling ' + toReshuffle + ' cards...');
       loadDeck();
       newDeal(); 
     
     } else if (toReshuffle === 1) {
 
-      notifyClicked('Deck Info!', 'only one card in deck, need to redeem to continue');
+      // notifyClicked('Deck Info!', 'only one card in deck, need to redeem to continue');
       $turnFinished = true;
 
     } else {
 
-      notifyClicked('Deck Info!', 'all cards collected! you rock!');
+      // notifyClicked('Deck Info!', 'all cards collected! you rock!');
       $beforeGame = true;
 
     }
