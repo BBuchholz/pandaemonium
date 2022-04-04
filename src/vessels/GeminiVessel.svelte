@@ -2,9 +2,13 @@
   
   import { 
     airCollection, 
-    collectedGemini 
+    collectedGemini,
   } from './stores.js';
-  import { keysGemini } from '../constants.js';
+
+  import { 
+    keysGemini,
+  } from '../constants.js';
+
   import AirDecanVessel from './AirDecanVessel.svelte';
 
   function redeemGemini() {
@@ -46,7 +50,7 @@
   .elemental-vessel {
     background-color: '#ffffff';
     display: flex;
-    flex-flow: row;
+    flex-flow: row-reverse;
   }
   
   .sign-vessel {

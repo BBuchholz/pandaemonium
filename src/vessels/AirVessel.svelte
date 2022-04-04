@@ -6,22 +6,13 @@
   import GeminiVessel from './GeminiVessel.svelte';
   import AquariusVessel from './AquariusVessel.svelte';
   import LibraVessel from './LibraVessel.svelte';
-  
-  import { 
-    selectedQuadrant,
-  } from '../stores.js';
 
+  import AirDecanVessel from './AirDecanVessel.svelte';
+  
   import { 
     airCollection, 
     collectedAir,
   } from './stores.js';
-
-  import { 
-    keysGemini, 
-    keysAquarius, 
-    keysLibra,
-    keysAir
-  } from '../constants.js';
 
   function redeemAir() {
 
@@ -41,6 +32,10 @@
       </button>
     
     </div>
+
+  {:else if $airCollection.length === 0}
+
+    <AirDecanVessel />
 
   {:else}
 

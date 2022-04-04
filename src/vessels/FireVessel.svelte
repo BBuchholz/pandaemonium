@@ -6,8 +6,11 @@
   import SagittariusVessel from './SagittariusVessel.svelte';
   import LeoVessel from './LeoVessel.svelte';
   import AriesVessel from './AriesVessel.svelte';
+
+  import FireDecanVessel from './FireDecanVessel.svelte';
  
-  import {  
+  import {
+    fireCollection,  
     collectedFire,
   } from './stores.js';
 
@@ -29,6 +32,10 @@
       </button>
     
     </div>
+
+  {:else if $fireCollection.length === 0}
+
+    <FireDecanVessel />
 
   {:else}
       

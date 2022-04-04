@@ -37,9 +37,20 @@ export class Knechtor {
 
     let rank = '';
     if(cardValue){
+      console.log('cardValue: ' + cardValue);
       rank = parseInt(cardValue.replace(suitKey, ''))
     }
-    return rank;
+
+    if(rank && rank == 10){
+      console.log('rank: ' + rank);
+      return 0;
+    }else if(rank){
+      console.log('rank: ' + rank);
+      return rank;
+    }else{
+      console.log('rank not defined');
+      return '';
+    }
   }
 
   dealTwelveTrees(){

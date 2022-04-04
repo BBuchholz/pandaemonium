@@ -7,22 +7,12 @@
   import TaurusVessel from './TaurusVessel.svelte';
   import CapricornVessel from './CapricornVessel.svelte';
 
-  import { 
-    selectedQuadrant,
-  } from '../stores.js';
+  import EarthDecanVessel from './EarthDecanVessel.svelte';
 
   import { 
     earthCollection, 
     collectedEarth,
   } from './stores.js';
-
-  import { 
-    keysVirgo, 
-    keysTaurus, 
-    keysCapricorn,
-    keysEarth 
-  } from '../constants.js';
-  
 
   function redeemEarth() {
 
@@ -42,6 +32,10 @@
       </button>
     
     </div>
+
+  {:else if $earthCollection.length === 0}
+
+    <EarthDecanVessel />
 
   {:else}
 

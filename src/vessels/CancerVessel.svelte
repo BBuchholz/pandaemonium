@@ -2,9 +2,13 @@
   
   import { 
     waterCollection, 
-    collectedCancer 
+    collectedCancer,
   } from './stores.js';
-  import { keysCancer } from '../constants.js';
+
+  import { 
+    keysCancer, 
+  } from '../constants.js';
+  
   import WaterDecanVessel from './WaterDecanVessel.svelte';
 
   function redeemCancer() {
@@ -46,7 +50,7 @@
   .elemental-vessel {
     background-color: '#ffffff';
     display: flex;
-    flex-flow: row;
+    flex-flow: row-reverse;
   }
   
   .sign-vessel {

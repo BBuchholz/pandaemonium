@@ -2,9 +2,13 @@
   
   import { 
     airCollection, 
-    collectedAquarius 
+    collectedAquarius, 
   } from './stores.js';
-  import { keysAquarius } from '../constants.js';
+
+  import { 
+    keysAquarius, 
+  } from '../constants.js';
+  
   import AirDecanVessel from './AirDecanVessel.svelte';
 
   function redeemAquarius() {
@@ -46,7 +50,7 @@
   .elemental-vessel {
     background-color: '#ffffff';
     display: flex;
-    flex-flow: row;
+    flex-flow: row-reverse;
   }
   
   .sign-vessel {

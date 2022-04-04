@@ -1,25 +1,40 @@
 <script>
   
-  import { fireCollection, collectedRecentlyFire } from './stores.js';
+  import { 
+    fireCollection, 
+    collectedRecentlyFire, 
+  } from './stores.js';
 
-  import KnechtController from '../myriad/KnechtController.js';
-  const magisterLudi = KnechtController();
+  import { 
+    Knechtor, 
+  } from '../myriad/Knechtor.js';
 
-  export let cardKey = '8W';
+  const magisterLudi = new Knechtor();
 
-  let cardSuit = 'W';
-  let cardRank = '8';
+  export let cardKey = '10W';
 
-  $: cardSuit = magisterLudi.parseSuit(cardKey);
-  $: cardRank = magisterLudi.parseRank(cardKey, cardSuit);
+  let cardSuit;
+  let cardRank;
 
+  initialize();
+
+  function initialize(){
+
+    cardSuit = magisterLudi.parseSuit(cardKey);
+    cardRank = magisterLudi.parseRank(cardKey, cardSuit);
+
+    console.log('cardKey ' + cardKey);
+    console.log('cardSuit ' + cardSuit);
+    console.log('cardRank ' + cardRank);
+
+  }
 
 </script> 
 
     
     <div  
       class="decan-vessel" 
-      class:collected={$fireCollection.includes(cardKey)}
+      class:collected={$fireCollection.includes(cardKey) || cardKey === '10W'}
       class:wiggle={ $collectedRecentlyFire.includes(cardKey)}
     >
       <a href={"https://dark-shadow-sun-fire.netlify.app/?cardKey=" + cardKey} target="_blank">{cardRank}</a>

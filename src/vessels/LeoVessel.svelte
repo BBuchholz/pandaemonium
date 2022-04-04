@@ -2,9 +2,13 @@
   
   import { 
     fireCollection, 
-    collectedLeo 
+    collectedLeo, 
   } from './stores.js';
-  import { keysLeo } from '../constants.js';
+
+  import { 
+    keysLeo, 
+  } from '../constants.js';
+
   import FireDecanVessel from './FireDecanVessel.svelte';
 
   function redeemLeo() {
@@ -46,7 +50,7 @@
   .elemental-vessel {
     background-color: '#ffffff';
     display: flex;
-    flex-flow: row;
+    flex-flow: row-reverse;
   }
   
   .sign-vessel {

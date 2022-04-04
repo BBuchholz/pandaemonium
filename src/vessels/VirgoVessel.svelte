@@ -2,9 +2,13 @@
   
   import { 
     earthCollection, 
-    collectedVirgo 
+    collectedVirgo, 
   } from './stores.js';
-  import { keysVirgo } from '../constants.js';
+
+  import { 
+    keysVirgo, 
+  } from '../constants.js';
+  
   import EarthDecanVessel from './EarthDecanVessel.svelte';
 
   function redeemVirgo() {
@@ -46,7 +50,7 @@
   .elemental-vessel {
     background-color: '#ffffff';
     display: flex;
-    flex-flow: row;
+    flex-flow: row-reverse;
   }
   
   .sign-vessel {

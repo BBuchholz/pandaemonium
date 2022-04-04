@@ -2,9 +2,13 @@
   
   import { 
     waterCollection, 
-    collectedPisces 
+    collectedPisces, 
   } from './stores.js';
-  import { keysPisces } from '../constants.js';
+
+  import { 
+    keysPisces, 
+  } from '../constants.js';
+
   import WaterDecanVessel from './WaterDecanVessel.svelte';
 
   function redeemPisces() {
@@ -46,7 +50,7 @@
   .elemental-vessel {
     background-color: '#ffffff';
     display: flex;
-    flex-flow: row;
+    flex-flow: row-reverse;
   }
   
   .sign-vessel {

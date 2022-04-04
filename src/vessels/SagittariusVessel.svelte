@@ -2,9 +2,13 @@
   
   import { 
     fireCollection, 
-    collectedSagittarius 
+    collectedSagittarius, 
   } from './stores.js';
-  import { keysSagittarius } from '../constants.js';
+
+  import { 
+    keysSagittarius, 
+  } from '../constants.js';
+  
   import FireDecanVessel from './FireDecanVessel.svelte';
 
   function redeemSagittarius() {
@@ -46,7 +50,7 @@
   .elemental-vessel {
     background-color: '#ffffff';
     display: flex;
-    flex-flow: row;
+    flex-flow: row-reverse;
   }
   
   .sign-vessel {

@@ -7,21 +7,12 @@
   import ScorpioVessel from './ScorpioVessel.svelte';
   import CancerVessel from './CancerVessel.svelte';
 
-  import { 
-    selectedQuadrant,
-  } from '../stores.js';
+  import WaterDecanVessel from './WaterDecanVessel.svelte';
   
   import { 
     waterCollection, 
     collectedWater,
   } from './stores.js';
-
-  import { 
-    keysCancer, 
-    keysScorpio, 
-    keysPisces,
-    keysWater 
-  } from '../constants.js';
 
   function redeemWater() {
 
@@ -41,6 +32,10 @@
       </button>
     
     </div>
+
+  {:else if $waterCollection.length === 0}
+
+    <WaterDecanVessel />
 
   {:else}
 

@@ -2,9 +2,13 @@
   
   import { 
     earthCollection, 
-    collectedCapricorn 
+    collectedCapricorn, 
   } from './stores.js';
-  import { keysCapricorn } from '../constants.js';
+
+  import { 
+    keysCapricorn, 
+  } from '../constants.js';
+
   import EarthDecanVessel from './EarthDecanVessel.svelte';
 
   function redeemCapricorn() {
@@ -46,7 +50,7 @@
   .elemental-vessel {
     background-color: '#ffffff';
     display: flex;
-    flex-flow: row;
+    flex-flow: row-reverse;
   }
   
   .sign-vessel {

@@ -40,68 +40,6 @@
   import { getNotificationsContext } from 'svelte-notifications';
   const { addNotification } = getNotificationsContext();
 
-  // function notifyPassPhraseFound(){
-  //   addNotification({
-  //     position: 'top-right',
-  //     text: 'Pass Phrase Found',
-  //     type: 'error',
-  //     description: 'pass phrase: ' + $passPhrase,
-  //     removeAfter: 1000,
-  //   });
-  // } 
-
-  // function notifyDevMode(){
-  //   addNotification({
-  //     position: 'top-right',
-  //     text: 'Dev Mode Detected',
-  //     type: 'error',
-  //     description: 'Check console for output logs',
-  //     removeAfter: 3000,
-  //   });
-  // } 
-
-  // function notifyQuadrantInfo(quadrantName){
-
-  //   let descriptionText;
-
-  //   if(quadrantName){
-
-  //     descriptionText = 'Current Quadrant: ' + quadrantName;
-
-  //   }else{
-
-  //     descriptionText = 'No Quadrant Selected';
-  //   }
-
-  //   addNotification({
-  //     position: 'top-right',
-  //     text: 'Quadrant Info',
-  //     type: 'info',
-  //     description: descriptionText,
-  //     removeAfter: 4000,
-  //   });
-  // }
-
-  // $: notifyQuadrantInfo($selectedQuadrant);
-
-  // function notifyDeckInfo(deck, discardCount){
-
-  //   let deckCount = deck.length;
-
-  //   let descriptionText = 'Deck Count: ' + deckCount;
-  //   descriptionText += '\nDiscard Count: ' + discardCount;
-
-  //   addNotification({
-  //     position: 'top-right',
-  //     text: 'Deck Info',
-  //     type: 'info',
-  //     description: descriptionText,
-  //     removeAfter: 4000,
-  //   });
-  // }
-
-  // $: notifyDeckInfo($deck, $discardCount);
-
   function redeemSpirit() {
 
     $waterCollection = [];
@@ -182,7 +120,7 @@
     $selectedQuadrant = 'Fire';
   }
 
-  function loadElementalVessels(){
+  function initializeElementalVessels(){
 
       $waterCollection = [
         '1C', '2C', '3C', 
@@ -210,28 +148,60 @@
 
   }
 
+  function setupDevMode(quadrantToSelect, keysToRedeem){
+
+    console.log('setting up dev mode');
+
+    //filter keys from each collection
+    $waterCollection =  $waterCollection.filter(
+                          cardKey => 
+                          !keysToRedeem.includes(cardKey)
+                        );
+    
+    $airCollection =  $airCollection.filter(
+                          cardKey => 
+                          !keysToRedeem.includes(cardKey)
+                        );
+    
+    $earthCollection =  $earthCollection.filter(
+                          cardKey => 
+                          !keysToRedeem.includes(cardKey)
+                        );
+    
+    $fireCollection =  $fireCollection.filter(
+                          cardKey => 
+                          !keysToRedeem.includes(cardKey)
+                        );
+
+    //select quadrant without redeeming
+    $selectedQuadrant = quadrantToSelect;
+
+        
+  } 
+
   initialize();
 
   function initialize(){
 
-    if($passPhrase === 'leMonde'){
-      notifyPassPhraseFound();
-
-      if(!$devMode){
-        $devMode = true;
-      }
-    }
-
-    loadElementalVessels();
+    initializeElementalVessels();
 
     if($devMode){
 
-      notifyDevMode();
+      //use this to selectively redeem
+      //some keys for testing particular 
+      //gameplay scenarios
+      const keysToRedeem = [
+        '3C', '6C', '9C',
+        '3S', '6S', '9S',
+        '3D', '6D', '9D',
+        '3W', '6W', '9W',
+      ];
 
-      // console.log('waterCollection: ' + $waterCollection);
-      // console.log('airCollection: ' + $airCollection);
-      // console.log('earthCollection: ' + $earthCollection);
-      // console.log('fireCollection: ' + $fireCollection);
+      //this will bypass the redemption
+      //on selection so we can specify
+      //a quadrant and surgically target
+      //specific deck compositions
+      setupDevMode('Earth', keysToRedeem);
     }
   }
 

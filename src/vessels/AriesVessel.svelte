@@ -2,9 +2,13 @@
   
   import { 
     fireCollection, 
-    collectedAries 
+    collectedAries, 
   } from './stores.js';
-  import { keysAries } from '../constants.js';
+
+  import { 
+    keysAries, 
+  } from '../constants.js';
+  
   import FireDecanVessel from './FireDecanVessel.svelte';
 
   function redeemAries() {
@@ -46,7 +50,7 @@
   .elemental-vessel {
     background-color: '#ffffff';
     display: flex;
-    flex-flow: row;
+    flex-flow: row-reverse;
   }
   
   .sign-vessel {

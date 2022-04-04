@@ -2,9 +2,13 @@
   
   import { 
     waterCollection, 
-    collectedScorpio 
+    collectedScorpio, 
   } from './stores.js';
-  import { keysScorpio } from '../constants.js';
+
+  import { 
+    keysScorpio, 
+  } from '../constants.js';
+  
   import WaterDecanVessel from './WaterDecanVessel.svelte';
  
   function redeemScorpio() {
@@ -46,7 +50,7 @@
   .elemental-vessel {
     background-color: '#ffffff';
     display: flex;
-    flex-flow: row;
+    flex-flow: row-reverse;
   }
   
   .sign-vessel {

@@ -4,7 +4,11 @@
     airCollection, 
     collectedLibra 
   } from './stores.js';
-  import { keysLibra } from '../constants.js';
+
+  import { 
+    keysLibra, 
+  } from '../constants.js';
+  
   import AirDecanVessel from './AirDecanVessel.svelte';
 
   function redeemLibra() {
@@ -46,7 +50,7 @@
   .elemental-vessel {
     background-color: '#ffffff';
     display: flex;
-    flex-flow: row;
+    flex-flow: row-reverse;
   }
   
   .sign-vessel {
