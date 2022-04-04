@@ -66,20 +66,40 @@
   import { getNotificationsContext } from 'svelte-notifications';
   const { addNotification } = getNotificationsContext();
 
-  // function notifyClicked(title, description){
-  //   addNotification({
-  //     position: 'top-right',
-  //     text: title,
-  //     type: 'info',
-  //     description: description,
-  //     removeAfter: 4000,
-  //   });
-  // }
+  function notifyCollectedWater(cardKey){
+    addNotification({
+      position: 'top-left',
+      text: cardKey + ' collected (Water)',
+      type: 'error',
+      description: 'lorem ipsum',
+      removeAfter: 4000,
+    });
+  }
 
-  function notifySelectionResolutionValue(){
+  function notifyCollectedAir(cardKey){
+    addNotification({
+      position: 'top-right',
+      text: cardKey + ' collected (Air)',
+      type: 'error',
+      description: 'lorem ipsum',
+      removeAfter: 4000,
+    });
+  }
+
+  function notifyCollectedEarth(cardKey){
+    addNotification({
+      position: 'bottom-left',
+      text: cardKey + ' collected (Earth)',
+      type: 'error',
+      description: 'lorem ipsum',
+      removeAfter: 4000,
+    });
+  }
+
+  function notifyCollectedFire(cardKey){
     addNotification({
       position: 'bottom-right',
-      text: 'collected ' + $selectionResolutionValue,
+      text: cardKey + ' collected (Fire)',
       type: 'error',
       description: 'lorem ipsum',
       removeAfter: 4000,
@@ -244,27 +264,17 @@
 
       // console.log('cardSuit: ' + cardSuit);
 
-      if(cardSuit === 'D'){
-        
-        if(!$earthCollection.includes(cardKey)){
-          
-          $earthCollection = [...$earthCollection, cardKey];
-          $earthColCountChanged = true;
-          $collectedRecentlyEarth = [...$collectedRecentlyEarth, cardKey];
-        }
-        
-        
-      }
 
-      if(cardSuit === 'W'){
+      if(cardSuit === 'C'){
         
-        if(!$fireCollection.includes(cardKey)){
+        if(!$waterCollection.includes(cardKey)){
           
-          $fireCollection = [...$fireCollection, cardKey];
-          $fireColCountChanged = true;
-          $collectedRecentlyFire = [...$collectedRecentlyFire, cardKey];
+          $waterCollection = [...$waterCollection, cardKey];
+          $waterColCountChanged = true;
+          $collectedRecentlyWater = [...$collectedRecentlyWater, cardKey];
+
+          notifyCollectedWater(cardKey);
         }
-        
       }
 
       if(cardSuit === 'S'){
@@ -274,23 +284,35 @@
           $airCollection = [...$airCollection, cardKey];
           $airColCountChanged = true;
           $collectedRecentlyAir = [...$collectedRecentlyAir, cardKey];
+
+          notifyCollectedAir(cardKey);
         }
-        
       }
 
-      if(cardSuit === 'C'){
+      if(cardSuit === 'D'){
         
-        if(!$waterCollection.includes(cardKey)){
+        if(!$earthCollection.includes(cardKey)){
           
-          $waterCollection = [...$waterCollection, cardKey];
-          $waterColCountChanged = true;
-          $collectedRecentlyWater = [...$collectedRecentlyWater, cardKey];
-        }
+          $earthCollection = [...$earthCollection, cardKey];
+          $earthColCountChanged = true;
+          $collectedRecentlyEarth = [...$collectedRecentlyEarth, cardKey];
+
+          notifyCollectedEarth(cardKey);
+        }       
+      }
+
+      if(cardSuit === 'W'){
         
+        if(!$fireCollection.includes(cardKey)){
+          
+          $fireCollection = [...$fireCollection, cardKey];
+          $fireColCountChanged = true;
+          $collectedRecentlyFire = [...$collectedRecentlyFire, cardKey];
+
+          notifyCollectedFire(cardKey);
+        }
       }
     }
-
-    notifySelectionResolutionValue();
 
     resetSelection();
     // console.log('card comparison processed');

@@ -55,6 +55,38 @@
 
 </script>
 
+<div
+  class="notification"
+  in:fade
+  out:fade  
+>
+  <div class="notification-content">
+    <slot>{notification.text}</slot>
+
+    {#if !notification.disableDescription}
+
+      <p>{notification.description || 'Custom description'}</p>
+
+    {/if}
+
+  </div>
+
+  {#if !notification.disableButtons}
+
+    <div class="notification-buttons">
+      <button on:click={copyState}>
+        Copy
+      </button>
+      <button on:click={onRemove}>
+        Close
+      </button>
+    </div>
+  
+  {/if}
+
+</div>
+
+
 <style>
   .notification {
     display: flex;
@@ -102,34 +134,3 @@
     background: rgba(0, 0, 0, 0.01);
   }
 </style>
-
-<div
-  class="notification"
-  in:fade
-  out:fade  
->
-  <div class="notification-content">
-    <slot>{notification.text}</slot>
-
-    {#if !notification.disableDescription}
-
-      <p>{notification.description || 'Custom description'}</p>
-
-    {/if}
-
-  </div>
-
-  {#if !notification.disableButtons}
-
-    <div class="notification-buttons">
-      <button on:click={copyState}>
-        Copy
-      </button>
-      <button on:click={onRemove}>
-        Close
-      </button>
-    </div>
-  
-  {/if}
-
-</div>
