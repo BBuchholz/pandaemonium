@@ -1,6 +1,9 @@
 <script>
   
-  import { earthCollection, collectedRecentlyEarth } from '../stores.js';
+  import { 
+    earthCollection, 
+    collectedRecentlyEarth, 
+  } from './stores.js';
 
   import KnechtController from '../myriad/KnechtController.js';
   const magisterLudi = KnechtController();
@@ -28,10 +31,10 @@
 <style> 
 
   .decan-vessel {
-    margin: 1px;
-    padding: 2px;
+    margin: 5px;
+    padding: 5px;
     border-style: double;
-    border-radius: 7px;
+    border-radius: 10px;
     display: none;
   }
 

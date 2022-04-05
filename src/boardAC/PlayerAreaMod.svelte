@@ -13,7 +13,7 @@
     selectionIsValid, 
     noValidChoices
   
-  } from '../stores.js';
+  } from './stores.js';
 
   import Card from './Card.svelte';
 
@@ -56,6 +56,8 @@
 
     
   {#if $beforeGame}
+
+    <LibraryPopupButton />
 
     <button 
       class="start-game"

@@ -47,7 +47,7 @@
     font-weight: 700;
     border: solid 3px black;
     color: white;
-    background-color: #cc98e6;
+    background-color: #lightslategray;
     border-radius: 30px;
     transition: all ease-out .2s;
     cursor: pointer;

@@ -33,7 +33,7 @@
 
     if($devMode){
 
-      $passPhrase = 'leMonde';
+      $passPhrase = 'leAC';
     }
   }
 

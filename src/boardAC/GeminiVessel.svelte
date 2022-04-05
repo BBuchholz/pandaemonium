@@ -1,6 +1,9 @@
 <script>
   
-  import { airCollection, collectedGemini } from '../stores.js';
+  import { 
+    airCollection, 
+    collectedGemini, 
+  } from './stores.js';
   import { keysGemini } from '../constants.js';
   import AirDecanVessel from './AirDecanVessel.svelte';
 
@@ -47,7 +50,7 @@
   
   .zodiac-vessel {
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     align-items: center;
     justify-content: space-around;
   }

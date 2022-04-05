@@ -6,11 +6,15 @@
   import LibraVessel from './LibraVessel.svelte';
 
   import { 
+    waterCollection, 
     airCollection, 
+    earthCollection,
+    fireCollection, 
     collectedAir,
+    collectedSpirit,
     heatIndex,
     moistureIndex
-  } from '../stores.js';
+  } from './stores.js';
 
   import { 
     keysGemini, 
@@ -18,19 +22,47 @@
     keysLibra,
     keysAir
   } from '../constants.js';
-  
-  
 
   function redeemAir() {
-
-    $airCollection =  $airCollection.filter(
-                          cardKey => 
-                          !keysAir.includes(cardKey)
-                        ); 
     
-    // uncomment when implemented
-    $heatIndex += 9;
-    $moistureIndex += 9;
+    if($collectedSpirit){
+      
+      redeemSpirit()
+      selectAir(true);
+
+    }else{
+
+      $airCollection =  $airCollection.filter(
+                            cardKey => 
+                            !keysAir.includes(cardKey)
+                          ); 
+
+      selectAir(false);
+    }
+  }
+
+  function selectAir(resetIndexes){
+
+    if(resetIndexes){
+
+      $heatIndex = 9;
+      $moistureIndex = 9;
+
+    }else{
+
+      $heatIndex += 9;
+      $moistureIndex += 9;
+    }
+
+      
+  }
+
+  function redeemSpirit() {
+
+    $waterCollection = [];
+    $airCollection = [];
+    $earthCollection = [];
+    $fireCollection = [];
   }
 
 </script>

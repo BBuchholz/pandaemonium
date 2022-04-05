@@ -7,7 +7,7 @@
     selectedCardsForDaemon,
     selectionIsWet,
     resolutionIsHeated
-    } from '../stores.js';
+    } from './stores.js';
 
   import {
     cardImagePath

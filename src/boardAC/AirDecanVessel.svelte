@@ -1,6 +1,9 @@
 <script>
   
-  import { airCollection, collectedRecentlyAir } from '../stores.js';
+  import { 
+    airCollection, 
+    collectedRecentlyAir, 
+  } from './stores.js';
 
   import KnechtController from '../myriad/KnechtController.js';
   const magisterLudi = KnechtController();

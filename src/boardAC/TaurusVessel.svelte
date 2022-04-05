@@ -1,6 +1,9 @@
 <script>
   
-  import { earthCollection, collectedTaurus } from '../stores.js';
+  import { 
+    earthCollection, 
+    collectedTaurus, 
+  } from './stores.js';
   import { keysTaurus } from '../constants.js';
   import EarthDecanVessel from './EarthDecanVessel.svelte';
 
@@ -47,7 +50,7 @@
   
   .zodiac-vessel {
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     align-items: center;
     justify-content: space-around;
   }

@@ -5,18 +5,70 @@
   import AriesVessel from './AriesVessel.svelte';
  
   import { 
+    waterCollection, 
+    airCollection,
+    earthCollection,
     fireCollection, 
     collectedFire,
+    collectedSpirit,
     heatIndex,
-    moistureIndex } from '../stores.js';
-  import { keysLeo, keysAries, keysSagittarius, keysFire } from '../constants.js';
+    moistureIndex, 
+  } from './stores.js';
+
+  import { 
+    keysLeo, 
+    keysAries, 
+    keysSagittarius, 
+    keysFire, 
+  } from '../constants.js';
   
+  // function redeemFire() {
+
+  //   $fireCollection = $fireCollection.filter(cardKey => !keysFire.includes(cardKey)); 
+
+  //   $heatIndex += 9;
+  //   $moistureIndex += -9;
+  // }
+
   function redeemFire() {
+    
+    if($collectedSpirit){
+      
+      redeemSpirit()
+      selectFire(true);
 
-    $fireCollection = $fireCollection.filter(cardKey => !keysFire.includes(cardKey)); 
+    }else{
 
-    $heatIndex += 9;
-    $moistureIndex += -9;
+      $fireCollection =  $fireCollection.filter(
+                            cardKey => 
+                            !keysFire.includes(cardKey)
+                          ); 
+
+      selectFire(false);
+    }
+  }
+
+  function selectFire(resetIndexes){
+
+    if(resetIndexes){
+
+      $heatIndex = 9;
+      $moistureIndex = -9;
+
+    }else{
+
+      $heatIndex += 9;
+      $moistureIndex += -9;
+
+    }
+  }
+
+  function redeemSpirit() {
+
+    $waterCollection = [];
+    $airCollection = [];
+    $earthCollection = [];
+    $fireCollection = [];
   }
 
 </script>

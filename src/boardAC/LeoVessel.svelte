@@ -1,6 +1,9 @@
 <script>
   
-  import { fireCollection, collectedLeo } from '../stores.js';
+  import { 
+    fireCollection, 
+    collectedLeo, 
+  } from './stores.js';
   import { keysLeo } from '../constants.js';
   import FireDecanVessel from './FireDecanVessel.svelte';
 
@@ -47,7 +50,7 @@
   
   .zodiac-vessel {
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     align-items: center;
     justify-content: space-around;
   }

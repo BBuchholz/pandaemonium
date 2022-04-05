@@ -1,6 +1,9 @@
 <script>
   
-  import { waterCollection, collectedCancer } from '../stores.js';
+  import { 
+    waterCollection, 
+    collectedCancer, 
+  } from './stores.js';
   import { keysCancer } from '../constants.js';
   import WaterDecanVessel from './WaterDecanVessel.svelte';
 
@@ -47,7 +50,7 @@
   
   .zodiac-vessel {
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     align-items: center;
     justify-content: space-around;
   }

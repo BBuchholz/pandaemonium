@@ -6,10 +6,14 @@
 
   import { 
     waterCollection, 
+    airCollection,
+    earthCollection,
+    fireCollection,
     collectedWater,
+    collectedSpirit,
     heatIndex,
     moistureIndex 
-  } from '../stores.js';
+  } from './stores.js';
 
   import { 
     keysCancer, 
@@ -18,18 +22,44 @@
     keysWater 
   } from '../constants.js';
   
-  
-
   function redeemWater() {
+    
+    if($collectedSpirit){
+      
+      redeemSpirit()
+      selectWater(true);
 
-    $waterCollection =  $waterCollection.filter(
-                          cardKey => 
-                          !keysWater.includes(cardKey)
-                        ); 
+    }else{
 
-    // uncomment when implemented
-    $heatIndex += -9;
-    $moistureIndex += 9;
+      $waterCollection =  $waterCollection.filter(
+                            cardKey => 
+                            !keysWater.includes(cardKey)
+                          ); 
+
+      selectWater(false);
+    }
+  }
+
+  function selectWater(resetIndexes){
+
+    if(resetIndexes){
+
+      $heatIndex = -9;
+      $moistureIndex = 9;
+
+    }else{
+
+      $heatIndex += -9;
+      $moistureIndex += 9;
+    }
+  }
+
+  function redeemSpirit() {
+
+    $waterCollection = [];
+    $airCollection = [];
+    $earthCollection = [];
+    $fireCollection = [];
   }
 
 </script>

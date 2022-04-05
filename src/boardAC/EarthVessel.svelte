@@ -6,11 +6,15 @@
   import CapricornVessel from './CapricornVessel.svelte';
 
   import { 
+    waterCollection, 
+    airCollection, 
     earthCollection, 
+    fireCollection,
     collectedEarth,
+    collectedSpirit,
     heatIndex,
     moistureIndex
-  } from '../stores.js';
+  } from './stores.js';
 
   import { 
     keysVirgo, 
@@ -20,15 +24,55 @@
   } from '../constants.js';
   
 
+  // function redeemEarth() {
+
+  //   $earthCollection =  $earthCollection.filter(
+  //                         cardKey => 
+  //                         !keysEarth.includes(cardKey)
+  //                       ); 
+
+  //   $heatIndex += -9;
+  //   $moistureIndex += -9;
+  // }
+
   function redeemEarth() {
+    
+    if($collectedSpirit){
+      
+      redeemSpirit()
+      selectEarth(true);
 
-    $earthCollection =  $earthCollection.filter(
-                          cardKey => 
-                          !keysEarth.includes(cardKey)
-                        ); 
+    }else{
 
-    $heatIndex += -9;
-    $moistureIndex += -9;
+      $earthCollection =  $earthCollection.filter(
+                            cardKey => 
+                            !keysEarth.includes(cardKey)
+                          ); 
+
+      selectEarth(false);
+    }
+  }
+
+  function selectEarth(resetIndexes){
+
+    if(resetIndexes){
+
+      $heatIndex = -9;
+      $moistureIndex = -9;
+
+    }else{
+      
+      $heatIndex += -9;
+      $moistureIndex += -9;
+    }
+  }
+
+  function redeemSpirit() {
+
+    $waterCollection = [];
+    $airCollection = [];
+    $earthCollection = [];
+    $fireCollection = [];
   }
 
 </script>

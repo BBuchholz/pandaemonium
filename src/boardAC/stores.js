@@ -325,6 +325,15 @@ export const collectedAir = derived(
 	}
 );
 
+
+export const collectedSpirit = derived(
+	[collectedWater, collectedAir, collectedEarth, collectedFire],
+	([$collectedWater, $collectedAir, $collectedEarth, $collectedFire]) => {
+		
+		return $collectedWater && $collectedAir && $collectedEarth && $collectedFire;
+	}
+);
+
 export const currentDeckCount = derived(
 	[deck, playerCards, daemonCards],
 	([$deck, $playerCards, $daemonCards]) => {
