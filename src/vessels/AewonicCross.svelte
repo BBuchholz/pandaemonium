@@ -42,7 +42,9 @@
     earthCollection,
     fireCollection,
   } from './stores.js';
- 
+   
+  import { fade, fly } from 'svelte/transition';
+
   import Card from './ModCard.svelte';
 
   import { Knechtor } from '../myriad/Knechtor.js';
@@ -140,46 +142,59 @@
 
 
   <div 
-    class="daemon-cards">
+    class="daemon-cards"
+  >
 
-    <div 
-      class="card-stead"
-      class:hidden={!$aewonicCross[0]}
-    >  
+    {#if $aewonicCross[0]}
 
-      <Card
-        cardKey={$aewonicCross[0]}
-        i=0
-        on:cardClicked={handleDaemonCardClicked($aewonicCross[0])}
-      />
+      <div 
+        class="card-stead"
+        transition:fade
+      >  
 
-    </div>
+        <Card
+          cardKey={$aewonicCross[0]}
+          i=0
+          on:cardClicked={handleDaemonCardClicked($aewonicCross[0])}
+        />
+
+      </div>
     
-    <div 
-      class="card-stead"
-      class:hidden={!$aewonicCross[2]}
-    >
-
-      <Card
-        cardKey={$aewonicCross[2]}
-        i=1
-        on:cardClicked={handleDaemonCardClicked($aewonicCross[2])}
-      />
-
-    </div>
+    {/if}
     
-    <div 
-      class="card-stead"
-      class:hidden={!$aewonicCross[4]}
-    >
+    {#if $aewonicCross[2]}
+      
+      <div 
+        class="card-stead"
+        transition:fade
+      >
 
-      <Card
-        cardKey={$aewonicCross[4]}
-        i=2
-        on:cardClicked={handleDaemonCardClicked($aewonicCross[4])}
-      />
+        <Card
+          cardKey={$aewonicCross[2]}
+          i=1
+          on:cardClicked={handleDaemonCardClicked($aewonicCross[2])}
+        />
 
-    </div>
+      </div>
+    
+    {/if}
+    
+    {#if $aewonicCross[4]}
+
+      <div 
+        class="card-stead"
+        transition:fade
+      >
+
+        <Card
+          cardKey={$aewonicCross[4]}
+          i=2
+          on:cardClicked={handleDaemonCardClicked($aewonicCross[4])}
+        />
+
+      </div>
+
+    {/if}
 
   </div>  
 
@@ -187,44 +202,56 @@
     class="player-cards"
   >
 
-    <div 
-      class="card-stead"
-      class:hidden={!$aewonicCross[1]}
-    >
+    {#if $aewonicCross[1]}
 
-      <Card 
-        cardKey={$aewonicCross[1]}
-        i=0
-        on:cardClicked={handlePlayerCardClicked($aewonicCross[1])}
-      />
-    
-    </div>
-    
-    <div 
-      class="card-stead"
-      class:hidden={!$aewonicCross[3]}
-    >
+      <div 
+        class="card-stead"
+        transition:fade
+      >
 
-      <Card 
-        cardKey={$aewonicCross[3]}
-        i=1
-        on:cardClicked={handlePlayerCardClicked($aewonicCross[3])}
-      />
-
-    </div>
+        <Card 
+          cardKey={$aewonicCross[1]}
+          i=0
+          on:cardClicked={handlePlayerCardClicked($aewonicCross[1])}
+        />
       
-    <div 
-      class="card-stead"
-      class:hidden={!$aewonicCross[5]}
-    >
+      </div>
+      
+    {/if}
+    
+    {#if $aewonicCross[3]}
 
-      <Card 
-        cardKey={$aewonicCross[5]}
-        i=2
-        on:cardClicked={handlePlayerCardClicked($aewonicCross[5])}
-      />
+      <div 
+        class="card-stead"
+        transition:fade
+      >
 
-    </div>
+        <Card 
+          cardKey={$aewonicCross[3]}
+          i=1
+          on:cardClicked={handlePlayerCardClicked($aewonicCross[3])}
+        />
+
+      </div>
+    
+    {/if}
+
+    {#if $aewonicCross[5]}  
+      
+      <div 
+        class="card-stead"
+        transition:fade
+      >
+
+        <Card 
+          cardKey={$aewonicCross[5]}
+          i=2
+          on:cardClicked={handlePlayerCardClicked($aewonicCross[5])}
+        />
+
+      </div>
+    
+    {/if}
     
 
   </div>  
@@ -262,7 +289,7 @@
   border-radius: 3%;
   box-sizing: border-box;
   text-align: center;
-  transition: all .15s ease-out;
+  transition: all .15s ease-in-out;
   box-shadow: 0px 5px 5px rgba(0,0,0,.3);
   overflow: hidden;
   display: flex;

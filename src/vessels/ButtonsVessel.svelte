@@ -85,6 +85,26 @@
       removeAfter: 4000,
     });
   }
+  
+  function notifyCollectedWaterWet(cardKey){
+    addNotification({
+      position: 'top-center',
+      text: cardKey + ' collected (Water)',
+      type: 'error',
+      description: 'lorem ipsum',
+      removeAfter: 4000,
+    });
+  }
+
+  function notifyCollectedAirWet(cardKey){
+    addNotification({
+      position: 'top-center',
+      text: cardKey + ' collected (Air)',
+      type: 'error',
+      description: 'lorem ipsum',
+      removeAfter: 4000,
+    });
+  }
 
   function notifyCollectedEarth(cardKey){
     addNotification({
@@ -99,6 +119,26 @@
   function notifyCollectedFire(cardKey){
     addNotification({
       position: 'bottom-right',
+      text: cardKey + ' collected (Fire)',
+      type: 'error',
+      description: 'lorem ipsum',
+      removeAfter: 4000,
+    });
+  }
+
+  function notifyCollectedEarthDry(cardKey){
+    addNotification({
+      position: 'bottom-center',
+      text: cardKey + ' collected (Earth)',
+      type: 'error',
+      description: 'lorem ipsum',
+      removeAfter: 4000,
+    });
+  }
+
+  function notifyCollectedFireDry(cardKey){
+    addNotification({
+      position: 'bottom-center',
       text: cardKey + ' collected (Fire)',
       type: 'error',
       description: 'lorem ipsum',
@@ -221,6 +261,7 @@
 
   function endGame(){
     $beforeGame = true;
+    $turnFinished = false;
     $selectedQuadrant = '';
     // $daemonCards = [];
     // $playerCards = [];
@@ -253,78 +294,128 @@
 
   function processCardCollection() {
 
-    // console.log('res: ' + $selectionResolutionValue);
-    // console.log('length: ' + $selectionResolutionValue.length);
+    // determine if overlap will occur, so we can 
+    // use the centered notifications for each 
+    // (denoted as Dry for lower Quadrants 
+    //  and Wet for upper Quadrants)
+    
+    let foundWater = [];
+    let foundAir = [];
+    let foundEarth = [];
+    let foundFire = [];
 
     for(const cardKey of $selectionResolutionValue){
 
-      // console.log('cardkey: ' + cardKey);
-
       let cardSuit = magisterLudi.parseSuit(cardKey);
-
-      // console.log('cardSuit: ' + cardSuit);
-
 
       if(cardSuit === 'C'){
         
-        if(!$waterCollection.includes(cardKey)){
-          
-          $waterCollection = [...$waterCollection, cardKey];
-          $waterColCountChanged = true;
-          $collectedRecentlyWater = [...$collectedRecentlyWater, cardKey];
-
-          notifyCollectedWater(cardKey);
-        }
+        foundWater.push(cardKey);
       }
 
       if(cardSuit === 'S'){
-        
-        if(!$airCollection.includes(cardKey)){
-          
-          $airCollection = [...$airCollection, cardKey];
-          $airColCountChanged = true;
-          $collectedRecentlyAir = [...$collectedRecentlyAir, cardKey];
 
-          notifyCollectedAir(cardKey);
-        }
+        foundAir.push(cardKey);
       }
 
       if(cardSuit === 'D'){
-        
-        if(!$earthCollection.includes(cardKey)){
-          
-          $earthCollection = [...$earthCollection, cardKey];
-          $earthColCountChanged = true;
-          $collectedRecentlyEarth = [...$collectedRecentlyEarth, cardKey];
-
-          notifyCollectedEarth(cardKey);
-        }       
+               
+        foundEarth.push(cardKey);
       }
 
       if(cardSuit === 'W'){
         
-        if(!$fireCollection.includes(cardKey)){
+        foundFire.push(cardKey);
+      }   
+
+    }
+
+    //Water
+    for(const cardKey of foundWater){
+
+      if(!$waterCollection.includes(cardKey)){
           
-          $fireCollection = [...$fireCollection, cardKey];
-          $fireColCountChanged = true;
-          $collectedRecentlyFire = [...$collectedRecentlyFire, cardKey];
+        $waterCollection = [...$waterCollection, cardKey];
+        $waterColCountChanged = true;
+        $collectedRecentlyWater = [...$collectedRecentlyWater, cardKey];
+      
+        if(foundAir.length > 0){
+
+          notifyCollectedWaterWet(cardKey);
+
+        }else{
+
+          notifyCollectedWater(cardKey);
+
+        }
+      }
+    }
+
+    //Air
+    for(const cardKey of foundAir){
+
+      if(!$airCollection.includes(cardKey)){
+          
+        $airCollection = [...$airCollection, cardKey];
+        $airColCountChanged = true;
+        $collectedRecentlyAir = [...$collectedRecentlyAir, cardKey];
+      
+        if(foundWater.length > 0){
+
+          notifyCollectedAirWet(cardKey);
+
+        }else{
+
+          notifyCollectedAir(cardKey);
+
+        }
+      }
+    }
+
+    //Earth
+    for(const cardKey of foundEarth){
+
+      if(!$earthCollection.includes(cardKey)){
+          
+        $earthCollection = [...$earthCollection, cardKey];
+        $earthColCountChanged = true;
+        $collectedRecentlyEarth = [...$collectedRecentlyEarth, cardKey];
+      
+        if(foundFire.length > 0){
+
+          notifyCollectedEarthDry(cardKey);
+
+        }else{
+
+          notifyCollectedEarth(cardKey);
+
+        }
+      }
+    }
+
+    //Fire
+    for(const cardKey of foundFire){
+
+      if(!$fireCollection.includes(cardKey)){
+          
+        $fireCollection = [...$fireCollection, cardKey];
+        $fireColCountChanged = true;
+        $collectedRecentlyFire = [...$collectedRecentlyFire, cardKey];
+      
+        if(foundEarth.length > 0){
+
+          notifyCollectedFireDry(cardKey);
+
+        }else{
 
           notifyCollectedFire(cardKey);
+
         }
       }
     }
 
     resetSelection();
-    // console.log('card comparison processed');
   }
-
-  // $: console.log('playerCards: ' + $playerCards);
-  // $: console.log('daemonCards: ' + $daemonCards);
-  // $: console.log('noValidChoices: ' + $noValidChoices);
-
-  // $: console.log('beforeGame: ' + $beforeGame);
-  // $: console.log('selectedQuadrant: ' + $selectedQuadrant);
-
 
 </script>
 
@@ -396,7 +487,7 @@
 
   {/if}
 
-  {#if $turnFinished && !$beforeGame}
+  {#if $turnFinished && !$beforeGame && !$collectedSpirit}
 
     <button 
       class="next-turn" 

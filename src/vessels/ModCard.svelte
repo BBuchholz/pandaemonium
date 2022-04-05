@@ -1,6 +1,6 @@
 <script>
   
-  import { fade, fly } from 'svelte/transition';
+  import { fade } from 'svelte/transition';
 
   import { 
     selectedCardsForPlayer, 
@@ -158,8 +158,7 @@ function getZodiacalSymbolFromCardKey(cardKey){
 
 <div 
   class="card"
-  in:fly="{{ y: 200, duration: 2000, delay: i*200 }}" 
-  out:fade
+  transition:fade
   class:card-up={$selectedCards.includes(cardKey) && cardUp(cardKey)}
   class:card-down={$selectedCards.includes(cardKey) && cardDown(cardKey)}
   class:fire-color={cardSuit === 'W'}
@@ -215,6 +214,7 @@ function getZodiacalSymbolFromCardKey(cardKey){
   transition: all .15s ease-out;
   box-shadow: 0px 5px 5px rgba(0,0,0,.3);
   overflow: hidden;
+  animation: all .15s ease-in-out;
 }
 
 .card-up {
