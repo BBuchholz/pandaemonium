@@ -11,7 +11,6 @@
 
   import MyriadNotification from './MyriadNotification.svelte';
 
-  import GameBoard from './components/GameBoard.svelte';
   import DaedalusLab from './components/DaedalusLab.svelte';
 
   import BoardAC from './BoardAC.svelte';

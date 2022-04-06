@@ -1,33 +1,33 @@
-/////////////////////////////////
-// TOP LEVEL STORES
-/////////////////////////////////
+// /////////////////////////////////
+// // TOP LEVEL STORES
+// /////////////////////////////////
 
 import { writable, derived } from 'svelte/store';
 import KnechtController from './myriad/KnechtController.js';
 
-import { 
-	keysVirgo, 
-	keysTaurus, 
-	keysCapricorn, 
-	keysLibra, 
-	keysGemini, 
-	keysAquarius,
-	keysPisces, 
-	keysScorpio,
-	keysCancer,
-	keysSagittarius,
-	keysLeo,
-	keysAries
-} from './constants.js'; 
+// import { 
+// 	keysVirgo, 
+// 	keysTaurus, 
+// 	keysCapricorn, 
+// 	keysLibra, 
+// 	keysGemini, 
+// 	keysAquarius,
+// 	keysPisces, 
+// 	keysScorpio,
+// 	keysCancer,
+// 	keysSagittarius,
+// 	keysLeo,
+// 	keysAries
+// } from './constants.js'; 
 
 const magisterLudi = KnechtController();
-const testingElementalVessels = false;
+// const testingElementalVessels = false;
 
 export const modal = writable(null);
 export const passPhrase = writable('');
 
-export const rulesIncludeElementalShiftsOnAllCollections =
-	writable(false);
+// export const rulesIncludeElementalShiftsOnAllCollections =
+// 	writable(false);
 
 export const selectedQuadrant = writable('');
 
@@ -45,303 +45,303 @@ export const selectedCards = derived(
 );
 
 export const selectedEarthSign = writable('');
-export const selectedWaterSign = writable('');
-export const selectedAirSign = writable('');
-export const selectedFireSign = writable('');
+// export const selectedWaterSign = writable('');
+// export const selectedAirSign = writable('');
+// export const selectedFireSign = writable('');
 
-export const playerCards = writable([]);
-export const daemonCards = writable([]);
-// export const deck = writable([]);
+// export const playerCards = writable([]);
+// export const daemonCards = writable([]);
+// // export const deck = writable([]);
 
 export const airColCountChanged = writable(false);
 export const earthColCountChanged = writable(false);
 export const fireColCountChanged = writable(false);
 export const waterColCountChanged = writable(false);
 
-export const collectedRecentlyFire = writable([]);
-export const collectedRecentlyWater = writable([]);
-export const collectedRecentlyAir = writable([]);
-export const collectedRecentlyEarth = writable([]);
+// export const collectedRecentlyFire = writable([]);
+// export const collectedRecentlyWater = writable([]);
+// export const collectedRecentlyAir = writable([]);
+// export const collectedRecentlyEarth = writable([]);
 
 
 export const fireCollection = writable([]);
 
-export const fireColCount = derived(
-	fireCollection,
-	($fireCollection) => {
-		return $fireCollection.length;
-	}
-);
+// export const fireColCount = derived(
+// 	fireCollection,
+// 	($fireCollection) => {
+// 		return $fireCollection.length;
+// 	}
+// );
 
-export const collectedSagittarius = derived(
-	fireCollection,
-	($fireCollection) => {
+// export const collectedSagittarius = derived(
+// 	fireCollection,
+// 	($fireCollection) => {
 
-		for(const cardKey of keysSagittarius){
+// 		for(const cardKey of keysSagittarius){
 
-			if(!$fireCollection.includes(cardKey)){
+// 			if(!$fireCollection.includes(cardKey)){
 				
-				return false;
-			}
-		}
+// 				return false;
+// 			}
+// 		}
 
-		return true;
-	}
-);
+// 		return true;
+// 	}
+// );
 
-export const collectedLeo = derived(
-	fireCollection,
-	($fireCollection) => {
+// export const collectedLeo = derived(
+// 	fireCollection,
+// 	($fireCollection) => {
 
-		for(const cardKey of keysLeo){
+// 		for(const cardKey of keysLeo){
 
-			if(!$fireCollection.includes(cardKey)){
+// 			if(!$fireCollection.includes(cardKey)){
 				
-				return false;
-			}
-		}
+// 				return false;
+// 			}
+// 		}
 
-		return true;
-	}
-);
+// 		return true;
+// 	}
+// );
 
-export const collectedAries = derived(
-	fireCollection,
-	($fireCollection) => {
+// export const collectedAries = derived(
+// 	fireCollection,
+// 	($fireCollection) => {
 
-		for(const cardKey of keysAries){
+// 		for(const cardKey of keysAries){
 
-			if(!$fireCollection.includes(cardKey)){
+// 			if(!$fireCollection.includes(cardKey)){
 				
-				return false;
-			}
-		}
+// 				return false;
+// 			}
+// 		}
 
-		return true;
-	}
-);
+// 		return true;
+// 	}
+// );
 
 
-export const collectedFire = derived(
-	[collectedAries, collectedLeo, collectedSagittarius],
-	([$collectedAries, $collectedLeo, $collectedSagittarius]) => {
+// export const collectedFire = derived(
+// 	[collectedAries, collectedLeo, collectedSagittarius],
+// 	([$collectedAries, $collectedLeo, $collectedSagittarius]) => {
 
-		return testingElementalVessels || $collectedAries && $collectedLeo && $collectedSagittarius;
-	}
-);
+// 		return testingElementalVessels || $collectedAries && $collectedLeo && $collectedSagittarius;
+// 	}
+// );
 
 export const earthCollection = writable([]);
 
-export const earthColCount = derived(
-	earthCollection,
-	($earthCollection) => {
-		return $earthCollection.length;
-	}
-);
+// export const earthColCount = derived(
+// 	earthCollection,
+// 	($earthCollection) => {
+// 		return $earthCollection.length;
+// 	}
+// );
 
-export const collectedVirgo = derived(
-	earthCollection,
-	($earthCollection) => {
+// export const collectedVirgo = derived(
+// 	earthCollection,
+// 	($earthCollection) => {
 
-		for(const cardKey of keysVirgo){
+// 		for(const cardKey of keysVirgo){
 
-			if(!$earthCollection.includes(cardKey)){
+// 			if(!$earthCollection.includes(cardKey)){
 
-				return false;
-			}
-		}
+// 				return false;
+// 			}
+// 		}
 
-		return true;
-	}
-);
+// 		return true;
+// 	}
+// );
 
-export const collectedTaurus = derived(
-	earthCollection,
-	($earthCollection) => {
+// export const collectedTaurus = derived(
+// 	earthCollection,
+// 	($earthCollection) => {
 
-		for(const cardKey of keysTaurus){
+// 		for(const cardKey of keysTaurus){
 
-			if(!$earthCollection.includes(cardKey)){
+// 			if(!$earthCollection.includes(cardKey)){
 				
-				return false;
-			}
-		}
+// 				return false;
+// 			}
+// 		}
 
-		return true;
-	}
-);
+// 		return true;
+// 	}
+// );
 
-export const collectedCapricorn = derived(
-	earthCollection,
-	($earthCollection) => {
+// export const collectedCapricorn = derived(
+// 	earthCollection,
+// 	($earthCollection) => {
 
-		for(const cardKey of keysCapricorn){
+// 		for(const cardKey of keysCapricorn){
 
-			if(!$earthCollection.includes(cardKey)){
+// 			if(!$earthCollection.includes(cardKey)){
 				
-				return false;
-			}
-		}
+// 				return false;
+// 			}
+// 		}
 
-		return true;
-	}
-);
+// 		return true;
+// 	}
+// );
 
-export const collectedEarth = derived(
-	[collectedVirgo, collectedTaurus, collectedCapricorn],
-	([$collectedVirgo, $collectedTaurus, $collectedCapricorn]) => {
+// export const collectedEarth = derived(
+// 	[collectedVirgo, collectedTaurus, collectedCapricorn],
+// 	([$collectedVirgo, $collectedTaurus, $collectedCapricorn]) => {
 		
-		return testingElementalVessels || $collectedVirgo && $collectedTaurus && $collectedCapricorn;
-	}
-);
+// 		return testingElementalVessels || $collectedVirgo && $collectedTaurus && $collectedCapricorn;
+// 	}
+// );
 
 export const waterCollection = writable([]);
 
-export const waterColCount = derived(
-	waterCollection,
-	($waterCollection) => {
-		return $waterCollection.length;
-	}
-);
+// export const waterColCount = derived(
+// 	waterCollection,
+// 	($waterCollection) => {
+// 		return $waterCollection.length;
+// 	}
+// );
 
-export const collectedPisces = derived(
-	waterCollection,
-	($waterCollection) => {
+// export const collectedPisces = derived(
+// 	waterCollection,
+// 	($waterCollection) => {
 
-		for(const cardKey of keysPisces){
+// 		for(const cardKey of keysPisces){
 
-			if(!$waterCollection.includes(cardKey)){
+// 			if(!$waterCollection.includes(cardKey)){
 				
-				return false;
-			}
-		}
+// 				return false;
+// 			}
+// 		}
 
-		return true;
-	}
-);
+// 		return true;
+// 	}
+// );
 
-export const collectedCancer = derived(
-	waterCollection,
-	($waterCollection) => {
+// export const collectedCancer = derived(
+// 	waterCollection,
+// 	($waterCollection) => {
 
-		for(const cardKey of keysCancer){
+// 		for(const cardKey of keysCancer){
 
-			if(!$waterCollection.includes(cardKey)){
+// 			if(!$waterCollection.includes(cardKey)){
 				
-				return false;
-			}
-		}
+// 				return false;
+// 			}
+// 		}
 
-		return true;
-	}
-);
+// 		return true;
+// 	}
+// );
 
-export const collectedScorpio = derived(
-	waterCollection,
-	($waterCollection) => {
+// export const collectedScorpio = derived(
+// 	waterCollection,
+// 	($waterCollection) => {
 
-		for(const cardKey of keysScorpio){
+// 		for(const cardKey of keysScorpio){
 
-			if(!$waterCollection.includes(cardKey)){
+// 			if(!$waterCollection.includes(cardKey)){
 				
-				return false;
-			}
-		}
+// 				return false;
+// 			}
+// 		}
 
-		return true;
-	}
-);
+// 		return true;
+// 	}
+// );
 
-export const collectedWater = derived(
-	[collectedScorpio, collectedCancer, collectedPisces],
-	([$collectedScorpio, $collectedCancer, $collectedPisces]) => {
+// export const collectedWater = derived(
+// 	[collectedScorpio, collectedCancer, collectedPisces],
+// 	([$collectedScorpio, $collectedCancer, $collectedPisces]) => {
 		
-		return testingElementalVessels || $collectedScorpio && $collectedCancer && $collectedPisces;
-	}
-);
+// 		return testingElementalVessels || $collectedScorpio && $collectedCancer && $collectedPisces;
+// 	}
+// );
 
 export const airCollection = writable([]);
 
-export const airColCount = derived(
-	airCollection,
-	($airCollection) => {
-		return $airCollection.length;
-	}
-);
+// export const airColCount = derived(
+// 	airCollection,
+// 	($airCollection) => {
+// 		return $airCollection.length;
+// 	}
+// );
 
-export const collectedAquarius = derived(
-	airCollection,
-	($airCollection) => {
+// export const collectedAquarius = derived(
+// 	airCollection,
+// 	($airCollection) => {
 
-		for(const cardKey of keysAquarius){
+// 		for(const cardKey of keysAquarius){
 
-			if(!$airCollection.includes(cardKey)){
+// 			if(!$airCollection.includes(cardKey)){
 				
-				return false;
-			}
-		}
+// 				return false;
+// 			}
+// 		}
 
-		return true;
-	}
-);
+// 		return true;
+// 	}
+// );
 
-export const collectedGemini = derived(
-	airCollection,
-	($airCollection) => {
+// export const collectedGemini = derived(
+// 	airCollection,
+// 	($airCollection) => {
 
-		for(const cardKey of keysGemini){
+// 		for(const cardKey of keysGemini){
 
-			if(!$airCollection.includes(cardKey)){
+// 			if(!$airCollection.includes(cardKey)){
 				
-				return false;
-			}
-		}
+// 				return false;
+// 			}
+// 		}
 
-		return true;
-	}
-);
+// 		return true;
+// 	}
+// );
 
-export const collectedLibra = derived(
-	airCollection,
-	($airCollection) => {
+// export const collectedLibra = derived(
+// 	airCollection,
+// 	($airCollection) => {
 
-		for(const cardKey of keysLibra){
+// 		for(const cardKey of keysLibra){
 
-			if(!$airCollection.includes(cardKey)){
+// 			if(!$airCollection.includes(cardKey)){
 				
-				return false;
-			}
-		}
+// 				return false;
+// 			}
+// 		}
 
-		return true;
-	}
-);
+// 		return true;
+// 	}
+// );
 
-export const collectedAir = derived(
-	[collectedLibra, collectedGemini, collectedAquarius],
-	([$collectedLibra, $collectedGemini, $collectedAquarius]) => {
+// export const collectedAir = derived(
+// 	[collectedLibra, collectedGemini, collectedAquarius],
+// 	([$collectedLibra, $collectedGemini, $collectedAquarius]) => {
 		
-		return testingElementalVessels || $collectedLibra && $collectedGemini && $collectedAquarius;
-	}
-);
-
-// export const currentDeckCount = derived(
-// 	[deck, playerCards, daemonCards],
-// 	([$deck, $playerCards, $daemonCards]) => {
-// 		return $deck.length;
+// 		return testingElementalVessels || $collectedLibra && $collectedGemini && $collectedAquarius;
 // 	}
 // );
 
+// // export const currentDeckCount = derived(
+// // 	[deck, playerCards, daemonCards],
+// // 	([$deck, $playerCards, $daemonCards]) => {
+// // 		return $deck.length;
+// // 	}
+// // );
 
-// export const buttonCounts = derived(
-// 	[currentDeckCount],
-// 	([$currentDeckCount]) => {
+
+// // export const buttonCounts = derived(
+// // 	[currentDeckCount],
+// // 	([$currentDeckCount]) => {
 	
-// 		const counts = '(' + $currentDeckCount + ')';
+// // 		const counts = '(' + $currentDeckCount + ')';
 
-// 		return counts;
-// 	}
-// );
+// // 		return counts;
+// // 	}
+// // );
 
 export const beforeGame = writable(true);
 export const turnFinished = writable(false);
@@ -364,87 +364,87 @@ export const selectionIsSingular = derived(
 	}
 );
 
-export const selectionResolutionHValue = derived(
-	[selectedCardsForDaemon, selectedCardsForPlayer, resolutionIsHeated],
-	([$selectedCardsForDaemon, $selectedCardsForPlayer, $resolutionIsHeated]) => {
+// export const selectionResolutionHValue = derived(
+// 	[selectedCardsForDaemon, selectedCardsForPlayer, resolutionIsHeated],
+// 	([$selectedCardsForDaemon, $selectedCardsForPlayer, $resolutionIsHeated]) => {
 		
-		let daemonTotalHeatIndex = 0;
-		let playerTotalHeatIndex = 0;
+// 		let daemonTotalHeatIndex = 0;
+// 		let playerTotalHeatIndex = 0;
 		
-		for(const cardKey of $selectedCardsForDaemon){
+// 		for(const cardKey of $selectedCardsForDaemon){
 
-			let cardSuit = magisterLudi.parseSuit(cardKey);
-			let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
-			let cardHeatDelta = magisterLudi.getHDeltaFromSuit(cardSuit) * cardRank;
+// 			let cardSuit = magisterLudi.parseSuit(cardKey);
+// 			let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
+// 			let cardHeatDelta = magisterLudi.getHDeltaFromSuit(cardSuit) * cardRank;
 
-			daemonTotalHeatIndex += cardHeatDelta;
-		}
+// 			daemonTotalHeatIndex += cardHeatDelta;
+// 		}
 
-		for(const cardKey of $selectedCardsForPlayer){
+// 		for(const cardKey of $selectedCardsForPlayer){
 			
-			let cardSuit = magisterLudi.parseSuit(cardKey);
-			let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
-			let cardHeatDelta = magisterLudi.getHDeltaFromSuit(cardSuit) * cardRank;
+// 			let cardSuit = magisterLudi.parseSuit(cardKey);
+// 			let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
+// 			let cardHeatDelta = magisterLudi.getHDeltaFromSuit(cardSuit) * cardRank;
 
-			playerTotalHeatIndex += cardHeatDelta;
-		}
+// 			playerTotalHeatIndex += cardHeatDelta;
+// 		}
 
-		let outcome = 0;
+// 		let outcome = 0;
 
-		if($resolutionIsHeated){
+// 		if($resolutionIsHeated){
 
-			outcome = playerTotalHeatIndex - daemonTotalHeatIndex;
+// 			outcome = playerTotalHeatIndex - daemonTotalHeatIndex;
 
-		}else{
+// 		}else{
 
-			outcome = playerTotalHeatIndex + daemonTotalHeatIndex;
+// 			outcome = playerTotalHeatIndex + daemonTotalHeatIndex;
 
-		}
+// 		}
 
-		return outcome;
-	}
-);
+// 		return outcome;
+// 	}
+// );
 
-export const selectionResolutionMValue = derived(
-	[selectedCardsForDaemon, selectedCardsForPlayer, resolutionIsHeated],
-	([$selectedCardsForDaemon, $selectedCardsForPlayer, $resolutionIsHeated]) => {
+// export const selectionResolutionMValue = derived(
+// 	[selectedCardsForDaemon, selectedCardsForPlayer, resolutionIsHeated],
+// 	([$selectedCardsForDaemon, $selectedCardsForPlayer, $resolutionIsHeated]) => {
 		
-		let daemonTotalMoistureIndex = 0;
-		let playerTotalMoistureIndex = 0;
+// 		let daemonTotalMoistureIndex = 0;
+// 		let playerTotalMoistureIndex = 0;
 		
-		for(const cardKey of $selectedCardsForDaemon){
+// 		for(const cardKey of $selectedCardsForDaemon){
 
-			let cardSuit = magisterLudi.parseSuit(cardKey);
-			let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
-			let cardMoistureDelta = magisterLudi.getMDeltaFromSuit(cardSuit) * cardRank;
+// 			let cardSuit = magisterLudi.parseSuit(cardKey);
+// 			let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
+// 			let cardMoistureDelta = magisterLudi.getMDeltaFromSuit(cardSuit) * cardRank;
 
-			daemonTotalMoistureIndex += cardMoistureDelta;
-		}
+// 			daemonTotalMoistureIndex += cardMoistureDelta;
+// 		}
 
-		for(const cardKey of $selectedCardsForPlayer){
+// 		for(const cardKey of $selectedCardsForPlayer){
 			
-			let cardSuit = magisterLudi.parseSuit(cardKey);
-			let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
-			let cardMoistureDelta = magisterLudi.getMDeltaFromSuit(cardSuit) * cardRank;
+// 			let cardSuit = magisterLudi.parseSuit(cardKey);
+// 			let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
+// 			let cardMoistureDelta = magisterLudi.getMDeltaFromSuit(cardSuit) * cardRank;
 
-			playerTotalMoistureIndex += cardMoistureDelta;
-		}
+// 			playerTotalMoistureIndex += cardMoistureDelta;
+// 		}
 
-		let outcome = 0;
+// 		let outcome = 0;
 
-		if($resolutionIsHeated){
+// 		if($resolutionIsHeated){
 
-			outcome = playerTotalMoistureIndex - daemonTotalMoistureIndex;
+// 			outcome = playerTotalMoistureIndex - daemonTotalMoistureIndex;
 
-		}else{
+// 		}else{
 
-			outcome = playerTotalMoistureIndex + daemonTotalMoistureIndex;
+// 			outcome = playerTotalMoistureIndex + daemonTotalMoistureIndex;
 
-		}
+// 		}
 
-		return outcome;
-	}
-);
+// 		return outcome;
+// 	}
+// );
 
 export const selectionIsWet = derived(
 	moistureIndex,
@@ -453,19 +453,19 @@ export const selectionIsWet = derived(
 	}
 );
 
-// export const discardCount = derived(
-// 	[deck, earthColCount, airColCount, waterColCount, fireColCount, playerCards, daemonCards],
-// 	([$deck, $earthColCount, $airColCount, $waterColCount, $fireColCount, $playerCards, $daemonCards]) => {
+// // export const discardCount = derived(
+// // 	[deck, earthColCount, airColCount, waterColCount, fireColCount, playerCards, daemonCards],
+// // 	([$deck, $earthColCount, $airColCount, $waterColCount, $fireColCount, $playerCards, $daemonCards]) => {
 
-// 		return 36 - $deck.length - 
-// 					 $earthColCount - 
-// 					 $airColCount -
-// 					 $waterColCount -
-// 					 $fireColCount -
-// 					 $playerCards.length -
-// 					 $daemonCards.length;
-// 	}
-// );
+// // 		return 36 - $deck.length - 
+// // 					 $earthColCount - 
+// // 					 $airColCount -
+// // 					 $waterColCount -
+// // 					 $fireColCount -
+// // 					 $playerCards.length -
+// // 					 $daemonCards.length;
+// // 	}
+// // );
 
 export const currentQuadrant = derived(
 	[selectionIsWet, resolutionIsHeated],
@@ -832,148 +832,148 @@ export const selectionResolutionValue = derived(
 	}
 );
 
-export const noValidChoices = derived(
-	[playerCards, 
-	 daemonCards,
-	 currentQuadrant],
-	([$playerCards, 
-	  $daemonCards,
-	  $currentQuadrant]) => {
+// export const noValidChoices = derived(
+// 	[playerCards, 
+// 	 daemonCards,
+// 	 currentQuadrant],
+// 	([$playerCards, 
+// 	  $daemonCards,
+// 	  $currentQuadrant]) => {
 
-		if($playerCards.length === 0 ||
-			 $daemonCards.length === 0){
+// 		if($playerCards.length === 0 ||
+// 			 $daemonCards.length === 0){
 
-			// in between deals, no Valid moves not applicable, return false
-			return false;
-		}
+// 			// in between deals, no Valid moves not applicable, return false
+// 			return false;
+// 		}
 
 
-		if($currentQuadrant === 'Fire'){
+// 		if($currentQuadrant === 'Fire'){
 
-			const allPossible = 
-				magisterLudi.allPossibleCombos($playerCards, $daemonCards);
+// 			const allPossible = 
+// 				magisterLudi.allPossibleCombos($playerCards, $daemonCards);
 
-			//card selection will be single, so we just need to find one
-			// pairing that shares neither a suit or a rank
-			for(const keyPair of allPossible){
+// 			//card selection will be single, so we just need to find one
+// 			// pairing that shares neither a suit or a rank
+// 			for(const keyPair of allPossible){
 				
-				const pCardKey = keyPair[0];
-				const dCardKey = keyPair[1];
+// 				const pCardKey = keyPair[0];
+// 				const dCardKey = keyPair[1];
 				
-			  const dSuit = magisterLudi.parseSuit(dCardKey);
-			  const pSuit = magisterLudi.parseSuit(pCardKey);
+// 			  const dSuit = magisterLudi.parseSuit(dCardKey);
+// 			  const pSuit = magisterLudi.parseSuit(pCardKey);
 
-			  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
-			  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
+// 			  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
+// 			  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
 
-			  if(dSuit != pSuit && dRank != pRank){
+// 			  if(dSuit != pSuit && dRank != pRank){
 
-			  	// noValidChoices is false
-			  	return false;
-			  }
-			}
-		}
+// 			  	// noValidChoices is false
+// 			  	return false;
+// 			  }
+// 			}
+// 		}
 
-		if($currentQuadrant === 'Water'){
+// 		if($currentQuadrant === 'Water'){
 
-			// copying from earth, not fully tested
+// 			// copying from earth, not fully tested
 
-			const allPossible = 
-				magisterLudi.allPossibleCombos($playerCards, $daemonCards);
+// 			const allPossible = 
+// 				magisterLudi.allPossibleCombos($playerCards, $daemonCards);
 
-			//card selection will be single, so we just need to find one
-			// pairing that shares either a suit or a rank
-			for(const keyPair of allPossible){
+// 			//card selection will be single, so we just need to find one
+// 			// pairing that shares either a suit or a rank
+// 			for(const keyPair of allPossible){
 				
-				const pCardKey = keyPair[0];
-				const dCardKey = keyPair[1];
+// 				const pCardKey = keyPair[0];
+// 				const dCardKey = keyPair[1];
 				
-			  const dSuit = magisterLudi.parseSuit(dCardKey);
-			  const pSuit = magisterLudi.parseSuit(pCardKey);
+// 			  const dSuit = magisterLudi.parseSuit(dCardKey);
+// 			  const pSuit = magisterLudi.parseSuit(pCardKey);
 
-			  if(dSuit === pSuit){
+// 			  if(dSuit === pSuit){
 
-			  	// noValidChoices is false
-			  	return false;
-			  }
+// 			  	// noValidChoices is false
+// 			  	return false;
+// 			  }
 
-			  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
-			  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
+// 			  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
+// 			  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
 
-			  if(dRank === pRank){
+// 			  if(dRank === pRank){
 
-			  	// noValidChoices is false
-			  	return false;
-			  }
-			}
+// 			  	// noValidChoices is false
+// 			  	return false;
+// 			  }
+// 			}
 
-		}
+// 		}
 
-		if($currentQuadrant === 'Air'){
+// 		if($currentQuadrant === 'Air'){
 
 			
-			// COPYING FROM FIRE, NOT FULLY TESTED
-			const allPossible = 
-				magisterLudi.allPossibleCombos($playerCards, $playerCards);
+// 			// COPYING FROM FIRE, NOT FULLY TESTED
+// 			const allPossible = 
+// 				magisterLudi.allPossibleCombos($playerCards, $playerCards);
 
-			//card selection will be single, so we just need to find one
-			// pairing that shares neither a suit or a rank
-			for(const keyPair of allPossible){
+// 			//card selection will be single, so we just need to find one
+// 			// pairing that shares neither a suit or a rank
+// 			for(const keyPair of allPossible){
 				
-				const pCardKey = keyPair[0];
-				const dCardKey = keyPair[1];
+// 				const pCardKey = keyPair[0];
+// 				const dCardKey = keyPair[1];
 				
-			  const dSuit = magisterLudi.parseSuit(dCardKey);
-			  const pSuit = magisterLudi.parseSuit(pCardKey);
+// 			  const dSuit = magisterLudi.parseSuit(dCardKey);
+// 			  const pSuit = magisterLudi.parseSuit(pCardKey);
 
-			  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
-			  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
+// 			  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
+// 			  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
 
-			  if(dSuit != pSuit && dRank != pRank){
+// 			  if(dSuit != pSuit && dRank != pRank){
 
-			  	// noValidChoices is false
-			  	return false;
-			  }
-			}
-		}
+// 			  	// noValidChoices is false
+// 			  	return false;
+// 			  }
+// 			}
+// 		}
 
-		if($currentQuadrant === 'Earth'){
+// 		if($currentQuadrant === 'Earth'){
 
-			const allPossible = 
-				magisterLudi.allPossibleCombos($playerCards, $daemonCards);
+// 			const allPossible = 
+// 				magisterLudi.allPossibleCombos($playerCards, $daemonCards);
 
-			//card selection will be single, so we just need to find one
-			// pairing that shares either a suit or a rank
-			for(const keyPair of allPossible){
+// 			//card selection will be single, so we just need to find one
+// 			// pairing that shares either a suit or a rank
+// 			for(const keyPair of allPossible){
 				
-				const pCardKey = keyPair[0];
-				const dCardKey = keyPair[1];
+// 				const pCardKey = keyPair[0];
+// 				const dCardKey = keyPair[1];
 				
-			  const dSuit = magisterLudi.parseSuit(dCardKey);
-			  const pSuit = magisterLudi.parseSuit(pCardKey);
+// 			  const dSuit = magisterLudi.parseSuit(dCardKey);
+// 			  const pSuit = magisterLudi.parseSuit(pCardKey);
 
-			  if(dSuit === pSuit){
+// 			  if(dSuit === pSuit){
 
-			  	// noValidChoices is false
-			  	return false;
-			  }
+// 			  	// noValidChoices is false
+// 			  	return false;
+// 			  }
 
-			  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
-			  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
+// 			  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
+// 			  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
 
-			  if(dRank === pRank){
+// 			  if(dRank === pRank){
 
-			  	// noValidChoices is false
-			  	return false;
-			  }
-			}
+// 			  	// noValidChoices is false
+// 			  	return false;
+// 			  }
+// 			}
 
-		}
+// 		}
 
-  	// noValidChoices is true
-		return true;
-	}
-);
+//   	// noValidChoices is true
+// 		return true;
+// 	}
+// );
 
 export const currentStateText = derived(
 	[fireCollection, 
