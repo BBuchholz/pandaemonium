@@ -7,7 +7,7 @@
   import { getNotificationsContext } from 'svelte-notifications';
   const { addNotification } = getNotificationsContext();
 
-  import { earthCollection, selectedEarthSign, moistureIndex, heatIndex, passPhrase } from './stores.js';
+  import { moistureIndex, heatIndex, passPhrase } from './stores.js';
   import { keysTaurus, keysVirgo, keysCapricorn } from './constants.js';
 
   function redeemFire(){

@@ -3,11 +3,7 @@
   import { fade, fly } from 'svelte/transition';
 
   import { 
-    selectedCardsForPlayer, 
-    selectedCardsForDaemon,
-    selectionIsWet,
-    resolutionIsHeated,
-    selectedCards 
+    selectedCards, 
     } from './stores.js';
 
   import {

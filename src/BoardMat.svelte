@@ -49,12 +49,16 @@
 
     }else{
     
+    console.log('1');
       if($selectionIsSingular) {
 
+    console.log($selectedCardsForDaemon);
         $selectedCardsForDaemon = [$singleSteadCardKey];
 
+    console.log($selectedCardsForDaemon);
       }else{
         
+    console.log('2');
         $selectedCardsForDaemon = 
           [...$selectedCardsForDaemon, $singleSteadCardKey];
       }

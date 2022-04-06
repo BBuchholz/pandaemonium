@@ -32,7 +32,7 @@
 
     if($devMode){
 
-      $passPhrase = 'leAC';
+      $passPhrase = 'leMat';
     }
   }
 
