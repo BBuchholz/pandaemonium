@@ -7,8 +7,12 @@
   import { getNotificationsContext } from 'svelte-notifications';
   const { addNotification } = getNotificationsContext();
 
-  import { moistureIndex, heatIndex, passPhrase } from './stores.js';
-  import { keysTaurus, keysVirgo, keysCapricorn } from './constants.js';
+  import { 
+    moistureIndex, 
+    heatIndex, 
+    passPhrase,
+    devMode, 
+  } from './stores.js';
 
   function redeemFire(){
     $heatIndex = $heatIndex + 9;
@@ -90,11 +94,6 @@
     });
   }
 
-  function handleDaedalusLabClick(){
-    $passPhrase = 'daedalus';
-    close();
-  }
-
   function handleBoardACClick(){
     $passPhrase = 'leAC';
     close();
@@ -109,6 +108,21 @@
     $passPhrase = 'leMonde';
     close();
   }
+
+  function handleBoardCEClick(){
+    $passPhrase = 'leCE';
+    close();
+  }
+  
+  function handleDaedalusLabClick(){
+    $passPhrase = 'daedalus';
+    close();
+  }
+
+  function enterDevMode(){
+    $devMode = true;
+  }
+
 </script>
 
 <div class="planar-buttons">
@@ -119,6 +133,8 @@
     <button on:click={redeemEarth} >Redeem Earth</button>
     <button on:click={saveGame} >Save Game</button>
     <button on:click={loadGame} >Load Game</button>
+    <button on:click={enterDevMode} >Enter Dev Mode</button>
+    <p>Dev Mode is {$devMode}</p>
 
 
     <p>This is an open source project based on another under GPL licensing, and subject to those conditions, contact me through the github site, hosted at <a href='https://github.com/BBuchholz/pandaemonium'>github.com/BBuchholz/pandaemonium</a>, for details </p>
@@ -126,14 +142,6 @@
 </div>
 <div class='daedalus-lab'>
   
-    <div class="lab-item">
-      <a 
-        href="#DaedalusLab"
-        on:click={handleDaedalusLabClick}
-      > 
-        Daedalus Lab 
-      </a>
-    </div>
     <div class="lab-item">
       <a 
         href="#boardAC"
@@ -156,6 +164,22 @@
         on:click={handleBoardMondeClick}
       > 
         Board Monde 
+      </a>
+    </div>
+    <div class="lab-item">
+      <a 
+        href="#boardCE"
+        on:click={handleBoardCEClick}
+      > 
+        Board CE 
+      </a>
+    </div>
+    <div class="lab-item">
+      <a 
+        href="#DaedalusLab"
+        on:click={handleDaedalusLabClick}
+      > 
+        Daedalus Lab 
       </a>
     </div>
   

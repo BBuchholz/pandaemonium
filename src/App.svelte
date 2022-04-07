@@ -16,7 +16,8 @@
   import BoardAC from './BoardAC.svelte';
   import BoardMat from './BoardMat.svelte'; 
   import BoardMonde from './BoardMonde.svelte'; 
-
+  import BoardCE from './BoardCE.svelte';
+ 
   initialize();
 
   function initialize(){
@@ -32,7 +33,7 @@
 
     if($devMode){
 
-      $passPhrase = 'leMat';
+      $passPhrase = 'leCE';
     }
   }
 
@@ -60,6 +61,10 @@
       {:else if $passPhrase === 'leMonde'}
 
         <BoardMonde />
+
+      {:else if $passPhrase === 'leCE'}
+
+        <BoardCE />
 
       {:else}
 
