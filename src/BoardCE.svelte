@@ -86,7 +86,7 @@
     //YOU MAY WANT A REMINDER AND READ IT ALL, BUT
     //AFTER A FEW DEV CYCLES IT GETS OLD SO TURN THIS
     //ON TO HAVE IT FADE QUICKER
-    const timeDelay = true;
+    const timeDelay = false;
 
     if(timeDelay){
 
@@ -415,10 +415,12 @@
     // TODOS GO HERE TO BE LISTED
     ////////////////////////////////////////////////////////
 
+    addToDo('refactor stores current logic into KnechtController, and put new behavior into Knechtor, and then we can write unit tests to verify that both are behaving the same, SEE TODO COMMENTS IN boardCE/stores.js')
     addToDo('alert on deck info should be a notification. ');
     addToDo('replace Card with ModCard. ');
     addToDo('if the button labelled "Play the Game" is clicked without a quadrant selected, notify to select a quadrant. ');
     addToDo('board should be black and white if no quadrant selected. ');
+    addToDo('Fire logic ready to be implemented, see code notes on Game Logic Docs');
   }
 
   function addToDo(toDoText){

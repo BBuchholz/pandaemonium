@@ -526,6 +526,16 @@ export const selectionIsValid = derived(
 
 			if($currentQuadrant === 'Water'){
 
+				///////////////////////////////////////////////////
+				//
+				// TODO: replace this with the following line 
+				// outcome = magisterLudi.validateSelectionWater(???);
+				//
+				// TODO: create tests to define expected outcomes
+				//
+				///////////////////////////////////////////////////
+
+
 				//assume true
 				outcome = true;
 
@@ -577,6 +587,16 @@ export const selectionIsValid = derived(
 
 
 			if($currentQuadrant === 'Air'){
+
+				///////////////////////////////////////////////////
+				//
+				// TODO: replace this with the following line 
+				// outcome = magisterLudi.validateSelectionAir(???);
+				//
+				// TODO: create tests to define expected outcomes
+				//
+				///////////////////////////////////////////////////
+
 
 				//ADAPTED FROM WATER, NOT FULLY TESTED
 
@@ -646,6 +666,18 @@ export const selectionIsValid = derived(
 
 
 			if($currentQuadrant === 'Earth'){
+
+				///////////////////////////////////////////////////
+				//
+				// TODO: replace this with the following line 
+				// outcome = magisterLudi.validateSelectionEarth(???);
+				//
+				// TODO: create tests to define expected outcomes
+				//
+				///////////////////////////////////////////////////
+
+
+
 				// implement first
 				// Contracting and Solitary (Cold and Dry)
 				// one card from each tree
@@ -684,6 +716,18 @@ export const selectionIsValid = derived(
 
 
 			if($currentQuadrant === 'Fire'){
+
+				///////////////////////////////////////////////////
+				//
+				// TODO: replace this with the following line 
+				// outcome = magisterLudi.validateSelectionFire(???);
+				//
+				// TODO: create tests to define expected outcomes
+				//
+				///////////////////////////////////////////////////
+
+
+
 
 				// COPIED FROM EARTH (MODIFY)
 				// Expanding and Solitary (Hot and Dry)
@@ -730,23 +774,23 @@ export const selectionResolutionValue = derived(
 		let playerSuit = '?';
 
 		
-		for(const cardKey of $selectedCardsForDaemon){
+		// for(const cardKey of $selectedCardsForDaemon){
 
-			let cardSuit = magisterLudi.parseSuit(cardKey);
-			let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
-			let cardMoistureDelta = magisterLudi.getMDeltaFromSuit(cardSuit) * cardRank;
+		// 	let cardSuit = magisterLudi.parseSuit(cardKey);
+		// 	let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
+		// 	let cardMoistureDelta = magisterLudi.getMDeltaFromSuit(cardSuit) * cardRank;
 
-			//daemonTotalMoistureIndex += cardMoistureDelta;
-		}
+		// 	//daemonTotalMoistureIndex += cardMoistureDelta;
+		// }
 
-		for(const cardKey of $selectedCardsForPlayer){
+		// for(const cardKey of $selectedCardsForPlayer){
 			
-			let cardSuit = magisterLudi.parseSuit(cardKey);
-			let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
-			let cardMoistureDelta = magisterLudi.getMDeltaFromSuit(cardSuit) * cardRank;
+		// 	let cardSuit = magisterLudi.parseSuit(cardKey);
+		// 	let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
+		// 	let cardMoistureDelta = magisterLudi.getMDeltaFromSuit(cardSuit) * cardRank;
 
-			//playerTotalMoistureIndex += cardMoistureDelta;
-		}
+		// 	//playerTotalMoistureIndex += cardMoistureDelta;
+		// }
 
 		let outcome = [];
 
@@ -755,49 +799,18 @@ export const selectionResolutionValue = derived(
 			return outcome;
 		}
 
-		if($currentQuadrant === 'Earth'){
-			// implement first
-			// Cooperative and Solitary (Cold and Dry)
-			// one card from each tree
-			// cuz wet should match either suit or rank
-		  	    
-	    let playerCardKey = $selectedCardsForPlayer[0];
-	    let daemonCardKey = $selectedCardsForDaemon[0];
-
-	    outcome.push(playerCardKey);
-	    outcome.push(daemonCardKey);
-
-		}
-
-		if($currentQuadrant === 'Fire'){
-
-			// COPIED FROM EARTH (MODIFIED)
-			// Expanding and Solitary (Hot and Dry)
-			// one card from each tree
-			// only collect winning card, higher rank wins
-		  	    
-	    const pCardKey = $selectedCardsForPlayer[0];
-	    const dCardKey = $selectedCardsForDaemon[0];
-
-	    if(pCardKey && dCardKey){
-		    console.log('pCardKey: ' + pCardKey);
-		    console.log('dCardKey: ' + dCardKey);
-
-			  const dSuit = magisterLudi.parseSuit(dCardKey);
-			  const pSuit = magisterLudi.parseSuit(pCardKey);
-
-			  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
-			  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
-
-			  if(dRank > pRank){
-			  	outcome.push(dCardKey);
-			  }else{
-			  	outcome.push(pCardKey);
-			  }
-			}
-		}
-
 		if($currentQuadrant === 'Water'){
+			
+				///////////////////////////////////////////////////
+				//
+				// TODO: replace this with the following line 
+				// outcome = magisterLudi.selectionResValWater(???);
+				//
+				// TODO: create tests to define expected outcomes
+				//
+				///////////////////////////////////////////////////
+
+			
 			// water treats all as one group, so consolidate
 			const allCardKeys = 
 				[
@@ -812,6 +825,17 @@ export const selectionResolutionValue = derived(
 		}
 
 		if($currentQuadrant === 'Air'){
+			
+				///////////////////////////////////////////////////
+				//
+				// TODO: replace this with the following line 
+				// outcome = magisterLudi.selectionResValAir(???);
+				//
+				// TODO: create tests to define expected outcomes
+				//
+				///////////////////////////////////////////////////
+
+			
 
 			// COPYING FROM FIRE, NOT FULLY TESTED
 				    
@@ -839,6 +863,68 @@ export const selectionResolutionValue = derived(
 			}
 		}
 
+		if($currentQuadrant === 'Earth'){
+			
+				///////////////////////////////////////////////////
+				//
+				// TODO: replace this with the following line 
+				// outcome = magisterLudi.selectionResValEarth(???);
+				//
+				// TODO: create tests to define expected outcomes
+				//
+				///////////////////////////////////////////////////
+
+			
+			// implement first
+			// Cooperative and Solitary (Cold and Dry)
+			// one card from each tree
+			// cuz wet should match either suit or rank
+		  	    
+	    let playerCardKey = $selectedCardsForPlayer[0];
+	    let daemonCardKey = $selectedCardsForDaemon[0];
+
+	    outcome.push(playerCardKey);
+	    outcome.push(daemonCardKey);
+
+		}
+
+		if($currentQuadrant === 'Fire'){
+
+				///////////////////////////////////////////////////
+				//
+				// TODO: replace this with the following line 
+				// outcome = magisterLudi.selectionResValFire(???);
+				//
+				// TODO: create tests to define expected outcomes
+				//
+				///////////////////////////////////////////////////
+
+			// COPIED FROM EARTH (MODIFIED)
+			// Expanding and Solitary (Hot and Dry)
+			// one card from each tree
+			// only collect winning card, higher rank wins
+		  	    
+	    const pCardKey = $selectedCardsForPlayer[0];
+	    const dCardKey = $selectedCardsForDaemon[0];
+
+	    if(pCardKey && dCardKey){
+		    console.log('pCardKey: ' + pCardKey);
+		    console.log('dCardKey: ' + dCardKey);
+
+			  const dSuit = magisterLudi.parseSuit(dCardKey);
+			  const pSuit = magisterLudi.parseSuit(pCardKey);
+
+			  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
+			  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
+
+			  if(dRank > pRank){
+			  	outcome.push(dCardKey);
+			  }else{
+			  	outcome.push(pCardKey);
+			  }
+			}
+		}
+
 		return outcome;
 	}
 );
@@ -858,32 +944,6 @@ export const noValidChoices = derived(
 			return false;
 		}
 
-
-		if($currentQuadrant === 'Fire'){
-
-			const allPossible = 
-				magisterLudi.allPossibleCombos($playerCards, $daemonCards);
-
-			//card selection will be single, so we just need to find one
-			// pairing that shares neither a suit or a rank
-			for(const keyPair of allPossible){
-				
-				const pCardKey = keyPair[0];
-				const dCardKey = keyPair[1];
-				
-			  const dSuit = magisterLudi.parseSuit(dCardKey);
-			  const pSuit = magisterLudi.parseSuit(pCardKey);
-
-			  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
-			  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
-
-			  if(dSuit != pSuit && dRank != pRank){
-
-			  	// noValidChoices is false
-			  	return false;
-			  }
-			}
-		}
 
 		if($currentQuadrant === 'Water'){
 
@@ -979,6 +1039,32 @@ export const noValidChoices = derived(
 			  }
 			}
 
+		}
+
+		if($currentQuadrant === 'Fire'){
+
+			const allPossible = 
+				magisterLudi.allPossibleCombos($playerCards, $daemonCards);
+
+			//card selection will be single, so we just need to find one
+			// pairing that shares neither a suit or a rank
+			for(const keyPair of allPossible){
+				
+				const pCardKey = keyPair[0];
+				const dCardKey = keyPair[1];
+				
+			  const dSuit = magisterLudi.parseSuit(dCardKey);
+			  const pSuit = magisterLudi.parseSuit(pCardKey);
+
+			  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
+			  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
+
+			  if(dSuit != pSuit && dRank != pRank){
+
+			  	// noValidChoices is false
+			  	return false;
+			  }
+			}
 		}
 
   	// noValidChoices is true
