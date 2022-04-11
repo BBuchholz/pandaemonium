@@ -7,6 +7,7 @@
     modal, 
     passPhrase,
     devMode,
+    devNotifyDelay,
   } from './stores.js';
 
   import MyriadNotification from './MyriadNotification.svelte';
@@ -33,7 +34,20 @@
 
     if($devMode){
 
-      $passPhrase = 'leCE';
+      $passPhrase = 'leCE';    
+
+      //////////////////////////////////////////
+      // $devNotifyDelay DOC
+      //////////////////////////////////////////
+      //CONTROLS DEV NOTIFICATION LENGTH IN DEV MODE
+      //WE PUT TODOS IN HERE FOR CONVENIENCE
+      //TOGGLE THIS WHEN DEVELOPING, THE FIRST FEW TIMES
+      //YOU MAY WANT A REMINDER AND READ IT ALL, BUT
+      //AFTER A FEW DEV CYCLES IT GETS OLD SO TURN THIS
+      //ON TO HAVE IT FADE QUICKER
+
+      $devNotifyDelay = true; // false stays forever until closed explicitly, true stays three seconds each, sequentially
+
     }
   }
 

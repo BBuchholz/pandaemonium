@@ -10,6 +10,7 @@
 
   import {
     devMode,
+    devNotifyDelay,
   } from './stores.js';
 
   import { 
@@ -82,13 +83,7 @@
 
     let removeAfterTime;
 
-    //TOGGLE THIS WHEN DEVELOPING, THE FIRST FEW TIMES
-    //YOU MAY WANT A REMINDER AND READ IT ALL, BUT
-    //AFTER A FEW DEV CYCLES IT GETS OLD SO TURN THIS
-    //ON TO HAVE IT FADE QUICKER
-    const timeDelay = false;
-
-    if(timeDelay){
+    if($devNotifyDelay){
 
       //NB: position 0 will always be forever
       // THIS IS INTENTIONAL
@@ -122,7 +117,7 @@
     const devInfoText2 = 
       'The goal is to get all components into a portable ' +
       'format that applies to all boards, eg. all boards ' +
-      'should get there vessels from the vessels/ directory ' +
+      'should get their vessels from the vessels/ directory ' +
       'and any variations in behavior should be encapsulated ' +
       'in such a manner as to be configurables';
 
