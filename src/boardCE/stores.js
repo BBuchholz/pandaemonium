@@ -1,5 +1,5 @@
 /////////////////////////////////
-// TOP LEVEL STORES
+// BOARD CE STORES
 /////////////////////////////////
 
 import { writable, derived } from 'svelte/store';
@@ -719,39 +719,17 @@ export const selectionIsValid = derived(
 
 				///////////////////////////////////////////////////
 				//
-				// TODO: replace this with the following line 
+				// DONE: replace this with the following line 
 				// outcome = magisterLudi.validateSelectionFire(???);
 				//
 				// TODO: create tests to define expected outcomes
 				//
 				///////////////////////////////////////////////////
 
-
-
-
-				// COPIED FROM EARTH (MODIFY)
-				// Expanding and Solitary (Hot and Dry)
-				// one card from each tree
-				// valid selection is neither sharing suit or rank
-
-				let isSolitary = $selectedCardsForPlayer.length === 1 &&
-	       		   		  	     $selectedCardsForDaemon.length === 1;
-
-  	    if(isSolitary){
-
-	  	    let playerCardKey = $selectedCardsForPlayer[0];
-	  	    let daemonCardKey = $selectedCardsForDaemon[0];
-
-	  	    let daemonSuit = magisterLudi.parseSuit(daemonCardKey);
-	  	    let playerSuit = magisterLudi.parseSuit(playerCardKey);
-
-  	    	let daemonRank = magisterLudi.parseRank(daemonCardKey, daemonSuit);
-  	    	let playerRank = magisterLudi.parseRank(playerCardKey, playerSuit);
-
-  	    	outcome = 
-  	    		daemonSuit != playerSuit &&
-				 		daemonRank != playerRank;
-  	    }				
+				outcome = 
+					magisterLudi.validateSelectionFire(
+						$selectedCardsForPlayer, $selectedCardsForDaemon);				
+			
 			}
 
 			return outcome;
@@ -947,6 +925,16 @@ export const noValidChoices = derived(
 
 		if($currentQuadrant === 'Water'){
 
+				///////////////////////////////////////////////////
+				//
+				// TODO: replace this with the following line 
+				// outcome = magisterLudi.noValidChoicesWater(???);
+				//
+				// TODO: create tests to define expected outcomes
+				//
+				///////////////////////////////////////////////////
+
+
 			// copying from earth, not fully tested
 
 			const allPossible = 
@@ -982,6 +970,15 @@ export const noValidChoices = derived(
 
 		if($currentQuadrant === 'Air'){
 
+				///////////////////////////////////////////////////
+				//
+				// TODO: replace this with the following line 
+				// outcome = magisterLudi.noValidChoicesAir(???);
+				//
+				// TODO: create tests to define expected outcomes
+				//
+				///////////////////////////////////////////////////
+
 			
 			// COPYING FROM FIRE, NOT FULLY TESTED
 			const allPossible = 
@@ -1009,6 +1006,15 @@ export const noValidChoices = derived(
 		}
 
 		if($currentQuadrant === 'Earth'){
+
+				///////////////////////////////////////////////////
+				//
+				// TODO: replace this with the following line 
+				// outcome = magisterLudi.noValidChoicesEarth(???);
+				//
+				// TODO: create tests to define expected outcomes
+				//
+				///////////////////////////////////////////////////
 
 			const allPossible = 
 				magisterLudi.allPossibleCombos($playerCards, $daemonCards);
@@ -1042,6 +1048,15 @@ export const noValidChoices = derived(
 		}
 
 		if($currentQuadrant === 'Fire'){
+
+				///////////////////////////////////////////////////
+				//
+				// TODO: replace this with the following line 
+				// outcome = magisterLudi.noValidChoicesFire(???);
+				//
+				// TODO: create tests to define expected outcomes
+				//
+				///////////////////////////////////////////////////
 
 			const allPossible = 
 				magisterLudi.allPossibleCombos($playerCards, $daemonCards);

@@ -523,7 +523,44 @@ const KnechtController = () => {
         default:
           return 0;
       }
-    }
+    },
+
+    validateSelectionFire: (selectedCardsForPlayer,
+                            selectedCardsForDaemon) => {
+
+      // COPIED FROM EARTH (MODIFY)
+      // Expanding and Solitary (Hot and Dry)
+      // one card from each tree
+      // valid selection is neither sharing suit or rank
+
+      let outcome = false;
+      
+      if(!selectedCardsForPlayer || !selectedCardsForDaemon){
+
+        return outcome;
+      }
+
+      let isSolitary = selectedCardsForPlayer.length === 1 &&
+                         selectedCardsForDaemon.length === 1;
+
+      if(isSolitary){
+
+        let playerCardKey = selectedCardsForPlayer[0];
+        let daemonCardKey = selectedCardsForDaemon[0];
+
+        let daemonSuit = self.parseSuit(daemonCardKey);
+        let playerSuit = self.parseSuit(playerCardKey);
+
+        let daemonRank = self.parseRank(daemonCardKey, daemonSuit);
+        let playerRank = self.parseRank(playerCardKey, playerSuit);
+
+        outcome = 
+          daemonSuit != playerSuit &&
+          daemonRank != playerRank;
+      }
+
+      return outcome;
+    },
 
   };
 

@@ -46,7 +46,11 @@
       //AFTER A FEW DEV CYCLES IT GETS OLD SO TURN THIS
       //ON TO HAVE IT FADE QUICKER
 
-      $devNotifyDelay = true; // false stays forever until closed explicitly, true stays three seconds each, sequentially
+      //LEAVING IT HERE MEANS WHEN IN PROD, EVEN IF ITS
+      //SET IT WON"T TRIGGER, DEFAULT BEHAVIOR WILL BE
+      //WHAT IS SET IN STORES (had issues with otherwise)
+
+      $devNotifyDelay = true; // false stays forever until closed explicitly, true stays 0.3 seconds each, sequentially
 
     }
   }
