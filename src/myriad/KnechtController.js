@@ -562,6 +562,46 @@ const KnechtController = () => {
       return outcome;
     },
 
+    noValidChoicesWater: (playerCards, daemonCards) => {
+      
+      //copied from boardCE, not fully tested
+
+      if(!playerCards || !daemonCards){
+        return true;
+      }
+
+      const allPossible = 
+        self.allPossibleCombos(playerCards, daemonCards);
+
+      //card selection will be single, so we just need to find one
+      // pairing that shares either a suit or a rank
+      for(const keyPair of allPossible){
+        
+        const pCardKey = keyPair[0];
+        const dCardKey = keyPair[1];
+        
+        const dSuit = magisterLudi.parseSuit(dCardKey);
+        const pSuit = magisterLudi.parseSuit(pCardKey);
+
+        if(dSuit === pSuit){
+
+          // noValidChoices is false
+          return false;
+        }
+
+        const dRank = magisterLudi.parseRank(dCardKey, dSuit);
+        const pRank = magisterLudi.parseRank(pCardKey, pSuit);
+
+        if(dRank === pRank){
+
+          // noValidChoices is false
+          return false;
+        }
+
+        return false;
+      }
+    },
+
   };
 
   return self;

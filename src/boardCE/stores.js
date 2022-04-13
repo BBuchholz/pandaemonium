@@ -528,10 +528,10 @@ export const selectionIsValid = derived(
 
 				///////////////////////////////////////////////////
 				//
-				// TODO: replace this with the following line 
+				// TODO WATER: replace this with the following line 
 				// outcome = magisterLudi.validateSelectionWater(???);
 				//
-				// TODO: create tests to define expected outcomes
+				// TODO WATER: create tests to define expected outcomes
 				//
 				///////////////////////////////////////////////////
 
@@ -590,10 +590,10 @@ export const selectionIsValid = derived(
 
 				///////////////////////////////////////////////////
 				//
-				// TODO: replace this with the following line 
+				// TODO AIR: replace this with the following line 
 				// outcome = magisterLudi.validateSelectionAir(???);
 				//
-				// TODO: create tests to define expected outcomes
+				// TODO AIR: create tests to define expected outcomes
 				//
 				///////////////////////////////////////////////////
 
@@ -669,10 +669,10 @@ export const selectionIsValid = derived(
 
 				///////////////////////////////////////////////////
 				//
-				// TODO: replace this with the following line 
+				// TODO EARTH: replace this with the following line 
 				// outcome = magisterLudi.validateSelectionEarth(???);
 				//
-				// TODO: create tests to define expected outcomes
+				// TODO EARTH: create tests to define expected outcomes
 				//
 				///////////////////////////////////////////////////
 
@@ -719,10 +719,10 @@ export const selectionIsValid = derived(
 
 				///////////////////////////////////////////////////
 				//
-				// DONE: replace this with the following line 
+				// DONE FIRE: replace this with the following line 
 				// outcome = magisterLudi.validateSelectionFire(???);
 				//
-				// TODO: create tests to define expected outcomes
+				// TODO FIRE: create tests to define expected outcomes
 				//
 				///////////////////////////////////////////////////
 
@@ -781,10 +781,10 @@ export const selectionResolutionValue = derived(
 			
 				///////////////////////////////////////////////////
 				//
-				// TODO: replace this with the following line 
+				// TODO WATER: replace this with the following line 
 				// outcome = magisterLudi.selectionResValWater(???);
 				//
-				// TODO: create tests to define expected outcomes
+				// TODO WATER: create tests to define expected outcomes
 				//
 				///////////////////////////////////////////////////
 
@@ -806,10 +806,10 @@ export const selectionResolutionValue = derived(
 			
 				///////////////////////////////////////////////////
 				//
-				// TODO: replace this with the following line 
+				// TODO AIR: replace this with the following line 
 				// outcome = magisterLudi.selectionResValAir(???);
 				//
-				// TODO: create tests to define expected outcomes
+				// TODO AIR: create tests to define expected outcomes
 				//
 				///////////////////////////////////////////////////
 
@@ -845,10 +845,10 @@ export const selectionResolutionValue = derived(
 			
 				///////////////////////////////////////////////////
 				//
-				// TODO: replace this with the following line 
+				// TODO EARTH: replace this with the following line 
 				// outcome = magisterLudi.selectionResValEarth(???);
 				//
-				// TODO: create tests to define expected outcomes
+				// TODO EARTH: create tests to define expected outcomes
 				//
 				///////////////////////////////////////////////////
 
@@ -870,10 +870,10 @@ export const selectionResolutionValue = derived(
 
 				///////////////////////////////////////////////////
 				//
-				// TODO: replace this with the following line 
+				// TODO FIRE: replace this with the following line 
 				// outcome = magisterLudi.selectionResValFire(???);
 				//
-				// TODO: create tests to define expected outcomes
+				// TODO FIRE: create tests to define expected outcomes
 				//
 				///////////////////////////////////////////////////
 
@@ -927,44 +927,14 @@ export const noValidChoices = derived(
 
 				///////////////////////////////////////////////////
 				//
-				// TODO: replace this with the following line 
-				// outcome = magisterLudi.noValidChoicesWater(???);
+				// DONE WATER: replace this with the following line 
+				// return magisterLudi.noValidChoicesWater(???);
 				//
-				// TODO: create tests to define expected outcomes
+				// TODO WATER: create tests to define expected outcomes
 				//
 				///////////////////////////////////////////////////
 
-
-			// copying from earth, not fully tested
-
-			const allPossible = 
-				magisterLudi.allPossibleCombos($playerCards, $daemonCards);
-
-			//card selection will be single, so we just need to find one
-			// pairing that shares either a suit or a rank
-			for(const keyPair of allPossible){
-				
-				const pCardKey = keyPair[0];
-				const dCardKey = keyPair[1];
-				
-			  const dSuit = magisterLudi.parseSuit(dCardKey);
-			  const pSuit = magisterLudi.parseSuit(pCardKey);
-
-			  if(dSuit === pSuit){
-
-			  	// noValidChoices is false
-			  	return false;
-			  }
-
-			  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
-			  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
-
-			  if(dRank === pRank){
-
-			  	// noValidChoices is false
-			  	return false;
-			  }
-			}
+			return magisterLudi.noValidChoicesWater()
 
 		}
 
@@ -972,10 +942,10 @@ export const noValidChoices = derived(
 
 				///////////////////////////////////////////////////
 				//
-				// TODO: replace this with the following line 
-				// outcome = magisterLudi.noValidChoicesAir(???);
+				// TODO AIR: replace this with the following line 
+				// return magisterLudi.noValidChoicesAir(???);
 				//
-				// TODO: create tests to define expected outcomes
+				// TODO AIR: create tests to define expected outcomes
 				//
 				///////////////////////////////////////////////////
 
@@ -1009,10 +979,10 @@ export const noValidChoices = derived(
 
 				///////////////////////////////////////////////////
 				//
-				// TODO: replace this with the following line 
-				// outcome = magisterLudi.noValidChoicesEarth(???);
+				// TODO EARTH: replace this with the following line 
+				// return magisterLudi.noValidChoicesEarth(???);
 				//
-				// TODO: create tests to define expected outcomes
+				// TODO EARTH: create tests to define expected outcomes
 				//
 				///////////////////////////////////////////////////
 
@@ -1051,10 +1021,10 @@ export const noValidChoices = derived(
 
 				///////////////////////////////////////////////////
 				//
-				// TODO: replace this with the following line 
-				// outcome = magisterLudi.noValidChoicesFire(???);
+				// TODO FIRE: replace this with the following line 
+				// return magisterLudi.noValidChoicesFire(???);
 				//
-				// TODO: create tests to define expected outcomes
+				// TODO FIRE: create tests to define expected outcomes
 				//
 				///////////////////////////////////////////////////
 
