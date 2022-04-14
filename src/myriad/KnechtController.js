@@ -525,6 +525,115 @@ const KnechtController = () => {
       }
     },
 
+    validateSelectionAir: (selectedCardsForDaemon,
+                           selectedCardsForPlayer) => {
+
+
+      let outcome = false;
+
+      const affinityMapPlayer = new Map();
+      const affinityMapDaemon = new Map();
+
+      //assume true, we will test for validity violations
+      //and flip this flag if any are found
+      outcome = true;
+
+      if(selectedCardsForPlayer.length < 1 || 
+         selectedCardsForDaemon.length < 1){
+        outcome = false;
+      }
+
+      for(const cardKey of selectedCardsForPlayer){
+
+        const cardSuit = self.parseSuit(cardKey);
+        const cardRank = self.parseRank(cardKey, cardSuit);
+
+        if(!affinityMapPlayer.has(cardSuit)){
+          affinityMapPlayer.set(cardSuit, 1);
+        } else {
+          affinityMapPlayer.set(cardSuit, affinityMapPlayer.get(cardSuit) + 1);
+        }
+
+        if(!affinityMapPlayer.has(cardRank)){
+          affinityMapPlayer.set(cardRank, 1);
+        } else {
+          affinityMapPlayer.set(cardRank, affinityMapPlayer.get(cardRank) + 1);
+        }
+      }
+
+      for(const cardKey of selectedCardsForDaemon){
+
+        const cardSuit = self.parseSuit(cardKey);
+        const cardRank = self.parseRank(cardKey, cardSuit);
+
+        if(!affinityMapDaemon.has(cardSuit)){
+          affinityMapDaemon.set(cardSuit, 1);
+        } else {
+          affinityMapDaemon.set(cardSuit, affinityMapDaemon.get(cardSuit) + 1);
+        }
+
+        if(!affinityMapDaemon.has(cardRank)){
+          affinityMapDaemon.set(cardRank, 1);
+        } else {
+          affinityMapDaemon.set(cardRank, affinityMapDaemon.get(cardRank) + 1);
+        }
+      }
+
+      for(const [key, value] of affinityMapDaemon){
+
+        if(value > 1){
+          outcome = false;
+        }
+      }
+
+      for(const [key, value] of affinityMapPlayer){
+
+        if(value > 1){
+          outcome = false;
+        }
+      }
+
+      return outcome;
+    },
+
+    validateSelectionEarth: (selectedCardsForDaemon,
+                             selectedCardsForPlayer) => {
+
+      let outcome = false;
+
+      let isSolitary = 
+        selectedCardsForPlayer.length === 1 &&
+        selectedCardsForDaemon.length === 1;
+
+      if(isSolitary){
+
+        let playerCardKey = selectedCardsForPlayer[0];
+        let daemonCardKey = selectedCardsForDaemon[0];
+
+        let daemonSuit = self.parseSuit(daemonCardKey);
+        let playerSuit = self.parseSuit(playerCardKey);
+       
+
+        if(daemonSuit === playerSuit){
+
+          outcome = true;
+
+        } else {
+
+          let daemonRank = self.parseRank(daemonCardKey, daemonSuit);
+          let playerRank = self.parseRank(playerCardKey, playerSuit);
+
+          if(playerRank === daemonRank){
+
+            outcome = true;
+          }
+        }
+
+      }
+
+      return outcome;
+    },
+
     validateSelectionFire: (selectedCardsForPlayer,
                             selectedCardsForDaemon) => {
 
@@ -562,7 +671,7 @@ const KnechtController = () => {
       return outcome;
     },
 
-    noValidChoicesWater: (playerCards, daemonCards) => {
+    noValidChoicesWater: (daemonCards, playerCards) => {
       
       //copied from boardCE, not fully tested
 
@@ -600,6 +709,79 @@ const KnechtController = () => {
 
         return false;
       }
+    },
+
+    noValidChoicesAir: (daemonCards, playerCards) => {
+      
+      //copied from boardCE, not fully tested
+
+      if(!playerCards || !daemonCards){
+        return true;
+      }
+
+      const allPossible = 
+        self.allPossibleCombos(daemonCards, playerCards);
+
+      //card selection will be single, so we just need to find one
+      // pairing that shares neither a suit or a rank
+      for(const keyPair of allPossible){
+        
+        const pCardKey = keyPair[0];
+        const dCardKey = keyPair[1];
+        
+        const dSuit = self.parseSuit(dCardKey);
+        const pSuit = self.parseSuit(pCardKey);
+
+        const dRank = self.parseRank(dCardKey, dSuit);
+        const pRank = self.parseRank(pCardKey, pSuit);
+
+        if(dSuit != pSuit && dRank != pRank){
+
+          // noValidChoices is false
+          return false;
+        }
+      }
+    },
+
+    noValidChoicesEarth: (daemonCards, playerCards) => {
+      
+      //copied from boardCE, not fully tested
+
+      if(!playerCards || !daemonCards){
+        return true;
+      }
+
+
+      const allPossible = 
+        magisterLudi.allPossibleCombos($playerCards, $daemonCards);
+
+      //card selection will be single, so we just need to find one
+      // pairing that shares either a suit or a rank
+      for(const keyPair of allPossible){
+        
+        const pCardKey = keyPair[0];
+        const dCardKey = keyPair[1];
+        
+        const dSuit = magisterLudi.parseSuit(dCardKey);
+        const pSuit = magisterLudi.parseSuit(pCardKey);
+
+        if(dSuit === pSuit){
+
+          // noValidChoices is false
+          return false;
+        }
+
+        const dRank = magisterLudi.parseRank(dCardKey, dSuit);
+        const pRank = magisterLudi.parseRank(pCardKey, pSuit);
+
+        if(dRank === pRank){
+
+          // noValidChoices is false
+          return false;
+        }
+      }
+
+
     },
 
     selResValWater: (selectedCardsForPlayer, 

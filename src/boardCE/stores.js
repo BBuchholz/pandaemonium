@@ -590,78 +590,16 @@ export const selectionIsValid = derived(
 
 				///////////////////////////////////////////////////
 				//
-				// TODO AIR: replace this with the following line 
+				// DONE AIR: replace this with the following line 
 				// outcome = magisterLudi.validateSelectionAir(???);
 				//
 				// TODO AIR: create tests to define expected outcomes
 				//
 				///////////////////////////////////////////////////
 
-
-				//ADAPTED FROM WATER, NOT FULLY TESTED
-
-				const affinityMapPlayer = new Map();
-				const affinityMapDaemon = new Map();
-
-				//assume true, we will test for validity violations
-				//and flip this flag if any are found
-				outcome = true;
-
-				if($selectedCardsForPlayer.length < 1 || 
-					 $selectedCardsForDaemon.length < 1){
-					outcome = false;
-				}
-
-				for(const cardKey of $selectedCardsForPlayer){
-
-					const cardSuit = magisterLudi.parseSuit(cardKey);
-					const cardRank = magisterLudi.parseRank(cardKey, cardSuit);
-
-					if(!affinityMapPlayer.has(cardSuit)){
-						affinityMapPlayer.set(cardSuit, 1);
-					} else {
-						affinityMapPlayer.set(cardSuit, affinityMapPlayer.get(cardSuit) + 1);
-					}
-
-					if(!affinityMapPlayer.has(cardRank)){
-						affinityMapPlayer.set(cardRank, 1);
-					} else {
-						affinityMapPlayer.set(cardRank, affinityMapPlayer.get(cardRank) + 1);
-					}
-				}
-
-				for(const cardKey of $selectedCardsForDaemon){
-
-					const cardSuit = magisterLudi.parseSuit(cardKey);
-					const cardRank = magisterLudi.parseRank(cardKey, cardSuit);
-
-					if(!affinityMapDaemon.has(cardSuit)){
-						affinityMapDaemon.set(cardSuit, 1);
-					} else {
-						affinityMapDaemon.set(cardSuit, affinityMapDaemon.get(cardSuit) + 1);
-					}
-
-					if(!affinityMapDaemon.has(cardRank)){
-						affinityMapDaemon.set(cardRank, 1);
-					} else {
-						affinityMapDaemon.set(cardRank, affinityMapDaemon.get(cardRank) + 1);
-					}
-				}
-
-				for(const [key, value] of affinityMapDaemon){
-
-					if(value > 1){
-						outcome = false;
-					}
-				}
-
-				for(const [key, value] of affinityMapPlayer){
-
-					if(value > 1){
-						outcome = false;
-					}
-				}
-
+				outcome = 
+					magisterLudi.validateSelectionAir(
+						$selectedCardsForDaemon, $selectedCardsForPlayer);
 			}
 
 
@@ -669,48 +607,16 @@ export const selectionIsValid = derived(
 
 				///////////////////////////////////////////////////
 				//
-				// TODO EARTH: replace this with the following line 
+				// DONE EARTH: replace this with the following line 
 				// outcome = magisterLudi.validateSelectionEarth(???);
 				//
 				// TODO EARTH: create tests to define expected outcomes
 				//
 				///////////////////////////////////////////////////
 
-
-
-				// implement first
-				// Contracting and Solitary (Cold and Dry)
-				// one card from each tree
-				// should match either suit or rank
-
-				let isSolitary = $selectedCardsForPlayer.length === 1 &&
-	       		   		  	     $selectedCardsForDaemon.length === 1;
-
-  	    if(isSolitary){
-
-	  	    let playerCardKey = $selectedCardsForPlayer[0];
-	  	    let daemonCardKey = $selectedCardsForDaemon[0];
-
-	  	    let daemonSuit = magisterLudi.parseSuit(daemonCardKey);
-	  	    let playerSuit = magisterLudi.parseSuit(playerCardKey);
-	  	   
-
-	  	    if(daemonSuit === playerSuit){
-
-	  	    	outcome = true;
-
-	  	    } else {
-
-	  	    	let daemonRank = magisterLudi.parseRank(daemonCardKey, daemonSuit);
-	  	    	let playerRank = magisterLudi.parseRank(playerCardKey, playerSuit);
-
-  	    		if(playerRank === daemonRank){
-
-  	    			outcome = true;
-  	    		}
-	  	    }
-
-  	    }
+				outcome = 
+					magisterLudi.validateSelectionEarth(
+						$selectedCardsForDaemon, $selectedCardsForPlayer);
 
 			}
 
@@ -877,7 +783,9 @@ export const noValidChoices = derived(
 				//
 				///////////////////////////////////////////////////
 
-			return magisterLudi.noValidChoicesWater()
+			return 
+				magisterLudi.noValidChoicesWater(
+					$daemonCards, $playerCards);
 
 		}
 
@@ -892,71 +800,25 @@ export const noValidChoices = derived(
 				//
 				///////////////////////////////////////////////////
 
-			
-			// COPYING FROM FIRE, NOT FULLY TESTED
-			const allPossible = 
-				magisterLudi.allPossibleCombos($playerCards, $playerCards);
-
-			//card selection will be single, so we just need to find one
-			// pairing that shares neither a suit or a rank
-			for(const keyPair of allPossible){
-				
-				const pCardKey = keyPair[0];
-				const dCardKey = keyPair[1];
-				
-			  const dSuit = magisterLudi.parseSuit(dCardKey);
-			  const pSuit = magisterLudi.parseSuit(pCardKey);
-
-			  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
-			  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
-
-			  if(dSuit != pSuit && dRank != pRank){
-
-			  	// noValidChoices is false
-			  	return false;
-			  }
-			}
+				return 
+					magisterLudi.noValidChoicesAir(
+						$daemonCards, $playerCards);
 		}
 
 		if($currentQuadrant === 'Earth'){
 
 				///////////////////////////////////////////////////
 				//
-				// TODO EARTH: replace this with the following line 
+				// DONE EARTH: replace this with the following line 
 				// return magisterLudi.noValidChoicesEarth(???);
 				//
 				// TODO EARTH: create tests to define expected outcomes
 				//
 				///////////////////////////////////////////////////
 
-			const allPossible = 
-				magisterLudi.allPossibleCombos($playerCards, $daemonCards);
-
-			//card selection will be single, so we just need to find one
-			// pairing that shares either a suit or a rank
-			for(const keyPair of allPossible){
-				
-				const pCardKey = keyPair[0];
-				const dCardKey = keyPair[1];
-				
-			  const dSuit = magisterLudi.parseSuit(dCardKey);
-			  const pSuit = magisterLudi.parseSuit(pCardKey);
-
-			  if(dSuit === pSuit){
-
-			  	// noValidChoices is false
-			  	return false;
-			  }
-
-			  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
-			  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
-
-			  if(dRank === pRank){
-
-			  	// noValidChoices is false
-			  	return false;
-			  }
-			}
+			return
+				magisterLudi.noValidChoicesEarth(
+					$daemonCards, $playerCards);
 
 		}
 
