@@ -602,6 +602,105 @@ const KnechtController = () => {
       }
     },
 
+    selResValWater: (selectedCardsForPlayer, 
+                     selectedCardsForDaemon) => {
+      
+      //copied from boardCE, not fully tested
+            
+      let outcome = [];
+
+      // water treats all as one group, so consolidate
+      const allCardKeys = 
+        [
+          ...selectedCardsForPlayer, 
+          ...selectedCardsForDaemon
+        ];
+
+      for(const cardKey of allCardKeys){
+        outcome.push(cardKey);
+      }
+
+      return outcome;
+    },
+
+    selResValAir: (selectedCardsForPlayer, 
+                   selectedCardsForDaemon) => {
+      
+      //copied from boardCE, not fully tested
+            
+      let outcome = [];
+
+      for(let i = 0; i < 3; i++){
+
+        const pCardKey = selectedCardsForPlayer[i];
+        const dCardKey = selectedCardsForDaemon[i];
+
+        if(pCardKey && dCardKey){
+          console.log('pCardKey: ' + pCardKey);
+          console.log('dCardKey: ' + dCardKey);
+
+          const dSuit = self.parseSuit(dCardKey);
+          const pSuit = self.parseSuit(pCardKey);
+
+          const dRank = self.parseRank(dCardKey, dSuit);
+          const pRank = self.parseRank(pCardKey, pSuit);
+
+          if(dRank > pRank){
+            outcome.push(dCardKey);
+          }else{
+            outcome.push(pCardKey);
+          }
+        }
+      }
+
+      return outcome;
+    },
+
+    selResValEarth: (selectedCardsForPlayer, 
+                     selectedCardsForDaemon) => {
+      
+      //copied from boardCE, not fully tested
+            
+      let playerCardKey = selectedCardsForPlayer[0];
+      let daemonCardKey = selectedCardsForDaemon[0];
+      let outcome = [];
+
+      outcome.push(playerCardKey);
+      outcome.push(daemonCardKey);
+
+      return outcome;
+    },
+
+    selResValFire: (selectedCardsForPlayer, 
+                     selectedCardsForDaemon) => {
+      
+      //copied from boardCE, not fully tested
+            
+      let outcome = [];
+            
+      const pCardKey = selectedCardsForPlayer[0];
+      const dCardKey = selectedCardsForDaemon[0];
+
+      if(pCardKey && dCardKey){
+        console.log('pCardKey: ' + pCardKey);
+        console.log('dCardKey: ' + dCardKey);
+
+        const dSuit = self.parseSuit(dCardKey);
+        const pSuit = self.parseSuit(pCardKey);
+
+        const dRank = self.parseRank(dCardKey, dSuit);
+        const pRank = self.parseRank(pCardKey, pSuit);
+
+        if(dRank > pRank){
+         outcome.push(dCardKey);
+        }else{
+         outcome.push(pCardKey);
+        }
+      }
+
+      return outcome;
+    },
+
   };
 
   return self;

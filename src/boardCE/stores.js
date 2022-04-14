@@ -781,24 +781,16 @@ export const selectionResolutionValue = derived(
 			
 				///////////////////////////////////////////////////
 				//
-				// TODO WATER: replace this with the following line 
+				// DONE WATER: replace this with the following line 
 				// outcome = magisterLudi.selectionResValWater(???);
 				//
 				// TODO WATER: create tests to define expected outcomes
 				//
 				///////////////////////////////////////////////////
 
-			
-			// water treats all as one group, so consolidate
-			const allCardKeys = 
-				[
-					...$selectedCardsForPlayer, 
-					...$selectedCardsForDaemon
-				];
-
-			for(const cardKey of allCardKeys){
-				outcome.push(cardKey);
-			}
+			outcome = 
+				magisterLudi.selResValWater(
+					$selectedCardsForPlayer, $selectedCardsForDaemon);
 
 		}
 
@@ -806,7 +798,7 @@ export const selectionResolutionValue = derived(
 			
 				///////////////////////////////////////////////////
 				//
-				// TODO AIR: replace this with the following line 
+				// DONE AIR: replace this with the following line 
 				// outcome = magisterLudi.selectionResValAir(???);
 				//
 				// TODO AIR: create tests to define expected outcomes
@@ -814,55 +806,26 @@ export const selectionResolutionValue = derived(
 				///////////////////////////////////////////////////
 
 			
+			outcome = 
+				magisterLudi.selResValAir(
+					$selectedCardsForPlayer, $selectedCardsForDaemon);
 
-			// COPYING FROM FIRE, NOT FULLY TESTED
-				    
-    	for(let i = 0; i < 3; i++){
-
-		    const pCardKey = $selectedCardsForPlayer[i];
-		    const dCardKey = $selectedCardsForDaemon[i];
-
-		    if(pCardKey && dCardKey){
-			    console.log('pCardKey: ' + pCardKey);
-			    console.log('dCardKey: ' + dCardKey);
-
-				  const dSuit = magisterLudi.parseSuit(dCardKey);
-				  const pSuit = magisterLudi.parseSuit(pCardKey);
-
-				  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
-				  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
-
-				  if(dRank > pRank){
-				  	outcome.push(dCardKey);
-				  }else{
-				  	outcome.push(pCardKey);
-				  }
-				}
-			}
 		}
 
 		if($currentQuadrant === 'Earth'){
 			
 				///////////////////////////////////////////////////
 				//
-				// TODO EARTH: replace this with the following line 
+				// DONE EARTH: replace this with the following line 
 				// outcome = magisterLudi.selectionResValEarth(???);
 				//
 				// TODO EARTH: create tests to define expected outcomes
 				//
 				///////////////////////////////////////////////////
 
-			
-			// implement first
-			// Cooperative and Solitary (Cold and Dry)
-			// one card from each tree
-			// cuz wet should match either suit or rank
-		  	    
-	    let playerCardKey = $selectedCardsForPlayer[0];
-	    let daemonCardKey = $selectedCardsForDaemon[0];
-
-	    outcome.push(playerCardKey);
-	    outcome.push(daemonCardKey);
+			outcome = 
+				magisterLudi.selResValEarth(
+					$selectedCardsForPlayer, $selectedCardsForDaemon);
 
 		}
 
@@ -870,37 +833,17 @@ export const selectionResolutionValue = derived(
 
 				///////////////////////////////////////////////////
 				//
-				// TODO FIRE: replace this with the following line 
+				// DONE FIRE: replace this with the following line 
 				// outcome = magisterLudi.selectionResValFire(???);
 				//
 				// TODO FIRE: create tests to define expected outcomes
 				//
 				///////////////////////////////////////////////////
 
-			// COPIED FROM EARTH (MODIFIED)
-			// Expanding and Solitary (Hot and Dry)
-			// one card from each tree
-			// only collect winning card, higher rank wins
-		  	    
-	    const pCardKey = $selectedCardsForPlayer[0];
-	    const dCardKey = $selectedCardsForDaemon[0];
+			outcome = 
+				magisterLudi.selResValAir(
+					$selectedCardsForPlayer, $selectedCardsForDaemon);
 
-	    if(pCardKey && dCardKey){
-		    console.log('pCardKey: ' + pCardKey);
-		    console.log('dCardKey: ' + dCardKey);
-
-			  const dSuit = magisterLudi.parseSuit(dCardKey);
-			  const pSuit = magisterLudi.parseSuit(pCardKey);
-
-			  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
-			  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
-
-			  if(dRank > pRank){
-			  	outcome.push(dCardKey);
-			  }else{
-			  	outcome.push(pCardKey);
-			  }
-			}
 		}
 
 		return outcome;
