@@ -6,18 +6,18 @@ import { writable, derived } from 'svelte/store';
 import KnechtController from '../myriad/KnechtController.js';
 
 import { 
-	keysVirgo, 
-	keysTaurus, 
-	keysCapricorn, 
-	keysLibra, 
-	keysGemini, 
-	keysAquarius,
-	keysPisces, 
-	keysScorpio,
-	keysCancer,
-	keysSagittarius,
-	keysLeo,
-	keysAries
+  keysVirgo, 
+  keysTaurus, 
+  keysCapricorn, 
+  keysLibra, 
+  keysGemini, 
+  keysAquarius,
+  keysPisces, 
+  keysScorpio,
+  keysCancer,
+  keysSagittarius,
+  keysLeo,
+  keysAries
 } from '../constants.js'; 
 
 const magisterLudi = KnechtController();
@@ -29,7 +29,7 @@ export const passPhrase = writable('');
 export const toDos = writable([]);
 
 export const rulesIncludeElementalShiftsOnAllCollections =
-	writable(false);
+  writable(false);
 
 export const selectedQuadrant = writable('');
 
@@ -40,10 +40,10 @@ export const selectedCardsForDaemon = writable([]);
 
 
 export const selectedCards = derived(
-	[selectedCardsForDaemon, selectedCardsForPlayer],
-	([$selectedCardsForDaemon, $selectedCardsForPlayer]) => {
-		return [...$selectedCardsForDaemon, ...$selectedCardsForPlayer];
-	}
+  [selectedCardsForDaemon, selectedCardsForPlayer],
+  ([$selectedCardsForDaemon, $selectedCardsForPlayer]) => {
+    return [...$selectedCardsForDaemon, ...$selectedCardsForPlayer];
+  }
 );
 
 export const selectedEarthSign = writable('');
@@ -69,289 +69,289 @@ export const collectedRecentlyEarth = writable([]);
 export const fireCollection = writable([]);
 
 export const fireColCount = derived(
-	fireCollection,
-	($fireCollection) => {
-		return $fireCollection.length;
-	}
+  fireCollection,
+  ($fireCollection) => {
+    return $fireCollection.length;
+  }
 );
 
 export const collectedSagittarius = derived(
-	fireCollection,
-	($fireCollection) => {
+  fireCollection,
+  ($fireCollection) => {
 
-		for(const cardKey of keysSagittarius){
+    for(const cardKey of keysSagittarius){
 
-			if(!$fireCollection.includes(cardKey)){
-				
-				return false;
-			}
-		}
+      if(!$fireCollection.includes(cardKey)){
+        
+        return false;
+      }
+    }
 
-		return true;
-	}
+    return true;
+  }
 );
 
 export const collectedLeo = derived(
-	fireCollection,
-	($fireCollection) => {
+  fireCollection,
+  ($fireCollection) => {
 
-		for(const cardKey of keysLeo){
+    for(const cardKey of keysLeo){
 
-			if(!$fireCollection.includes(cardKey)){
-				
-				return false;
-			}
-		}
+      if(!$fireCollection.includes(cardKey)){
+        
+        return false;
+      }
+    }
 
-		return true;
-	}
+    return true;
+  }
 );
 
 export const collectedAries = derived(
-	fireCollection,
-	($fireCollection) => {
+  fireCollection,
+  ($fireCollection) => {
 
-		for(const cardKey of keysAries){
+    for(const cardKey of keysAries){
 
-			if(!$fireCollection.includes(cardKey)){
-				
-				return false;
-			}
-		}
+      if(!$fireCollection.includes(cardKey)){
+        
+        return false;
+      }
+    }
 
-		return true;
-	}
+    return true;
+  }
 );
 
 
 export const collectedFire = derived(
-	[collectedAries, collectedLeo, collectedSagittarius],
-	([$collectedAries, $collectedLeo, $collectedSagittarius]) => {
+  [collectedAries, collectedLeo, collectedSagittarius],
+  ([$collectedAries, $collectedLeo, $collectedSagittarius]) => {
 
-		return testingElementalVessels || $collectedAries && $collectedLeo && $collectedSagittarius;
-	}
+    return testingElementalVessels || $collectedAries && $collectedLeo && $collectedSagittarius;
+  }
 );
 
 export const earthCollection = writable([]);
 
 export const earthColCount = derived(
-	earthCollection,
-	($earthCollection) => {
-		return $earthCollection.length;
-	}
+  earthCollection,
+  ($earthCollection) => {
+    return $earthCollection.length;
+  }
 );
 
 export const collectedVirgo = derived(
-	earthCollection,
-	($earthCollection) => {
+  earthCollection,
+  ($earthCollection) => {
 
-		for(const cardKey of keysVirgo){
+    for(const cardKey of keysVirgo){
 
-			if(!$earthCollection.includes(cardKey)){
+      if(!$earthCollection.includes(cardKey)){
 
-				return false;
-			}
-		}
+        return false;
+      }
+    }
 
-		return true;
-	}
+    return true;
+  }
 );
 
 export const collectedTaurus = derived(
-	earthCollection,
-	($earthCollection) => {
+  earthCollection,
+  ($earthCollection) => {
 
-		for(const cardKey of keysTaurus){
+    for(const cardKey of keysTaurus){
 
-			if(!$earthCollection.includes(cardKey)){
-				
-				return false;
-			}
-		}
+      if(!$earthCollection.includes(cardKey)){
+        
+        return false;
+      }
+    }
 
-		return true;
-	}
+    return true;
+  }
 );
 
 export const collectedCapricorn = derived(
-	earthCollection,
-	($earthCollection) => {
+  earthCollection,
+  ($earthCollection) => {
 
-		for(const cardKey of keysCapricorn){
+    for(const cardKey of keysCapricorn){
 
-			if(!$earthCollection.includes(cardKey)){
-				
-				return false;
-			}
-		}
+      if(!$earthCollection.includes(cardKey)){
+        
+        return false;
+      }
+    }
 
-		return true;
-	}
+    return true;
+  }
 );
 
 export const collectedEarth = derived(
-	[collectedVirgo, collectedTaurus, collectedCapricorn],
-	([$collectedVirgo, $collectedTaurus, $collectedCapricorn]) => {
-		
-		return testingElementalVessels || $collectedVirgo && $collectedTaurus && $collectedCapricorn;
-	}
+  [collectedVirgo, collectedTaurus, collectedCapricorn],
+  ([$collectedVirgo, $collectedTaurus, $collectedCapricorn]) => {
+    
+    return testingElementalVessels || $collectedVirgo && $collectedTaurus && $collectedCapricorn;
+  }
 );
 
 export const waterCollection = writable([]);
 
 export const waterColCount = derived(
-	waterCollection,
-	($waterCollection) => {
-		return $waterCollection.length;
-	}
+  waterCollection,
+  ($waterCollection) => {
+    return $waterCollection.length;
+  }
 );
 
 export const collectedPisces = derived(
-	waterCollection,
-	($waterCollection) => {
+  waterCollection,
+  ($waterCollection) => {
 
-		for(const cardKey of keysPisces){
+    for(const cardKey of keysPisces){
 
-			if(!$waterCollection.includes(cardKey)){
-				
-				return false;
-			}
-		}
+      if(!$waterCollection.includes(cardKey)){
+        
+        return false;
+      }
+    }
 
-		return true;
-	}
+    return true;
+  }
 );
 
 export const collectedCancer = derived(
-	waterCollection,
-	($waterCollection) => {
+  waterCollection,
+  ($waterCollection) => {
 
-		for(const cardKey of keysCancer){
+    for(const cardKey of keysCancer){
 
-			if(!$waterCollection.includes(cardKey)){
-				
-				return false;
-			}
-		}
+      if(!$waterCollection.includes(cardKey)){
+        
+        return false;
+      }
+    }
 
-		return true;
-	}
+    return true;
+  }
 );
 
 export const collectedScorpio = derived(
-	waterCollection,
-	($waterCollection) => {
+  waterCollection,
+  ($waterCollection) => {
 
-		for(const cardKey of keysScorpio){
+    for(const cardKey of keysScorpio){
 
-			if(!$waterCollection.includes(cardKey)){
-				
-				return false;
-			}
-		}
+      if(!$waterCollection.includes(cardKey)){
+        
+        return false;
+      }
+    }
 
-		return true;
-	}
+    return true;
+  }
 );
 
 export const collectedWater = derived(
-	[collectedScorpio, collectedCancer, collectedPisces],
-	([$collectedScorpio, $collectedCancer, $collectedPisces]) => {
-		
-		return testingElementalVessels || $collectedScorpio && $collectedCancer && $collectedPisces;
-	}
+  [collectedScorpio, collectedCancer, collectedPisces],
+  ([$collectedScorpio, $collectedCancer, $collectedPisces]) => {
+    
+    return testingElementalVessels || $collectedScorpio && $collectedCancer && $collectedPisces;
+  }
 );
 
 export const airCollection = writable([]);
 
 export const airColCount = derived(
-	airCollection,
-	($airCollection) => {
-		return $airCollection.length;
-	}
+  airCollection,
+  ($airCollection) => {
+    return $airCollection.length;
+  }
 );
 
 export const collectedAquarius = derived(
-	airCollection,
-	($airCollection) => {
+  airCollection,
+  ($airCollection) => {
 
-		for(const cardKey of keysAquarius){
+    for(const cardKey of keysAquarius){
 
-			if(!$airCollection.includes(cardKey)){
-				
-				return false;
-			}
-		}
+      if(!$airCollection.includes(cardKey)){
+        
+        return false;
+      }
+    }
 
-		return true;
-	}
+    return true;
+  }
 );
 
 export const collectedGemini = derived(
-	airCollection,
-	($airCollection) => {
+  airCollection,
+  ($airCollection) => {
 
-		for(const cardKey of keysGemini){
+    for(const cardKey of keysGemini){
 
-			if(!$airCollection.includes(cardKey)){
-				
-				return false;
-			}
-		}
+      if(!$airCollection.includes(cardKey)){
+        
+        return false;
+      }
+    }
 
-		return true;
-	}
+    return true;
+  }
 );
 
 export const collectedLibra = derived(
-	airCollection,
-	($airCollection) => {
+  airCollection,
+  ($airCollection) => {
 
-		for(const cardKey of keysLibra){
+    for(const cardKey of keysLibra){
 
-			if(!$airCollection.includes(cardKey)){
-				
-				return false;
-			}
-		}
+      if(!$airCollection.includes(cardKey)){
+        
+        return false;
+      }
+    }
 
-		return true;
-	}
+    return true;
+  }
 );
 
 export const collectedAir = derived(
-	[collectedLibra, collectedGemini, collectedAquarius],
-	([$collectedLibra, $collectedGemini, $collectedAquarius]) => {
-		
-		return testingElementalVessels || $collectedLibra && $collectedGemini && $collectedAquarius;
-	}
+  [collectedLibra, collectedGemini, collectedAquarius],
+  ([$collectedLibra, $collectedGemini, $collectedAquarius]) => {
+    
+    return testingElementalVessels || $collectedLibra && $collectedGemini && $collectedAquarius;
+  }
 );
 
 
 export const collectedSpirit = derived(
-	[collectedWater, collectedAir, collectedEarth, collectedFire],
-	([$collectedWater, $collectedAir, $collectedEarth, $collectedFire]) => {
-		
-		return $collectedWater && $collectedAir && $collectedEarth && $collectedFire;
-	}
+  [collectedWater, collectedAir, collectedEarth, collectedFire],
+  ([$collectedWater, $collectedAir, $collectedEarth, $collectedFire]) => {
+    
+    return $collectedWater && $collectedAir && $collectedEarth && $collectedFire;
+  }
 );
 
 export const currentDeckCount = derived(
-	[deck, playerCards, daemonCards],
-	([$deck, $playerCards, $daemonCards]) => {
-		return $deck.length;
-	}
+  [deck, playerCards, daemonCards],
+  ([$deck, $playerCards, $daemonCards]) => {
+    return $deck.length;
+  }
 );
 
 
 export const buttonCounts = derived(
-	[currentDeckCount],
-	([$currentDeckCount]) => {
-	
-		const counts = '(' + $currentDeckCount + ')';
+  [currentDeckCount],
+  ([$currentDeckCount]) => {
+  
+    const counts = '(' + $currentDeckCount + ')';
 
-		return counts;
-	}
+    return counts;
+  }
 );
 
 export const beforeGame = writable(true);
@@ -361,524 +361,440 @@ export const heatIndex = writable(0);
 export const nextTurnButtonText = writable('Next!');
 
 export const resolutionIsHeated = derived(
-	heatIndex,
-	($heatIndex) => {
-		return $heatIndex > 0;
-	}
+  heatIndex,
+  ($heatIndex) => {
+    return $heatIndex > 0;
+  }
 );
 
 
 export const selectionIsSingular = derived(
-	moistureIndex,
-	($moistureIndex) => {
-		return $moistureIndex < 1;
-	}
+  moistureIndex,
+  ($moistureIndex) => {
+    return $moistureIndex < 1;
+  }
 );
 
 export const selectionResolutionHValue = derived(
-	[selectedCardsForDaemon, selectedCardsForPlayer, resolutionIsHeated],
-	([$selectedCardsForDaemon, $selectedCardsForPlayer, $resolutionIsHeated]) => {
-		
-		let daemonTotalHeatIndex = 0;
-		let playerTotalHeatIndex = 0;
-		
-		for(const cardKey of $selectedCardsForDaemon){
+  [selectedCardsForDaemon, selectedCardsForPlayer, resolutionIsHeated],
+  ([$selectedCardsForDaemon, $selectedCardsForPlayer, $resolutionIsHeated]) => {
+    
+    let daemonTotalHeatIndex = 0;
+    let playerTotalHeatIndex = 0;
+    
+    for(const cardKey of $selectedCardsForDaemon){
 
-			let cardSuit = magisterLudi.parseSuit(cardKey);
-			let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
-			let cardHeatDelta = magisterLudi.getHDeltaFromSuit(cardSuit) * cardRank;
+      let cardSuit = magisterLudi.parseSuit(cardKey);
+      let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
+      let cardHeatDelta = magisterLudi.getHDeltaFromSuit(cardSuit) * cardRank;
 
-			daemonTotalHeatIndex += cardHeatDelta;
-		}
+      daemonTotalHeatIndex += cardHeatDelta;
+    }
 
-		for(const cardKey of $selectedCardsForPlayer){
-			
-			let cardSuit = magisterLudi.parseSuit(cardKey);
-			let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
-			let cardHeatDelta = magisterLudi.getHDeltaFromSuit(cardSuit) * cardRank;
+    for(const cardKey of $selectedCardsForPlayer){
+      
+      let cardSuit = magisterLudi.parseSuit(cardKey);
+      let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
+      let cardHeatDelta = magisterLudi.getHDeltaFromSuit(cardSuit) * cardRank;
 
-			playerTotalHeatIndex += cardHeatDelta;
-		}
+      playerTotalHeatIndex += cardHeatDelta;
+    }
 
-		let outcome = 0;
+    let outcome = 0;
 
-		if($resolutionIsHeated){
+    if($resolutionIsHeated){
 
-			outcome = playerTotalHeatIndex - daemonTotalHeatIndex;
+      outcome = playerTotalHeatIndex - daemonTotalHeatIndex;
 
-		}else{
+    }else{
 
-			outcome = playerTotalHeatIndex + daemonTotalHeatIndex;
+      outcome = playerTotalHeatIndex + daemonTotalHeatIndex;
 
-		}
+    }
 
-		return outcome;
-	}
+    return outcome;
+  }
 );
 
 export const selectionResolutionMValue = derived(
-	[selectedCardsForDaemon, selectedCardsForPlayer, resolutionIsHeated],
-	([$selectedCardsForDaemon, $selectedCardsForPlayer, $resolutionIsHeated]) => {
-		
-		let daemonTotalMoistureIndex = 0;
-		let playerTotalMoistureIndex = 0;
-		
-		for(const cardKey of $selectedCardsForDaemon){
+  [selectedCardsForDaemon, selectedCardsForPlayer, resolutionIsHeated],
+  ([$selectedCardsForDaemon, $selectedCardsForPlayer, $resolutionIsHeated]) => {
+    
+    let daemonTotalMoistureIndex = 0;
+    let playerTotalMoistureIndex = 0;
+    
+    for(const cardKey of $selectedCardsForDaemon){
 
-			let cardSuit = magisterLudi.parseSuit(cardKey);
-			let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
-			let cardMoistureDelta = magisterLudi.getMDeltaFromSuit(cardSuit) * cardRank;
+      let cardSuit = magisterLudi.parseSuit(cardKey);
+      let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
+      let cardMoistureDelta = magisterLudi.getMDeltaFromSuit(cardSuit) * cardRank;
 
-			daemonTotalMoistureIndex += cardMoistureDelta;
-		}
+      daemonTotalMoistureIndex += cardMoistureDelta;
+    }
 
-		for(const cardKey of $selectedCardsForPlayer){
-			
-			let cardSuit = magisterLudi.parseSuit(cardKey);
-			let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
-			let cardMoistureDelta = magisterLudi.getMDeltaFromSuit(cardSuit) * cardRank;
+    for(const cardKey of $selectedCardsForPlayer){
+      
+      let cardSuit = magisterLudi.parseSuit(cardKey);
+      let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
+      let cardMoistureDelta = magisterLudi.getMDeltaFromSuit(cardSuit) * cardRank;
 
-			playerTotalMoistureIndex += cardMoistureDelta;
-		}
+      playerTotalMoistureIndex += cardMoistureDelta;
+    }
 
-		let outcome = 0;
+    let outcome = 0;
 
-		if($resolutionIsHeated){
+    if($resolutionIsHeated){
 
-			outcome = playerTotalMoistureIndex - daemonTotalMoistureIndex;
+      outcome = playerTotalMoistureIndex - daemonTotalMoistureIndex;
 
-		}else{
+    }else{
 
-			outcome = playerTotalMoistureIndex + daemonTotalMoistureIndex;
+      outcome = playerTotalMoistureIndex + daemonTotalMoistureIndex;
 
-		}
+    }
 
-		return outcome;
-	}
+    return outcome;
+  }
 );
 
 export const selectionIsWet = derived(
-	moistureIndex,
-	($moistureIndex) => {
-		return $moistureIndex > 0;
-	}
+  moistureIndex,
+  ($moistureIndex) => {
+    return $moistureIndex > 0;
+  }
 );
 
 export const discardCount = derived(
-	[deck, earthColCount, airColCount, waterColCount, fireColCount, playerCards, daemonCards],
-	([$deck, $earthColCount, $airColCount, $waterColCount, $fireColCount, $playerCards, $daemonCards]) => {
+  [deck, earthColCount, airColCount, waterColCount, fireColCount, playerCards, daemonCards],
+  ([$deck, $earthColCount, $airColCount, $waterColCount, $fireColCount, $playerCards, $daemonCards]) => {
 
-		return 36 - $deck.length - 
-					 $earthColCount - 
-					 $airColCount -
-					 $waterColCount -
-					 $fireColCount -
-					 $playerCards.length -
-					 $daemonCards.length;
-	}
+    return 36 - $deck.length - 
+           $earthColCount - 
+           $airColCount -
+           $waterColCount -
+           $fireColCount -
+           $playerCards.length -
+           $daemonCards.length;
+  }
 );
 
 export const currentQuadrant = derived(
-	[selectionIsWet, resolutionIsHeated],
-	([$selectionIsWet, $resolutionIsHeated]) => {
+  [selectionIsWet, resolutionIsHeated],
+  ([$selectionIsWet, $resolutionIsHeated]) => {
 
-		// Quadrant Determination follows the Empedoclean Elements
-		// see: https://en.wikipedia.org/wiki/Classical_element#Greece 
+    // Quadrant Determination follows the Empedoclean Elements
+    // see: https://en.wikipedia.org/wiki/Classical_element#Greece 
 
-		if($selectionIsWet){
+    if($selectionIsWet){
 
-			if($resolutionIsHeated){
+      if($resolutionIsHeated){
 
-				// Wet and Hot = Air
-				return 'Air';
+        // Wet and Hot = Air
+        return 'Air';
 
-			}else{
+      }else{
 
-				// Wet and Cold = Water
-				return 'Water';
-			}
+        // Wet and Cold = Water
+        return 'Water';
+      }
 
-		}else{
+    }else{
 
-			if($resolutionIsHeated){
+      if($resolutionIsHeated){
 
-				// Dry and Hot
-				return 'Fire';
-				
-			}else{
+        // Dry and Hot
+        return 'Fire';
+        
+      }else{
 
-				// Dry and Cold
-				return 'Earth';
-			}
-		}
-	}
+        // Dry and Cold
+        return 'Earth';
+      }
+    }
+  }
 );
 
 export const selectionIsValid = derived(
-	[selectedCardsForPlayer,
+  [selectedCardsForPlayer,
    selectedCardsForDaemon,
    currentQuadrant],
     ([$selectedCardsForPlayer,
       $selectedCardsForDaemon,
       $currentQuadrant]) => {
 
-			let outcome = false;
+      let outcome = false;
 
-			if($currentQuadrant === 'Water'){
+      if($currentQuadrant === 'Water'){
 
-				///////////////////////////////////////////////////
-				//
-				// TODO WATER: replace this with the following line 
-				// outcome = magisterLudi.validateSelectionWater(???);
-				//
-				// TODO WATER: create tests to define expected outcomes
-				//
-				///////////////////////////////////////////////////
+        ///////////////////////////////////////////////////
+        //
+        // DONE WATER: replace this with the following line 
+        // outcome = magisterLudi.validateSelectionWater(???);
+        //
+        // TODO WATER: create tests to define expected outcomes
+        //
+        ///////////////////////////////////////////////////
 
-
-				//assume true
-				outcome = true;
-
-				const affinityMap = new Map();
-
-				// water treats all as one group, so consolidate
-				const allCardKeys = 
-					[
-						...$selectedCardsForPlayer, 
-						...$selectedCardsForDaemon
-					];
-
-				if(allCardKeys.length < 2){
-					outcome = false;
-				}
-
-				for(const cardKey of allCardKeys){
-
-					const cardSuit = magisterLudi.parseSuit(cardKey);
-					const cardRank = magisterLudi.parseRank(cardKey, cardSuit);
-
-					if(!affinityMap.has(cardSuit)){
-						affinityMap.set(cardSuit, 1);
-					} else {
-						affinityMap.set(cardSuit, affinityMap.get(cardSuit) + 1);
-					}
-
-					if(!affinityMap.has(cardRank)){
-						affinityMap.set(cardRank, 1);
-					} else {
-						affinityMap.set(cardRank, affinityMap.get(cardRank) + 1);
-					}
-				}
-
-				// a broken chain can be detected by one card
-				// having no other cards sharing an affinity
-				for(const cardKey of allCardKeys){
-
-					const cardSuit = magisterLudi.parseSuit(cardKey);
-					const cardRank = magisterLudi.parseRank(cardKey, cardSuit);
-
-					if(affinityMap.get(cardSuit) < 2 &&
-						 affinityMap.get(cardRank) < 2){
-						// no connections, broken chain
-						outcome = false;
-					}
-				}
-			}
+        outcome = 
+          magisterLudi.validateSelectionWater(
+            $selectedCardsForDaemon, $selectedCardsForPlayer);
+      }
 
 
-			if($currentQuadrant === 'Air'){
+      if($currentQuadrant === 'Air'){
 
-				///////////////////////////////////////////////////
-				//
-				// DONE AIR: replace this with the following line 
-				// outcome = magisterLudi.validateSelectionAir(???);
-				//
-				// TODO AIR: create tests to define expected outcomes
-				//
-				///////////////////////////////////////////////////
+        ///////////////////////////////////////////////////
+        //
+        // DONE AIR: replace this with the following line 
+        // outcome = magisterLudi.validateSelectionAir(???);
+        //
+        // TODO AIR: create tests to define expected outcomes
+        //
+        ///////////////////////////////////////////////////
 
-				outcome = 
-					magisterLudi.validateSelectionAir(
-						$selectedCardsForDaemon, $selectedCardsForPlayer);
-			}
-
-
-			if($currentQuadrant === 'Earth'){
-
-				///////////////////////////////////////////////////
-				//
-				// DONE EARTH: replace this with the following line 
-				// outcome = magisterLudi.validateSelectionEarth(???);
-				//
-				// TODO EARTH: create tests to define expected outcomes
-				//
-				///////////////////////////////////////////////////
-
-				outcome = 
-					magisterLudi.validateSelectionEarth(
-						$selectedCardsForDaemon, $selectedCardsForPlayer);
-
-			}
+        outcome = 
+          magisterLudi.validateSelectionAir(
+            $selectedCardsForDaemon, $selectedCardsForPlayer);
+      }
 
 
-			if($currentQuadrant === 'Fire'){
+      if($currentQuadrant === 'Earth'){
 
-				///////////////////////////////////////////////////
-				//
-				// DONE FIRE: replace this with the following line 
-				// outcome = magisterLudi.validateSelectionFire(???);
-				//
-				// TODO FIRE: create tests to define expected outcomes
-				//
-				///////////////////////////////////////////////////
+        ///////////////////////////////////////////////////
+        //
+        // DONE EARTH: replace this with the following line 
+        // outcome = magisterLudi.validateSelectionEarth(???);
+        //
+        // TODO EARTH: create tests to define expected outcomes
+        //
+        ///////////////////////////////////////////////////
 
-				outcome = 
-					magisterLudi.validateSelectionFire(
-						$selectedCardsForPlayer, $selectedCardsForDaemon);				
-			
-			}
+        outcome = 
+          magisterLudi.validateSelectionEarth(
+            $selectedCardsForDaemon, $selectedCardsForPlayer);
 
-			return outcome;
+      }
+
+
+      if($currentQuadrant === 'Fire'){
+
+        ///////////////////////////////////////////////////
+        //
+        // DONE FIRE: replace this with the following line 
+        // outcome = magisterLudi.validateSelectionFire(???);
+        //
+        // TODO FIRE: create tests to define expected outcomes
+        //
+        ///////////////////////////////////////////////////
+
+        outcome = 
+          magisterLudi.validateSelectionFire(
+            $selectedCardsForPlayer, $selectedCardsForDaemon);        
+      
+      }
+
+      return outcome;
     } 
 );
 
 export const selectionResolutionValue = derived(
-	[selectedCardsForDaemon, 
-	 selectedCardsForPlayer, 
-	 currentQuadrant,
-	 selectionIsValid],
-	([$selectedCardsForDaemon, 
-	  $selectedCardsForPlayer, 
-	  $currentQuadrant,
-	  $selectionIsValid]) => {
-		
-		let daemonRank = 0;
-		let playerRank = 0;
-		let daemonSuit = '?';
-		let playerSuit = '?';
+  [selectedCardsForDaemon, 
+   selectedCardsForPlayer, 
+   currentQuadrant,
+   selectionIsValid],
+  ([$selectedCardsForDaemon, 
+    $selectedCardsForPlayer, 
+    $currentQuadrant,
+    $selectionIsValid]) => {
+    
+    // let daemonRank = 0;
+    // let playerRank = 0;
+    // let daemonSuit = '?';
+    // let playerSuit = '?';
 
-		
-		// for(const cardKey of $selectedCardsForDaemon){
 
-		// 	let cardSuit = magisterLudi.parseSuit(cardKey);
-		// 	let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
-		// 	let cardMoistureDelta = magisterLudi.getMDeltaFromSuit(cardSuit) * cardRank;
+    let outcome = [];
 
-		// 	//daemonTotalMoistureIndex += cardMoistureDelta;
-		// }
+    if(!$selectionIsValid){
 
-		// for(const cardKey of $selectedCardsForPlayer){
-			
-		// 	let cardSuit = magisterLudi.parseSuit(cardKey);
-		// 	let cardRank = magisterLudi.parseRank(cardKey, cardSuit);
-		// 	let cardMoistureDelta = magisterLudi.getMDeltaFromSuit(cardSuit) * cardRank;
+      return outcome;
+    }
 
-		// 	//playerTotalMoistureIndex += cardMoistureDelta;
-		// }
+    if($currentQuadrant === 'Water'){
+      
+        ///////////////////////////////////////////////////
+        //
+        // DONE WATER: replace this with the following line 
+        // outcome = magisterLudi.selectionResValWater(???);
+        //
+        // TODO WATER: create tests to define expected outcomes
+        //
+        ///////////////////////////////////////////////////
 
-		let outcome = [];
+      outcome = 
+        magisterLudi.selResValWater(
+          $selectedCardsForPlayer, $selectedCardsForDaemon);
 
-		if(!$selectionIsValid){
+    }
 
-			return outcome;
-		}
+    if($currentQuadrant === 'Air'){
+      
+        ///////////////////////////////////////////////////
+        //
+        // DONE AIR: replace this with the following line 
+        // outcome = magisterLudi.selectionResValAir(???);
+        //
+        // TODO AIR: create tests to define expected outcomes
+        //
+        ///////////////////////////////////////////////////
 
-		if($currentQuadrant === 'Water'){
-			
-				///////////////////////////////////////////////////
-				//
-				// DONE WATER: replace this with the following line 
-				// outcome = magisterLudi.selectionResValWater(???);
-				//
-				// TODO WATER: create tests to define expected outcomes
-				//
-				///////////////////////////////////////////////////
+      
+      outcome = 
+        magisterLudi.selResValAir(
+          $selectedCardsForPlayer, $selectedCardsForDaemon);
 
-			outcome = 
-				magisterLudi.selResValWater(
-					$selectedCardsForPlayer, $selectedCardsForDaemon);
+    }
 
-		}
+    if($currentQuadrant === 'Earth'){
+      
+        ///////////////////////////////////////////////////
+        //
+        // DONE EARTH: replace this with the following line 
+        // outcome = magisterLudi.selectionResValEarth(???);
+        //
+        // TODO EARTH: create tests to define expected outcomes
+        //
+        ///////////////////////////////////////////////////
 
-		if($currentQuadrant === 'Air'){
-			
-				///////////////////////////////////////////////////
-				//
-				// DONE AIR: replace this with the following line 
-				// outcome = magisterLudi.selectionResValAir(???);
-				//
-				// TODO AIR: create tests to define expected outcomes
-				//
-				///////////////////////////////////////////////////
+      outcome = 
+        magisterLudi.selResValEarth(
+          $selectedCardsForPlayer, $selectedCardsForDaemon);
 
-			
-			outcome = 
-				magisterLudi.selResValAir(
-					$selectedCardsForPlayer, $selectedCardsForDaemon);
+    }
 
-		}
+    if($currentQuadrant === 'Fire'){
 
-		if($currentQuadrant === 'Earth'){
-			
-				///////////////////////////////////////////////////
-				//
-				// DONE EARTH: replace this with the following line 
-				// outcome = magisterLudi.selectionResValEarth(???);
-				//
-				// TODO EARTH: create tests to define expected outcomes
-				//
-				///////////////////////////////////////////////////
+        ///////////////////////////////////////////////////
+        //
+        // DONE FIRE: replace this with the following line 
+        // outcome = magisterLudi.selectionResValFire(???);
+        //
+        // TODO FIRE: create tests to define expected outcomes
+        //
+        ///////////////////////////////////////////////////
 
-			outcome = 
-				magisterLudi.selResValEarth(
-					$selectedCardsForPlayer, $selectedCardsForDaemon);
+      outcome = 
+        magisterLudi.selResValAir(
+          $selectedCardsForPlayer, $selectedCardsForDaemon);
 
-		}
+    }
 
-		if($currentQuadrant === 'Fire'){
-
-				///////////////////////////////////////////////////
-				//
-				// DONE FIRE: replace this with the following line 
-				// outcome = magisterLudi.selectionResValFire(???);
-				//
-				// TODO FIRE: create tests to define expected outcomes
-				//
-				///////////////////////////////////////////////////
-
-			outcome = 
-				magisterLudi.selResValAir(
-					$selectedCardsForPlayer, $selectedCardsForDaemon);
-
-		}
-
-		return outcome;
-	}
+    return outcome;
+  }
 );
 
 export const noValidChoices = derived(
-	[playerCards, 
-	 daemonCards,
-	 currentQuadrant],
-	([$playerCards, 
-	  $daemonCards,
-	  $currentQuadrant]) => {
+  [playerCards, 
+   daemonCards,
+   currentQuadrant],
+  ([$playerCards, 
+    $daemonCards,
+    $currentQuadrant]) => {
 
-		if($playerCards.length === 0 ||
-			 $daemonCards.length === 0){
+    if($playerCards.length === 0 ||
+       $daemonCards.length === 0){
 
-			// in between deals, no Valid moves not applicable, return false
-			return false;
-		}
+      // in between deals, no Valid moves not applicable, return false
+      return false;
+    }
 
 
-		if($currentQuadrant === 'Water'){
+    if($currentQuadrant === 'Water'){
 
-				///////////////////////////////////////////////////
-				//
-				// DONE WATER: replace this with the following line 
-				// return magisterLudi.noValidChoicesWater(???);
-				//
-				// TODO WATER: create tests to define expected outcomes
-				//
-				///////////////////////////////////////////////////
+        ///////////////////////////////////////////////////
+        //
+        // DONE WATER: replace this with the following line 
+        // return magisterLudi.noValidChoicesWater(???);
+        //
+        // TODO WATER: create tests to define expected outcomes
+        //
+        ///////////////////////////////////////////////////
 
-			return 
-				magisterLudi.noValidChoicesWater(
-					$daemonCards, $playerCards);
+        return magisterLudi.noValidChoicesWater(
+          $daemonCards, $playerCards);
 
-		}
+    }
 
-		if($currentQuadrant === 'Air'){
+    if($currentQuadrant === 'Air'){
 
-				///////////////////////////////////////////////////
-				//
-				// TODO AIR: replace this with the following line 
-				// return magisterLudi.noValidChoicesAir(???);
-				//
-				// TODO AIR: create tests to define expected outcomes
-				//
-				///////////////////////////////////////////////////
+        ///////////////////////////////////////////////////
+        //
+        // TODO AIR: replace this with the following line 
+        // return magisterLudi.noValidChoicesAir(???);
+        //
+        // TODO AIR: create tests to define expected outcomes
+        //
+        ///////////////////////////////////////////////////
 
-				return 
-					magisterLudi.noValidChoicesAir(
-						$daemonCards, $playerCards);
-		}
+        return magisterLudi.noValidChoicesAir(
+          $daemonCards, $playerCards);
+    }
 
-		if($currentQuadrant === 'Earth'){
+    if($currentQuadrant === 'Earth'){
 
-				///////////////////////////////////////////////////
-				//
-				// DONE EARTH: replace this with the following line 
-				// return magisterLudi.noValidChoicesEarth(???);
-				//
-				// TODO EARTH: create tests to define expected outcomes
-				//
-				///////////////////////////////////////////////////
+        ///////////////////////////////////////////////////
+        //
+        // DONE EARTH: replace this with the following line 
+        // return magisterLudi.noValidChoicesEarth(???);
+        //
+        // TODO EARTH: create tests to define expected outcomes
+        //
+        ///////////////////////////////////////////////////
 
-			return
-				magisterLudi.noValidChoicesEarth(
-					$daemonCards, $playerCards);
+        return magisterLudi.noValidChoicesEarth(
+          $daemonCards, $playerCards);
 
-		}
+    }
 
-		if($currentQuadrant === 'Fire'){
+    if($currentQuadrant === 'Fire'){
 
-				///////////////////////////////////////////////////
-				//
-				// TODO FIRE: replace this with the following line 
-				// return magisterLudi.noValidChoicesFire(???);
-				//
-				// TODO FIRE: create tests to define expected outcomes
-				//
-				///////////////////////////////////////////////////
+        ///////////////////////////////////////////////////
+        //
+        // DONE FIRE: replace this with the following line 
+        // return magisterLudi.noValidChoicesFire(???);
+        //
+        // TODO FIRE: create tests to define expected outcomes
+        //
+        ///////////////////////////////////////////////////
 
-			const allPossible = 
-				magisterLudi.allPossibleCombos($playerCards, $daemonCards);
 
-			//card selection will be single, so we just need to find one
-			// pairing that shares neither a suit or a rank
-			for(const keyPair of allPossible){
-				
-				const pCardKey = keyPair[0];
-				const dCardKey = keyPair[1];
-				
-			  const dSuit = magisterLudi.parseSuit(dCardKey);
-			  const pSuit = magisterLudi.parseSuit(pCardKey);
+        return magisterLudi.noValidChoicesFire(
+          $daemonCards, $playerCards);
 
-			  const dRank = magisterLudi.parseRank(dCardKey, dSuit);
-			  const pRank = magisterLudi.parseRank(pCardKey, pSuit);
+    }
 
-			  if(dSuit != pSuit && dRank != pRank){
-
-			  	// noValidChoices is false
-			  	return false;
-			  }
-			}
-		}
-
-  	// noValidChoices is true
-		return true;
-	}
+    // noValidChoices is true
+    return true;
+  }
 );
 
 export const currentStateText = derived(
-	[fireCollection, 
-	 waterCollection,
-	 airCollection,
-	 earthCollection],
-	([$fireCollection,
-		$waterCollection,
-		$airCollection,
-		$earthCollection]) => {
-		
-		return "Fire Collection: [" + $fireCollection + `] 
+  [fireCollection, 
+   waterCollection,
+   airCollection,
+   earthCollection],
+  ([$fireCollection,
+    $waterCollection,
+    $airCollection,
+    $earthCollection]) => {
+    
+    return "Fire Collection: [" + $fireCollection + `] 
 ` +
-					 "Water Collection: [" + $waterCollection + `] 
+           "Water Collection: [" + $waterCollection + `] 
 ` +
-					 "Air Collection: [" + $airCollection + `] 
+           "Air Collection: [" + $airCollection + `] 
 ` +
-					 "Earth Collection: [" + $earthCollection + `] 
+           "Earth Collection: [" + $earthCollection + `] 
 `;
-	}
+  }
 );

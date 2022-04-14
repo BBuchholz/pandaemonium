@@ -9,8 +9,11 @@ const KnechtController = () => {
     getScenarios: () => {
 
       if(self.useHardCodedScenarios){
+
         return self.getHardCodedScenarios();
+
       }else{
+
         return self.getDynamicScenarios();
       }
     },
@@ -525,18 +528,70 @@ const KnechtController = () => {
       }
     },
 
+    validateSelectionWater: (selectedCardsForDaemon,
+                             selectedCardsForPlayer) => {
+
+      //assume true
+      let outcome = true;
+
+      const affinityMap = new Map();
+
+      // water treats all as one group, so consolidate
+      const allCardKeys = 
+        [
+          ...selectedCardsForPlayer, 
+          ...selectedCardsForDaemon
+        ];
+
+      if(allCardKeys.length < 2){
+        outcome = false;
+      }
+
+      for(const cardKey of allCardKeys){
+
+        const cardSuit = self.parseSuit(cardKey);
+        const cardRank = self.parseRank(cardKey, cardSuit);
+
+        if(!affinityMap.has(cardSuit)){
+          affinityMap.set(cardSuit, 1);
+        } else {
+          affinityMap.set(cardSuit, affinityMap.get(cardSuit) + 1);
+        }
+
+        if(!affinityMap.has(cardRank)){
+          affinityMap.set(cardRank, 1);
+        } else {
+          affinityMap.set(cardRank, affinityMap.get(cardRank) + 1);
+        }
+      }
+
+      // a broken chain can be detected by one card
+      // having no other cards sharing an affinity
+      for(const cardKey of allCardKeys){
+
+        const cardSuit = self.parseSuit(cardKey);
+        const cardRank = self.parseRank(cardKey, cardSuit);
+
+        if(affinityMap.get(cardSuit) < 2 &&
+           affinityMap.get(cardRank) < 2){
+          // no connections, broken chain
+          outcome = false;
+        }
+      }
+
+      return outcome;
+
+    },
+
     validateSelectionAir: (selectedCardsForDaemon,
                            selectedCardsForPlayer) => {
-
-
-      let outcome = false;
 
       const affinityMapPlayer = new Map();
       const affinityMapDaemon = new Map();
 
       //assume true, we will test for validity violations
       //and flip this flag if any are found
-      outcome = true;
+      let outcome = true;
 
       if(selectedCardsForPlayer.length < 1 || 
          selectedCardsForDaemon.length < 1){
@@ -689,8 +744,8 @@ const KnechtController = () => {
         const pCardKey = keyPair[0];
         const dCardKey = keyPair[1];
         
-        const dSuit = magisterLudi.parseSuit(dCardKey);
-        const pSuit = magisterLudi.parseSuit(pCardKey);
+        const dSuit = self.parseSuit(dCardKey);
+        const pSuit = self.parseSuit(pCardKey);
 
         if(dSuit === pSuit){
 
@@ -698,8 +753,8 @@ const KnechtController = () => {
           return false;
         }
 
-        const dRank = magisterLudi.parseRank(dCardKey, dSuit);
-        const pRank = magisterLudi.parseRank(pCardKey, pSuit);
+        const dRank = self.parseRank(dCardKey, dSuit);
+        const pRank = self.parseRank(pCardKey, pSuit);
 
         if(dRank === pRank){
 
@@ -707,8 +762,9 @@ const KnechtController = () => {
           return false;
         }
 
-        return false;
       }
+
+      return true;
     },
 
     noValidChoicesAir: (daemonCards, playerCards) => {
@@ -784,6 +840,46 @@ const KnechtController = () => {
 
     },
 
+    noValidChoicesFire: (daemonCards, playerCards) => {
+      
+      //copied from boardCE, not fully tested
+
+      if(!playerCards || !daemonCards){
+        return true;
+      }
+
+      const allPossible = 
+        self.allPossibleCombos(playerCards, daemonCards);
+
+      //card selection will be single, so we just need to find one
+      // pairing that shares either a suit or a rank
+      for(const keyPair of allPossible){
+        
+        const pCardKey = keyPair[0];
+        const dCardKey = keyPair[1];
+        
+        const dSuit = self.parseSuit(dCardKey);
+        const pSuit = self.parseSuit(pCardKey);
+
+        if(dSuit === pSuit){
+
+          // noValidChoices is false
+          return false;
+        }
+
+        const dRank = self.parseRank(dCardKey, dSuit);
+        const pRank = self.parseRank(pCardKey, pSuit);
+
+        if(dRank === pRank){
+
+          // noValidChoices is false
+          return false;
+        }
+      }
+
+
+    },
+
     selResValWater: (selectedCardsForPlayer, 
                      selectedCardsForDaemon) => {
       
@@ -818,8 +914,8 @@ const KnechtController = () => {
         const dCardKey = selectedCardsForDaemon[i];
 
         if(pCardKey && dCardKey){
-          console.log('pCardKey: ' + pCardKey);
-          console.log('dCardKey: ' + dCardKey);
+          
+          
 
           const dSuit = self.parseSuit(dCardKey);
           const pSuit = self.parseSuit(pCardKey);
@@ -864,8 +960,8 @@ const KnechtController = () => {
       const dCardKey = selectedCardsForDaemon[0];
 
       if(pCardKey && dCardKey){
-        console.log('pCardKey: ' + pCardKey);
-        console.log('dCardKey: ' + dCardKey);
+        
+        
 
         const dSuit = self.parseSuit(dCardKey);
         const pSuit = self.parseSuit(pCardKey);
