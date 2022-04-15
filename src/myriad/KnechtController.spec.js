@@ -6,6 +6,51 @@ it('should parse suit', () => {
   expect('W').toEqual(magisterLudi.parseSuit('5W'));
 });
 
+//////////////////////////////////////////////////
+// SELECTION RESOLUTION VALUE AIR
+//////////////////////////////////////////////////
+describe('selResValAir', () => {
+
+  // FROM SPEC DOC
+  // WITHIN SAME SUIT: Higher "Wins" and is reused, Lower collected
+  // WITHIN DIFFERING SUITS: Astrological order (rock paper scissors style)
+  // air trumps earth
+  // water trumps air
+  // fire trumps water
+  // earth trumps fire
+  // water and earth harmonize (treat as same suit, tie goes to water, earth is collected)
+  // fire and air fuel/consume (treat as same suit, tie goes to fire, air is collected)
+
+  const selResValAirCases = [
+
+    [['6C'], ['8W'], ['6C']], //TODO AIR: More Cases Needed
+  
+  ];
+
+  test.each(selResValAirCases)(
+
+    "given selected Daemon cards %p " +
+    "and selected Player cards %p, " + 
+    "returns %p",
+    
+    (
+
+      selectedCardsDaemon, 
+      selectedCardsPlayer, 
+      expectedResult
+
+    ) => {
+
+      const result = 
+        magisterLudi.selResValAir(
+          selectedCardsDaemon, selectedCardsPlayer);
+
+      expect(result).toEqual(expectedResult);
+
+    }
+  );
+
+});
 
 //////////////////////////////////////////////////
 // SELECTION RESOLUTION VALUE EARTH
