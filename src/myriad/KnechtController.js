@@ -934,17 +934,23 @@ const KnechtController = () => {
       return outcome;
     },
 
-    selResValEarth: (selectedCardsForPlayer, 
-                     selectedCardsForDaemon) => {
+    selResValEarth: (selectedCardsForDaemon, 
+                     selectedCardsForPlayer) => {
       
-      //copied from boardCE, not fully tested
-            
-      let playerCardKey = selectedCardsForPlayer[0];
-      let daemonCardKey = selectedCardsForDaemon[0];
       let outcome = [];
 
-      outcome.push(playerCardKey);
+      if(!self.validateSelectionEarth(
+          selectedCardsForDaemon, selectedCardsForPlayer)){
+
+        return outcome;
+
+      }
+
+      let playerCardKey = selectedCardsForPlayer[0];
+      let daemonCardKey = selectedCardsForDaemon[0];
+      
       outcome.push(daemonCardKey);
+      outcome.push(playerCardKey);
 
       return outcome;
     },
