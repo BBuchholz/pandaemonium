@@ -23,7 +23,12 @@ describe('selResValAir', () => {
 
   const selResValAirCases = [
 
-    [['6C'], ['8W'], ['6C']], //TODO AIR: More Cases Needed
+    //TODO AIR: More Cases Needed, esp. Multi Selects
+    //JUST GENERATING THESE RANDOMLY
+    [['6C'], ['8W'], ['6C']], 
+    [['2C'], ['6C'], []], 
+    [['2C'], ['4D'], []],
+    [['2C'], ['8S'], []],
   
   ];
 

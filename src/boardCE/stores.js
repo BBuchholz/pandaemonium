@@ -464,6 +464,14 @@ export const selectionIsWet = derived(
   }
 );
 
+export const voidQuadrant = derived(
+  [moistureIndex, heatIndex],
+  ([$moistureIndex, $heatIndex]) => {
+    return $moistureIndex == 0 && 
+      $heatIndex == 0;
+  }
+);
+
 export const discardCount = derived(
   [deck, earthColCount, airColCount, waterColCount, fireColCount, playerCards, daemonCards],
   ([$deck, $earthColCount, $airColCount, $waterColCount, $fireColCount, $playerCards, $daemonCards]) => {
@@ -479,11 +487,16 @@ export const discardCount = derived(
 );
 
 export const currentQuadrant = derived(
-  [selectionIsWet, resolutionIsHeated],
-  ([$selectionIsWet, $resolutionIsHeated]) => {
+  [voidQuadrant, selectionIsWet, resolutionIsHeated],
+  ([$voidQuadrant, $selectionIsWet, $resolutionIsHeated]) => {
 
     // Quadrant Determination follows the Empedoclean Elements
     // see: https://en.wikipedia.org/wiki/Classical_element#Greece 
+
+    if($voidQuadrant){
+
+      return 'Void';
+    }
 
     if($selectionIsWet){
 

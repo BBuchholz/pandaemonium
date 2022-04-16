@@ -32,6 +32,7 @@
   class:water-color={$currentQuadrant === 'Water'}
   class:air-color={$currentQuadrant === 'Air'}
   class:earth-color={$currentQuadrant === 'Earth'}
+  class:void-color={$currentQuadrant === 'Void'}
   >
 
   <h1>
@@ -133,5 +134,8 @@
   background-color: #6f2811;
 }
 
+.void-color {
+  background-color: #303030;
+}
 
 </style>

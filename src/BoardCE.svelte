@@ -103,6 +103,16 @@
     });
   }
 
+  function notifyDeckInfo(infoDesc){
+    addNotification({
+      position: 'top-right',
+      text: 'Deck Info',
+      type: 'error',
+      description: infoDesc,
+      removeAfter: 2000,
+    }); 
+  }
+
   function notifyAllDevInfos(){
 
     const devInfoText = 
@@ -304,7 +314,7 @@
 
     } else {
 
-      alert('all cards collected! you rock!');
+      notifyDeckInfo('Deck is empty, redeem a vessel to select a quadrant and shuffle all cards');
       $beforeGame = true;
 
     }
@@ -413,7 +423,7 @@
     addToDo('refactor stores current logic into KnechtController, and put new behavior into Knechtor, and then we can write unit tests to verify that both are behaving the same, SEE TODO COMMENTS IN boardCE/stores.js')
     addToDo('alert on deck info should be a notification. ');
     addToDo('replace Card with ModCard. ');
-    addToDo('if the button labelled "Play the Game" is clicked without a quadrant selected, notify to select a quadrant. ');
+    addToDo('if the button labelled "Play the Game" is clicked without a quadrant selected, notify that you are in the void and will only get random cards that allow all selections unless you select a quadrant. ');
     addToDo('board should be black and white if no quadrant selected. ');
     addToDo('Fire logic ready to be implemented, see code notes on Game Logic Docs');
   }
@@ -427,6 +437,8 @@
 
   function initialize(){
 
+    fillAllElementalVessels();
+
     if($devMode){
 
       notifyAllDevInfos();
@@ -434,8 +446,6 @@
       loadToDos();
 
       notifyAllToDos();
-
-      fillAllElementalVessels();
 
       //use this to selectively redeem
       //some keys for testing particular 

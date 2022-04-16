@@ -44,6 +44,7 @@
   class:water-color={$currentQuadrant === 'Water'}
   class:air-color={$currentQuadrant === 'Air'}
   class:earth-color={$currentQuadrant === 'Earth'}
+  class:void-color={$currentQuadrant === 'Void'}
   >
 
   <div class="stats player-stats">
@@ -235,6 +236,10 @@ button {
 
 .earth-color {
   background-color: #eea890;
+}
+
+.void-color {
+  background-color: #BEBEBE;
 }
 
 </style>
