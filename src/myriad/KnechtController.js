@@ -809,7 +809,7 @@ const KnechtController = () => {
 
 
       const allPossible = 
-        magisterLudi.allPossibleCombos($playerCards, $daemonCards);
+        self.allPossibleCombos(daemonCards, playerCards);
 
       //card selection will be single, so we just need to find one
       // pairing that shares either a suit or a rank
@@ -818,8 +818,8 @@ const KnechtController = () => {
         const pCardKey = keyPair[0];
         const dCardKey = keyPair[1];
         
-        const dSuit = magisterLudi.parseSuit(dCardKey);
-        const pSuit = magisterLudi.parseSuit(pCardKey);
+        const dSuit = self.parseSuit(dCardKey);
+        const pSuit = self.parseSuit(pCardKey);
 
         if(dSuit === pSuit){
 
@@ -827,8 +827,8 @@ const KnechtController = () => {
           return false;
         }
 
-        const dRank = magisterLudi.parseRank(dCardKey, dSuit);
-        const pRank = magisterLudi.parseRank(pCardKey, pSuit);
+        const dRank = self.parseRank(dCardKey, dSuit);
+        const pRank = self.parseRank(pCardKey, pSuit);
 
         if(dRank === pRank){
 
