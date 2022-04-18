@@ -1,5 +1,9 @@
 <script>
   
+  import {
+    voidMode,
+  } from '../stores.js';
+
   import { 
 
     selectedCardsForPlayer, 
@@ -19,6 +23,7 @@
 
   import LibraryPopupButton from '../LibraryPopupButton.svelte';
 
+  import VoidVessel from './VoidVessel.svelte';
   import EarthVessel from './EarthVessel.svelte';
   import FireVessel from './FireVessel.svelte';
 
@@ -56,7 +61,7 @@
   </div>
 
     
-  {#if $beforeGame}
+  {#if $beforeGame && !$voidMode}
 
     <LibraryPopupButton />
 
@@ -67,6 +72,18 @@
     >
       Play the Game!
     </button>
+
+  {:else if $beforeGame && $voidMode}
+
+    <VoidVessel />
+
+    <button 
+      class="start-game"
+      class:beforeGame
+      on:click={onStartGame}
+    >
+      Play the Game!
+    </button>    
 
   {:else}
 

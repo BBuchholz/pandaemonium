@@ -7,6 +7,7 @@
     modal, 
     passPhrase,
     devMode,
+    voidMode,
     devNotifyDelay,
   } from './stores.js';
 
@@ -34,7 +35,9 @@
 
     if($devMode){
 
-      $passPhrase = 'leCE';    
+      $passPhrase = 'leCE';  
+
+      $voidMode = true;  
 
       //////////////////////////////////////////
       // $devNotifyDelay DOC

@@ -537,6 +537,22 @@ export const selectionIsValid = derived(
 
       let outcome = false;
 
+      if($currentQuadrant === 'Void'){
+
+        ///////////////////////////////////////////////////
+        //
+        // DONE VOID: replace this with the following line 
+        // outcome = magisterLudi.validateSelectionVoid(???);
+        //
+        // TODO VOID: create tests to define expected outcomes
+        //
+        ///////////////////////////////////////////////////
+
+        outcome = 
+          magisterLudi.validateSelectionVoid(
+            $selectedCardsForDaemon, $selectedCardsForPlayer);
+      }
+
       if($currentQuadrant === 'Water'){
 
         ///////////////////////////////////////////////////
@@ -633,6 +649,23 @@ export const selectionResolutionValue = derived(
       return outcome;
     }
 
+    if($currentQuadrant === 'Void'){
+      
+        ///////////////////////////////////////////////////
+        //
+        // DONE VOID: replace this with the following line 
+        // outcome = magisterLudi.selectionResValVoid(???);
+        //
+        // TODO VOID: create tests to define expected outcomes
+        //
+        ///////////////////////////////////////////////////
+
+      outcome = 
+        magisterLudi.selResValVoid(
+          $selectedCardsForPlayer, $selectedCardsForDaemon);
+
+    }
+
     if($currentQuadrant === 'Water'){
       
         ///////////////////////////////////////////////////
@@ -721,6 +754,21 @@ export const noValidChoices = derived(
       return false;
     }
 
+    if($currentQuadrant === 'Void'){
+
+        ///////////////////////////////////////////////////
+        //
+        // DONE VOID: replace this with the following line 
+        // return magisterLudi.noValidChoicesVoid(???);
+        //
+        // TODO VOID: create tests to define expected outcomes
+        //
+        ///////////////////////////////////////////////////
+
+        return magisterLudi.noValidChoicesVoid(
+          $daemonCards, $playerCards);
+
+    }
 
     if($currentQuadrant === 'Water'){
 
@@ -742,7 +790,7 @@ export const noValidChoices = derived(
 
         ///////////////////////////////////////////////////
         //
-        // TODO AIR: replace this with the following line 
+        // DONE AIR: replace this with the following line 
         // return magisterLudi.noValidChoicesAir(???);
         //
         // TODO AIR: create tests to define expected outcomes

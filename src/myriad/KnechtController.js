@@ -528,6 +528,23 @@ const KnechtController = () => {
       }
     },
 
+    validateSelectionVoid: (selectedCardsForDaemon,
+                            selectedCardsForPlayer) => {
+
+      let outcome = true;
+
+      // VOID allows all possible combinations, requiring
+      // only that there be one from each tree, which is
+      // a base level commonality to all elements
+
+      outcome = 
+        selectedCardsForDaemon.length > 0 &&
+        selectedCardsForPlayer.length > 0;
+
+      return outcome;
+
+    },
+
     validateSelectionWater: (selectedCardsForDaemon,
                              selectedCardsForPlayer) => {
 
@@ -726,6 +743,11 @@ const KnechtController = () => {
       return outcome;
     },
 
+    noValidChoicesVoid: (daemonCards, playerCards) => {
+
+      return daemonCards.length < 1 && playerCards.length < 1;
+    },
+
     noValidChoicesWater: (daemonCards, playerCards) => {
       
       //copied from boardCE, not fully tested
@@ -878,6 +900,27 @@ const KnechtController = () => {
       }
 
 
+    },
+
+    selResValVoid: (selectedCardsForPlayer, 
+                    selectedCardsForDaemon) => {
+      
+      //copied from boardCE, not fully tested
+            
+      let outcome = [];
+
+      // void allows all selections, consolidate into one group
+      const allCardKeys = 
+        [
+          ...selectedCardsForPlayer, 
+          ...selectedCardsForDaemon
+        ];
+
+      for(const cardKey of allCardKeys){
+        outcome.push(cardKey);
+      }
+
+      return outcome;
     },
 
     selResValWater: (selectedCardsForPlayer, 

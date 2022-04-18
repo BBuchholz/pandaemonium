@@ -15,6 +15,8 @@ export const selectedQuadrant = writable('');
 export const devMode = writable(false);
 export const devNotifyDelay = writable(false);
 
+export const voidMode = writable(false);
+
 export const selectedCardsForPlayer = writable([]);
 export const selectedCardsForDaemon = writable([]);
 

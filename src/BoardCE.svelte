@@ -314,7 +314,7 @@
 
     } else {
 
-      notifyDeckInfo('Deck is empty, redeem a vessel to select a quadrant and shuffle all cards');
+      notifyDeckInfo('Deck is empty, redeem a vessel to select a quadrant and shuffle all cards. To Enable Void Mode, open the book and select it...');
       $beforeGame = true;
 
     }
@@ -424,7 +424,7 @@
     addToDo('alert on deck info should be a notification. ');
     addToDo('replace Card with ModCard. ');
     addToDo('if the button labelled "Play the Game" is clicked without a quadrant selected, notify that you are in the void and will only get random cards that allow all selections unless you select a quadrant. ');
-    addToDo('board should be black and white if no quadrant selected. ');
+    // addToDo('board should be black and white if no quadrant selected. ');
     addToDo('Fire logic ready to be implemented, see code notes on Game Logic Docs');
   }
 

@@ -12,6 +12,7 @@
     heatIndex, 
     passPhrase,
     devMode, 
+    voidMode,
   } from './stores.js';
 
   function redeemFire(){
@@ -123,6 +124,10 @@
     $devMode = true;
   }
 
+  function enterVoidMode(){
+    $voidMode = true;
+  }
+
 </script>
 
 <div class="planar-buttons">
@@ -134,7 +139,9 @@
     <button on:click={saveGame} >Save Game</button>
     <button on:click={loadGame} >Load Game</button>
     <button on:click={enterDevMode} >Enter Dev Mode</button>
+    <button on:click={enterVoidMode} >Enter Void Mode</button>
     <p>Dev Mode is {$devMode}</p>
+    <p>Void Mode is {$voidMode}</p>
 
 
     <p>This is an open source project based on another under GPL licensing, and subject to those conditions, contact me through the github site, hosted at <a href='https://github.com/BBuchholz/pandaemonium'>github.com/BBuchholz/pandaemonium</a>, for details </p>
