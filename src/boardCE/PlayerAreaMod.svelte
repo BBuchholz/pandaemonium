@@ -15,7 +15,7 @@
     nextTurnButtonText,  
     selectionResolutionValue, 
     selectionIsValid, 
-    noValidChoices
+    noValidChoice
   
   } from './stores.js';
 
@@ -115,7 +115,7 @@
 
   {:else}
 
-    {#if $noValidChoices && !$beforeGame}
+    {#if $noValidChoice && !$beforeGame}
 
 
       <button 

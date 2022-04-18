@@ -739,7 +739,7 @@ export const selectionResolutionValue = derived(
   }
 );
 
-export const noValidChoices = derived(
+export const noValidChoice = derived(
   [playerCards, 
    daemonCards,
    currentQuadrant],
@@ -759,13 +759,13 @@ export const noValidChoices = derived(
         ///////////////////////////////////////////////////
         //
         // DONE VOID: replace this with the following line 
-        // return magisterLudi.noValidChoicesVoid(???);
+        // return magisterLudi.noValidChoiceVoid(???);
         //
         // TODO VOID: create tests to define expected outcomes
         //
         ///////////////////////////////////////////////////
 
-        return magisterLudi.noValidChoicesVoid(
+        return magisterLudi.noValidChoiceVoid(
           $daemonCards, $playerCards);
 
     }
@@ -775,13 +775,13 @@ export const noValidChoices = derived(
         ///////////////////////////////////////////////////
         //
         // DONE WATER: replace this with the following line 
-        // return magisterLudi.noValidChoicesWater(???);
+        // return magisterLudi.noValidChoiceWater(???);
         //
         // TODO WATER: create tests to define expected outcomes
         //
         ///////////////////////////////////////////////////
 
-        return magisterLudi.noValidChoicesWater(
+        return magisterLudi.noValidChoiceWater(
           $daemonCards, $playerCards);
 
     }
@@ -791,13 +791,13 @@ export const noValidChoices = derived(
         ///////////////////////////////////////////////////
         //
         // DONE AIR: replace this with the following line 
-        // return magisterLudi.noValidChoicesAir(???);
+        // return magisterLudi.noValidChoiceAir(???);
         //
         // TODO AIR: create tests to define expected outcomes
         //
         ///////////////////////////////////////////////////
 
-        return magisterLudi.noValidChoicesAir(
+        return magisterLudi.noValidChoiceAir(
           $daemonCards, $playerCards);
     }
 
@@ -806,13 +806,13 @@ export const noValidChoices = derived(
         ///////////////////////////////////////////////////
         //
         // DONE EARTH: replace this with the following line 
-        // return magisterLudi.noValidChoicesEarth(???);
+        // return magisterLudi.noValidChoiceEarth(???);
         //
         // TODO EARTH: create tests to define expected outcomes
         //
         ///////////////////////////////////////////////////
 
-        return magisterLudi.noValidChoicesEarth(
+        return magisterLudi.noValidChoiceEarth(
           $daemonCards, $playerCards);
 
     }
@@ -822,19 +822,19 @@ export const noValidChoices = derived(
         ///////////////////////////////////////////////////
         //
         // DONE FIRE: replace this with the following line 
-        // return magisterLudi.noValidChoicesFire(???);
+        // return magisterLudi.noValidChoiceFire(???);
         //
         // TODO FIRE: create tests to define expected outcomes
         //
         ///////////////////////////////////////////////////
 
 
-        return magisterLudi.noValidChoicesFire(
+        return magisterLudi.noValidChoiceFire(
           $daemonCards, $playerCards);
 
     }
 
-    // noValidChoices is true
+    // noValidChoice is true
     return true;
   }
 );

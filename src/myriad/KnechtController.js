@@ -743,12 +743,12 @@ const KnechtController = () => {
       return outcome;
     },
 
-    noValidChoicesVoid: (daemonCards, playerCards) => {
+    noValidChoiceVoid: (daemonCards, playerCards) => {
 
       return daemonCards.length < 1 && playerCards.length < 1;
     },
 
-    noValidChoicesWater: (daemonCards, playerCards) => {
+    noValidChoiceWater: (daemonCards, playerCards) => {
       
       //copied from boardCE, not fully tested
 
@@ -771,7 +771,7 @@ const KnechtController = () => {
 
         if(dSuit === pSuit){
 
-          // noValidChoices is false
+          // noValidChoice is false
           return false;
         }
 
@@ -780,7 +780,7 @@ const KnechtController = () => {
 
         if(dRank === pRank){
 
-          // noValidChoices is false
+          // noValidChoice is false
           return false;
         }
 
@@ -789,7 +789,7 @@ const KnechtController = () => {
       return true;
     },
 
-    noValidChoicesAir: (daemonCards, playerCards) => {
+    noValidChoiceAir: (daemonCards, playerCards) => {
       
       //copied from boardCE, not fully tested
 
@@ -815,13 +815,13 @@ const KnechtController = () => {
 
         if(dSuit != pSuit && dRank != pRank){
 
-          // noValidChoices is false
+          // noValidChoice is false
           return false;
         }
       }
     },
 
-    noValidChoicesEarth: (daemonCards, playerCards) => {
+    noValidChoiceEarth: (daemonCards, playerCards) => {
       
       //copied from boardCE, not fully tested
 
@@ -845,7 +845,7 @@ const KnechtController = () => {
 
         if(dSuit === pSuit){
 
-          // noValidChoices is false
+          // noValidChoice is false
           return false;
         }
 
@@ -854,7 +854,7 @@ const KnechtController = () => {
 
         if(dRank === pRank){
 
-          // noValidChoices is false
+          // noValidChoice is false
           return false;
         }
       }
@@ -862,7 +862,7 @@ const KnechtController = () => {
 
     },
 
-    noValidChoicesFire: (daemonCards, playerCards) => {
+    noValidChoiceFire: (daemonCards, playerCards) => {
       
       //copied from boardCE, not fully tested
 
@@ -885,7 +885,7 @@ const KnechtController = () => {
 
         if(dSuit === pSuit){
 
-          // noValidChoices is false
+          // noValidChoice is false
           return false;
         }
 
@@ -894,7 +894,7 @@ const KnechtController = () => {
 
         if(dRank === pRank){
 
-          // noValidChoices is false
+          // noValidChoice is false
           return false;
         }
       }
@@ -908,6 +908,12 @@ const KnechtController = () => {
       //copied from boardCE, not fully tested
             
       let outcome = [];
+
+      if(selectedCardsForDaemon.length == 0 || 
+         selectedCardsForPlayer.length == 0){
+
+        return outcome;
+      }
 
       // void allows all selections, consolidate into one group
       const allCardKeys = 
