@@ -1,6 +1,6 @@
 <script>
   import { fade } from 'svelte/transition';
-  import { currentStateText } from './stores.js';
+  import { previousTurnInfoForCopyDialog } from './stores.js';
 
   export let notification;
   export let withoutStyles = false;
@@ -10,10 +10,10 @@
   import { getNotificationsContext } from 'svelte-notifications';
   const { addNotification } = getNotificationsContext();
 
-  function notifyCopied(){
+  function notifyCopied(textToWrite){
     addNotification({
       position: 'bottom-right',
-      text: 'copied to clipboard',
+      text: 'copied to clipboard: ' + textToWrite,
       type: 'error',
       description: 'lorem ipsum',
       removeAfter: 4000,
@@ -36,12 +36,12 @@
 
   function copyState() {
 
-    const textToWrite = $currentStateText;
+    const textToWrite = $previousTurnInfoForCopyDialog;
 
     navigator.clipboard.writeText(textToWrite).then(function() {
     
       /* clipboard successfully set */
-      notifyCopied();
+      notifyCopied(textToWrite);
 
     }, function() {
     

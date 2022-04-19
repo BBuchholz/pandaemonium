@@ -11,6 +11,7 @@
   import {
     devMode,
     devNotifyDelay,
+    previousTurnInfoForCopyDialog,
   } from './stores.js';
 
   import { 
@@ -182,7 +183,38 @@
 
   function resetSelection() {
 
-    // roundFinished = true;
+    //TODO COPY NOTIFY: store the previous turn info 
+    //                  here before clearing
+    //Table
+    //Selected
+    //Collected
+    //Quadrant
+
+    let textToStore = 'Table: ';
+
+    textToStore += JSON.stringify($daemonCards);
+    textToStore += JSON.stringify($playerCards);
+
+    textToStore += 'Selected: ';
+
+    textToStore += JSON.stringify($selectedCardsForDaemon);
+    textToStore += JSON.stringify($selectedCardsForPlayer);
+
+    
+    textToStore += 'Collected: ';
+
+    textToStore += JSON.stringify('fill this in');
+    textToStore += JSON.stringify('fill this in');
+
+    
+    textToStore += 'Quadrant: ';
+
+    textToStore += JSON.stringify('fill this in');
+
+
+
+    $previousTurnInfoForCopyDialog = textToStore;
+    
     $selectedCardsForPlayer = [];
     $selectedCardsForDaemon = [];
     $playerCards = [];

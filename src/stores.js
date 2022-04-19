@@ -425,23 +425,25 @@ export const selectionResolutionValue = derived(
 	}
 );
 
-export const currentStateText = derived(
-	[fireCollection, 
-	 waterCollection,
-	 airCollection,
-	 earthCollection],
-	([$fireCollection,
-		$waterCollection,
-		$airCollection,
-		$earthCollection]) => {
+// export const currentStateText = derived(
+// 	[fireCollection, 
+// 	 waterCollection,
+// 	 airCollection,
+// 	 earthCollection],
+// 	([$fireCollection,
+// 		$waterCollection,
+// 		$airCollection,
+// 		$earthCollection]) => {
 		
-		return "Fire Collection: [" + $fireCollection + `] 
-` +
-					 "Water Collection: [" + $waterCollection + `] 
-` +
-					 "Air Collection: [" + $airCollection + `] 
-` +
-					 "Earth Collection: [" + $earthCollection + `] 
-`;
-	}
-);
+// 		return "Fire Collection: [" + $fireCollection + `] 
+// ` +
+// 					 "Water Collection: [" + $waterCollection + `] 
+// ` +
+// 					 "Air Collection: [" + $airCollection + `] 
+// ` +
+// 					 "Earth Collection: [" + $earthCollection + `] 
+// `;
+// 	}
+// );
+
+export const previousTurnInfoForCopyDialog = writable('');
