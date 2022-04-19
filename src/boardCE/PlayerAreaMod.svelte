@@ -8,6 +8,7 @@
 
     selectedCardsForPlayer, 
     selectedCardsForDaemon, 
+    selectedCards,
     playerCards, 
     beforeGame,
     currentQuadrant,  
@@ -15,7 +16,7 @@
     nextTurnButtonText,  
     selectionResolutionValue, 
     selectionIsValid, 
-    noValidChoice
+    newDealEligible,
   
   } from './stores.js';
 
@@ -115,7 +116,7 @@
 
   {:else}
 
-    {#if $noValidChoice && !$beforeGame}
+    {#if $newDealEligible && !$beforeGame && !$selectedCards.length > 0}
 
 
       <button 
@@ -123,7 +124,7 @@
         on:click={selectionConfirmed}
       >
 
-        No Valid Moves
+        🔄
 
       </button>
   

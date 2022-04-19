@@ -457,10 +457,16 @@ export const selectionResolutionMValue = derived(
   }
 );
 
+//THIS SHOULD BECOME "selectionIsMultiple"
+//BECAUSE WE WANT VOID TO SUPPORT MULTIPLE
+//AND THE MOISTURE INDEX IS 0, SO Wetness isn't
+//A Factor (find all usages and replace name)
+//THEN REFACTOR THIS TO REMOVE INDEXES ALL TOGETHER
+//JUST HAVE IT BASED OFF OF THE CURRENT QUADRANT
 export const selectionIsWet = derived(
   moistureIndex,
   ($moistureIndex) => {
-    return $moistureIndex > 0;
+    return $moistureIndex >= 0; //THIS IS A HACK, SEE ABOVE
   }
 );
 
@@ -544,7 +550,7 @@ export const selectionIsValid = derived(
         // DONE VOID: replace this with the following line 
         // outcome = magisterLudi.validateSelectionVoid(???);
         //
-        // TODO VOID: create tests to define expected outcomes
+        // DONE VOID: create tests to define expected outcomes
         //
         ///////////////////////////////////////////////////
 
@@ -656,7 +662,7 @@ export const selectionResolutionValue = derived(
         // DONE VOID: replace this with the following line 
         // outcome = magisterLudi.selectionResValVoid(???);
         //
-        // TODO VOID: create tests to define expected outcomes
+        // DONE VOID: create tests to define expected outcomes
         //
         ///////////////////////////////////////////////////
 
@@ -739,7 +745,7 @@ export const selectionResolutionValue = derived(
   }
 );
 
-export const noValidChoice = derived(
+export const newDealEligible = derived(
   [playerCards, 
    daemonCards,
    currentQuadrant],
@@ -759,13 +765,13 @@ export const noValidChoice = derived(
         ///////////////////////////////////////////////////
         //
         // DONE VOID: replace this with the following line 
-        // return magisterLudi.noValidChoiceVoid(???);
+        // return magisterLudi.newDealEligibleVoid(???);
         //
         // TODO VOID: create tests to define expected outcomes
         //
         ///////////////////////////////////////////////////
 
-        return magisterLudi.noValidChoiceVoid(
+        return magisterLudi.newDealEligibleVoid(
           $daemonCards, $playerCards);
 
     }
@@ -775,13 +781,13 @@ export const noValidChoice = derived(
         ///////////////////////////////////////////////////
         //
         // DONE WATER: replace this with the following line 
-        // return magisterLudi.noValidChoiceWater(???);
+        // return magisterLudi.newDealEligibleWater(???);
         //
         // TODO WATER: create tests to define expected outcomes
         //
         ///////////////////////////////////////////////////
 
-        return magisterLudi.noValidChoiceWater(
+        return magisterLudi.newDealEligibleWater(
           $daemonCards, $playerCards);
 
     }
@@ -791,13 +797,13 @@ export const noValidChoice = derived(
         ///////////////////////////////////////////////////
         //
         // DONE AIR: replace this with the following line 
-        // return magisterLudi.noValidChoiceAir(???);
+        // return magisterLudi.newDealEligibleAir(???);
         //
         // TODO AIR: create tests to define expected outcomes
         //
         ///////////////////////////////////////////////////
 
-        return magisterLudi.noValidChoiceAir(
+        return magisterLudi.newDealEligibleAir(
           $daemonCards, $playerCards);
     }
 
@@ -806,13 +812,13 @@ export const noValidChoice = derived(
         ///////////////////////////////////////////////////
         //
         // DONE EARTH: replace this with the following line 
-        // return magisterLudi.noValidChoiceEarth(???);
+        // return magisterLudi.newDealEligibleEarth(???);
         //
         // TODO EARTH: create tests to define expected outcomes
         //
         ///////////////////////////////////////////////////
 
-        return magisterLudi.noValidChoiceEarth(
+        return magisterLudi.newDealEligibleEarth(
           $daemonCards, $playerCards);
 
     }
@@ -822,19 +828,19 @@ export const noValidChoice = derived(
         ///////////////////////////////////////////////////
         //
         // DONE FIRE: replace this with the following line 
-        // return magisterLudi.noValidChoiceFire(???);
+        // return magisterLudi.newDealEligibleFire(???);
         //
         // TODO FIRE: create tests to define expected outcomes
         //
         ///////////////////////////////////////////////////
 
 
-        return magisterLudi.noValidChoiceFire(
+        return magisterLudi.newDealEligibleFire(
           $daemonCards, $playerCards);
 
     }
 
-    // noValidChoice is true
+    // newDealEligible is true
     return true;
   }
 );

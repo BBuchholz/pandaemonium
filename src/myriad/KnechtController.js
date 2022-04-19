@@ -538,7 +538,7 @@ const KnechtController = () => {
       // a base level commonality to all elements
 
       outcome = 
-        selectedCardsForDaemon.length > 0 &&
+        selectedCardsForDaemon.length > 0 ||
         selectedCardsForPlayer.length > 0;
 
       return outcome;
@@ -743,12 +743,12 @@ const KnechtController = () => {
       return outcome;
     },
 
-    noValidChoiceVoid: (daemonCards, playerCards) => {
+    newDealEligibleVoid: (daemonCards, playerCards) => {
 
-      return daemonCards.length < 1 && playerCards.length < 1;
+      return daemonCards.length > 0 && playerCards.length > 0;
     },
 
-    noValidChoiceWater: (daemonCards, playerCards) => {
+    newDealEligibleWater: (daemonCards, playerCards) => {
       
       //copied from boardCE, not fully tested
 
@@ -771,7 +771,7 @@ const KnechtController = () => {
 
         if(dSuit === pSuit){
 
-          // noValidChoice is false
+          // newDealEligible is false
           return false;
         }
 
@@ -780,7 +780,7 @@ const KnechtController = () => {
 
         if(dRank === pRank){
 
-          // noValidChoice is false
+          // newDealEligible is false
           return false;
         }
 
@@ -789,7 +789,7 @@ const KnechtController = () => {
       return true;
     },
 
-    noValidChoiceAir: (daemonCards, playerCards) => {
+    newDealEligibleAir: (daemonCards, playerCards) => {
       
       //copied from boardCE, not fully tested
 
@@ -815,13 +815,13 @@ const KnechtController = () => {
 
         if(dSuit != pSuit && dRank != pRank){
 
-          // noValidChoice is false
+          // newDealEligible is false
           return false;
         }
       }
     },
 
-    noValidChoiceEarth: (daemonCards, playerCards) => {
+    newDealEligibleEarth: (daemonCards, playerCards) => {
       
       //copied from boardCE, not fully tested
 
@@ -845,7 +845,7 @@ const KnechtController = () => {
 
         if(dSuit === pSuit){
 
-          // noValidChoice is false
+          // newDealEligible is false
           return false;
         }
 
@@ -854,7 +854,7 @@ const KnechtController = () => {
 
         if(dRank === pRank){
 
-          // noValidChoice is false
+          // newDealEligible is false
           return false;
         }
       }
@@ -862,7 +862,7 @@ const KnechtController = () => {
 
     },
 
-    noValidChoiceFire: (daemonCards, playerCards) => {
+    newDealEligibleFire: (daemonCards, playerCards) => {
       
       //copied from boardCE, not fully tested
 
@@ -885,7 +885,7 @@ const KnechtController = () => {
 
         if(dSuit === pSuit){
 
-          // noValidChoice is false
+          // newDealEligible is false
           return false;
         }
 
@@ -894,7 +894,7 @@ const KnechtController = () => {
 
         if(dRank === pRank){
 
-          // noValidChoice is false
+          // newDealEligible is false
           return false;
         }
       }
@@ -909,7 +909,7 @@ const KnechtController = () => {
             
       let outcome = [];
 
-      if(selectedCardsForDaemon.length == 0 || 
+      if(selectedCardsForDaemon.length == 0 && 
          selectedCardsForPlayer.length == 0){
 
         return outcome;
