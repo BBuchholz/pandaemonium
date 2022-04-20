@@ -11,7 +11,7 @@
   import {
     devMode,
     devNotifyDelay,
-    previousTurnInfoForCopyDialog,
+    previousTurnInfo,
   } from './stores.js';
 
   import { 
@@ -44,6 +44,7 @@
     collectedRecentlyEarth,
     rulesIncludeElementalShiftsOnAllCollections,
     toDos,
+    currentQuadrant,
   } from './boardCE/stores.js';
 
 
@@ -183,37 +184,24 @@
 
   function resetSelection() {
 
-    //TODO COPY NOTIFY: store the previous turn info 
+    //DONE COPY NOTIFY: store the previous turn info 
     //                  here before clearing
     //Table
     //Selected
     //Collected
     //Quadrant
-
-    let textToStore = 'Table: ';
-
-    textToStore += JSON.stringify($daemonCards);
-    textToStore += JSON.stringify($playerCards);
-
-    textToStore += 'Selected: ';
-
-    textToStore += JSON.stringify($selectedCardsForDaemon);
-    textToStore += JSON.stringify($selectedCardsForPlayer);
-
     
-    textToStore += 'Collected: ';
-
-    textToStore += JSON.stringify('fill this in');
-    textToStore += JSON.stringify('fill this in');
-
+    let gameObjToStore = {};
     
-    textToStore += 'Quadrant: ';
+    gameObjToStore.table = [...$daemonCards, ...$playerCards];
+    gameObjToStore.selected = 
+      [...$selectedCardsForDaemon, ...$playerCards];
+    gameObjToStore.collected = [...$selectionResolutionValue];
+    gameObjToStore.quadrant = $currentQuadrant;
 
-    textToStore += JSON.stringify('fill this in');
 
-
-
-    $previousTurnInfoForCopyDialog = textToStore;
+    $previousTurnInfo = 
+      JSON.stringify(gameObjToStore);
     
     $selectedCardsForPlayer = [];
     $selectedCardsForDaemon = [];

@@ -1,6 +1,6 @@
 <script>
   import { fade } from 'svelte/transition';
-  import { previousTurnInfoForCopyDialog } from './stores.js';
+  import { previousTurnInfo } from './stores.js';
 
   export let notification;
   export let withoutStyles = false;
@@ -36,7 +36,7 @@
 
   function copyState() {
 
-    const textToWrite = $previousTurnInfoForCopyDialog;
+    const textToWrite = $previousTurnInfo;
 
     navigator.clipboard.writeText(textToWrite).then(function() {
     

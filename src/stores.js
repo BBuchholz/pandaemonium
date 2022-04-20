@@ -446,4 +446,4 @@ export const selectionResolutionValue = derived(
 // 	}
 // );
 
-export const previousTurnInfoForCopyDialog = writable('');
+export const previousTurnInfo = writable('');
