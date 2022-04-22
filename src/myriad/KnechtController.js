@@ -972,11 +972,131 @@ const KnechtController = () => {
           const dRank = self.parseRank(dCardKey, dSuit);
           const pRank = self.parseRank(pCardKey, pSuit);
 
-          if(dRank > pRank){
-            outcome.push(dCardKey);
+          /// TODO R2: finish this test
+
+          if(pSuit === dSuit){
+
+            // WITHIN SAME SUIT: Higher "Wins"
+            // and is reused, Lower collected
+            if(dRank > pRank){
+              outcome.push(pCardKey);
+            }else{
+              outcome.push(dCardKey);
+            } 
+
           }else{
-            outcome.push(pCardKey);
+            
+            // WITHIN DIFFERING SUITS: Astrological order
+            // (rock paper scissors style)
+            // air trumps earth
+            // water trumps air
+            // fire trumps water
+            // earth trumps fire
+            // water and earth harmonize
+            // (treat as same suit, tie goes to
+            // water, earth is collected)
+            // fire and air fuel/consume
+            // (treat as same suit, tie goes to
+            // fire, air is collected)
+
+
+            switch(dSuit){
+              
+              case 'C':
+
+                //Daemon Element Is Water 
+                switch(pSuit){
+                  
+                  case 'C':
+                    //Player Element Is Water 
+                    break;
+
+                  case 'S':
+                    //Player Element Is Air
+                    break;
+
+                  case 'D':
+                    //Player Element Is Earth
+                    break;
+
+                  case 'W':
+                    //Player Element Is Fire
+                    break;
+                }
+                break;
+
+              case 'S':
+
+                //Daemon Element Is Air
+                switch(pSuit){
+                  
+                  case 'C':
+                    //Player Element Is Water 
+                    break;
+
+                  case 'S':
+                    //Player Element Is Air
+                    break;
+
+                  case 'D':
+                    //Player Element Is Earth
+                    break;
+
+                  case 'W':
+                    //Player Element Is Fire
+                    break;
+                }
+                break;
+
+              case 'D':
+
+                //Daemon Element Is Earth
+                switch(pSuit){
+                  
+                  case 'C':
+                    //Player Element Is Water 
+                    break;
+
+                  case 'S':
+                    //Player Element Is Air
+                    break;
+
+                  case 'D':
+                    //Player Element Is Earth
+                    break;
+
+                  case 'W':
+                    //Player Element Is Fire
+                    break;
+                }
+                break;
+
+              case 'W':
+
+                //Daemon Element Is Fire
+                switch(pSuit){
+                  
+                  case 'C':
+                    //Player Element Is Water 
+                    break;
+
+                  case 'S':
+                    //Player Element Is Air
+                    break;
+
+                  case 'D':
+                    //Player Element Is Earth
+                    break;
+
+                  case 'W':
+                    //Player Element Is Fire
+                    break;
+                }
+                break;
+            }
+
           }
+
         }
       }
 
