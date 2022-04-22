@@ -545,15 +545,6 @@ export const selectionIsValid = derived(
 
       if($currentQuadrant === 'Void'){
 
-        ///////////////////////////////////////////////////
-        //
-        // DONE VOID: replace this with the following line 
-        // outcome = magisterLudi.validateSelectionVoid(???);
-        //
-        // DONE VOID: create tests to define expected outcomes
-        //
-        ///////////////////////////////////////////////////
-
         outcome = 
           magisterLudi.validateSelectionVoid(
             $selectedCardsForDaemon, $selectedCardsForPlayer);
@@ -563,10 +554,7 @@ export const selectionIsValid = derived(
 
         ///////////////////////////////////////////////////
         //
-        // DONE WATER: replace this with the following line 
-        // outcome = magisterLudi.validateSelectionWater(???);
-        //
-        // TODO WATER: create tests to define expected outcomes
+        // TODO R4: create tests to define expected outcomes
         //
         ///////////////////////////////////////////////////
 
@@ -580,10 +568,7 @@ export const selectionIsValid = derived(
 
         ///////////////////////////////////////////////////
         //
-        // DONE AIR: replace this with the following line 
-        // outcome = magisterLudi.validateSelectionAir(???);
-        //
-        // TODO AIR: create tests to define expected outcomes
+        // TODO R6: create tests to define expected outcomes
         //
         ///////////////////////////////////////////////////
 
@@ -597,10 +582,7 @@ export const selectionIsValid = derived(
 
         ///////////////////////////////////////////////////
         //
-        // DONE EARTH: replace this with the following line 
-        // outcome = magisterLudi.validateSelectionEarth(???);
-        //
-        // TODO EARTH: create tests to define expected outcomes
+        // TODO R9: create tests to define expected outcomes
         //
         ///////////////////////////////////////////////////
 
@@ -615,10 +597,7 @@ export const selectionIsValid = derived(
 
         ///////////////////////////////////////////////////
         //
-        // DONE FIRE: replace this with the following line 
-        // outcome = magisterLudi.validateSelectionFire(???);
-        //
-        // TODO FIRE: create tests to define expected outcomes
+        // TODO R11: create tests to define expected outcomes
         //
         ///////////////////////////////////////////////////
 
@@ -657,15 +636,6 @@ export const selectionResolutionValue = derived(
 
     if($currentQuadrant === 'Void'){
       
-        ///////////////////////////////////////////////////
-        //
-        // DONE VOID: replace this with the following line 
-        // outcome = magisterLudi.selectionResValVoid(???);
-        //
-        // DONE VOID: create tests to define expected outcomes
-        //
-        ///////////////////////////////////////////////////
-
       outcome = 
         magisterLudi.selResValVoid(
           $selectedCardsForPlayer, $selectedCardsForDaemon);
@@ -676,10 +646,7 @@ export const selectionResolutionValue = derived(
       
         ///////////////////////////////////////////////////
         //
-        // DONE WATER: replace this with the following line 
-        // outcome = magisterLudi.selectionResValWater(???);
-        //
-        // TODO WATER: create tests to define expected outcomes
+        // TODO R8: create tests to define expected outcomes
         //
         ///////////////////////////////////////////////////
 
@@ -693,10 +660,7 @@ export const selectionResolutionValue = derived(
       
         ///////////////////////////////////////////////////
         //
-        // DONE AIR: replace this with the following line 
-        // outcome = magisterLudi.selectionResValAir(???);
-        //
-        // TODO AIR: create tests to define expected outcomes
+        // TODO R2: create tests to define expected outcomes
         //
         ///////////////////////////////////////////////////
 
@@ -709,15 +673,6 @@ export const selectionResolutionValue = derived(
 
     if($currentQuadrant === 'Earth'){
       
-        ///////////////////////////////////////////////////
-        //
-        // DONE EARTH: replace this with the following line 
-        // outcome = magisterLudi.selectionResValEarth(???);
-        //
-        // TODO EARTH: create tests to define expected outcomes
-        //
-        ///////////////////////////////////////////////////
-
       outcome = 
         magisterLudi.selResValEarth(
           $selectedCardsForPlayer, $selectedCardsForDaemon);
@@ -728,15 +683,12 @@ export const selectionResolutionValue = derived(
 
         ///////////////////////////////////////////////////
         //
-        // DONE FIRE: replace this with the following line 
-        // outcome = magisterLudi.selectionResValFire(???);
-        //
-        // TODO FIRE: create tests to define expected outcomes
+        // TODO R7: create tests to define expected outcomes
         //
         ///////////////////////////////////////////////////
 
       outcome = 
-        magisterLudi.selResValAir(
+        magisterLudi.selResValFire(
           $selectedCardsForPlayer, $selectedCardsForDaemon);
 
     }
@@ -762,15 +714,6 @@ export const newDealEligible = derived(
 
     if($currentQuadrant === 'Void'){
 
-        ///////////////////////////////////////////////////
-        //
-        // DONE VOID: replace this with the following line 
-        // return magisterLudi.newDealEligibleVoid(???);
-        //
-        // TODO VOID: create tests to define expected outcomes
-        //
-        ///////////////////////////////////////////////////
-
         return magisterLudi.newDealEligibleVoid(
           $daemonCards, $playerCards);
 
@@ -780,10 +723,7 @@ export const newDealEligible = derived(
 
         ///////////////////////////////////////////////////
         //
-        // DONE WATER: replace this with the following line 
-        // return magisterLudi.newDealEligibleWater(???);
-        //
-        // TODO WATER: create tests to define expected outcomes
+        // TODO R12: create tests to define expected outcomes
         //
         ///////////////////////////////////////////////////
 
@@ -796,10 +736,7 @@ export const newDealEligible = derived(
 
         ///////////////////////////////////////////////////
         //
-        // DONE AIR: replace this with the following line 
-        // return magisterLudi.newDealEligibleAir(???);
-        //
-        // TODO AIR: create tests to define expected outcomes
+        // TODO R10: create tests to define expected outcomes
         //
         ///////////////////////////////////////////////////
 
@@ -811,10 +748,7 @@ export const newDealEligible = derived(
 
         ///////////////////////////////////////////////////
         //
-        // DONE EARTH: replace this with the following line 
-        // return magisterLudi.newDealEligibleEarth(???);
-        //
-        // TODO EARTH: create tests to define expected outcomes
+        // TODO R5: create tests to define expected outcomes
         //
         ///////////////////////////////////////////////////
 
@@ -827,10 +761,7 @@ export const newDealEligible = derived(
 
         ///////////////////////////////////////////////////
         //
-        // DONE FIRE: replace this with the following line 
-        // return magisterLudi.newDealEligibleFire(???);
-        //
-        // TODO FIRE: create tests to define expected outcomes
+        // TODO R3: create tests to define expected outcomes
         //
         ///////////////////////////////////////////////////
 
