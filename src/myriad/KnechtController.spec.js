@@ -43,6 +43,48 @@ describe('newDealEligibleVoid', () => {
 });
 
 //////////////////////////////////////////////////
+// NEW DEAL ELIGIBLE Earth
+//////////////////////////////////////////////////
+describe('newDealEligibleEarth', () => {
+
+  // ALL MOVES ARE ELIGIBLE IN Earth
+  // ONLY EMPTY CARD SETS QUALIFY FOR NEW DEAL
+  const newDealEligibleEarthCases = [
+
+    // TODO R5: these are copied from fire and are not verified
+    [['9C', '6C', '3C'], ['3W','6W','9W'], false],
+    [['9C', '6C'], ['3W','6W'], false],
+    [['9C'], ['3W'], false],
+    [[], [], true],
+  
+  ];
+
+  test.each(newDealEligibleEarthCases)(
+
+    "given selected Daemon cards %p " +
+    "and selected Player cards %p, " + 
+    "returns %p",
+    
+    (
+
+      daemonCards, 
+      playerCards, 
+      expectedResult,
+
+    ) => {
+
+      const result = 
+        magisterLudi.newDealEligibleEarth(
+          daemonCards, playerCards);
+
+      expect(result).toEqual(expectedResult);
+
+    }
+  );
+
+});
+
+//////////////////////////////////////////////////
 // NEW DEAL ELIGIBLE FIRE
 //////////////////////////////////////////////////
 describe('newDealEligibleFire', () => {
@@ -266,6 +308,46 @@ describe('validateSelectionVoid', () => {
 
       const result = 
         magisterLudi.validateSelectionVoid(
+          selectedCardsDaemon, selectedCardsPlayer);
+
+      expect(result).toEqual(expectedResult);
+
+    }
+  );
+
+});
+
+//////////////////////////////////////////////////
+// VALIDATE SELECTION WATER
+//////////////////////////////////////////////////
+describe('validateSelectionWater', () => {
+
+  const validateSelectionWaterCases = [
+
+    [['6C'], [], false],
+    [['6C'], ['8C'], true],
+    [['6C', '6S'], ['8D', '8W'], true],
+    [['6C', '6S', '6D'], ['8S', '8D', '8W'], true],
+    [[], ['8W'], false],
+  
+  ];
+
+  test.each(validateSelectionWaterCases)(
+
+    "given selected Daemon cards %p " +
+    "and selected Player cards %p, " + 
+    "returns %p",
+    
+    (
+
+      selectedCardsDaemon, 
+      selectedCardsPlayer, 
+      expectedResult,
+
+    ) => {
+
+      const result = 
+        magisterLudi.validateSelectionWater(
           selectedCardsDaemon, selectedCardsPlayer);
 
       expect(result).toEqual(expectedResult);

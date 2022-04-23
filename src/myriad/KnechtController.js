@@ -548,55 +548,16 @@ const KnechtController = () => {
     validateSelectionWater: (selectedCardsForDaemon,
                              selectedCardsForPlayer) => {
 
-      //assume true
-      let outcome = true;
-
-      const affinityMap = new Map();
-
-      // water treats all as one group, so consolidate
-      const allCardKeys = 
-        [
-          ...selectedCardsForPlayer, 
-          ...selectedCardsForDaemon
-        ];
-
-      if(allCardKeys.length < 2){
-        outcome = false;
+      
+      if(!selectedCardsForDaemon || 
+         !selectedCardsForPlayer){
+        return false;
       }
 
-      for(const cardKey of allCardKeys){
+      return selectedCardsForDaemon.length != 0 && 
+             selectedCardsForPlayer.length != 0;
 
-        const cardSuit = self.parseSuit(cardKey);
-        const cardRank = self.parseRank(cardKey, cardSuit);
-
-        if(!affinityMap.has(cardSuit)){
-          affinityMap.set(cardSuit, 1);
-        } else {
-          affinityMap.set(cardSuit, affinityMap.get(cardSuit) + 1);
-        }
-
-        if(!affinityMap.has(cardRank)){
-          affinityMap.set(cardRank, 1);
-        } else {
-          affinityMap.set(cardRank, affinityMap.get(cardRank) + 1);
-        }
-      }
-
-      // a broken chain can be detected by one card
-      // having no other cards sharing an affinity
-      for(const cardKey of allCardKeys){
-
-        const cardSuit = self.parseSuit(cardKey);
-        const cardRank = self.parseRank(cardKey, cardSuit);
-
-        if(affinityMap.get(cardSuit) < 2 &&
-           affinityMap.get(cardRank) < 2){
-          // no connections, broken chain
-          outcome = false;
-        }
-      }
-
-      return outcome;
+      
 
     },
 
