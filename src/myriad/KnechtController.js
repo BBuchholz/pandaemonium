@@ -864,44 +864,14 @@ const KnechtController = () => {
 
     newDealEligibleFire: (daemonCards, playerCards) => {
       
-      //copied from boardCE, not fully tested
-
-      if(!playerCards || !daemonCards){
+      if(!daemonCards || !playerCards){
         return true;
       }
 
-      const allPossible = 
-        self.allPossibleCombos(playerCards, daemonCards);
-
-      //card selection will be single, so we just need to find one
-      // pairing that shares either a suit or a rank
-      for(const keyPair of allPossible){
-        
-        const pCardKey = keyPair[0];
-        const dCardKey = keyPair[1];
-        
-        const dSuit = self.parseSuit(dCardKey);
-        const pSuit = self.parseSuit(pCardKey);
-
-        if(dSuit === pSuit){
-
-          // newDealEligible is false
-          return false;
-        }
-
-        const dRank = self.parseRank(dCardKey, dSuit);
-        const pRank = self.parseRank(pCardKey, pSuit);
-
-        if(dRank === pRank){
-
-          // newDealEligible is false
-          return false;
-        }
-      }
-
-
+      return daemonCards.length == 0 || 
+             playerCards.length == 0;
     },
-
+ 
     selResValVoid: (selectedCardsForPlayer, 
                     selectedCardsForDaemon) => {
       
@@ -950,8 +920,8 @@ const KnechtController = () => {
       return outcome;
     },
 
-    selResValAir: (selectedCardsForPlayer, 
-                   selectedCardsForDaemon) => {
+    selResValAir: (selectedCardsForDaemon, 
+                   selectedCardsForPlayer) => {
       
       //copied from boardCE, not fully tested
             
@@ -964,139 +934,196 @@ const KnechtController = () => {
 
         if(pCardKey && dCardKey){
           
-          
-
           const dSuit = self.parseSuit(dCardKey);
           const pSuit = self.parseSuit(pCardKey);
 
           const dRank = self.parseRank(dCardKey, dSuit);
           const pRank = self.parseRank(pCardKey, pSuit);
 
-          /// TODO R2: finish this test
-
-          if(pSuit === dSuit){
-
-            // WITHIN SAME SUIT: Higher "Wins"
-            // and is reused, Lower collected
-            if(dRank > pRank){
-              outcome.push(pCardKey);
-            }else{
-              outcome.push(dCardKey);
-            } 
-
-          }else{
+          switch(dSuit){
             
-            // WITHIN DIFFERING SUITS: Astrological order
-            // (rock paper scissors style)
-            // air trumps earth
-            // water trumps air
-            // fire trumps water
-            // earth trumps fire
-            // water and earth harmonize
-            // (treat as same suit, tie goes to
-            // water, earth is collected)
-            // fire and air fuel/consume
-            // (treat as same suit, tie goes to
-            // fire, air is collected)
+            case 'C':
 
+              //Daemon Element Is Water 
+              switch(pSuit){
+                
+                case 'C':
+                  //Player Element Is Water 
+                  // WITHIN SAME SUIT: Higher "Wins"
+                  // and is reused, Lower collected
+                  if(dRank > pRank){
+                    outcome.push(pCardKey);
+                  }else{
+                    outcome.push(dCardKey);
+                  } 
+                  break;
 
-            switch(dSuit){
-              
-              case 'C':
+                case 'S':
+                  //Player Element Is Air
+                  //Water Succeeds Air
+                  //Air is collected
+                  outcome.push(pCardKey);
+                  break;
 
-                //Daemon Element Is Water 
-                switch(pSuit){
-                  
-                  case 'C':
-                    //Player Element Is Water 
-                    break;
+                case 'D':
+                  // Player Element Is Earth
+                  // spec sheet text: Diff Suits, Harmonize,
+                  // treat as same suit, water succeeds Earth
+                  // if ranks are equal
+                  if(dRank == pRank){
+                    outcome.push(pCardKey);
+                  }else if(dRank > pRank){
+                    outcome.push(pCardKey);
+                  }else{
+                    outcome.push(dCardKey);
+                  } 
+                  break;
 
-                  case 'S':
-                    //Player Element Is Air
-                    break;
+                case 'W':
+                  // Player Element Is Fire
+                  // Fire Succeeds Water
+                  // Water is collected
+                  outcome.push(dCardKey);
+                  break;
+              }
+              break;
 
-                  case 'D':
-                    //Player Element Is Earth
-                    break;
+            case 'S':
 
-                  case 'W':
-                    //Player Element Is Fire
-                    break;
-                }
-                break;
+              //Daemon Element Is Air
+              switch(pSuit){
+                
+                case 'C':
+                  // Player Element Is Water 
+                  // Water Succeeds Air
+                  // Air is collected
+                  outcome.push(dCardKey);
+                  break;
 
-              case 'S':
+                case 'S':
+                  // Player Element Is Air
+                  // WITHIN SAME SUIT: Higher "Wins"
+                  // and is reused, Lower collected
+                  if(dRank > pRank){
+                    outcome.push(pCardKey);
+                  }else{
+                    outcome.push(dCardKey);
+                  } 
+                  break;
 
-                //Daemon Element Is Air
-                switch(pSuit){
-                  
-                  case 'C':
-                    //Player Element Is Water 
-                    break;
+                case 'D':
+                  // Player Element Is Earth
+                  // Air Succeeds Earth
+                  // Earth is Collected
+                  outcome.push(pCardKey);
+                  break;
 
-                  case 'S':
-                    //Player Element Is Air
-                    break;
+                case 'W':
+                  // Player Element Is Fire
+                  // test spec text: Diff Suits,
+                  // Fuel/Consume, treat as same suit,
+                  // fire succeeds air if ranks are equal
+                  if(dRank == pRank){
+                    outcome.push(dCardKey);
+                  }else if(dRank > pRank){
+                    outcome.push(pCardKey);
+                  }else{
+                    outcome.push(dCardKey);
+                  }
+                  break;
+              }
+              break;
 
-                  case 'D':
-                    //Player Element Is Earth
-                    break;
+            case 'D':
 
-                  case 'W':
-                    //Player Element Is Fire
-                    break;
-                }
-                break;
+              //Daemon Element Is Earth
+              switch(pSuit){
+                
+                case 'C':
+                  // Player Element Is Water 
+                  // test spec text: Diff Suits, Harmonize,
+                  // treat as same suit, water succeeds
+                  // Earth if ranks are equal, Earth collected
+                  if(dRank == pRank){
+                    outcome.push(dCardKey);
+                  }else if(dRank > pRank){
+                    outcome.push(pCardKey);
+                  }else{
+                    outcome.push(dCardKey);
+                  }
+                  break;
 
-              case 'D':
+                case 'S':
+                  // Player Element Is Air
+                  // Air succeeds Earth
+                  // Earth is Collected
+                  outcome.push(dCardKey);
+                  break;
 
-                //Daemon Element Is Earth
-                switch(pSuit){
-                  
-                  case 'C':
-                    //Player Element Is Water 
-                    break;
+                case 'D':
+                  //Player Element Is Earth
+                  // WITHIN SAME SUIT: Higher "Wins"
+                  // and is reused, Lower collected
+                  if(dRank > pRank){
+                    outcome.push(pCardKey);
+                  }else{
+                    outcome.push(dCardKey);
+                  } 
+                  break;
 
-                  case 'S':
-                    //Player Element Is Air
-                    break;
+                case 'W':
+                  // Player Element Is Fire
+                  // Earth succeeds Fire
+                  // Fire is Collected
+                  outcome.push(pCardKey);
+                  break;
+              }
+              break;
 
-                  case 'D':
-                    //Player Element Is Earth
-                    break;
+            case 'W':
 
-                  case 'W':
-                    //Player Element Is Fire
-                    break;
-                }
-                break;
+              //Daemon Element Is Fire
+              switch(pSuit){
+                
+                case 'C':
+                  // Player Element Is Water 
+                  // Fire succeeds Water
+                  // Water is Collected
+                  outcome.push(pCardKey);
+                  break;
 
-              case 'W':
+                case 'S':
+                  // Player Element Is Air
+                  // test spec text: Diff Suits,
+                  // Fuel/Consume, treat as same suit,
+                  // fire succeeds air if ranks are equal
+                  if(dRank >= pRank){
+                    outcome.push(pCardKey);
+                  }else{
+                    outcome.push(dCardKey);
+                  } 
+                  break;
 
-                //Daemon Element Is Fire
-                switch(pSuit){
-                  
-                  case 'C':
-                    //Player Element Is Water 
-                    break;
+                case 'D':
+                  // Player Element Is Earth
+                  // Earth succeeds Fire
+                  // Fire is Collected
+                  outcome.push(dCardKey);
+                  break;
 
-                  case 'S':
-                    //Player Element Is Air
-                    break;
-
-                  case 'D':
-                    //Player Element Is Earth
-                    break;
-
-                  case 'W':
-                    //Player Element Is Fire
-                    break;
-                }
-                break;
-            }
-
+                case 'W':
+                  // Player Element Is Fire
+                  // WITHIN SAME SUIT: Higher "Wins"
+                  // and is reused, Lower collected
+                  if(dRank > pRank){
+                    outcome.push(pCardKey);
+                  }else{
+                    outcome.push(dCardKey);
+                  } 
+                  break;
+              }
+              break;
           }
-
         }
       }
 
