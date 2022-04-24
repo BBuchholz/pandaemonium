@@ -43,7 +43,7 @@ describe('newDealEligibleVoid', () => {
 });
 
 //////////////////////////////////////////////////
-// NEW DEAL ELIGIBLE Earth
+// NEW DEAL ELIGIBLE EARTH
 //////////////////////////////////////////////////
 describe('newDealEligibleEarth', () => {
 
@@ -51,11 +51,11 @@ describe('newDealEligibleEarth', () => {
   // ONLY EMPTY CARD SETS QUALIFY FOR NEW DEAL
   const newDealEligibleEarthCases = [
 
-    // TODO R5: these are copied from fire and are not verified
     [['9C', '6C', '3C'], ['3W','6W','9W'], false],
     [['9C', '6C'], ['3W','6W'], false],
-    [['9C'], ['3W'], false],
+    [['9C'], ['3W'], true],
     [[], [], true],
+    [['1C', '8S', '2C'], ['3W','6W','9W'], true],
   
   ];
 
@@ -280,6 +280,45 @@ describe('selResValEarth', () => {
 });
 
 //////////////////////////////////////////////////
+// SELECTION RESOLUTION VALUE FIRE (TODO R7)
+//////////////////////////////////////////////////
+describe('selResValFire', () => {
+
+  const selResValFireCases = [
+
+    //TODO R7: NEED CASES
+    [['6C'], ['8W'], []],
+    [['6C'], ['8C'], ['6C', '8C']],
+    [['6W'], ['8W'], ['6W', '8W']],
+  
+  ];
+
+  test.each(selResValFireCases)(
+
+    "given selected Daemon cards %p " +
+    "and selected Player cards %p, " + 
+    "returns %p",
+    
+    (
+
+      selectedCardsDaemon, 
+      selectedCardsPlayer, 
+      expectedResult
+
+    ) => {
+
+      const result = 
+        magisterLudi.selResValFire(
+          selectedCardsDaemon, selectedCardsPlayer);
+
+      expect(result).toEqual(expectedResult);
+
+    }
+  );
+
+});
+
+//////////////////////////////////////////////////
 // VALIDATE SELECTION VOID
 //////////////////////////////////////////////////
 describe('validateSelectionVoid', () => {
@@ -348,6 +387,48 @@ describe('validateSelectionWater', () => {
 
       const result = 
         magisterLudi.validateSelectionWater(
+          selectedCardsDaemon, selectedCardsPlayer);
+
+      expect(result).toEqual(expectedResult);
+
+    }
+  );
+
+});
+
+
+//////////////////////////////////////////////////
+// VALIDATE SELECTION AIR
+//////////////////////////////////////////////////
+describe('validateSelectionAir', () => {
+
+  const validateSelectionAirCases = [
+
+    [['6C'], [], false],
+    [['6C'], ['8C'], true],
+    [['6C', '6S'], ['8D', '8W'], true],
+    [['6C', '6S', '6D'], ['8S', '8D', '8W'], true],
+    [[], ['8W'], false],
+    [[], [], false],
+  
+  ];
+
+  test.each(validateSelectionAirCases)(
+
+    "given selected Daemon cards %p " +
+    "and selected Player cards %p, " + 
+    "returns %p",
+    
+    (
+
+      selectedCardsDaemon, 
+      selectedCardsPlayer, 
+      expectedResult,
+
+    ) => {
+
+      const result = 
+        magisterLudi.validateSelectionAir(
           selectedCardsDaemon, selectedCardsPlayer);
 
       expect(result).toEqual(expectedResult);

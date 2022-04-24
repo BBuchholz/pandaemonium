@@ -548,6 +548,17 @@ const KnechtController = () => {
     validateSelectionWater: (selectedCardsForDaemon,
                              selectedCardsForPlayer) => {
 
+      if(!selectedCardsForDaemon || 
+         !selectedCardsForPlayer){
+        return false;
+      }
+
+      return selectedCardsForDaemon.length != 0 && 
+             selectedCardsForPlayer.length != 0;
+    },
+
+    validateSelectionAir: (selectedCardsForDaemon,
+                           selectedCardsForPlayer) => {
       
       if(!selectedCardsForDaemon || 
          !selectedCardsForPlayer){
@@ -556,77 +567,6 @@ const KnechtController = () => {
 
       return selectedCardsForDaemon.length != 0 && 
              selectedCardsForPlayer.length != 0;
-
-      
-
-    },
-
-    validateSelectionAir: (selectedCardsForDaemon,
-                           selectedCardsForPlayer) => {
-
-      const affinityMapPlayer = new Map();
-      const affinityMapDaemon = new Map();
-
-      //assume true, we will test for validity violations
-      //and flip this flag if any are found
-      let outcome = true;
-
-      if(selectedCardsForPlayer.length < 1 || 
-         selectedCardsForDaemon.length < 1){
-        outcome = false;
-      }
-
-      for(const cardKey of selectedCardsForPlayer){
-
-        const cardSuit = self.parseSuit(cardKey);
-        const cardRank = self.parseRank(cardKey, cardSuit);
-
-        if(!affinityMapPlayer.has(cardSuit)){
-          affinityMapPlayer.set(cardSuit, 1);
-        } else {
-          affinityMapPlayer.set(cardSuit, affinityMapPlayer.get(cardSuit) + 1);
-        }
-
-        if(!affinityMapPlayer.has(cardRank)){
-          affinityMapPlayer.set(cardRank, 1);
-        } else {
-          affinityMapPlayer.set(cardRank, affinityMapPlayer.get(cardRank) + 1);
-        }
-      }
-
-      for(const cardKey of selectedCardsForDaemon){
-
-        const cardSuit = self.parseSuit(cardKey);
-        const cardRank = self.parseRank(cardKey, cardSuit);
-
-        if(!affinityMapDaemon.has(cardSuit)){
-          affinityMapDaemon.set(cardSuit, 1);
-        } else {
-          affinityMapDaemon.set(cardSuit, affinityMapDaemon.get(cardSuit) + 1);
-        }
-
-        if(!affinityMapDaemon.has(cardRank)){
-          affinityMapDaemon.set(cardRank, 1);
-        } else {
-          affinityMapDaemon.set(cardRank, affinityMapDaemon.get(cardRank) + 1);
-        }
-      }
-
-      for(const [key, value] of affinityMapDaemon){
-
-        if(value > 1){
-          outcome = false;
-        }
-      }
-
-      for(const [key, value] of affinityMapPlayer){
-
-        if(value > 1){
-          outcome = false;
-        }
-      }
-
-      return outcome;
     },
 
     validateSelectionEarth: (selectedCardsForDaemon,
@@ -717,6 +657,11 @@ const KnechtController = () => {
         return true;
       }
 
+      if(daemonCards.length == 0 ||
+         playerCards.length == 0){
+        return true;
+      }
+
       const allPossible = 
         self.allPossibleCombos(playerCards, daemonCards);
 
@@ -786,10 +731,14 @@ const KnechtController = () => {
       
       //copied from boardCE, not fully tested
 
-      if(!playerCards || !daemonCards){
+      if(!daemonCards || !playerCards){
         return true;
       }
 
+      if(daemonCards.length == 0 ||
+         playerCards.length == 0){
+        return true;
+      }
 
       const allPossible = 
         self.allPossibleCombos(daemonCards, playerCards);
@@ -804,8 +753,8 @@ const KnechtController = () => {
         const dSuit = self.parseSuit(dCardKey);
         const pSuit = self.parseSuit(pCardKey);
 
-        if(dSuit === pSuit){
-
+        if(dSuit == pSuit){
+         
           // newDealEligible is false
           return false;
         }
@@ -813,14 +762,15 @@ const KnechtController = () => {
         const dRank = self.parseRank(dCardKey, dSuit);
         const pRank = self.parseRank(pCardKey, pSuit);
 
-        if(dRank === pRank){
+        if(dRank == pRank){
 
           // newDealEligible is false
           return false;
         }
       }
 
-
+      // if we reach here nothing was found
+      return true;
     },
 
     newDealEligibleFire: (daemonCards, playerCards) => {

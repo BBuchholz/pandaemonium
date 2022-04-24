@@ -552,12 +552,6 @@ export const selectionIsValid = derived(
 
       if($currentQuadrant === 'Water'){
 
-        ///////////////////////////////////////////////////
-        //
-        // TODO R4: create tests to define expected outcomes
-        //
-        ///////////////////////////////////////////////////
-
         outcome = 
           magisterLudi.validateSelectionWater(
             $selectedCardsForDaemon, $selectedCardsForPlayer);
@@ -565,12 +559,6 @@ export const selectionIsValid = derived(
 
 
       if($currentQuadrant === 'Air'){
-
-        ///////////////////////////////////////////////////
-        //
-        // TODO R6: create tests to define expected outcomes
-        //
-        ///////////////////////////////////////////////////
 
         outcome = 
           magisterLudi.validateSelectionAir(
@@ -620,12 +608,6 @@ export const selectionResolutionValue = derived(
     $selectedCardsForPlayer, 
     $currentQuadrant,
     $selectionIsValid]) => {
-    
-    // let daemonRank = 0;
-    // let playerRank = 0;
-    // let daemonSuit = '?';
-    // let playerSuit = '?';
-
 
     let outcome = [];
 
@@ -658,13 +640,6 @@ export const selectionResolutionValue = derived(
 
     if($currentQuadrant === 'Air'){
       
-        ///////////////////////////////////////////////////
-        //
-        // TODO R2: create tests to define expected outcomes
-        //
-        ///////////////////////////////////////////////////
-
-      
       outcome = 
         magisterLudi.selResValAir(
           $selectedCardsForPlayer, $selectedCardsForDaemon);
@@ -680,12 +655,6 @@ export const selectionResolutionValue = derived(
     }
 
     if($currentQuadrant === 'Fire'){
-
-        ///////////////////////////////////////////////////
-        //
-        // TODO R7: create tests to define expected outcomes
-        //
-        ///////////////////////////////////////////////////
 
       outcome = 
         magisterLudi.selResValFire(
@@ -746,25 +715,12 @@ export const newDealEligible = derived(
 
     if($currentQuadrant === 'Earth'){
 
-        ///////////////////////////////////////////////////
-        //
-        // TODO R5: create tests to define expected outcomes
-        //
-        ///////////////////////////////////////////////////
-
         return magisterLudi.newDealEligibleEarth(
           $daemonCards, $playerCards);
 
     }
 
     if($currentQuadrant === 'Fire'){
-
-        ///////////////////////////////////////////////////
-        //
-        // TODO R3: create tests to define expected outcomes
-        //
-        ///////////////////////////////////////////////////
-
 
         return magisterLudi.newDealEligibleFire(
           $daemonCards, $playerCards);
