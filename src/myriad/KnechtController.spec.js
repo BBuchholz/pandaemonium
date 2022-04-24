@@ -164,6 +164,43 @@ describe('selResValVoid', () => {
 });
 
 //////////////////////////////////////////////////
+// SELECTION RESOLUTION VALUE WATER
+//////////////////////////////////////////////////
+describe('selResValWater', () => {
+
+  const selResValWaterCases = [
+
+    // TODO R8: NEED CASES
+    [['1C'], [], ['1C']],
+  
+  ];
+
+  test.each(selResValWaterCases)(
+
+    "given selected Daemon cards %p " +
+    "and selected Player cards %p, " + 
+    "returns %p",
+    
+    (
+
+      selectedCardsDaemon, 
+      selectedCardsPlayer, 
+      expectedResult
+
+    ) => {
+
+      const result = 
+        magisterLudi.selResValWater(
+          selectedCardsDaemon, selectedCardsPlayer);
+
+      expect(result).toEqual(expectedResult);
+
+    }
+  );
+
+});
+
+//////////////////////////////////////////////////
 // SELECTION RESOLUTION VALUE AIR
 //////////////////////////////////////////////////
 describe('selResValAir', () => {
@@ -286,9 +323,10 @@ describe('selResValFire', () => {
 
   const selResValFireCases = [
 
-    //TODO R7: CASES VERIFIED (MAKE THESE PASS)
     [['9C'], ['1C'], ['9C']],
     [['9S'], ['1C'], ['1C']],
+    [['6S'], ['6C'], ['6S']],
+    [['6C'], ['6S'], ['6C']],
     [['9D'], ['1C'], ['1C']],
     [['9W'], ['1C'], ['1C']],
     [['9C'], ['1S'], ['1S']],

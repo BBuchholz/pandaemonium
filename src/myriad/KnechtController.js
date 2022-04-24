@@ -1062,19 +1062,17 @@ const KnechtController = () => {
       return outcome;
     },
 
-    selResValFire: (selectedCardsForPlayer, 
-                     selectedCardsForDaemon) => {
+    selResValFire: (selectedCardsForDaemon, 
+                    selectedCardsForPlayer) => {
       
       //copied from boardCE, not fully tested
             
       let outcome = [];
             
-      const pCardKey = selectedCardsForPlayer[0];
       const dCardKey = selectedCardsForDaemon[0];
+      const pCardKey = selectedCardsForPlayer[0];
 
-      if(pCardKey && dCardKey){
-        
-        
+      if(pCardKey && dCardKey){  
 
         const dSuit = self.parseSuit(dCardKey);
         const pSuit = self.parseSuit(pCardKey);
@@ -1082,10 +1080,31 @@ const KnechtController = () => {
         const dRank = self.parseRank(dCardKey, dSuit);
         const pRank = self.parseRank(pCardKey, pSuit);
 
-        if(dRank > pRank){
-         outcome.push(dCardKey);
+        if(dSuit == pSuit){
+          
+          //same suit, low rank succeeds
+          if(dRank > pRank){
+
+            outcome.push(dCardKey);
+          
+          }else{
+          
+            outcome.push(pCardKey);
+          
+          }
+
         }else{
-         outcome.push(pCardKey);
+          
+          //differing suits, high rank succeeds
+          if(dRank > pRank){
+           
+            outcome.push(pCardKey);
+          
+          }else{
+           
+            outcome.push(dCardKey);
+          }
+
         }
       }
 

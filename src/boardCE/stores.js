@@ -625,12 +625,6 @@ export const selectionResolutionValue = derived(
     }
 
     if($currentQuadrant === 'Water'){
-      
-        ///////////////////////////////////////////////////
-        //
-        // TODO R8: create tests to define expected outcomes
-        //
-        ///////////////////////////////////////////////////
 
       outcome = 
         magisterLudi.selResValWater(
