@@ -489,3 +489,40 @@ describe('validateSelectionAir', () => {
   );
 
 });
+
+//////////////////////////////////////////////////
+// VALIDATE SELECTION EARTH 
+//////////////////////////////////////////////////
+describe('validateSelectionEarth', () => {
+
+  const validateSelectionEarthCases = [
+
+    // TODO R9: NEED CASES
+    [[], [], false],
+  
+  ];
+
+  test.each(validateSelectionEarthCases)(
+
+    "given selected Daemon cards %p " +
+    "and selected Player cards %p, " + 
+    "returns %p",
+    
+    (
+
+      selectedCardsDaemon, 
+      selectedCardsPlayer, 
+      expectedResult,
+
+    ) => {
+
+      const result = 
+        magisterLudi.validateSelectionEarth(
+          selectedCardsDaemon, selectedCardsPlayer);
+
+      expect(result).toEqual(expectedResult);
+
+    }
+  );
+
+});

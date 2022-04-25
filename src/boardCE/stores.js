@@ -583,12 +583,6 @@ export const selectionIsValid = derived(
 
       if($currentQuadrant === 'Earth'){
 
-        ///////////////////////////////////////////////////
-        //
-        // TODO R9: create tests to define expected outcomes
-        //
-        ///////////////////////////////////////////////////
-
         outcome = 
           magisterLudi.validateSelectionEarth(
             $selectedCardsForDaemon, $selectedCardsForPlayer);
