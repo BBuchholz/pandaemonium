@@ -170,28 +170,29 @@ describe('selResValWater', () => {
 
   const selResValWaterCases = [
 
-    // TODO R8: NEED CASES
-    [['1C'], [], ['1C']],
-  
+    // TODO WATER: NEED MORE CASES, ADD AS WE GO
+    // (ESP. ONCE LOAD GAME IS REFACTORED INTO LOAD TABLE)
+    [["6S","5S"], ["2D","4D","6D","9D"], ["6S","5S"]],
+    [["1W","2W"], ["4C","3S","3C","7S"], ["1W","2W"]],
   ];
 
   test.each(selResValWaterCases)(
 
-    "given selected Daemon cards %p " +
-    "and selected Player cards %p, " + 
+    "given unselected cards %p " +
+    "and selected cards %p, " + 
     "returns %p",
     
     (
 
-      selectedCardsDaemon, 
-      selectedCardsPlayer, 
+      unselectedCards, 
+      selectedCards, 
       expectedResult
 
     ) => {
 
       const result = 
         magisterLudi.selResValWater(
-          selectedCardsDaemon, selectedCardsPlayer);
+          unselectedCards, selectedCards);
 
       expect(result).toEqual(expectedResult);
 

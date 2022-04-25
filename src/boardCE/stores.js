@@ -55,6 +55,21 @@ export const playerCards = writable([]);
 export const daemonCards = writable([]);
 export const deck = writable([]);
 
+export const unselectedCards = derived(
+  [daemonCards, playerCards, selectedCards],
+  ([$daemonCards, $playerCards, $selectedCards]) => {
+
+    let unselected = [...$daemonCards, ...$playerCards];
+
+    unselected = unselected.filter(
+                              cardKey => 
+                              !$selectedCards.includes(cardKey)
+                            );
+
+    return unselected;
+  }
+);
+
 export const airColCountChanged = writable(false);
 export const earthColCountChanged = writable(false);
 export const fireColCountChanged = writable(false);
@@ -600,12 +615,16 @@ export const selectionIsValid = derived(
 );
 
 export const selectionResolutionValue = derived(
-  [selectedCardsForDaemon, 
+  [unselectedCards,
+   selectedCardsForDaemon, 
    selectedCardsForPlayer, 
+   selectedCards,
    currentQuadrant,
    selectionIsValid],
-  ([$selectedCardsForDaemon, 
+  ([$unselectedCards,
+    $selectedCardsForDaemon, 
     $selectedCardsForPlayer, 
+    $selectedCards,
     $currentQuadrant,
     $selectionIsValid]) => {
 
@@ -628,7 +647,7 @@ export const selectionResolutionValue = derived(
 
       outcome = 
         magisterLudi.selResValWater(
-          $selectedCardsForPlayer, $selectedCardsForDaemon);
+          $unselectedCards, $selectedCards);
 
     }
 

@@ -810,21 +810,12 @@ const KnechtController = () => {
       return outcome;
     },
 
-    selResValWater: (selectedCardsForPlayer, 
-                     selectedCardsForDaemon) => {
-      
-      //copied from boardCE, not fully tested
+    selResValWater: (unselectedCards, 
+                     selectedCards) => {
             
       let outcome = [];
 
-      // water treats all as one group, so consolidate
-      const allCardKeys = 
-        [
-          ...selectedCardsForPlayer, 
-          ...selectedCardsForDaemon
-        ];
-
-      for(const cardKey of allCardKeys){
+      for(const cardKey of unselectedCards){
         outcome.push(cardKey);
       }
 
