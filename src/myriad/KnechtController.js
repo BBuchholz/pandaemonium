@@ -607,41 +607,16 @@ const KnechtController = () => {
       return outcome;
     },
 
-    validateSelectionFire: (selectedCardsForPlayer,
-                            selectedCardsForDaemon) => {
+    validateSelectionFire: (selectedCardsForDaemon,
+                            selectedCardsForPlayer) => {
 
-      // COPIED FROM EARTH (MODIFY)
-      // Expanding and Solitary (Hot and Dry)
-      // one card from each tree
-      // valid selection is neither sharing suit or rank
-
-      let outcome = false;
-      
-      if(!selectedCardsForPlayer || !selectedCardsForDaemon){
-
-        return outcome;
+      if(!selectedCardsForDaemon || 
+         !selectedCardsForPlayer){
+        return false;
       }
 
-      let isSolitary = selectedCardsForPlayer.length === 1 &&
-                         selectedCardsForDaemon.length === 1;
-
-      if(isSolitary){
-
-        let playerCardKey = selectedCardsForPlayer[0];
-        let daemonCardKey = selectedCardsForDaemon[0];
-
-        let daemonSuit = self.parseSuit(daemonCardKey);
-        let playerSuit = self.parseSuit(playerCardKey);
-
-        let daemonRank = self.parseRank(daemonCardKey, daemonSuit);
-        let playerRank = self.parseRank(playerCardKey, playerSuit);
-
-        outcome = 
-          daemonSuit != playerSuit &&
-          daemonRank != playerRank;
-      }
-
-      return outcome;
+      return selectedCardsForDaemon.length == 1 && 
+             selectedCardsForPlayer.length == 1;
     },
 
     newDealEligibleVoid: (daemonCards, playerCards) => {
@@ -700,6 +675,11 @@ const KnechtController = () => {
       //copied from boardCE, not fully tested
 
       if(!playerCards || !daemonCards){
+        return true;
+      }
+
+      if(daemonCards.length == 0 ||
+         playerCards.length == 0){
         return true;
       }
 

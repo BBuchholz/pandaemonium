@@ -592,12 +592,6 @@ export const selectionIsValid = derived(
 
       if($currentQuadrant === 'Fire'){
 
-        ///////////////////////////////////////////////////
-        //
-        // TODO R11: create tests to define expected outcomes
-        //
-        ///////////////////////////////////////////////////
-
         outcome = 
           magisterLudi.validateSelectionFire(
             $selectedCardsForPlayer, $selectedCardsForDaemon);        
@@ -697,24 +691,12 @@ export const newDealEligible = derived(
 
     if($currentQuadrant === 'Water'){
 
-        ///////////////////////////////////////////////////
-        //
-        // TODO R12: create tests to define expected outcomes
-        //
-        ///////////////////////////////////////////////////
-
         return magisterLudi.newDealEligibleWater(
           $daemonCards, $playerCards);
 
     }
 
     if($currentQuadrant === 'Air'){
-
-        ///////////////////////////////////////////////////
-        //
-        // TODO R10: create tests to define expected outcomes
-        //
-        ///////////////////////////////////////////////////
 
         return magisterLudi.newDealEligibleAir(
           $daemonCards, $playerCards);

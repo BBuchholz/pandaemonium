@@ -43,12 +43,90 @@ describe('newDealEligibleVoid', () => {
 });
 
 //////////////////////////////////////////////////
+// NEW DEAL ELIGIBLE WATER
+//////////////////////////////////////////////////
+describe('newDealEligibleWater', () => {
+
+  const newDealEligibleWaterCases = [
+
+    [['9C', '6C', '3C'], ['3W','6W','9W'], false],
+    [['9C', '6C'], ['3W','6W'], false],
+    [['9C'], ['3W'], true],
+    [[], [], true],
+  
+  ];
+
+  test.each(newDealEligibleWaterCases)(
+
+    "given selected Daemon cards %p " +
+    "and selected Player cards %p, " + 
+    "returns %p",
+    
+    (
+
+      daemonCards, 
+      playerCards, 
+      expectedResult,
+
+    ) => {
+
+      const result = 
+        magisterLudi.newDealEligibleWater(
+          daemonCards, playerCards);
+
+      expect(result).toEqual(expectedResult);
+
+    }
+  );
+
+});
+
+//////////////////////////////////////////////////
+// NEW DEAL ELIGIBLE AIR
+//////////////////////////////////////////////////
+describe('newDealEligibleAir', () => {
+
+  // ALL MOVES ARE ELIGIBLE IN Air
+  // ONLY EMPTY CARD SETS QUALIFY FOR NEW DEAL
+  const newDealEligibleAirCases = [
+
+    [['9C', '6C', '3C'], ['3W','6W','9W'], false],
+    [['9C', '6C'], ['3W','6W'], false],
+    [['9C'], ['3W'], false],
+    [[], [], true],
+  
+  ];
+
+  test.each(newDealEligibleAirCases)(
+
+    "given selected Daemon cards %p " +
+    "and selected Player cards %p, " + 
+    "returns %p",
+    
+    (
+
+      daemonCards, 
+      playerCards, 
+      expectedResult,
+
+    ) => {
+
+      const result = 
+        magisterLudi.newDealEligibleAir(
+          daemonCards, playerCards);
+
+      expect(result).toEqual(expectedResult);
+
+    }
+  );
+
+});
+
+//////////////////////////////////////////////////
 // NEW DEAL ELIGIBLE EARTH
 //////////////////////////////////////////////////
 describe('newDealEligibleEarth', () => {
 
-  // ALL MOVES ARE ELIGIBLE IN Earth
-  // ONLY EMPTY CARD SETS QUALIFY FOR NEW DEAL
   const newDealEligibleEarthCases = [
 
     [['9C', '6C', '3C'], ['3W','6W','9W'], false],
@@ -497,8 +575,12 @@ describe('validateSelectionEarth', () => {
 
   const validateSelectionEarthCases = [
 
-    // TODO R9: NEED CASES
     [[], [], false],
+    [['6C'], [], false],
+    [[], ['6W'], false],
+    [['6C'], ['6W'], true],
+    [['7C'], ['4W'], false],
+    [['7W'], ['4W'], true],  
   
   ];
 
@@ -518,6 +600,47 @@ describe('validateSelectionEarth', () => {
 
       const result = 
         magisterLudi.validateSelectionEarth(
+          selectedCardsDaemon, selectedCardsPlayer);
+
+      expect(result).toEqual(expectedResult);
+
+    }
+  );
+
+});
+
+//////////////////////////////////////////////////
+// VALIDATE SELECTION FIRE 
+//////////////////////////////////////////////////
+describe('validateSelectionFire', () => {
+
+  const validateSelectionFireCases = [
+
+    [[], [], false],
+    [['6C'], [], false],
+    [[], ['6W'], false],
+    [['6C'], ['6W'], true],
+    [['7C'], ['4W'], true],
+    [['7W'], ['4W'], true],  
+  
+  ];
+
+  test.each(validateSelectionFireCases)(
+
+    "given selected Daemon cards %p " +
+    "and selected Player cards %p, " + 
+    "returns %p",
+    
+    (
+
+      selectedCardsDaemon, 
+      selectedCardsPlayer, 
+      expectedResult,
+
+    ) => {
+
+      const result = 
+        magisterLudi.validateSelectionFire(
           selectedCardsDaemon, selectedCardsPlayer);
 
       expect(result).toEqual(expectedResult);
