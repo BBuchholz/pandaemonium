@@ -13,6 +13,7 @@
     passPhrase,
     devMode, 
     voidMode,
+    requestedInitialDeal,
   } from './stores.js';
 
   function redeemFire(){

@@ -17,6 +17,8 @@ export const devNotifyDelay = writable(false);
 
 export const voidMode = writable(false);
 
+export const requestedInitialDeal = writable('');
+
 export const selectedCardsForPlayer = writable([]);
 export const selectedCardsForDaemon = writable([]);
 

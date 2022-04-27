@@ -1,6 +1,8 @@
 <script>
   import { fade } from 'svelte/transition';
-  import { previousTurnInfo } from './stores.js';
+  import { 
+    previousTurnInfo, 
+  } from './stores.js';
 
   export let notification;
   export let withoutStyles = false;
