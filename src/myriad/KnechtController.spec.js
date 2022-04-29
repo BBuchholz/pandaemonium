@@ -449,6 +449,44 @@ describe('selResValFire', () => {
 });
 
 //////////////////////////////////////////////////
+// SELECTION RESOLUTION VALUE WATER TEXT
+//////////////////////////////////////////////////
+describe('selResValWaterText', () => {
+
+  const selResValWaterTextCases = [
+
+    // TODO WATER: NEED MORE CASES, ADD AS WE GO
+    // (ESP. ONCE LOAD GAME IS REFACTORED INTO LOAD TABLE)
+    [["6S","5S"], ["2D","4D","6D","9D"], ""],
+    [["1W","2W"], ["4C","3S","3C","7S"], ""],
+  ];
+
+  test.each(selResValWaterTextCases)(
+
+    "given unselected cards %p " +
+    "and selected cards %p, " + 
+    "returns %p",
+    
+    (
+
+      unselectedCards, 
+      selectedCards, 
+      expectedResult
+
+    ) => {
+
+      const result = 
+        magisterLudi.selResValWaterText(
+          unselectedCards, selectedCards);
+
+      expect(result).toEqual(expectedResult);
+
+    }
+  );
+
+});
+
+//////////////////////////////////////////////////
 // VALIDATE SELECTION VOID
 //////////////////////////////////////////////////
 describe('validateSelectionVoid', () => {

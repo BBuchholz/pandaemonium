@@ -667,6 +667,34 @@ export const selectionResolutionValue = derived(
   }
 );
 
+export const selectionResolutionText = derived(
+  [unselectedCards,
+   selectedCardsForDaemon, 
+   selectedCardsForPlayer, 
+   selectedCards,
+   currentQuadrant,
+   selectionIsValid],
+  ([$unselectedCards,
+    $selectedCardsForDaemon, 
+    $selectedCardsForPlayer, 
+    $selectedCards,
+    $currentQuadrant,
+    $selectionIsValid]) => {
+
+  let outcome = '';
+
+  if($currentQuadrant === 'Water'){
+
+    outcome = 
+      magisterLudi.selResValWaterText(
+        $unselectedCards, $selectedCards);
+
+  }
+
+  return outcome;
+
+});
+
 export const newDealEligible = derived(
   [playerCards, 
    daemonCards,

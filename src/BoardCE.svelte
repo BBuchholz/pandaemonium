@@ -25,6 +25,7 @@
     selectionResolutionMValue,
     selectionResolutionHValue,
     selectionResolutionValue,
+    selectionResolutionText,
     heatIndex,
     currentDeckCount,
     discardCount,
@@ -56,7 +57,7 @@
       position: 'bottom-right',
       text: 'collected ' + $selectionResolutionValue,
       type: 'error',
-      description: 'lorem ipsum',
+      description: 'magisterLudi says: ' + $selectionResolutionText,
       removeAfter: 4000,
     });
   }
