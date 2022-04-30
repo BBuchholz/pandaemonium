@@ -457,8 +457,8 @@ describe('selResValWaterText', () => {
 
     // TODO WATER: NEED MORE CASES, ADD AS WE GO
     // (ESP. ONCE LOAD GAME IS REFACTORED INTO LOAD TABLE)
-    [["6S","5S"], ["2D","4D","6D","9D"], ""],
-    [["1W","2W"], ["4C","3S","3C","7S"], ""],
+    [["6S","5S"], ["2D","4D","6D","9D"], "Air Dragon captured by Earth Dragon through Virtue of Dignity, 17 over 11"],
+    [["1W","2W"], ["4C","3S","3C","7S"], "Fire Dragon captured by Mist Dragon through Virtue of Dignity, 17 over 3"],
   ];
 
   test.each(selResValWaterTextCases)(
