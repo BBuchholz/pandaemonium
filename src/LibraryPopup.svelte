@@ -111,6 +111,11 @@
     close();
   }
 
+  function handleBoardNuitClick(){
+    $passPhrase = 'leNuit';
+    close();
+  }
+
   function handleBoardCEClick(){
     $passPhrase = 'leCE';
     close();
@@ -172,6 +177,14 @@
         on:click={handleBoardMondeClick}
       > 
         Board Monde 
+      </a>
+    </div>
+    <div class="lab-item">
+      <a 
+        href="#boardNuit"
+        on:click={handleBoardNuitClick}
+      > 
+        Board Nuit 
       </a>
     </div>
     <div class="lab-item">

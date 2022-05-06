@@ -3,7 +3,7 @@
   import KnechtController from './myriad/KnechtController.js';
   const magisterLudi = KnechtController();
 
-  import Card from './boardMat/Card.svelte';
+  import Card from './cards/Card.svelte';
   import WaterVessel from './vessels/WaterVessel.svelte';
   import AirVessel from './vessels/AirVessel.svelte';
   import EarthVessel from './vessels/EarthVessel.svelte';
@@ -13,7 +13,7 @@
   import DeckVessel from './vessels/DeckVessel.svelte';
   import DiscardVessel from './vessels/DiscardVessel.svelte';
    
-  import { 
+  import {
     passPhrase,
     devMode,
     selectedQuadrant,
@@ -209,29 +209,35 @@
 
   <div class="game-board">
 
-    <div class="vessels top">
+    <div class="water-vessel">
       <WaterVessel on:redeemWater={redeemWater} />
+    </div>
+
+    <div class="air-vessel">
       <AirVessel on:redeemAir={redeemAir} />
     </div>
 
-    <div class="vessels upper-middle">
+    <div class="deck-vessel">
       <DeckVessel />
     </div>
 
-    <div class="aewonic-cross middle">
+    <div class="ac-vessel">
       <AewonicCross />
     </div>
 
-    <div class="buttons">
+    <div class="buttons-vessel">
       <ButtonsVessel />
     </div>
 
-    <div class="vessels lower-middle">
+    <div class="discard-vessel">
       <DiscardVessel />
     </div>
 
-    <div class="vessels bottom">
+    <div class="earth-vessel">
       <EarthVessel on:redeemEarth={redeemEarth} />
+    </div>
+
+    <div class="fire-vessel">
       <FireVessel on:redeemFire={redeemFire} />
     </div>
 
@@ -240,50 +246,61 @@
 
 <style>
 
+/* REF-USED: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout */
+
 .game-board {
 
-  height: 100%;
-  min-height: 100%;
-  width: 100%;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto;
+  gap: 10px;
 }
 
-.aewonic-cross {
+.water-vessel {
 
-  height: 60%;
-  /*flex: auto;*/
-  overflow-y: scroll;
+  grid-column: 1/3;
+  grid-row: 1;
 }
 
-.vessels {
+.air-vessel {
 
-  display: flex;
-  width: 100%;
-  margin: 10px;
-  flex-flow: row wrap;
-  justify-content: space-around;
-
+  grid-column: 4/6;
+  grid-row: 1;
 }
 
-.top, .upper-middle, .lower-middle, .bottom {
-  height: 10%;
+.deck-vessel {
+
+  grid-column: 1;
+  grid-row: 2;
 }
 
+.ac-vessel {
 
-
-/*
-.top {
-
-  position: absolute;
-  top: 0;
+  grid-column: 1;
+  grid-row: 3;
 }
 
-.bottom {
-  
-  position: absolute;
-  bottom: 0;
-}*/
+.buttons-vessel {
+
+  grid-column: 1;
+  grid-row: 4;
+}
+
+.discard-vessel {
+
+  grid-column: 1;
+  grid-row: 5;
+}
+
+.earth-vessel {
+
+  grid-column: 1/3;
+  grid-row: 6;
+}
+
+.fire-vessel {
+
+  grid-column: 4/6;
+  grid-row: 6;
+}
 
 </style>

@@ -1082,6 +1082,221 @@ const KnechtController = () => {
       return outcome;
     },
 
+    selResValWaterText: (unselectedCards, 
+                         selectedCards) => {
+            
+      let selectedDragonKeys = [];            
+      let unselectedDragonKeys = [];
+
+      for(const cardKey of selectedCards){
+        selectedDragonKeys.push(cardKey);
+      }
+
+      for(const cardKey of unselectedCards){
+        unselectedDragonKeys.push(cardKey);
+      }
+
+      if(selectedDragonKeys.length == 0 &&
+         unselectedDragonKeys.length == 0){
+        return "Dragons Nowhere To Be Seen";
+      }
+
+      let capturedDragonType = self.parseDragonType(unselectedCards);
+      let virtuousDragonType = self.parseDragonType(selectedCards); 
+
+      let virtuousDignityRank = '17';
+      let capturedDignityRank = '3';
+
+      return capturedDragonType + " Dragon captured by " +
+             virtuousDragonType + " Dragon through Virtue of " + 
+             "Dignity, " + virtuousDignityRank + 
+             " over " + capturedDignityRank;
+    },
+
+    parseDragonType: (cardKeys) => {
+      
+      let outcome = 'Zero';
+
+      if(cardKeys.length == 0){
+
+        return outcome;
+      }
+
+      for(const cardKey of cardKeys){
+
+        switch(self.parseSuit(cardKey)){
+          
+          case 'C':
+            outcome = self.combineElements(outcome, 'Water');
+            break;
+          
+          case 'S':
+            outcome = self.combineElements(outcome, 'Air');
+            break;
+          
+          case 'D':
+            outcome = self.combineElements(outcome, 'Earth');
+            break;
+          
+          case 'W':
+            outcome = self.combineElements(outcome, 'Fire');
+            break;
+
+        }
+      }
+
+      return outcome;
+    },
+
+    combineElements: (elementOne, elementTwo) => {
+
+      switch(elementOne){
+        case 'Zero':
+          
+          switch(elementTwo){
+
+            case 'Zero':
+              return 'Zero';
+              break;
+
+            case 'Water':
+              return 'Water';
+              break;
+              
+            case 'Air':
+              return 'Air';
+              break;
+              
+            case 'Earth':
+              return 'Earth';
+              break;
+              
+            case 'Fire':
+              return 'Fire';
+              break;
+
+            default:
+              return;
+          }
+
+        case 'Water':
+          
+          switch(elementTwo){
+
+            case 'Zero':
+              return 'Water';
+              break;
+
+            case 'Water':
+              return 'Water';
+              break;
+              
+            case 'Air':
+              return '';
+              break;
+              
+            case 'Earth':
+              return '';
+              break;
+              
+            case 'Fire':
+
+              return '';
+              
+              break;
+          }
+
+
+          break;
+          
+        case 'Air':
+          
+          switch(elementTwo){
+
+            case 'Zero':
+
+              break;
+
+            case 'Water':
+
+              break;
+              
+            case 'Air':
+
+              break;
+              
+            case 'Earth':
+
+              break;
+              
+            case 'Fire':
+
+              break;
+          }
+
+
+          break;
+          
+        case 'Earth':
+          
+          switch(elementTwo){
+
+            case 'Zero':
+
+              break;
+
+            case 'Water':
+
+              break;
+              
+            case 'Air':
+
+              break;
+              
+            case 'Earth':
+
+              break;
+              
+            case 'Fire':
+
+              break;
+          }
+
+
+          break;
+          
+        case 'Fire':
+          
+          switch(elementTwo){
+
+            case 'Zero':
+
+              break;
+
+            case 'Water':
+
+              break;
+              
+            case 'Air':
+
+              break;
+              
+            case 'Earth':
+
+              break;
+              
+            case 'Fire':
+
+              break;
+          }
+
+
+          break;
+      }
+
+      return 'Multi';
+    },
+
   };
 
   return self;

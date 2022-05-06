@@ -457,8 +457,9 @@ describe('selResValWaterText', () => {
 
     // TODO WATER: NEED MORE CASES, ADD AS WE GO
     // (ESP. ONCE LOAD GAME IS REFACTORED INTO LOAD TABLE)
-    [["6S","5S"], ["2D","4D","6D","9D"], "Air Dragon captured by Earth Dragon through Virtue of Dignity, 17 over 11"],
-    [["1W","2W"], ["4C","3S","3C","7S"], "Fire Dragon captured by Mist Dragon through Virtue of Dignity, 17 over 3"],
+    // [["6S","5S"], ["2D","4D","6D","9D"], "Air Dragon captured by Earth Dragon through Virtue of Dignity, 17 over 11"],
+    // [["1W","2W"], ["4C","3S","3C","7S"], "Fire Dragon captured by Mist Dragon through Virtue of Dignity, 17 over 3"],
+    [[], [], "Dragons Nowhere To Be Seen"],
   ];
 
   test.each(selResValWaterTextCases)(
@@ -680,6 +681,294 @@ describe('validateSelectionFire', () => {
       const result = 
         magisterLudi.validateSelectionFire(
           selectedCardsDaemon, selectedCardsPlayer);
+
+      expect(result).toEqual(expectedResult);
+
+    }
+  );
+
+});
+
+//////////////////////////////////////////////////
+// PARSE DRAGON TYPE 
+//////////////////////////////////////////////////
+describe('parseDragonType', () => {
+
+  const parseDragonTypeCases = [
+
+    [[], 'Zero'],
+    [['6C'], 'Water'],
+    [['6S'], 'Air'],
+    [['7D'], 'Earth'],
+    [['7W'], 'Fire'],  
+  
+  ];
+
+  test.each(parseDragonTypeCases)(
+
+    "given card keys %p " +
+    "returns %p",
+    
+    (
+      cardKeys, 
+      expectedResult,
+
+    ) => {
+
+      const result = magisterLudi.parseDragonType(cardKeys);
+
+      expect(result).toEqual(expectedResult);
+
+    }
+  );
+
+});
+
+//////////////////////////////////////////////////
+// COMBINE ELEMENTS 
+//////////////////////////////////////////////////
+describe('combineElements', () => {
+
+  const combineElementsCases = [
+
+    // PREVIOUS, REMOVE THESE AS LOWER '?' ARE FILLED IN
+    // ['Water', 'Water', 'Water'],
+    // ['Air', 'Air', 'Air'],
+    // ['Earth', 'Earth', 'Earth'],
+    // ['Fire', 'Fire', 'Fire'],
+
+    // NEW, EVERY COMBINATION POSSIBLE, CHANGE '?' TO EXPECTED
+    ['Water', 'Water ', 'Water'],
+    // ['Water', 'Air', '?'],
+    // ['Water', 'Earth', '?'],
+    // ['Water', 'Fire', '?'],
+    // ['Water', 'Mist', '?'],
+    // ['Water', 'Clay', '?'],
+    // ['Water', 'Steam', '?'],
+    // ['Water', 'Dust', '?'],
+    // ['Water', 'Kiln', '?'],
+    // ['Water', 'Ember', '?'],
+    // ['Water', 'Sauna', '?'],
+    // ['Water', 'Tar', '?'],
+    // ['Water', 'Tempest', '?'],
+    // ['Water', 'Ash', '?'],
+
+    // ['Air', 'Water ', '?'],
+    // ['Air', 'Air', '?'],
+    // ['Air', 'Earth', '?'],
+    // ['Air', 'Fire', '?'],
+    // ['Air', 'Mist', '?'],
+    // ['Air', 'Clay', '?'],
+    // ['Air', 'Steam', '?'],
+    // ['Air', 'Dust', '?'],
+    // ['Air', 'Kiln', '?'],
+    // ['Air', 'Ember', '?'],
+    // ['Air', 'Sauna', '?'],
+    // ['Air', 'Tar', '?'],
+    // ['Air', 'Tempest', '?'],
+    // ['Air', 'Ash', '?'],
+
+    // ['Earth', 'Water ', '?'],
+    // ['Earth', 'Air', '?'],
+    // ['Earth', 'Earth', '?'],
+    // ['Earth', 'Fire', '?'],
+    // ['Earth', 'Mist', '?'],
+    // ['Earth', 'Clay', '?'],
+    // ['Earth', 'Steam', '?'],
+    // ['Earth', 'Dust', '?'],
+    // ['Earth', 'Kiln', '?'],
+    // ['Earth', 'Ember', '?'],
+    // ['Earth', 'Sauna', '?'],
+    // ['Earth', 'Tar', '?'],
+    // ['Earth', 'Tempest', '?'],
+    // ['Earth', 'Ash', '?'],
+
+    // ['Fire', 'Water ', '?'],
+    // ['Fire', 'Air', '?'],
+    // ['Fire', 'Earth', '?'],
+    // ['Fire', 'Fire', '?'],
+    // ['Fire', 'Mist', '?'],
+    // ['Fire', 'Clay', '?'],
+    // ['Fire', 'Steam', '?'],
+    // ['Fire', 'Dust', '?'],
+    // ['Fire', 'Kiln', '?'],
+    // ['Fire', 'Ember', '?'],
+    // ['Fire', 'Sauna', '?'],
+    // ['Fire', 'Tar', '?'],
+    // ['Fire', 'Tempest', '?'],
+    // ['Fire', 'Ash', '?'],
+
+    // ['Mist', 'Water ', '?'],
+    // ['Mist', 'Air', '?'],
+    // ['Mist', 'Earth', '?'],
+    // ['Mist', 'Fire', '?'],
+    // ['Mist', 'Mist', '?'],
+    // ['Mist', 'Clay', '?'],
+    // ['Mist', 'Steam', '?'],
+    // ['Mist', 'Dust', '?'],
+    // ['Mist', 'Kiln', '?'],
+    // ['Mist', 'Ember', '?'],
+    // ['Mist', 'Sauna', '?'],
+    // ['Mist', 'Tar', '?'],
+    // ['Mist', 'Tempest', '?'],
+    // ['Mist', 'Ash', '?'],
+
+    // ['Clay', 'Water ', '?'],
+    // ['Clay', 'Air', '?'],
+    // ['Clay', 'Earth', '?'],
+    // ['Clay', 'Fire', '?'],
+    // ['Clay', 'Mist', '?'],
+    // ['Clay', 'Clay', '?'],
+    // ['Clay', 'Steam', '?'],
+    // ['Clay', 'Dust', '?'],
+    // ['Clay', 'Kiln', '?'],
+    // ['Clay', 'Ember', '?'],
+    // ['Clay', 'Sauna', '?'],
+    // ['Clay', 'Tar', '?'],
+    // ['Clay', 'Tempest', '?'],
+    // ['Clay', 'Ash', '?'],
+
+    // ['Steam', 'Water ', '?'],
+    // ['Steam', 'Air', '?'],
+    // ['Steam', 'Earth', '?'],
+    // ['Steam', 'Fire', '?'],
+    // ['Steam', 'Mist', '?'],
+    // ['Steam', 'Clay', '?'],
+    // ['Steam', 'Steam', '?'],
+    // ['Steam', 'Dust', '?'],
+    // ['Steam', 'Kiln', '?'],
+    // ['Steam', 'Ember', '?'],
+    // ['Steam', 'Sauna', '?'],
+    // ['Steam', 'Tar', '?'],
+    // ['Steam', 'Tempest', '?'],
+    // ['Steam', 'Ash', '?'],
+
+    // ['Dust', 'Water ', '?'],
+    // ['Dust', 'Air', '?'],
+    // ['Dust', 'Earth', '?'],
+    // ['Dust', 'Fire', '?'],
+    // ['Dust', 'Mist', '?'],
+    // ['Dust', 'Clay', '?'],
+    // ['Dust', 'Steam', '?'],
+    // ['Dust', 'Dust', '?'],
+    // ['Dust', 'Kiln', '?'],
+    // ['Dust', 'Ember', '?'],
+    // ['Dust', 'Sauna', '?'],
+    // ['Dust', 'Tar', '?'],
+    // ['Dust', 'Tempest', '?'],
+    // ['Dust', 'Ash', '?'],
+
+    // ['Kiln', 'Water ', '?'],
+    // ['Kiln', 'Air', '?'],
+    // ['Kiln', 'Earth', '?'],
+    // ['Kiln', 'Fire', '?'],
+    // ['Kiln', 'Mist', '?'],
+    // ['Kiln', 'Clay', '?'],
+    // ['Kiln', 'Steam', '?'],
+    // ['Kiln', 'Dust', '?'],
+    // ['Kiln', 'Kiln', '?'],
+    // ['Kiln', 'Ember', '?'],
+    // ['Kiln', 'Sauna', '?'],
+    // ['Kiln', 'Tar', '?'],
+    // ['Kiln', 'Tempest', '?'],
+    // ['Kiln', 'Ash', '?'],
+
+    // ['Ember', 'Water ', '?'],
+    // ['Ember', 'Air', '?'],
+    // ['Ember', 'Earth', '?'],
+    // ['Ember', 'Fire', '?'],
+    // ['Ember', 'Mist', '?'],
+    // ['Ember', 'Clay', '?'],
+    // ['Ember', 'Steam', '?'],
+    // ['Ember', 'Dust', '?'],
+    // ['Ember', 'Kiln', '?'],
+    // ['Ember', 'Ember', '?'],
+    // ['Ember', 'Sauna', '?'],
+    // ['Ember', 'Tar', '?'],
+    // ['Ember', 'Tempest', '?'],
+    // ['Ember', 'Ash', '?'],
+
+    // ['Sauna', 'Water ', '?'],
+    // ['Sauna', 'Air', '?'],
+    // ['Sauna', 'Earth', '?'],
+    // ['Sauna', 'Fire', '?'],
+    // ['Sauna', 'Mist', '?'],
+    // ['Sauna', 'Clay', '?'],
+    // ['Sauna', 'Steam', '?'],
+    // ['Sauna', 'Dust', '?'],
+    // ['Sauna', 'Kiln', '?'],
+    // ['Sauna', 'Ember', '?'],
+    // ['Sauna', 'Sauna', '?'],
+    // ['Sauna', 'Tar', '?'],
+    // ['Sauna', 'Tempest', '?'],
+    // ['Sauna', 'Ash', '?'],
+
+    // ['Tar', 'Water ', '?'],
+    // ['Tar', 'Air', '?'],
+    // ['Tar', 'Earth', '?'],
+    // ['Tar', 'Fire', '?'],
+    // ['Tar', 'Mist', '?'],
+    // ['Tar', 'Clay', '?'],
+    // ['Tar', 'Steam', '?'],
+    // ['Tar', 'Dust', '?'],
+    // ['Tar', 'Kiln', '?'],
+    // ['Tar', 'Ember', '?'],
+    // ['Tar', 'Sauna', '?'],
+    // ['Tar', 'Tar', '?'],
+    // ['Tar', 'Tempest', '?'],
+    // ['Tar', 'Ash', '?'],
+
+    // ['Tempest', 'Water ', '?'],
+    // ['Tempest', 'Air', '?'],
+    // ['Tempest', 'Earth', '?'],
+    // ['Tempest', 'Fire', '?'],
+    // ['Tempest', 'Mist', '?'],
+    // ['Tempest', 'Clay', '?'],
+    // ['Tempest', 'Steam', '?'],
+    // ['Tempest', 'Dust', '?'],
+    // ['Tempest', 'Kiln', '?'],
+    // ['Tempest', 'Ember', '?'],
+    // ['Tempest', 'Sauna', '?'],
+    // ['Tempest', 'Tar', '?'],
+    // ['Tempest', 'Tempest', '?'],
+    // ['Tempest', 'Ash', '?'],
+
+    // ['Ash', 'Water ', '?'],
+    // ['Ash', 'Air', '?'],
+    // ['Ash', 'Earth', '?'],
+    // ['Ash', 'Fire', '?'],
+    // ['Ash', 'Mist', '?'],
+    // ['Ash', 'Clay', '?'],
+    // ['Ash', 'Steam', '?'],
+    // ['Ash', 'Dust', '?'],
+    // ['Ash', 'Kiln', '?'],
+    // ['Ash', 'Ember', '?'],
+    // ['Ash', 'Sauna', '?'],
+    // ['Ash', 'Tar', '?'],
+    // ['Ash', 'Tempest', '?'],
+    // ['Ash', 'Ash', '?'],
+  
+  ];
+
+  test.each(combineElementsCases)(
+
+    "given element %p " +
+    "and element %p " + 
+    "returns %p",
+    
+    (
+      elementOne,
+      elementTwo, 
+      expectedResult,
+
+    ) => {
+
+
+      console.log('elementOne: ' + elementOne);
+      console.log('elementTwo: ' + elementTwo);
+
+      const result = 
+        magisterLudi.combineElements(elementOne, elementTwo);
 
       expect(result).toEqual(expectedResult);
 
