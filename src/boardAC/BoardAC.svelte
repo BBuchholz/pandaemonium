@@ -2,17 +2,15 @@
 
   import { onMount } from 'svelte';
 
-  import DaemonArea from './boardCE/DaemonAreaMod.svelte';
-  import PlayerArea from './boardCE/PlayerAreaMod.svelte';
+  import DaemonArea from './DaemonAreaMod.svelte';
+  import PlayerArea from './PlayerAreaMod.svelte';
 
-  import KnechtController from './myriad/KnechtController.js';
+  import KnechtController from '../myriad/KnechtController.js';
   const magisterLudi = KnechtController();
-
+  
   import {
     devMode,
-    devNotifyDelay,
-    previousTurnInfo,
-  } from './stores.js';
+  } from '../stores.js';
 
   import { 
     selectedCardsForPlayer, 
@@ -25,7 +23,6 @@
     selectionResolutionMValue,
     selectionResolutionHValue,
     selectionResolutionValue,
-    selectionResolutionText,
     heatIndex,
     currentDeckCount,
     discardCount,
@@ -43,10 +40,8 @@
     collectedRecentlyWater,
     collectedRecentlyAir,
     collectedRecentlyEarth,
-    rulesIncludeElementalShiftsOnAllCollections,
-    toDos,
-    currentQuadrant,
-  } from './boardCE/stores.js';
+    rulesIncludeElementalShiftsOnAllCollections
+  } from './stores.js';
 
 
   import { getNotificationsContext } from 'svelte-notifications';
@@ -57,7 +52,7 @@
       position: 'bottom-right',
       text: 'collected ' + $selectionResolutionValue,
       type: 'error',
-      description: 'magisterLudi says: ' + $selectionResolutionText,
+      description: 'lorem ipsum',
       removeAfter: 4000,
     });
   }
@@ -80,85 +75,11 @@
     });
   }
 
-
-
-  function notifyDevInfo(infoTitle, infoDesc, position){
-
-    let removeAfterTime;
-
-    if($devNotifyDelay){
-
-      //NB: position 0 will always be forever
-      // THIS IS INTENTIONAL
-      removeAfterTime = position * 300;
-
-    }else{
-
-      removeAfterTime = 0;
-    }
-
-    addNotification({
-      position: 'top-right',
-      text: 'Dev Info: ' + infoTitle,
-      type: 'error',
-      description: infoDesc,
-      removeAfter: removeAfterTime,
-    });
-  }
-
-  function notifyDeckInfo(infoDesc){
-    addNotification({
-      position: 'top-right',
-      text: 'Deck Info',
-      type: 'error',
-      description: infoDesc,
-      removeAfter: 2000,
-    }); 
-  }
-
-  function notifyAllDevInfos(){
-
-    const devInfoText = 
-      'Welcome to Board CE, currently in dev mode. ' +
-      'It is identical to Board AC, but will be replacing ' +
-      'Card with ModCard (displaying zodiacal affinities). ' + 
-      'Other changes will be made to Board CE going forward, ' +
-      'with Board AC preserved as is for reference.';
-
-    notifyDevInfo('ModCard', devInfoText, 1);
-
-    const devInfoText2 = 
-      'The goal is to get all components into a portable ' +
-      'format that applies to all boards, eg. all boards ' +
-      'should get their vessels from the vessels/ directory ' +
-      'and any variations in behavior should be encapsulated ' +
-      'in such a manner as to be configurables';
-
-    notifyDevInfo('Configurables', devInfoText2, 2);
-    
-  }
-
-  function notifyAllToDos(){
-
-    if($toDos.length == 0){
-      return;
-    }
-
-    let multilineTodos = '';
-
-    for(let i = 0; i < $toDos.length; i++){
-
-      const count = i + 1;
-      const todo = $toDos[i];
-      multilineTodos += '(' + count + '.) ' + todo; 
-    }
-
-    notifyDevInfo('ToDos', multilineTodos, 0);
-  }
-
   function startGame() {
     $beforeGame = false;
+    // console.log('starting game...');
     loadDeck(); 
+    // playTurn();
     dealCards();
   }
 
@@ -176,6 +97,7 @@
     
     $deck = newDeckMinusEarth;
 
+    // console.log('deck length: ' + $deck.length);
   }
 
   function playTurn() {
@@ -185,30 +107,17 @@
 
   function resetSelection() {
 
-    //DONE COPY NOTIFY: store the previous turn info 
-    //                  here before clearing
-    //Table
-    //Selected
-    //Collected
-    //Quadrant
-    
-    let gameObjToStore = {};
-    
-    gameObjToStore.table = [...$daemonCards, ...$playerCards];
-    gameObjToStore.selected = 
-      [...$selectedCardsForDaemon, ...$playerCards];
-    gameObjToStore.collected = [...$selectionResolutionValue];
-    gameObjToStore.quadrant = $currentQuadrant;
-
-
-    $previousTurnInfo = 
-      JSON.stringify(gameObjToStore);
-    
+    // roundFinished = true;
     $selectedCardsForPlayer = [];
     $selectedCardsForDaemon = [];
     $playerCards = [];
     $daemonCards = [];
+    // console.log('selection reset');
   }
+
+  // function selectCard(cardKey) {
+  //   console.log('selected ' + cardKey);
+  // }
 
   function handleSelectionConfirmed() {
     // console.log('selection confirmed'); 
@@ -335,7 +244,7 @@
 
     } else {
 
-      notifyDeckInfo('Deck is empty, redeem a vessel to select a quadrant and shuffle all cards. To Enable Void Mode, open the book and select it...');
+      alert('all cards collected! you rock!');
       $beforeGame = true;
 
     }
@@ -435,38 +344,13 @@
 
   }
 
-  function loadToDos(){
-
-    ////////////////////////////////////////////////////////
-    // TODOS GO HERE TO BE LISTED
-    ////////////////////////////////////////////////////////
-
-    addToDo('refactor stores current logic into KnechtController, and put new behavior into Knechtor, and then we can write unit tests to verify that both are behaving the same, SEE TODO COMMENTS IN boardCE/stores.js')
-    addToDo('alert on deck info should be a notification. ');
-    addToDo('replace Card with ModCard. ');
-    addToDo('if the button labelled "Play the Game" is clicked without a quadrant selected, notify that you are in the void and will only get random cards that allow all selections unless you select a quadrant. ');
-    // addToDo('board should be black and white if no quadrant selected. ');
-    addToDo('Fire logic ready to be implemented, see code notes on Game Logic Docs');
-  }
-
-  function addToDo(toDoText){
-
-    $toDos.push(toDoText);
-  }
-
   initialize();
 
   function initialize(){
 
-    fillAllElementalVessels();
-
     if($devMode){
 
-      notifyAllDevInfos();
-
-      loadToDos();
-
-      notifyAllToDos();
+      fillAllElementalVessels();
 
       //use this to selectively redeem
       //some keys for testing particular 

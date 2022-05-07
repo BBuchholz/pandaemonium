@@ -1,30 +1,30 @@
 <script>
 
-  import KnechtController from './myriad/KnechtController.js';
+  import KnechtController from '../myriad/KnechtController.js';
   const magisterLudi = KnechtController();
 
-  import Card from './cards/Card.svelte';
-  import WaterVessel from './vessels/WaterVessel.svelte';
-  import AirVessel from './vessels/AirVessel.svelte';
-  import EarthVessel from './vessels/EarthVessel.svelte';
-  import FireVessel from './vessels/FireVessel.svelte';
-  import AewonicCross from './vessels/AewonicCross.svelte';
-  import ButtonsVessel from './vessels/ButtonsVessel.svelte';
-  import DeckVessel from './vessels/DeckVessel.svelte';
-  import DiscardVessel from './vessels/DiscardVessel.svelte';
+  import Card from './Card.svelte';
+  import WaterVessel from './WaterVessel.svelte';
+  import AirVessel from './AirVessel.svelte';
+  import EarthVessel from './EarthVessel.svelte';
+  import FireVessel from './FireVessel.svelte';
+  import AewonicCross from './AewonicCross.svelte';
+  import ButtonsVessel from './ButtonsVessel.svelte';
+  import DeckVessel from './DeckVessel.svelte';
+  import DiscardVessel from './DiscardVessel.svelte';
    
   import {
     passPhrase,
     devMode,
     selectedQuadrant,
-  } from './stores.js';
+  } from '../stores.js';
 
   import { 
     keysWater, 
     keysAir, 
     keysEarth, 
     keysFire,
-  } from './constants.js';
+  } from '../constants.js';
 
   
   import {
@@ -35,7 +35,7 @@
     earthCollection,
     fireCollection,
     collectedSpirit,
-  } from './vessels/stores.js'
+  } from './stores.js'
 
   import { getNotificationsContext } from 'svelte-notifications';
   const { addNotification } = getNotificationsContext();

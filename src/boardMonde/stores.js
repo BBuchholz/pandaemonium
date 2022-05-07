@@ -32,13 +32,12 @@ export const rulesIncludeElementalShiftsOnAllCollections =
 export const selectedCardsForPlayer = writable([]);
 export const selectedCardsForDaemon = writable([]);
 
-
-// export const selectedCards = derived(
-// 	[selectedCardsForDaemon, selectedCardsForPlayer],
-// 	([$selectedCardsForDaemon, $selectedCardsForPlayer]) => {
-// 		return [...$selectedCardsForDaemon, ...$selectedCardsForPlayer];
-// 	}
-// );
+export const selectedCards = derived(
+	[selectedCardsForDaemon, selectedCardsForPlayer],
+	([$selectedCardsForDaemon, $selectedCardsForPlayer]) => {
+		return [...$selectedCardsForDaemon, ...$selectedCardsForPlayer];
+	}
+);
 
 export const selectedEarthSign = writable('');
 export const selectedWaterSign = writable('');

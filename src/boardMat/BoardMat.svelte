@@ -1,13 +1,13 @@
 <script>
 
-  import KnechtController from './myriad/KnechtController.js';
+  import KnechtController from '../myriad/KnechtController.js';
   const magisterLudi = KnechtController();
 
-  import Card from './boardMat/Card.svelte';
+  import Card from './Card.svelte';
   
   import { 
     passPhrase,
-  } from './stores.js';
+  } from '../stores.js';
 
   import { 
 
@@ -15,11 +15,21 @@
     selectionIsSingular,
     singleSteadCardKey,
     deck,
-  } from './boardMat/stores.js';
+  } from './stores.js';
 
 
   import { getNotificationsContext } from 'svelte-notifications';
   const { addNotification } = getNotificationsContext();
+  
+  import { getContext } from 'svelte';
+
+  import LibraryPopup from '../LibraryPopup.svelte';
+
+  const { open } = getContext('simple-modal');
+
+  const showPopupLong = () => {
+    open(LibraryPopup);
+  };
 
   function notifyPassPhraseFound(){
     addNotification({
@@ -95,13 +105,18 @@
 
     <div class="buttons">
 
+      <button 
+        on:click={showPopupLong}
+      >
+        📓
+      </button>
 
       <button 
         class="deal-button"
         on:click={dealRandomCard}
       >
 
-        Deal Random Card
+        Deal
 
       </button>
 

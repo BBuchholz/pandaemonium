@@ -15,11 +15,11 @@
 
   import DaedalusLab from './components/DaedalusLab.svelte';
 
-  import BoardAC from './BoardAC.svelte';
-  import BoardMat from './BoardMat.svelte'; 
-  import BoardMonde from './BoardMonde.svelte'; 
-  import BoardNuit from './BoardNuit.svelte'; 
-  import BoardCE from './BoardCE.svelte';
+  import BoardAC from './boardAC/BoardAC.svelte';
+  import BoardMat from './boardMat/BoardMat.svelte'; 
+  import BoardMonde from './boardMonde/BoardMonde.svelte'; 
+  import BoardNuit from './boardNuit/BoardNuit.svelte'; 
+  import BoardCE from './boardCE/BoardCE.svelte';
 
   initialize();
 
@@ -94,7 +94,7 @@
 
       {:else}
 
-        <BoardMonde />
+        <BoardMat />
 
       {/if}
 
