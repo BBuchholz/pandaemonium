@@ -13,13 +13,17 @@
 
   import MyriadNotification from './MyriadNotification.svelte';
 
-  import DaedalusLab from './components/DaedalusLab.svelte';
-
   import BoardAC from './boardAC/BoardAC.svelte';
   import BoardMat from './boardMat/BoardMat.svelte'; 
   import BoardMonde from './boardMonde/BoardMonde.svelte'; 
   import BoardNuit from './boardNuit/BoardNuit.svelte'; 
   import BoardCE from './boardCE/BoardCE.svelte';
+  import Alexandria from './alex/Alexandria.svelte';
+  import LeMarchand from './alex/LeMarchand.svelte';
+  import Daedalus from './alex/Daedalus.svelte';
+
+  import DaedalusLab from './components/DaedalusLab.svelte';
+
 
   initialize();
 
@@ -36,9 +40,9 @@
 
     if($devMode){
 
-      $passPhrase = 'leNuit';  
+      $passPhrase = 'lament';  
 
-      $voidMode = true;  
+      $voidMode = false;  
 
       //////////////////////////////////////////
       // $devNotifyDelay DOC
@@ -70,15 +74,27 @@
 
       {#if $passPhrase === 'daedalus'}
 
-        <DaedalusLab {$passPhrase} />
+        <Daedalus {$passPhrase} />
 
       {:else if $passPhrase === 'leAC'}
 
         <BoardAC />
 
+      {:else if $passPhrase === 'daedalusLab'}
+
+        <DaedalusLab {$passPhrase} />
+
       {:else if $passPhrase === 'leMat'}
 
         <BoardMat />
+
+      {:else if $passPhrase === 'alex'}
+
+        <Alexandria />
+
+      {:else if $passPhrase === 'lament'}
+
+        <LeMarchand />
 
       {:else if $passPhrase === 'leMonde'}
 
@@ -94,7 +110,7 @@
 
       {:else}
 
-        <BoardMat />
+        <LeMarchand />
 
       {/if}
 
