@@ -72,6 +72,12 @@
     
     <main>
 
+      <div class='header'>
+        
+        And there was music too; a simple tune emerged from the box, played on a mechanism that she could not yet see. Enchanted, she delved further. Though one piece had been removed, the rest did not come readily. Each segment presented a fresh challenge to fingers and mind, the victories rewarded with a further filigree added to the tune. The puzzle draws the player onward until suddenly the puzzle is solved and the gateway is opened.
+
+      </div>
+
       {#if $passPhrase === 'daedalus'}
 
         <Daedalus {$passPhrase} />
@@ -114,6 +120,12 @@
 
       {/if}
 
+      <div class='footer'>
+        
+        a Temple Cathedral Tomb production
+
+      </div>
+
     </main>
 
   </Modal>
@@ -121,6 +133,31 @@
 </Notifications>
 
 <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@300&display=swap');
+
+.header, .footer {
+  width: 80%;
+  position: relative;
+  height: auto;
+  padding: 20px;
+  margin: 20px;
+}
+
+.header {
+  font-family: 'Averia Serif Libre', cursive;
+  font-size: 18px;
+  font-style: italic;
+  line-height: 17px;
+
+}
+
+.footer {
+  font-family: 'Averia Serif Libre', cursive;
+  font-size: 18px;
+  font-style: italic;
+  line-height: 17px;
+}
 
 main {
   text-align: center;
@@ -133,5 +170,6 @@ main {
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
 
 </style>

@@ -50,49 +50,53 @@
 
 </script>
 
-<div class='daedalus-lab'>
-  
-    <div class="lab-item">
-      <a 
-        href="#boardAC"
-        on:click={handleBoardACClick}
-      > 
-        Board AC 
-      </a>
-    </div>
-    <div class="lab-item">
-      <a 
-        href="#boardMat"
-        on:click={handleBoardMatClick}
-      > 
-        Board Mat 
-      </a>
-    </div>
-    <div class="lab-item">
-      <a 
-        href="#boardMonde"
-        on:click={handleBoardMondeClick}
-      > 
-        Board Monde 
-      </a>
-    </div>
-    <div class="lab-item">
-      <a 
-        href="#boardNuit"
-        on:click={handleBoardNuitClick}
-      > 
-        Board Nuit 
-      </a>
-    </div>
-    <div class="lab-item">
-      <a 
-        href="#boardCE"
-        on:click={handleBoardCEClick}
-      > 
-        Board CE 
-      </a>
-    </div>
-  
+<div class='main'>
+
+  <div class='daedalus-lab'>
+    
+      <div class="lab-item">
+        <a 
+          href="#boardAC"
+          on:click={handleBoardACClick}
+        > 
+          Board AC 
+        </a>
+      </div>
+      <div class="lab-item">
+        <a 
+          href="#boardMat"
+          on:click={handleBoardMatClick}
+        > 
+          Board Mat 
+        </a>
+      </div>
+      <div class="lab-item">
+        <a 
+          href="#boardMonde"
+          on:click={handleBoardMondeClick}
+        > 
+          Board Monde 
+        </a>
+      </div>
+      <div class="lab-item">
+        <a 
+          href="#boardNuit"
+          on:click={handleBoardNuitClick}
+        > 
+          Board Nuit 
+        </a>
+      </div>
+      <div class="lab-item">
+        <a 
+          href="#boardCE"
+          on:click={handleBoardCEClick}
+        > 
+          Board CE 
+        </a>
+      </div>
+    
+  </div>
+
 </div>
 
 <style>
