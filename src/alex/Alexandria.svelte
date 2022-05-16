@@ -9,8 +9,12 @@
 
   import {  
     passPhrase,
-    devMode, 
+    devMode,
   } from '../stores.js';
+
+  import {  
+    bookName,
+  } from './stores.js';
 
   function notifyWithoutExpire(textValue){
     addNotification({
@@ -23,53 +27,41 @@
     });
   }
 
-  function handleBoardACClick(){
-    $passPhrase = 'leAC';
-    close();
-  }
-
-  function handleBoardMatClick(){
-    $passPhrase = 'leMat';
-    close();
-  }
-
-  function handleBoardMondeClick(){
-    $passPhrase = 'leMonde';
-    close();
-  }
-
-  function handleBoardNuitClick(){
-    $passPhrase = 'leNuit';
-    close();
-  }
-
-  function handleBoardCEClick(){
-    $passPhrase = 'leCE';
-    close();
+  function handleBookTaroClick(){
+    $bookName = 'liberTaro';
   }
 
 </script>
 
 <div class='main'>
 
-  <div class='daedalus-lab'>
-    
-      <div class="lab-item">
-        <a 
-          href="#boardAC"
-          on:click={handleBoardACClick}
-        > 
-          Board AC 
-        </a>
-      </div>
-    
-  </div>
+  {#if $bookName === 'liberTaro'}
+
+    Liber Taro Goes Here
+
+  {:else}
+
+    <!-- turn this into CitadelShelf -->
+    <div class='citadel-shelf'>
+      
+        <div class="book">
+          <a 
+            href="#BookTaro"
+            on:click={handleBookTaroClick}
+          > 
+            Book Taro 
+          </a>
+        </div>
+      
+    </div>
+
+  {/if}
 
 </div>
 
 <style>
 
-.daedalus-lab {
+.citadel-shelf {
   border: solid;
   border-radius: 10px;
   display: flex;
@@ -77,7 +69,7 @@
   justify-content: space-around;
 }
 
-.lab-item {
+.book {
   margin: 10px;
   padding: 10px;
   border: thin solid;

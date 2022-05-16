@@ -1,14 +1,15 @@
 // // /////////////////////////////////
-// // // ALEXANDRIA STORES
+// // // ALEX STORES
 // // /////////////////////////////////
 
-// import { writable, derived } from 'svelte/store';
+import { writable, derived } from 'svelte/store';
 // import KnechtController from './myriad/KnechtController.js';
 
 // const magisterLudi = KnechtController();
 
 // export const modal = writable(null);
-// export const passPhrase = writable('');
+export const bookName = writable('');
+export const benchName = writable('');
 
 // export const selectedQuadrant = writable('');
 

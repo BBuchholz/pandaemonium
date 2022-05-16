@@ -4,6 +4,8 @@
 
   const { close } = getContext('simple-modal');
 
+  import BenchTaro from './BenchTaro.svelte';
+
   import { getNotificationsContext } from 'svelte-notifications';
   const { addNotification } = getNotificationsContext();
 
@@ -11,6 +13,10 @@
     passPhrase,
     devMode, 
   } from '../stores.js';
+
+  import {  
+    benchName,
+  } from './stores.js';
 
   function notifyWithoutExpire(textValue){
     addNotification({
@@ -23,94 +29,42 @@
     });
   }
 
-  function handleBoardACClick(){
-    $passPhrase = 'leAC';
-    close();
+  function handleBenchTaroClick(){
+    $benchName = 'benchTaro';
   }
 
-  function handleBoardMatClick(){
-    $passPhrase = 'leMat';
-    close();
-  }
-
-  function handleBoardMondeClick(){
-    $passPhrase = 'leMonde';
-    close();
-  }
-
-  function handleBoardNuitClick(){
-    $passPhrase = 'leNuit';
-    close();
-  }
-
-  function handleBoardCEClick(){
-    $passPhrase = 'leCE';
-    close();
-  }
-  
-  function handleDaedalusLabClick(){
-    $passPhrase = 'daedalusLab';
-    close();
-  } 
 
 </script>
 
-<div class='daedalus-lab'>
-  
-    <div class="lab-item">
-      <a 
-        href="#boardAC"
-        on:click={handleBoardACClick}
-      > 
-        Board AC 
-      </a>
+<div class='main'>
+
+  {#if $benchName === 'benchTaro'}
+
+    <BenchTaro />
+
+  {:else}
+
+    <div class='daedalus-shop'>
+      
+        <div class="bench">
+          <a 
+            href="#Bench"
+            on:click={handleBenchTaroClick}
+          > 
+            Bench Taro 
+          </a>
+        </div>
+        
+      
     </div>
-    <div class="lab-item">
-      <a 
-        href="#boardMat"
-        on:click={handleBoardMatClick}
-      > 
-        Board Mat 
-      </a>
-    </div>
-    <div class="lab-item">
-      <a 
-        href="#boardMonde"
-        on:click={handleBoardMondeClick}
-      > 
-        Board Monde 
-      </a>
-    </div>
-    <div class="lab-item">
-      <a 
-        href="#boardNuit"
-        on:click={handleBoardNuitClick}
-      > 
-        Board Nuit 
-      </a>
-    </div>
-    <div class="lab-item">
-      <a 
-        href="#boardCE"
-        on:click={handleBoardCEClick}
-      > 
-        Board CE 
-      </a>
-    </div>
-    <div class="lab-item">
-      <a 
-        href="#DaedalusLab"
-        on:click={handleDaedalusLabClick}
-      > 
-        Daedalus Lab 
-      </a>
-    </div>
-  
+
+  {/if}
+
 </div>
 
 <style>
 
-.daedalus-lab {
+.daedalus-shop {
   border: solid;
   border-radius: 10px;
   display: flex;
@@ -118,7 +72,7 @@
   justify-content: space-around;
 }
 
-.lab-item {
+.bench {
   margin: 10px;
   padding: 10px;
   border: thin solid;

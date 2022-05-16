@@ -42,7 +42,7 @@
 
     if($devMode){
 
-      $passPhrase = 'alex';  
+      $passPhrase = 'daedalus';  
 
       $voidMode = false;  
 
