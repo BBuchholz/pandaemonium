@@ -8,7 +8,77 @@ import KnechtController from './myriad/KnechtController.js';
 const magisterLudi = KnechtController();
 
 export const modal = writable(null);
-export const passPhrase = writable('');
+export const passPhrase = writable('lament');
+
+export const headerQuote = derived(
+	[passPhrase, ],
+	([$passPhrase, ]) => {
+
+		let quote = {};
+
+		if($passPhrase === 'daedalus'){
+
+		}
+
+		if ($passPhrase === 'leAC'){
+
+		}
+
+		if ($passPhrase === 'daedalusLab') {
+
+		}
+
+		if ($passPhrase === 'leMat') {
+
+		}
+
+		if ($passPhrase === 'alex') {
+
+			quote.content = 'I have always imagined that Paradise ' + 
+		 		'will be a kind of a Library.';
+
+			quote.source = 'Jorge Luis Borges';
+		}
+
+		if ($passPhrase === 'lament') {
+
+			quote.content = 'And there was music too; ' + 
+		 		'a simple tune emerged from the box, ' + 
+		 		'played on a mechanism that she could ' + 
+		 		'not yet see. Enchanted, she delved ' + 
+		 		'further. Though one piece had been ' + 
+		 		'removed, the rest did not come readily. ' + 
+		 		'Each segment presented a fresh challenge ' + 
+		 		'to fingers and mind, the victories ' + 
+		 		'rewarded with a further filigree ' + 
+		 		'added to the tune.';
+
+		 quote.source = 'The Hellbound Heart, by Clive Barker';
+		}
+
+		if ($passPhrase === 'leMonde') {
+
+		}
+
+		if ($passPhrase === 'leNuit') {
+
+		}
+
+		if ($passPhrase === 'leCE') {
+
+		}
+
+		if(!quote.content){
+
+			quote.content = 
+				"No header quote set for pass phrase " + $passPhrase;
+			quote.source = 
+				"THE MGMNT"
+		}
+
+		return quote;
+	}
+);
 
 export const selectedQuadrant = writable('');
 

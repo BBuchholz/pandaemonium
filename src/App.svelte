@@ -6,6 +6,7 @@
   import { 
     modal, 
     passPhrase,
+    headerQuote,
     devMode,
     voidMode,
     devNotifyDelay,
@@ -18,6 +19,7 @@
   import BoardMonde from './boardMonde/BoardMonde.svelte'; 
   import BoardNuit from './boardNuit/BoardNuit.svelte'; 
   import BoardCE from './boardCE/BoardCE.svelte';
+
   import Alexandria from './alex/Alexandria.svelte';
   import LeMarchand from './alex/LeMarchand.svelte';
   import Daedalus from './alex/Daedalus.svelte';
@@ -40,7 +42,7 @@
 
     if($devMode){
 
-      $passPhrase = 'lament';  
+      $passPhrase = 'alex';  
 
       $voidMode = false;  
 
@@ -74,8 +76,18 @@
 
       <div class='header'>
         
-        And there was music too; a simple tune emerged from the box, played on a mechanism that she could not yet see. Enchanted, she delved further. Though one piece had been removed, the rest did not come readily. Each segment presented a fresh challenge to fingers and mind, the victories rewarded with a further filigree added to the tune. The puzzle draws the player onward until suddenly the puzzle is solved and the gateway is opened.
+        <p>
+        
+        {$headerQuote.content}
+        
+        </p>
+        
+        <p>
 
+        - {$headerQuote.source}
+
+        </p>
+      
       </div>
 
       {#if $passPhrase === 'daedalus'}

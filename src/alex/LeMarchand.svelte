@@ -29,11 +29,15 @@
     $passPhrase = 'daedalus';
   } 
 
+  function handleMlJkClick(){
+    notifyWithoutExpire('ML/JK option will become available when we can separate serious speculation from nonchalant play...');
+  } 
+
 </script>
 
-<div class='daedalus-lab'>
+<div class='puzzle-box'>
     
-    <div class="lab-item">
+    <div class="facet-face">
       <a 
         href="#Alexandria"
         on:click={handleAlexandriaClick}
@@ -41,7 +45,15 @@
         Alexandria
       </a>
     </div>
-    <div class="lab-item">
+    <div class="facet-face">
+      <a 
+        href="#MLJK"
+        on:click={handleMlJkClick}
+      > 
+        ML/JK
+      </a>
+    </div>
+    <div class="facet-face">
       <a 
         href="#DaedalusLab"
         on:click={handleDaedalusClick}
@@ -54,7 +66,7 @@
 
 <style>
 
-.daedalus-lab {
+.puzzle-box {
   border: solid;
   border-radius: 10px;
   display: flex;
@@ -62,7 +74,7 @@
   justify-content: space-around;
 }
 
-.lab-item {
+.facet-face {
   margin: 10px;
   padding: 10px;
   border: thin solid;
