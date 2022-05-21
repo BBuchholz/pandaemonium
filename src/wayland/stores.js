@@ -10,3 +10,5 @@ import { writable, derived } from 'svelte/store';
 export const bookName = writable('');
 export const benchName = writable('');
 
+export const toDos = writable([]);
+

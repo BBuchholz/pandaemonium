@@ -18,6 +18,13 @@ export const headerQuote = derived(
 
 		if($passPhrase === 'daedalus'){
 
+			quote.content = 'The school is the servant of the ' + 
+		 		'workshop and will one day be absorbed in it. ' + 
+		 		'Therefore there will be no teachers or pupils ' + 
+		 		'[...] but masters, journeymen, and apprentices.';
+
+			quote.source = 'Walter Gropius';
+
 		}
 
 		if ($passPhrase === 'leAC'){
@@ -26,6 +33,11 @@ export const headerQuote = derived(
 
 		if ($passPhrase === 'daedalusLab') {
 
+			quote.content = 'I would have a workshop attached to ' + 
+		 		'every school, and one hour a day given up to ' + 
+		 		'the teaching of simple decorative arts.';
+
+			quote.source = 'Oscar Wilde';
 		}
 
 		if ($passPhrase === 'leMat') {

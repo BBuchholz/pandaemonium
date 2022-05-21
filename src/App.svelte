@@ -21,11 +21,10 @@
   import BoardCE from './boardCE/BoardCE.svelte';
 
   import Alexandria from './alex/Alexandria.svelte';
-  import LeMarchand from './alex/LeMarchand.svelte';
-  import Daedalus from './alex/Daedalus.svelte';
+  import LeMarchand from './prospero/LeMarchand.svelte';
+  import Daedalus from './wayland/Daedalus.svelte';
 
   import DaedalusLab from './components/DaedalusLab.svelte';
-
 
   initialize();
 
@@ -33,7 +32,8 @@
 
     $devMode = false;
 
-    const urlParams = new URLSearchParams(window.location.search);
+    const urlParams = 
+      new URLSearchParams(window.location.search);
     
     if(urlParams.has('passPhrase')){
 
