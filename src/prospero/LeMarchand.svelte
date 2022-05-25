@@ -47,15 +47,20 @@
   }
 
   function handleAlexandriaClick(){
-    $passPhrase = 'alex';
+    $passPhrase = 'learn';
   }
   
   function handleDaedalusClick(){
-    $passPhrase = 'daedalus';
+    $passPhrase = 'craft';
   } 
 
   function handleMlJkClick(){
-    notifyWithoutExpire('ML/JK option will become available when we can separate serious speculation from nonchalant play...');
+    
+    // // TODO;
+    // notifyWithoutExpire('ML/JK option will become available when we can separate serious speculation from nonchalant play...');
+
+    $passPhrase = 'matriculate';
+
   } 
 
 </script>
@@ -64,7 +69,7 @@
     
     <div class="facet-face">
       <a 
-        href="#Alexandria"
+        href="#learn"
         on:click={handleAlexandriaClick}
       > 
         Alexandria
@@ -72,7 +77,7 @@
     </div>
     <div class="facet-face">
       <a 
-        href="#MLJK"
+        href="#matriculate"
         on:click={handleMlJkClick}
       > 
         ML/JK
@@ -80,7 +85,7 @@
     </div>
     <div class="facet-face">
       <a 
-        href="#DaedalusLab"
+        href="#craft"
         on:click={handleDaedalusClick}
       > 
         Daedalus

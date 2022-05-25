@@ -23,6 +23,7 @@
   import Alexandria from './alex/Alexandria.svelte';
   import LeMarchand from './prospero/LeMarchand.svelte';
   import Daedalus from './wayland/Daedalus.svelte';
+  import JosephDaedalus from './joseph/JosephDaedalus.svelte';
 
   import DaedalusLab from './components/DaedalusLab.svelte';
 
@@ -90,13 +91,17 @@
       
       </div>
 
-      {#if $passPhrase === 'daedalus'}
+      {#if $passPhrase === 'craft'}
 
         <Daedalus {$passPhrase} />
 
       {:else if $passPhrase === 'leAC'}
 
         <BoardAC />
+
+      {:else if $passPhrase === 'matriculate'}
+
+        <JosephDaedalus />
 
       {:else if $passPhrase === 'daedalusLab'}
 
@@ -106,7 +111,7 @@
 
         <BoardMat />
 
-      {:else if $passPhrase === 'alex'}
+      {:else if $passPhrase === 'learn'}
 
         <Alexandria />
 
