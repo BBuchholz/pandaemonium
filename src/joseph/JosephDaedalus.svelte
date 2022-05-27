@@ -31,13 +31,18 @@
   }
 
   function handleNamingCupClick(){
-    $boardName = 'NamingCup';
+    $passPhrase = 'matriculate_naming-cup';
   }
 
   initialize();
 
   function initialize(){
     
+
+    if($devMode){
+      
+      $boardName = 'NamingCup';
+    }
   }
 
 
@@ -47,7 +52,7 @@
 
 <div class='main'>
 
-  {#if $boardName === 'NamingCup'}
+  {#if $passPhrase.startsWith('matriculate_naming-cup')}
 
     <NamingCup />
 
@@ -57,7 +62,7 @@
       
         <div class="board">
           <a 
-            href="#name"
+            href="#matriculate_naming-cup"
             on:click={handleNamingCupClick}
           > 
             Liber Nomos 

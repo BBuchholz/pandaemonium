@@ -14,7 +14,7 @@
 
   function notifyWithoutExpire(textValue){
     addNotification({
-      position: 'bottom-right',
+      position: 'top-right',
       text: textValue,
       type: 'error',
       description: 'lorem ipsum',
@@ -23,95 +23,30 @@
     });
   }
 
-  function handleBoardACClick(){
-    $passPhrase = 'leAC';
-    close();
+  function showPopupLong() {
+
+    const generatedName = 'name goes here';
+
+    notifyWithoutExpire(generatedName);
   }
 
-  function handleBoardMatClick(){
-    $passPhrase = 'leMat';
-    close();
-  }
-
-  function handleBoardMondeClick(){
-    $passPhrase = 'leMonde';
-    close();
-  }
-
-  function handleBoardNuitClick(){
-    $passPhrase = 'leNuit';
-    close();
-  }
-
-  function handleBoardCEClick(){
-    $passPhrase = 'leCE';
-    close();
-  }
-  
-  function handleDaedalusLabClick(){
-    $passPhrase = 'daedalusLab';
-    close();
-  } 
 
 </script>
 
-<div class='daedalus-lab'>
+<div class='naming-cup'>
   
-    <div class="lab-item">
-      <a 
-        href="#boardAC"
-        on:click={handleBoardACClick}
-      > 
-        Board AC 
-      </a>
-    </div>
-    <div class="lab-item">
-      <a 
-        href="#boardMat"
-        on:click={handleBoardMatClick}
-      > 
-        Board Mat 
-      </a>
-    </div>
-    <div class="lab-item">
-      <a 
-        href="#boardMonde"
-        on:click={handleBoardMondeClick}
-      > 
-        Board Monde 
-      </a>
-    </div>
-    <div class="lab-item">
-      <a 
-        href="#boardNuit"
-        on:click={handleBoardNuitClick}
-      > 
-        Board Nuit 
-      </a>
-    </div>
-    <div class="lab-item">
-      <a 
-        href="#boardCE"
-        on:click={handleBoardCEClick}
-      > 
-        Board CE 
-      </a>
-    </div>
-    <div class="lab-item">
-      <a 
-        href="#DaedalusLab"
-        on:click={handleDaedalusLabClick}
-      > 
-        Daedalus Lab 
-      </a>
-    </div>
-  
+    <button 
+      on:click={showPopupLong}
+    >
+      Sip
+    </button>
+    
 </div>
 
 <style>
 
-.daedalus-lab {
-  border: solid;
+.naming-cup {
+  border: none;
   border-radius: 10px;
   display: flex;
   flex-flow: row wrap;
@@ -124,5 +59,22 @@
   border: thin solid;
   border-radius: 10px;
 }
+
+button {
+    font-size: 15px;
+    line-height: 15px;
+    padding: 8px 22px 8px 22px;
+    box-sizing: border-box;
+    font-weight: 700;
+    border: solid 3px lightgray;
+    color: black;
+    background-color: #BEBEBE;
+    border-radius: 30px;
+    transition: all ease-out .2s;
+    cursor: pointer;
+    outline: none;
+    margin: 5px;
+    animation: buttonPulse .2s infinite ease-in-out;
+  }
 
 </style>

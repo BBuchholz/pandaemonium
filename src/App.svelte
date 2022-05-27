@@ -43,7 +43,7 @@
 
     if($devMode){
 
-      $passPhrase = 'daedalus';  
+      $passPhrase = 'matriculate';  
 
       $voidMode = false;  
 
@@ -99,7 +99,7 @@
 
         <BoardAC />
 
-      {:else if $passPhrase === 'matriculate'}
+      {:else if $passPhrase.startsWith('matriculate')}
 
         <JosephDaedalus />
 
