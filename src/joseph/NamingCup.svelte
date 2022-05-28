@@ -12,31 +12,63 @@
     devMode, 
   } from '../stores.js';
 
-  function notifyWithoutExpire(textValue){
+  import { adverbs } from './adverbs.js';
+  import { adjectives } from './adjectives.js';
+  import { nouns } from './nouns.js';
+
+  import { Djehuti } from '../myriad/Djehuti.js';
+  const thothMagus = new Djehuti();
+
+  function notifyCopied(textToWrite){
     addNotification({
       position: 'top-right',
-      text: textValue,
+      text: 'copied: ' + textToWrite,
       type: 'error',
       description: 'lorem ipsum',
-      disableButtons: false,
+      removeAfter: 3000,
+      disableButtons: true,
+      disableDescription: true
+    });
+  }
+  
+  function notifyCopyError(){
+    addNotification({
+      position: 'top-right',
+      text: 'error copying to clipboard',
+      type: 'error',
+      description: 'lorem ipsum',
+      removeAfter: 4000,
+      disableButtons: true,
       disableDescription: true
     });
   }
 
-  function showPopupLong() {
+  function copyName() {
 
-    const generatedName = 'name goes here';
+    const textToWrite = 
+      thothMagus.generateName(adverbs, adjectives, nouns);
 
-    notifyWithoutExpire(generatedName);
-  }
+    navigator.clipboard.writeText(textToWrite).then(function() {
+    
+      /* clipboard successfully set */
+      notifyCopied(textToWrite);
 
+    }, function() {
+    
+      /* clipboard write failed */
+      notifyCopyError();
+      
+    });
+
+
+  };
 
 </script>
 
 <div class='naming-cup'>
   
     <button 
-      on:click={showPopupLong}
+      on:click={copyName}
     >
       Sip
     </button>
@@ -52,13 +84,13 @@
   flex-flow: row wrap;
   justify-content: space-around;
 }
-
+/*
 .lab-item {
   margin: 10px;
   padding: 10px;
   border: thin solid;
   border-radius: 10px;
-}
+}*/
 
 button {
     font-size: 15px;

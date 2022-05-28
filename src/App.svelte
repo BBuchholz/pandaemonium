@@ -43,7 +43,7 @@
 
     if($devMode){
 
-      $passPhrase = 'matriculate';  
+      $passPhrase = 'matriculate_naming-cup';  
 
       $voidMode = false;  
 
