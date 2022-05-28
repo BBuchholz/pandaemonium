@@ -1,3 +1,7 @@
+// NB: starting branch deservingly-resentful-sword for
+// new word suggestions, please add any submissions below
+// the EXPANSION CLUSTER line
+
 export const adjectives = [
   
   // JALI CLUSTER
@@ -25,4 +29,7 @@ export const adjectives = [
   'fearful',
   'yearning',
   'resentful',
+
+  // EXPANSION CLUSTER
+  // 'newWordGoesAboveThisPlaceHolder',
 ];
