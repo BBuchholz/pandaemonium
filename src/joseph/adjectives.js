@@ -31,5 +31,6 @@ export const adjectives = [
   'resentful',
 
   // EXPANSION CLUSTER
+  'cyclopean',
   // 'newWordGoesAboveThisPlaceHolder',
 ];
