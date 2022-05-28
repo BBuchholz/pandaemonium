@@ -32,5 +32,6 @@ export const adjectives = [
 
   // EXPANSION CLUSTER
   'cyclopean',
+  'daemonic',
   // 'newWordGoesAboveThisPlaceHolder',
 ];
