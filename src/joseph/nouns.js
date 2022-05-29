@@ -24,5 +24,13 @@ export const nouns = [
   'box',
 
   // EXPANSION CLUSTER
+  'abnorm',
+  'amorph',
+  'antediluvium',
+  'antique',
+  'clay-wheel',
+  'kick-wheel',
+  'norm',
+  'sand-box',
   // 'newWordGoesAboveThisPlaceHolder',
 ];

@@ -6,11 +6,24 @@ export class Djehuti {
 
   generateName(adverbs, adjectives, nouns){
 
-    this.shuffle(adverbs);
+    let options = ['two', 'three'];
+
+    this.shuffle(options);
+
     this.shuffle(adjectives);
     this.shuffle(nouns);
 
-    return adverbs[0] + '-' + adjectives[0] + '-' + nouns[0];
+    if(options[0] === 'two'){
+
+      return adjectives[0] + '-' + nouns[0];
+
+    }else{
+
+      this.shuffle(adverbs);
+
+      return adverbs[0] + '-' + adjectives[0] + '-' + nouns[0];      
+    }
+
   }
 
   shuffle(array){

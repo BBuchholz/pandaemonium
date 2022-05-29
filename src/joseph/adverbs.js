@@ -31,5 +31,26 @@ export const adverbs = [
   'resentfully',
 
   // EXPANSION CLUSTER
+  'abnormally',
+  'accursedly',
+  'amorphously',
+  'antediluvially',
+  'antiquatedly',
+  'anxiously',
+  'badly',
+  'bravely',
+  'calmly',
+  'carefully',
+  'certainly',
+  'correctly',
+  'eagerly',
+  'easily',
+  'excitedly',
+  'extremely',
+  'furiously',
+  'generously',
+  'gently',
+  'gladly',
+
   // 'newWordGoesAboveThisPlaceHolder',
 ];
