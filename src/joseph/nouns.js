@@ -19,7 +19,7 @@ export const nouns = [
   // FAUNA CLUSTER
   'tooth',
   'fang',
-  'mane'
+  'mane',
   'tail',
   'claw',
   'talon',
