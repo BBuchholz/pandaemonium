@@ -7,6 +7,7 @@
     modal, 
     passPhrase,
     headerQuote,
+    affinityAnchor,
     devMode,
     voidMode,
     devNotifyDelay,
@@ -23,6 +24,9 @@
   import Alexandria from './alex/Alexandria.svelte';
   import LeMarchand from './prospero/LeMarchand.svelte';
   import Daedalus from './wayland/Daedalus.svelte';
+  import AffinityHeader from './wayland/AffinityHeader.svelte';
+  import CardAffinityHeader from './wayland/CardAffinityHeader.svelte';
+  import QuoteHeader from './wayland/QuoteHeader.svelte';
   import JosephDaedalus from './joseph/JosephDaedalus.svelte';
 
   import DaedalusLab from './components/DaedalusLab.svelte';
@@ -43,7 +47,7 @@
 
     if($devMode){
 
-      $passPhrase = 'matriculate_naming-cup';  
+      $passPhrase = 'leMat';  
 
       $voidMode = false;  
 
@@ -75,21 +79,21 @@
     
     <main>
 
+      <AffinityHeader />
+<!-- 
       <div class='header'>
-        
-        <p>
-        
-        {$headerQuote.content}
-        
-        </p>
-        
-        <p>
 
-        - {$headerQuote.source}
+        {#if $affinityAnchor === 'cardKey'}
 
-        </p>
+          <CardAffinityHeader />
+
+        {:else}
+
+          <QuoteHeader />
+
+        {/if}
       
-      </div>
+      </div> -->
 
       {#if $passPhrase === 'craft'}
 
