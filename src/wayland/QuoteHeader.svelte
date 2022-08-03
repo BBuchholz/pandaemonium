@@ -4,8 +4,6 @@
 
   const { close } = getContext('simple-modal');
 
-  import BenchTaro from './BenchTaro.svelte';
-
   import DevInfo from './DevInfo.svelte';
 
   import { getNotificationsContext } from 'svelte-notifications';
@@ -33,8 +31,8 @@
     });
   }
 
-  function handleBenchTaroClick(){
-    $benchName = 'benchTaro';
+  function handleQuoteClick(){
+
   }
 
   function addToDo(toDoSource, toDoText){
@@ -55,40 +53,33 @@
 
 <div class='main'>
 
-  {#if $benchName === 'benchTaro'}
 
-    <BenchTaro />
+  <div class='quote-header'>
+    
+      <div class="bench">
+        <a 
+          href="#Bench"
+          on:click={handleQuoteClick}
+        > 
+          
+          
+          <p>
+          
+            {$headerQuote.content}
+          
+          </p>
+          
+          <p>
 
-  {:else}
+            - {$headerQuote.source}
 
-    <div class='quote-header'>
+          </p>
+
+        </a>
+      </div>
       
-        <div class="bench">
-          <a 
-            href="#Bench"
-            on:click={handleBenchTaroClick}
-          > 
-            
-            
-            <p>
-            
-              {$headerQuote.content}
-            
-            </p>
-            
-            <p>
-
-              - {$headerQuote.source}
-
-            </p>
-
-          </a>
-        </div>
-        
-      
-    </div>
-
-  {/if}
+    
+  </div>
 
 </div>
 
