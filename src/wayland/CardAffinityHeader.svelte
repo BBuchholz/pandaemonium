@@ -14,6 +14,7 @@
   import {  
     passPhrase,
     devMode, 
+    affinityKeys,
   } from '../stores.js';
 
   import {  
@@ -44,7 +45,7 @@
 
   function initialize(){
     
-    addToDo('Daedalus.svelte', 'this is a test to do item');
+    // addToDo('Daedalus.svelte', 'this is a test to do item');
   }
 
 
@@ -52,7 +53,7 @@
 
 <div class='main'>
 
-  {#if $cardKey}
+  {#if $affinityKeys}
 
     Card Key Goes Here
 

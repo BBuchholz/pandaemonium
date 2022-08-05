@@ -4,7 +4,7 @@
 
   const { close } = getContext('simple-modal');
 
-  import DevInfo from './DevInfo.svelte';
+  // import DevInfo from './DevInfo.svelte';
 
   import { getNotificationsContext } from 'svelte-notifications';
   const { addNotification } = getNotificationsContext();
@@ -16,8 +16,8 @@
   } from '../stores.js';
 
   import {  
-    benchName,
-    toDos,
+    // benchName,
+    // toDos,
   } from './stores.js';
 
   function notifyWithoutExpire(textValue){
@@ -35,21 +35,19 @@
 
   }
 
-  function addToDo(toDoSource, toDoText){
-    $toDos.push(toDoSource + ": " + toDoText);
-  }
+  // function addToDo(toDoSource, toDoText){
+  //   $toDos.push(toDoSource + ": " + toDoText);
+  // }
 
   initialize();
 
   function initialize(){
     
-    addToDo('Daedalus.svelte', 'this is a test to do item');
+    // addToDo('Daedalus.svelte', 'this is a test to do item');
   }
 
 
 </script>
-
-<DevInfo toDos={toDos} />
 
 <div class='main'>
 

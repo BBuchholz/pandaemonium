@@ -8,6 +8,8 @@
 
   import DevInfo from './DevInfo.svelte';
   import QuoteHeader from './QuoteHeader.svelte';
+  import CardAffinityHeader from './CardAffinityHeader.svelte';
+  
   
 
 
@@ -37,19 +39,11 @@
     });
   }
 
-  function handleBenchTaroClick(){
-    $affinityAnchor = 'benchTaro';
-  }
-
-  function addToDo(toDoSource, toDoText){
-    $toDos.push(toDoSource + ": " + toDoText);
-  }
-
   initialize();
 
   function initialize(){
     
-    addToDo('Daedalus.svelte', 'this is a test to do item');
+    // addToDo('Daedalus.svelte', 'this is a test to do item');
   }
 
 
@@ -80,13 +74,6 @@
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
-}
-
-.bench {
-  margin: 10px;
-  padding: 10px;
-  border: thin solid;
-  border-radius: 10px;
 }
 
 </style>

@@ -10,6 +10,7 @@ const magisterLudi = KnechtController();
 export const modal = writable(null);
 export const passPhrase = writable('lament');
 export const affinityAnchor = writable('quotidian');
+export const affinityKeys = writable([]);
 
 export const headerQuote = derived(
 	[passPhrase, ],

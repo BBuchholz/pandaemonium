@@ -7,6 +7,8 @@
   
   import { 
     passPhrase,
+    affinityAnchor,
+    affinityKeys,
   } from '../stores.js';
 
   import { 
@@ -55,22 +57,29 @@
     if($selectedCardsForDaemon.includes($singleSteadCardKey)){
 
       $selectedCardsForDaemon = $selectedCardsForDaemon.filter(cKey => cKey !== $singleSteadCardKey);
+      
+
+      $affinityAnchor = 'quotidian';
 
     }else{
     
-    console.log('1');
+      console.log('1');
+  
       if($selectionIsSingular) {
 
-    console.log($selectedCardsForDaemon);
-        $selectedCardsForDaemon = [$singleSteadCardKey];
+        console.log($selectedCardsForDaemon);
+            $selectedCardsForDaemon = [$singleSteadCardKey];
 
-    console.log($selectedCardsForDaemon);
+        console.log($selectedCardsForDaemon);
+
       }else{
-        
-    console.log('2');
-        $selectedCardsForDaemon = 
-          [...$selectedCardsForDaemon, $singleSteadCardKey];
+            
+        console.log('2');
+            $selectedCardsForDaemon = 
+              [...$selectedCardsForDaemon, $singleSteadCardKey];
       }
+
+      $affinityAnchor = 'cardKey';
     }
 
   }
@@ -92,7 +101,7 @@
   function initialize(){
 
     if($passPhrase === 'leMat'){
-      notifyPassPhraseFound();
+      // notifyPassPhraseFound();
     }
   }
 

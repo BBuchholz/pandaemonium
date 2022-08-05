@@ -44,7 +44,7 @@
 
   function initialize(){
     
-    addToDo('Daedalus.svelte', 'this is a test to do item');
+    // addToDo('Daedalus.svelte', 'this is a test to do item');
   }
 
 
