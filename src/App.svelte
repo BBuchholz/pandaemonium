@@ -11,6 +11,7 @@
     devMode,
     voidMode,
     devNotifyDelay,
+    affinityKeys,
   } from './stores.js';
 
   import MyriadNotification from './MyriadNotification.svelte';
@@ -30,6 +31,10 @@
   import JosephDaedalus from './joseph/JosephDaedalus.svelte';
 
   import DaedalusLab from './components/DaedalusLab.svelte';
+
+  function handleAffinitiesChanged(event){
+    $affinityKeys = event.detail.cardKeys;
+  }
 
   initialize();
 
@@ -113,7 +118,9 @@
 
       {:else if $passPhrase === 'leMat'}
 
-        <BoardMat />
+        <BoardMat 
+          on:affinitiesChanged={handleAffinitiesChanged}
+        />
 
       {:else if $passPhrase === 'learn'}
 

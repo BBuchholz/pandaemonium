@@ -34,7 +34,7 @@
   }
 
   function handleBenchTaroClick(){
-    $benchName = 'benchTaro';
+    // $benchName = 'benchTaro';
   }
 
   function addToDo(toDoSource, toDoText){
@@ -53,9 +53,13 @@
 
 <div class='main'>
 
-  {#if $affinityKeys}
+  {#if $affinityKeys.length > 0}
 
-    Card Key Goes Here
+    <div class='bench'>
+      
+      Card Key: {$affinityKeys[0]}
+
+    </div>
 
   {:else}
 
