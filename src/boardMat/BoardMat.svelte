@@ -4,6 +4,9 @@
   const magisterLudi = KnechtController();
 
   import Card from './Card.svelte';
+
+  import { createEventDispatcher } from 'svelte';
+  const dispatch = createEventDispatcher();
   
   import { 
     passPhrase,
@@ -82,10 +85,24 @@
       $affinityAnchor = 'cardKey';
     }
 
+    updateAffinities();
+  }
+
+  function updateAffinities(){
+
+    dispatch('affinitiesChanged', {
+      cardKeys: [...$selectedCardsForDaemon]
+    });    
+  }
+
+  function resetSelection(){
+    $selectedCardsForDaemon = [];
+    updateAffinities();
   }
 
   function dealRandomCard(){
 
+    resetSelection();
 
     if($deck.length == 0){
       

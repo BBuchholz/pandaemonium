@@ -19,7 +19,7 @@
     keysCancer,
     keysSagittarius,
     keysLeo,
-    keysAries
+    keysAries,
   } from '../constants.js'
 
   import { Knechtor } from '../myriad/Knechtor.js';

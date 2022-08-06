@@ -4,9 +4,9 @@
 
   const { close } = getContext('simple-modal');
 
-  import BenchTaro from './BenchTaro.svelte';
+  // import BenchTaro from './BenchTaro.svelte';
 
-  import DevInfo from './DevInfo.svelte';
+  // import DevInfo from './DevInfo.svelte';
   import QuoteHeader from './QuoteHeader.svelte';
   import CardAffinityHeader from './CardAffinityHeader.svelte';
   
@@ -49,8 +49,8 @@
 
 </script>
 
-<DevInfo toDos={toDos} />
-
+<!-- <DevInfo toDos={toDos} />
+ -->
 
 <div class='affinity-header'>
 
