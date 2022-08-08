@@ -5,6 +5,7 @@
   const { close } = getContext('simple-modal');
 
   import BenchTaro from './BenchTaro.svelte';
+  import BenchMyriaD from './BenchMyriaD.svelte';
 
   import DevInfo from './DevInfo.svelte';
 
@@ -36,6 +37,10 @@
     $benchName = 'benchTaro';
   }
 
+  function handleBenchMyriaDClick(){
+    $benchName = 'benchMyriaD';
+  }
+
   function addToDo(toDoSource, toDoText){
     $toDos.push(toDoSource + ": " + toDoText);
   }
@@ -58,20 +63,32 @@
 
     <BenchTaro />
 
+  {:else if $benchName === 'benchMyriaD'}
+
+    <BenchMyriaD />
+
   {:else}
 
     <div class='daedalus-shop'>
-      
-        <div class="bench">
-          <a 
-            href="#Bench"
-            on:click={handleBenchTaroClick}
-          > 
-            Bench Taro 
-          </a>
-        </div>
-        
-      
+    
+      <div class="bench">
+        <a 
+          href="#BenchTaro"
+          on:click={handleBenchTaroClick}
+        > 
+          Tarot Bench 
+        </a>
+      </div>
+    
+      <div class="bench">
+        <a 
+          href="#BenchMyriaD"
+          on:click={handleBenchMyriaDClick}
+        > 
+          MyriaD Bench 
+        </a>
+      </div>  
+    
     </div>
 
   {/if}

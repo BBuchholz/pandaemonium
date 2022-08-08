@@ -25,6 +25,7 @@
   import Alexandria from './alex/Alexandria.svelte';
   import LeMarchand from './prospero/LeMarchand.svelte';
   import Daedalus from './wayland/Daedalus.svelte';
+  import OpRoom from './wayland/OpRoom.svelte';
   import AffinityHeader from './wayland/AffinityHeader.svelte';
   import CardAffinityHeader from './wayland/CardAffinityHeader.svelte';
   import QuoteHeader from './wayland/QuoteHeader.svelte';
@@ -141,6 +142,10 @@
       {:else if $passPhrase === 'leCE'}
 
         <BoardCE />
+
+      {:else if $passPhrase === 'Channard'}
+
+        <OpRoom />
 
       {:else}
 
