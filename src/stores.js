@@ -11,6 +11,7 @@ export const modal = writable(null);
 export const passPhrase = writable('lament');
 export const affinityAnchor = writable('quotidian');
 export const affinityKeys = writable([]);
+export const workBenchList = writable([]);
 
 export const headerQuote = derived(
 	[passPhrase, ],
@@ -30,6 +31,17 @@ export const headerQuote = derived(
 		}
 
 		if ($passPhrase === 'leAC'){
+
+		}
+
+		if ($passPhrase === 'craft') {
+
+			quote.content = 'The school is the servant of the ' + 
+		 		'workshop and will one day be absorbed in it. ' + 
+		 		'Therefore there will be no teachers or pupils ' + 
+		 		'[...] but masters, journeymen, and apprentices.';
+
+			quote.source = 'Walter Gropius';
 
 		}
 
@@ -63,6 +75,10 @@ export const headerQuote = derived(
 		}
 
 		if ($passPhrase === 'leMat') {
+
+			quote.content = 'Pick A Card, Any Card...';
+
+			quote.source = '🔮🃏🪄';
 
 		}
 

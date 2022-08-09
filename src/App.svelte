@@ -53,7 +53,7 @@
 
     if($devMode){
 
-      $passPhrase = 'leMat';  
+      $passPhrase = 'Channard';  
 
       $voidMode = false;  
 

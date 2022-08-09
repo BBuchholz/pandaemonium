@@ -10,6 +10,7 @@
     passPhrase,
     affinityAnchor,
     affinityKeys,
+    workBenchList,
   } from '../stores.js';
 
   import { getNotificationsContext } from 'svelte-notifications';
@@ -30,7 +31,25 @@
 
   <div class="op-room">
 
-    OP ROOM GOES HERE
+    <div class='workbench workbench-list'>
+      
+      <h1>WorkBenchItems</h1>
+
+      <ul>
+
+        {#each $workBenchList as listItem, i}
+
+          <li> {JSON.stringify(listItem)} </li>
+
+        {/each}
+
+      </ul>
+
+    </div>
+
+    <div class='workbench workbench-active'>
+     active goes here when selected from the left
+    </div>
 
   </div> 
 
@@ -41,8 +60,12 @@
   height: 100%;
   width: 100%;
   display: flex;
-  flex-flow: column;
   align-items: center;
+}
+
+.workbench {
+  flex: 1;
+  border: solid;
 }
 
 

@@ -1,51 +1,18 @@
 <script> 
   
-  import { getContext } from 'svelte';
-
-  const { close } = getContext('simple-modal');
-
-  // import DevInfo from './DevInfo.svelte';
-
-  import { getNotificationsContext } from 'svelte-notifications';
-  const { addNotification } = getNotificationsContext();
-
   import {  
-    passPhrase,
-    devMode, 
+    affinityAnchor,
     headerQuote,
   } from '../stores.js';
 
-  import {  
-    // benchName,
-    // toDos,
-  } from './stores.js';
-
-  function notifyWithoutExpire(textValue){
-    addNotification({
-      position: 'bottom-right',
-      text: textValue,
-      type: 'error',
-      description: 'lorem ipsum',
-      disableButtons: false,
-      disableDescription: true
-    });
-  }
-
   function handleQuoteClick(){
 
+    // Intention for Quote Header is to be a sort of 
+    // inspirational/mood-invoking decorative plate over
+    // where the toolset will go when in use, something
+    // we can toggle to open which is what this does
+    $affinityAnchor = 'toolSet'; //TODO: make this configurable at runtime, so different things can be behind the coverplate at the user's discretion
   }
-
-  // function addToDo(toDoSource, toDoText){
-  //   $toDos.push(toDoSource + ": " + toDoText);
-  // }
-
-  initialize();
-
-  function initialize(){
-    
-    // addToDo('Daedalus.svelte', 'this is a test to do item');
-  }
-
 
 </script>
 
@@ -59,19 +26,22 @@
           href="#Bench"
           on:click={handleQuoteClick}
         > 
-          
-          
+           
           <p>
           
             {$headerQuote.content}
           
           </p>
           
-          <p>
+          {#if $headerQuote.source}
 
-            - {$headerQuote.source}
+            <p>
 
-          </p>
+              - {$headerQuote.source}
+
+            </p>
+
+          {/if}
 
         </a>
       </div>
