@@ -16,6 +16,9 @@
   import { getNotificationsContext } from 'svelte-notifications';
   const { addNotification } = getNotificationsContext();
   
+
+  let activeWorkBenchItemText = 'active goes here when selected from the left';
+
   function notifyPassPhraseFound(){
     addNotification({
       position: 'top-right',
@@ -26,6 +29,15 @@
     });
   }
 
+  function handleWxrdClick(itemIndex){
+
+    console.log(itemIndex);
+    let itemText = $workBenchList[itemIndex];
+    console.log(itemText);
+
+    activeWorkBenchItemText = itemText;
+  }
+
 
 </script>
 
@@ -33,13 +45,20 @@
 
     <div class='workbench workbench-list'>
       
-      <h1>WorkBenchItems</h1>
+      <h1>Work Bench Items</h1>
 
       <ul>
 
-        {#each $workBenchList as listItem, i}
+        {#each $workBenchList as listItem, itemIndex}
 
-          <li> {JSON.stringify(listItem)} </li>
+          <li>
+            <a
+              href="#UUID_SHOULD_GO_HERE"
+              on:click={() => handleWxrdClick(itemIndex)}
+            >  
+              {listItem}
+            </a>
+          </li>
 
         {/each}
 
@@ -48,7 +67,12 @@
     </div>
 
     <div class='workbench workbench-active'>
-     active goes here when selected from the left
+     
+      <textarea
+        bind:value={activeWorkBenchItemText}
+        rows="5" 
+      />
+
     </div>
 
   </div> 

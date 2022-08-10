@@ -7,11 +7,13 @@
   } from '../stores.js';
 
 
+  let testCount = 0;
 
   function handleCreateClick(){
 
-    const testItem = 'test item';
-    $workBenchList = [testItem, ...$workBenchList];
+    testCount++;
+    const testItem = 'test item ' + testCount;
+    $workBenchList = [...$workBenchList, testItem];
   }
 
   function handleCloseClick(){
