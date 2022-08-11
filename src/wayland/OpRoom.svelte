@@ -17,7 +17,8 @@
   const { addNotification } = getNotificationsContext();
   
 
-  let activeWorkBenchItemText = 'active goes here when selected from the left';
+  let currentWorkBenchText = 'active goes here when selected from the left';
+  let prevItemIndex = '-1';
 
   function notifyPassPhraseFound(){
     addNotification({
@@ -31,11 +32,16 @@
 
   function handleWxrdClick(itemIndex){
 
-    console.log(itemIndex);
-    let itemText = $workBenchList[itemIndex];
-    console.log(itemText);
+    if(prevItemIndex > -1){
 
-    activeWorkBenchItemText = itemText;
+      $workBenchList[prevItemIndex] = currentWorkBenchText;
+ 
+    }
+    prevItemIndex = itemIndex;
+
+    let itemText = $workBenchList[itemIndex];
+
+    currentWorkBenchText = itemText;
   }
 
 
@@ -69,7 +75,7 @@
     <div class='workbench workbench-active'>
      
       <textarea
-        bind:value={activeWorkBenchItemText}
+        bind:value={currentWorkBenchText}
         rows="5" 
       />
 

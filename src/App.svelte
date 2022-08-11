@@ -41,7 +41,7 @@
 
   function initialize(){
 
-    $devMode = false;
+    $devMode = true;
 
     const urlParams = 
       new URLSearchParams(window.location.search);
@@ -86,20 +86,6 @@
     <main>
 
       <AffinityHeader />
-<!-- 
-      <div class='header'>
-
-        {#if $affinityAnchor === 'cardKey'}
-
-          <CardAffinityHeader />
-
-        {:else}
-
-          <QuoteHeader />
-
-        {/if}
-      
-      </div> -->
 
       {#if $passPhrase === 'craft'}
 
@@ -168,29 +154,6 @@
 <style>
 
 @import url('https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@300&display=swap');
-
-.header, .footer {
-  width: 80%;
-  position: relative;
-  height: auto;
-  padding: 20px;
-  margin: 20px;
-}
-
-.header {
-  font-family: 'Averia Serif Libre', cursive;
-  font-size: 18px;
-  font-style: italic;
-  line-height: 17px;
-
-}
-
-.footer {
-  font-family: 'Averia Serif Libre', cursive;
-  font-size: 18px;
-  font-style: italic;
-  line-height: 17px;
-}
 
 main {
   text-align: center;
