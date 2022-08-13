@@ -41,7 +41,7 @@
 
   function initialize(){
 
-    $devMode = false;
+    $devMode = true;
 
     const urlParams = 
       new URLSearchParams(window.location.search);
