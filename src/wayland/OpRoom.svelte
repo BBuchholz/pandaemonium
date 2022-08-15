@@ -3,6 +3,8 @@
   import KnechtController from '../myriad/KnechtController.js';
   const magisterLudi = KnechtController();
 
+  import SvelteMarkdown from 'svelte-markdown';
+
   import { createEventDispatcher } from 'svelte';
   const dispatch = createEventDispatcher();
   
@@ -11,13 +13,14 @@
     affinityAnchor,
     affinityKeys,
     workBenchList,
+    editMode,
   } from '../stores.js';
 
   import { getNotificationsContext } from 'svelte-notifications';
   const { addNotification } = getNotificationsContext();
   
 
-  let currentWorkBenchText = 'active goes here when selected from the left';
+  let currentWorkBenchText = '';
   let prevItemIndex = '-1';
 
   function notifyPassPhraseFound(){
@@ -74,10 +77,18 @@
 
     <div class='workbench workbench-active'>
      
-      <textarea
-        bind:value={currentWorkBenchText}
-        rows="5" 
-      />
+      {#if $editMode}
+
+        <textarea
+          bind:value={currentWorkBenchText}
+          rows="5" 
+        />
+
+      {:else}
+
+        <SvelteMarkdown source={currentWorkBenchText} />
+
+      {/if}
 
     </div>
 
