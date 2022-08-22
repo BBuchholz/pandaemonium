@@ -4,6 +4,35 @@ export class Djehuti {
 
   }
 
+  parsePreferredAlias(markdownText){
+    //TODO: implement with unit tests
+    return '';
+  }
+
+  parseUuid(markdownText){
+    //TODO: implement with unit tests
+    return '';
+  }
+
+  getPreferredAlias(markdownText){
+
+    //try preferred alias
+    if(this.parsePreferredAlias(markdownText)){
+      return this.parsePreferredAlias(markdownText);
+    }
+
+    //try uuid
+    if(this.parseUuid(markdownText)){
+      return this.parseUuid(markdownText);
+    }
+
+    if(markdownText.length < 30){
+      return markdownText;
+    }
+
+    return 'no uuid found';
+  }
+
   generateName(adverbs, adjectives, nouns){
 
     let options = ['two', 'three'];

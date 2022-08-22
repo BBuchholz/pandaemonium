@@ -1,7 +1,7 @@
 <script>
 
-  import KnechtController from '../myriad/KnechtController.js';
-  const magisterLudi = KnechtController();
+  import { Djehuti } from '../myriad/Djehuti.js';
+  const thothMagus = new Djehuti();
 
   import SvelteMarkdown from 'svelte-markdown';
 
@@ -65,7 +65,7 @@
               href="#UUID_SHOULD_GO_HERE"
               on:click={() => handleWxrdClick(itemIndex)}
             >  
-              {listItem}
+              {thothMagus.getPreferredAlias(listItem)}
             </a>
           </li>
 

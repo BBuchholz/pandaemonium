@@ -54,6 +54,7 @@
     if($devMode){
 
       $passPhrase = 'Channard';  
+      $affinityAnchor = 'toolSet';
 
       $voidMode = false;  
 
