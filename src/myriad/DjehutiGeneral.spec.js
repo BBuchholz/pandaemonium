@@ -9,3 +9,40 @@ it('should generate names', () => {
 
   expect(thothMagus.generateName(adverbs, adjectives, nouns)).toBeDefined();
 });
+
+it('should parse uuid if present', () => {
+
+  const textWithUuid = 
+`
+---
+
+uuid: valueGoesHere
+
+---
+
+Other text would be here and should be ignored
+
+`;
+
+  
+  expect(thothMagus.parseUuid(textWithUuid)).toBe('valueGoesHere');
+});
+
+it('should parse preferred alias if present', () => {
+
+  const textWithAlias = 
+`
+---
+
+uuid: valueGoesHere
+preferredAlias: Call Me This
+
+---
+
+Other text would be here and should be ignored
+
+`;
+
+  
+  expect(thothMagus.parsePreferredAlias(textWithAlias)).toBe('Call Me This');
+});

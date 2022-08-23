@@ -5,13 +5,41 @@ export class Djehuti {
   }
 
   parsePreferredAlias(markdownText){
-    //TODO: implement with unit tests
-    return '';
+    
+    //split into lines
+    const lines = markdownText.split('\n');
+
+    let preferredAlias = '';
+
+    for(const line of lines){
+      
+      //parse each line to see if begins with preferredAlias: 
+      if(line.startsWith('preferredAlias:')){
+
+        preferredAlias = line.replace('preferredAlias:', '').trim();
+      }
+    }
+
+    return preferredAlias;
   }
 
   parseUuid(markdownText){
-    //TODO: implement with unit tests
-    return '';
+
+    //split into lines
+    const lines = markdownText.split('\n');
+
+    let uuid = '';
+
+    for(const line of lines){
+
+      //parse each line to see if begins with uuid: 
+      if(line.startsWith('uuid:')){
+
+        uuid = line.replace('uuid:', '').trim();
+      }
+    }
+
+    return uuid;
   }
 
   getPreferredAlias(markdownText){
