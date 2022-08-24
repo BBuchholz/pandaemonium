@@ -46,3 +46,49 @@ Other text would be here and should be ignored
   
   expect(thothMagus.parsePreferredAlias(textWithAlias)).toBe('Call Me This');
 });
+
+
+it('should ensure uuid, respecting if present, adding if not found', () => {
+
+  const textWithUuid = 
+`
+---
+
+uuid: valueGoesHere
+
+---
+
+Other text would be here and should be ignored
+
+`;
+
+  const textWithoutUuid = 
+`
+---
+
+notAUuid: thisShouldStay
+
+---
+
+Other text would be here and should be ignored
+
+`;
+  
+  const textWithoutFrontMatter = 
+`
+
+Other text would be here and should be ignored
+
+`;
+  
+  expect(thothMagus.ensureUuid(textWithUuid)).toBe(textWithUuid);
+  const processedText = thothMagus.ensureUuid(textWithoutUuid);
+  expect(processedText).toContain('uuid: ');
+  expect(processedText).toContain('notAUuid: thisShouldStay');
+  expect(processedText).toContain('Other text would be here and should be ignored');
+
+  const processedTextWithoutFM = 
+    thothMagus.ensureUuid(textWithoutFrontMatter);
+  expect(processedTextWithoutFM).toContain('uuid: ');
+  expect(processedTextWithoutFM).toContain('Other text would be here and should be ignored');
+});

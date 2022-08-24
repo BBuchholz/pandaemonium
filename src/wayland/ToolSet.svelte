@@ -1,5 +1,8 @@
 <script> 
-  
+
+  import { Djehuti } from '../myriad/Djehuti.js';
+  const thothMagus = new Djehuti();
+
   import {  
     affinityKeys,
     affinityAnchor,
@@ -13,7 +16,10 @@
   function handleCreateClick(){
 
     testCount++;
-    const testItem = 'test item ' + testCount;
+    let testItem = 'test item ' + testCount;
+    console.log(testItem);
+    testItem = thothMagus.ensureUuid(testItem);
+    console.log(testItem);
     $workBenchList = [...$workBenchList, testItem];
   }
 

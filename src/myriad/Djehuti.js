@@ -1,7 +1,78 @@
+import { v4 as uuidv4 } from 'uuid';
+
 export class Djehuti {
 
   constructor(){
 
+  }
+
+  ensureUuid(markdownText){
+
+    //split into lines
+    const lines = markdownText.split('\n');
+    let newLines = [];
+
+    const trimmed = markdownText.trim();
+
+    if(!trimmed.startsWith('---')){
+
+      //there's no front matter found, so we can
+      //skip checking for existing uuid also
+      newLines.push('---');
+      newLines.push('');
+
+      const uuidLine = 'uuid: ' + uuidv4();
+  
+      newLines.push(uuidLine);
+      newLines.push('');
+      newLines.push('---');
+      newLines.push('');
+      newLines = newLines.concat(lines);
+    
+    }else{
+
+      //check if uuid is set
+      let uuidIsSet = false;
+
+      for(const line of lines){
+
+        //parse each line to see if begins with uuid: 
+        if(line.startsWith('uuid:')){
+
+          uuidIsSet = true;
+        }
+      }
+
+      //now that we know if we have one or not
+      //we can cycle through and append as appropriate
+
+      let openFound = false;
+
+      for(const line of lines){
+
+        if(!uuidIsSet && 
+           line.startsWith('---') && 
+           !openFound){
+
+  
+          const uuidLine = 'uuid: ' + uuidv4();
+  
+          openFound = true;
+          newLines.push(line);
+          newLines.push('');
+          newLines.push(uuidLine);
+        
+        }else{
+
+          newLines.push(line);
+        }
+
+      }
+    }
+
+    const newBlock = newLines.join('\n');
+
+    return newBlock
   }
 
   parsePreferredAlias(markdownText){
