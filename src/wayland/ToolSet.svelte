@@ -86,6 +86,12 @@
     $affinityAnchor = 'quotidian'
   }
 
+  function handlePruneClick(){
+
+    $currentWorkBenchText = 
+      thothMagus.pruneTasks($currentWorkBenchText);
+  }
+
 </script>
 
 <div class='main'>
@@ -102,6 +108,14 @@
         Copy
       </button>
 
+      {#if $editMode}
+
+        <button on:click={handlePruneClick}>
+          Prune
+        </button>
+
+      {/if}
+      
       <button on:click={handleEditClick}>
 
         {#if $editMode}
