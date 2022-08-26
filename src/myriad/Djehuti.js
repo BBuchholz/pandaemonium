@@ -2,8 +2,123 @@ import { v4 as uuidv4 } from 'uuid';
 
 export class Djehuti {
 
+  static previousTimeStamp;
+
   constructor(){
 
+  }
+
+  padDigits(num) {
+    return num.toString().padStart(2, '0');
+  }
+
+  formatDate(date) {
+    return (
+      [
+        date.getFullYear(),
+        this.padDigits(date.getMonth() + 1),
+        this.padDigits(date.getDate()),
+      ].join('-') +
+      '_' +
+      [
+        this.padDigits(date.getHours()),
+        this.padDigits(date.getMinutes()),
+        this.padDigits(date.getSeconds()),
+      ].join('-')
+    );
+  }
+
+  getCurrentTimeStamp(){
+
+    return this.formatDate(new Date());
+  }
+
+
+  setPreferredAlias(markdownText, preferredAliasToSet){
+
+    //split into lines
+    const lines = markdownText.split('\n');
+    let newLines = [];
+
+    const trimmed = markdownText.trim();
+
+    if(!trimmed.startsWith('---')){
+
+      //there's no front matter found, so we can
+      //skip checking for existing uuid also
+      newLines.push('---');
+      newLines.push('');
+
+      const preferredAliasLine = 
+        'preferredAlias: ' + preferredAliasToSet;
+  
+      newLines.push(preferredAliasLine);
+      newLines.push('');
+      newLines.push('---');
+      newLines.push('');
+      newLines = newLines.concat(lines);
+    
+    }else{
+
+      //check if preferredAlias is set
+      let preferredAliasIsSet = false;
+
+      for(const line of lines){
+
+        //parse each line to see if begins with preferredAlias: 
+        if(line.startsWith('preferredAlias:')){
+
+          preferredAliasIsSet = true;
+        }
+      }
+
+      //now that we know if we have one or not
+      //we can cycle through and append as appropriate
+
+      let openFound = false;
+
+      for(const line of lines){
+
+        if(line.startsWith('---') && 
+           !openFound){
+
+          // console.log(line);
+  
+          const preferredAliasLine = 
+            'preferredAlias: ' + preferredAliasToSet;
+  
+          openFound = true;
+          newLines.push(line);
+          newLines.push('');
+          newLines.push(preferredAliasLine);
+        
+          // console.log(newLines);
+
+        }else{
+
+          if(line.startsWith('preferredAlias: ')){
+          
+
+            const preferredAliasLine = 
+              'preferredAlias: ' + preferredAliasToSet;
+            newLines.push(preferredAliasLine);
+
+          }else{
+
+            newLines.push(line);            
+
+          }
+
+        }
+
+      }
+    }
+
+    // console.log(newLines);
+
+    const newBlock = newLines.join('\n');
+
+    return newBlock;
   }
 
   ensureUuid(markdownText){

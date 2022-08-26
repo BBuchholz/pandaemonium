@@ -8,8 +8,54 @@
     affinityAnchor,
     workBenchList,
     editMode,
+    currentWorkBenchText,
   } from '../stores.js';
 
+  import { getNotificationsContext } from 'svelte-notifications';
+  const { addNotification } = getNotificationsContext();
+
+  function notifyCopied(textToWrite){
+    addNotification({
+      position: 'bottom-right',
+      text: 'copied to clipboard: ' + textToWrite,
+      type: 'error',
+      description: 'lorem ipsum',
+      removeAfter: 4000,
+      disableButtons: true,
+      disableDescription: true
+    });
+  }
+  
+  function notifyCopyError(){
+    addNotification({
+      position: 'bottom-right',
+      text: 'error copying to clipboard',
+      type: 'error',
+      description: 'lorem ipsum',
+      removeAfter: 4000,
+      disableButtons: true,
+      disableDescription: true
+    });
+  }
+
+  function copyState() {
+
+    const textToWrite = $currentWorkBenchText;
+
+    navigator.clipboard.writeText(textToWrite).then(function() {
+    
+      /* clipboard successfully set */
+      notifyCopied(textToWrite);
+
+    }, function() {
+    
+      /* clipboard write failed */
+      notifyCopyError();
+      
+    });
+
+
+  };
 
   let testCount = 0;
 
@@ -17,15 +63,15 @@
 
     testCount++;
     let testItem = 'test item ' + testCount;
-    console.log(testItem);
+    const alias = thothMagus.getCurrentTimeStamp();
     testItem = thothMagus.ensureUuid(testItem);
-    console.log(testItem);
+    testItem = thothMagus.setPreferredAlias(testItem, alias);
     $workBenchList = [...$workBenchList, testItem];
   }
 
   function handleCopyClick(){
 
-    //TODO: implement (copy from BoardCE?)
+    copyState();
   }
 
   function handleEditClick(){

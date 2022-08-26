@@ -14,13 +14,12 @@
     affinityKeys,
     workBenchList,
     editMode,
+    currentWorkBenchText,
   } from '../stores.js';
 
   import { getNotificationsContext } from 'svelte-notifications';
   const { addNotification } = getNotificationsContext();
   
-
-  let currentWorkBenchText = '';
   let prevItemIndex = '-1';
 
   function notifyPassPhraseFound(){
@@ -37,14 +36,14 @@
 
     if(prevItemIndex > -1){
 
-      $workBenchList[prevItemIndex] = currentWorkBenchText;
+      $workBenchList[prevItemIndex] = $currentWorkBenchText;
  
     }
     prevItemIndex = itemIndex;
 
     let itemText = $workBenchList[itemIndex];
 
-    currentWorkBenchText = itemText;
+    $currentWorkBenchText = itemText;
   }
 
 
@@ -80,13 +79,13 @@
       {#if $editMode}
 
         <textarea
-          bind:value={currentWorkBenchText}
+          bind:value={$currentWorkBenchText}
           rows="5" 
         />
 
       {:else}
 
-        <SvelteMarkdown source={currentWorkBenchText} />
+        <SvelteMarkdown source={$currentWorkBenchText} />
 
       {/if}
 
