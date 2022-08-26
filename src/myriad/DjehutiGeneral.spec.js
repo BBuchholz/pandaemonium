@@ -149,3 +149,59 @@ Other text would be here and should be ignored
   expect(processedTextWithoutFM).toContain('preferredAlias: Call Me This');
   expect(processedTextWithoutFM).toContain('Other text would be here and should be ignored');
 });
+
+it('should prune completed tasks', () => {
+
+  const textToPrune = 
+`
+
+- [ ] [[PND]] should have an option to "prune" which creates a new item that has it's own uuid (ONLY IF AN EXISTING UUID IS FOUND) and all completed tasks removed (a nice side effect of this in obsidian is that we can flag whole paragraphs for removal by clicking the task button, turning it into a checklist item, and crossing it off (ADDENDUM: COPY THIS EXACT SLIP INTO THE UNIT TESTS, EXPECTED OUTPUT SHOULD ONLY LEAVE THIS ONE)
+- [x] [[PND]] should have an option for copy to clipboard for current active item in oproom 
+- [x] use the YYYY-MM-DD_HH-mm-ss format for default alias when creating wxrds in toolset in [[PND]]
+- [x] create unit test for djehuti method parse preferred alias
+- [x] create unit test for djehuti method parse uuid 
+- [x] work bench items text should cascade display preferred alias, if found in front matter, else uuid, if alias not found, else "no uuid found" if uuid not present
+
+`;
+
+  const expectedTextAfterPruning = 
+`
+
+- [ ] [[PND]] should have an option to "prune" which creates a new item that has it's own uuid (ONLY IF AN EXISTING UUID IS FOUND) and all completed tasks removed (a nice side effect of this in obsidian is that we can flag whole paragraphs for removal by clicking the task button, turning it into a checklist item, and crossing it off (ADDENDUM: COPY THIS EXACT SLIP INTO THE UNIT TESTS, EXPECTED OUTPUT SHOULD ONLY LEAVE THIS ONE)
+
+`;
+
+  const processedText =
+    thothMagus.pruneTasks(textToPrune);
+
+  expect(processedText).toBe(expectedTextAfterPruning);
+  
+});
+
+it('should create new uuid if found when pruning', () => {
+
+  const textToPrune = 
+`
+---
+
+uuid: someValue
+
+---
+
+- [ ] [[PND]] should have an option to "prune" which creates a new item that has it's own uuid (ONLY IF AN EXISTING UUID IS FOUND) and all completed tasks removed (a nice side effect of this in obsidian is that we can flag whole paragraphs for removal by clicking the task button, turning it into a checklist item, and crossing it off (ADDENDUM: COPY THIS EXACT SLIP INTO THE UNIT TESTS, EXPECTED OUTPUT SHOULD ONLY LEAVE THIS ONE)
+- [x] [[PND]] should have an option for copy to clipboard for current active item in oproom 
+- [x] use the YYYY-MM-DD_HH-mm-ss format for default alias when creating wxrds in toolset in [[PND]]
+- [x] create unit test for djehuti method parse preferred alias
+- [x] create unit test for djehuti method parse uuid 
+- [x] work bench items text should cascade display preferred alias, if found in front matter, else uuid, if alias not found, else "no uuid found" if uuid not present
+
+`;
+
+  const processedText =
+    thothMagus.pruneTasks(textToPrune);
+
+  expect(processedText).not.toContain('uuid: someValue');
+  
+});
+
+

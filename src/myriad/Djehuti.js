@@ -8,6 +8,34 @@ export class Djehuti {
 
   }
 
+  pruneTasks(markdownText){
+
+    //split into lines
+    const lines = markdownText.split('\n');
+    let newLines = [];
+
+    const trimmed = markdownText.trim();
+
+    for(const line of lines){
+
+      if(line.startsWith('uuid: ')){
+
+        //push new uuid here instead
+        const uuidLine = 'uuid: ' + uuidv4();
+
+        newLines.push(uuidLine);
+
+      }else if(!line.startsWith('- [x] ')){
+
+        newLines.push(line);
+      }
+    }
+
+    const newBlock = newLines.join('\n');
+
+    return newBlock;
+  }
+
   padDigits(num) {
     return num.toString().padStart(2, '0');
   }
