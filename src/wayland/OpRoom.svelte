@@ -36,9 +36,13 @@
 
     if(prevItemIndex > -1){
 
-      $workBenchList[prevItemIndex] = $currentWorkBenchText;
+      if($currentWorkBenchText){
+
+        $workBenchList[prevItemIndex] = $currentWorkBenchText; 
+      }
  
     }
+    
     prevItemIndex = itemIndex;
 
     let itemText = $workBenchList[itemIndex];

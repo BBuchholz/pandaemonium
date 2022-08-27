@@ -92,6 +92,11 @@
       thothMagus.pruneTasks($currentWorkBenchText);
   }
 
+  function handleClearClick(){
+
+    $currentWorkBenchText = '';
+  }
+
 </script>
 
 <div class='main'>
@@ -112,6 +117,10 @@
 
         <button on:click={handlePruneClick}>
           Prune
+        </button>
+
+        <button on:click={handleClearClick}>
+          Clear
         </button>
 
       {/if}
