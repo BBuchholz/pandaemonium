@@ -11,9 +11,6 @@ export const modal = writable(null);
 export const passPhrase = writable('lament');
 export const affinityAnchor = writable('quotidian');
 export const affinityKeys = writable([]);
-export const workBenchList = writable([]);
-export const currentWorkBenchText = writable('');
-export const editMode = writable(false);
 
 export const headerQuote = derived(
 	[passPhrase, ],

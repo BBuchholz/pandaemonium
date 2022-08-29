@@ -12,3 +12,7 @@ export const benchName = writable('');
 
 export const toDos = writable([]);
 
+export const workBenchList = writable([]);
+export const currentWorkBenchText = writable('');
+export const prevItemIndex = writable(-1);
+export const editMode = writable(false);

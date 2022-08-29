@@ -61,6 +61,10 @@ export class Djehuti {
     return this.formatDate(new Date());
   }
 
+  generatePraxisTemplate(){
+    return 'AWAITING IMPLEMENTATION';
+  }
+
 
   setPreferredAlias(markdownText, preferredAliasToSet){
 

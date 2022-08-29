@@ -12,15 +12,19 @@
     passPhrase,
     affinityAnchor,
     affinityKeys,
+  } from '../stores.js';
+
+  import { 
     workBenchList,
     editMode,
     currentWorkBenchText,
-  } from '../stores.js';
+    prevItemIndex,
+  } from './stores.js';
 
   import { getNotificationsContext } from 'svelte-notifications';
   const { addNotification } = getNotificationsContext();
   
-  let prevItemIndex = '-1';
+  
 
   function notifyPassPhraseFound(){
     addNotification({
@@ -34,16 +38,16 @@
 
   function handleWxrdClick(itemIndex){
 
-    if(prevItemIndex > -1){
+    if($prevItemIndex > -1){
 
       if($currentWorkBenchText){
 
-        $workBenchList[prevItemIndex] = $currentWorkBenchText; 
+        $workBenchList[$prevItemIndex] = $currentWorkBenchText; 
       }
  
     }
     
-    prevItemIndex = itemIndex;
+    $prevItemIndex = itemIndex;
 
     let itemText = $workBenchList[itemIndex];
 
@@ -55,45 +59,49 @@
 
   <div class="op-room">
 
-    <div class='workbench workbench-list'>
-      
-      <h1>Work Bench Items</h1>
+    {#if $prevItemIndex > -1}
 
-      <ul>
+      <div class='workbench workbench-list'>
+        
+        <h1>Work Bench Items</h1>
 
-        {#each $workBenchList as listItem, itemIndex}
+        <ul>
 
-          <li>
-            <a
-              href="#UUID_SHOULD_GO_HERE"
-              on:click={() => handleWxrdClick(itemIndex)}
-            >  
-              {thothMagus.getPreferredAlias(listItem)}
-            </a>
-          </li>
+          {#each $workBenchList as listItem, itemIndex}
 
-        {/each}
+            <li>
+              <a
+                href="#UUID_SHOULD_GO_HERE"
+                on:click={() => handleWxrdClick(itemIndex)}
+              >  
+                {thothMagus.getPreferredAlias(listItem)}
+              </a>
+            </li>
 
-      </ul>
+          {/each}
 
-    </div>
+        </ul>
 
-    <div class='workbench workbench-active'>
-     
-      {#if $editMode}
+      </div>
 
-        <textarea
-          bind:value={$currentWorkBenchText}
-          rows="5" 
-        />
+      <div class='workbench workbench-active'>
+       
+        {#if $editMode}
 
-      {:else}
+          <textarea
+            bind:value={$currentWorkBenchText}
+            rows="5" 
+          />
 
-        <SvelteMarkdown source={$currentWorkBenchText} />
+        {:else}
 
-      {/if}
+          <SvelteMarkdown source={$currentWorkBenchText} />
 
-    </div>
+        {/if}
+
+      </div>
+
+    {/if}
 
   </div> 
 

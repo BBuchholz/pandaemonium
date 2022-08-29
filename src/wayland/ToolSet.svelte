@@ -6,10 +6,14 @@
   import {  
     affinityKeys,
     affinityAnchor,
+  } from '../stores.js';
+
+  import {  
     workBenchList,
     editMode,
     currentWorkBenchText,
-  } from '../stores.js';
+    prevItemIndex,
+  } from './stores.js';
 
   import { getNotificationsContext } from 'svelte-notifications';
   const { addNotification } = getNotificationsContext();
@@ -67,6 +71,19 @@
     testItem = thothMagus.ensureUuid(testItem);
     testItem = thothMagus.setPreferredAlias(testItem, alias);
     $workBenchList = [...$workBenchList, testItem];
+
+    if($prevItemIndex < 0){
+
+      let itemIndex = 0;
+
+      //COPIED FROM OPROOM WXRD CLICK
+      $prevItemIndex = itemIndex;
+
+      let itemText = $workBenchList[itemIndex];
+
+      $currentWorkBenchText = itemText;
+      
+    }
   }
 
   function handleCopyClick(){
@@ -92,6 +109,12 @@
       thothMagus.pruneTasks($currentWorkBenchText);
   }
 
+  function handlePraxisClick(){
+
+    $currentWorkBenchText = 
+      thothMagus.generatePraxisTemplate();
+  }
+
   function handleClearClick(){
 
     $currentWorkBenchText = '';
@@ -109,35 +132,43 @@
         Create
       </button>
 
-      <button on:click={handleCopyClick}>
-        Copy
-      </button>
+      {#if $prevItemIndex > -1}
 
-      {#if $editMode}
-
-        <button on:click={handlePruneClick}>
-          Prune
+        <button on:click={handleCopyClick}>
+          Copy
         </button>
 
-        <button on:click={handleClearClick}>
-          Clear
+        {#if $editMode}
+
+          <button on:click={handlePruneClick}>
+            Prune
+          </button>
+
+          <button on:click={handlePraxisClick}>
+            Praxis
+          </button>
+
+          <button on:click={handleClearClick}>
+            Clear
+          </button>
+
+        {/if}
+        
+        <button on:click={handleEditClick}>
+
+          {#if $editMode}
+            
+            View
+
+          {:else}
+
+            Edit
+
+          {/if}
+
         </button>
 
       {/if}
-      
-      <button on:click={handleEditClick}>
-
-        {#if $editMode}
-          
-          View
-
-        {:else}
-
-          Edit
-
-        {/if}
-
-      </button>
 
       <button on:click={handleCloseClick}>
         Close
