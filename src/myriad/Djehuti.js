@@ -62,7 +62,24 @@ export class Djehuti {
   }
 
   generatePraxisTemplate(){
-    return 'AWAITING IMPLEMENTATION';
+
+    const praxisTemplate =
+`
+---
+
+wxrdUuid: replaceThisValue
+wxrdType: praxisInstance
+wxrdCreatedOn: 2022-08-29
+wxrdCreatedAt: 10-53-23
+wxrdSpecVersion: 1.0
+
+---
+
+
+
+`;
+
+    return praxisTemplate;
   }
 
 

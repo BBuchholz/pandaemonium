@@ -217,7 +217,7 @@ it('should generate praxis instance templates', () => {
 wxrdUuid: replaceThisValue
 wxrdType: praxisInstance
 wxrdCreatedOn: 2022-08-29
-wxrdCreatedAt: 09-53-23
+wxrdCreatedAt: 10-53-23
 wxrdSpecVersion: 1.0
 
 ---
