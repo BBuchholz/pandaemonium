@@ -2,16 +2,19 @@
   
   import {  
     affinityAnchor,
+    passPhrase,
     headerQuote,
   } from '../stores.js';
 
   function handleQuoteClick(){
 
-    // Intention for Quote Header is to be a sort of 
-    // inspirational/mood-invoking decorative plate over
-    // where the toolset will go when in use, something
-    // we can toggle to open which is what this does
-    $affinityAnchor = 'toolSet'; //TODO: make this configurable at runtime, so different things can be behind the coverplate at the user's discretion
+    if($passPhrase === 'Channard'){
+      $affinityAnchor = 'toolSet';
+    }
+
+    if($passPhrase === 'Tzimisce'){
+      $affinityAnchor = 'mdmdm';
+    }
   }
 
 </script>

@@ -3,6 +3,7 @@
   import QuoteHeader from './QuoteHeader.svelte';
   import CardAffinityHeader from './CardAffinityHeader.svelte';
   import ToolSet from './ToolSet.svelte';
+  import MyriadMDMatrix from './MyriadMDMatrix.svelte';
   
   import {  
     affinityAnchor,
@@ -19,6 +20,10 @@
   {:else if $affinityAnchor === 'toolSet' }
 
     <ToolSet />
+    
+  {:else if $affinityAnchor === 'mdmdm' }
+
+    <MyriadMDMatrix />
     
   {:else}
 

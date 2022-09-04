@@ -25,6 +25,10 @@
     $passPhrase = 'Channard';
   }
 
+  function handleMDClick(){
+    $passPhrase = 'Tzimisce';
+  }
+
 </script>
 
 <div class='bench'>
@@ -35,6 +39,15 @@
         on:click={handleOpRoomClick}
       > 
         Operati(ons/ng) Room
+      </a>
+    </div>
+  
+    <div class="bench-item">
+      <a 
+        href="#MD"
+        on:click={handleMDClick}
+      > 
+        MD
       </a>
     </div>
   

@@ -26,6 +26,7 @@
   import LeMarchand from './prospero/LeMarchand.svelte';
   import Daedalus from './wayland/Daedalus.svelte';
   import OpRoom from './wayland/OpRoom.svelte';
+  import MDMatrix from './wayland/MDMatrix.svelte';
   import AffinityHeader from './wayland/AffinityHeader.svelte';
   import CardAffinityHeader from './wayland/CardAffinityHeader.svelte';
   import QuoteHeader from './wayland/QuoteHeader.svelte';
@@ -41,7 +42,7 @@
 
   function initialize(){
 
-    $devMode = false;
+    $devMode = true; 
 
     const urlParams = 
       new URLSearchParams(window.location.search);
@@ -53,9 +54,9 @@
 
     if($devMode){
 
-      $passPhrase = 'Channard';  
-      $affinityAnchor = 'toolSet';
-
+      $passPhrase = 'Tzimisce';  
+      $affinityAnchor = 'quotidian';
+ 
       $voidMode = false;  
 
       //////////////////////////////////////////
@@ -133,6 +134,10 @@
       {:else if $passPhrase === 'Channard'}
 
         <OpRoom />
+
+      {:else if $passPhrase === 'Tzimisce'}
+
+        <MDMatrix />
 
       {:else}
 

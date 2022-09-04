@@ -113,7 +113,31 @@ export const headerQuote = derived(
 
 		}
 
-		if ($passPhrase === 'leCE') {
+		if ($passPhrase === 'Tzimisce') {
+
+			const choice = getRandomInt(2);
+
+			if(choice === 0){
+
+				quote.content = 'This was Baphomet. This diced and ' + 
+		 		'divided thing.';
+
+				quote.source = 'Clive Barker, Cabal';
+
+			}else{
+
+				quote.content = "The only thing that burns in hell " + 
+		 		"is the part of you that won't let go of your " + 
+		 		"life: your memories, your attachments. They burn " + 
+		 		"them all away, but they're not punishing you, " + 
+		 		"they're freeing your soul. If you're frightened " + 
+		 		"of dying and you're holding on, you'll see devils " + 
+		 		"tearing your life away. If you've made your " + 
+		 		"peace, then the devils are really angels freeing " + 
+		 		"you from the earth.";
+
+				quote.source = "from the film Jacob's Ladder";
+			}
 
 		}
 
@@ -136,6 +160,10 @@ export const headerQuote = derived(
 		return quote;
 	}
 );
+
+function getRandomInt(max) {
+	return Math.floor(Math.random() * max);
+}
 
 export const selectedQuadrant = writable('');
 
