@@ -117,10 +117,18 @@ export const headerQuote = derived(
 
 		}
 
+		if ($passPhrase == 'help') {
+
+			quote.content = 
+				"Still a bit murky? What's a MyrKi?";
+			quote.source = 
+				"THE MGMNT"			
+		}
+
 		if(!quote.content){
 
 			quote.content = 
-				"No header quote set for pass phrase " + $passPhrase;
+				"No clue set for MyrKi " + $passPhrase;
 			quote.source = 
 				"THE MGMNT"
 		}
