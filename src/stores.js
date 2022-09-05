@@ -11,11 +11,21 @@ export const modal = writable(null);
 export const passPhrase = writable('lament');
 export const affinityAnchor = writable('quotidian');
 export const affinityKeys = writable([]);
+export const contextualQuotes = writable([]);
 
+
+/**
+ * @deprecated - Since version 1.0. 
+ * 							 Will be deleted in version xx.yy. 
+ * 							 Use contextualQuotes writable instead.
+ * 
+ * Source: https://stackoverflow.com/a/19525656/670768
+ */
 export const headerQuote = derived(
 	[passPhrase, ],
 	([$passPhrase, ]) => {
 
+		console.warn('Calling deprecated store value headerQuote');
 		let quote = {};
 
 		if($passPhrase === 'daedalus'){

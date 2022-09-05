@@ -46,7 +46,9 @@
       <button on:click={() => notifyClicked('Keeper') }>
         Keeper
       </button>
-
+      <button on:click={() => notifyClicked('Inspector') }>
+        Inspector
+      </button>
       <button on:click={() => notifyClicked('Templer') }>
         Templer
       </button>
