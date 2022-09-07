@@ -31,6 +31,8 @@
   import CardAffinityHeader from './wayland/CardAffinityHeader.svelte';
   import QuoteHeader from './wayland/QuoteHeader.svelte';
   import JosephDaedalus from './joseph/JosephDaedalus.svelte';
+  import DoorStep from './DoorStep.svelte';
+  import HelpDesk from './HelpDesk.svelte';
 
   import DaedalusLab from './components/DaedalusLab.svelte';
 
@@ -41,6 +43,8 @@
   initialize();
 
   function initialize(){
+
+
 
     $devMode = false; 
 
@@ -87,7 +91,7 @@
     
     <main>
 
-      <AffinityHeader />
+      <!-- <AffinityHeader /> -->
 
       {#if $passPhrase === 'craft'}
 
@@ -139,9 +143,13 @@
 
         <MDMatrix />
 
+      {:else if $passPhrase === 'help'}
+
+        <HelpDesk />
+
       {:else}
 
-        <LeMarchand />
+        <DoorStep />
 
       {/if}
 

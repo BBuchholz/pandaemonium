@@ -8,7 +8,7 @@ import KnechtController from './myriad/KnechtController.js';
 const magisterLudi = KnechtController();
 
 export const modal = writable(null);
-export const passPhrase = writable('lament');
+export const passPhrase = writable('');
 export const affinityAnchor = writable('quotidian');
 export const affinityKeys = writable([]);
 export const contextualQuotes = writable([]);
