@@ -7,6 +7,11 @@
   import { getNotificationsContext } from 'svelte-notifications';
   const { addNotification } = getNotificationsContext();
 
+
+  import { Djehuti } from './myriad/Djehuti.js';
+
+  const djehuti = new Djehuti();
+
   import { 
     // currentBookTitle,
     passPhrase,
@@ -39,8 +44,50 @@
       notify('name cannnot be empty');
       return;
     }
-    
+
+    //log whatever was entered
+    //TODO: this is just cowboy coded, elaborate the process
+    createThisMarkDown();
+
     turnMyrKi();
+  }
+
+
+  // Function using fetch to POST to our API endpoint
+  function createThisMarkDown() {
+
+    if(!currentMyrKi){
+      return;
+    }
+
+    const newMarkDown = djehuti.createMDWxrd(currentMyrKi);
+    console.log('mark down created', newMarkDown);
+
+    return fetch('/api/wxrds-create', {
+      body: JSON.stringify(newMarkDown),
+      method: 'POST'
+    }).then(response => {
+      return response.json()
+    })
+  }
+
+  function createANewMarkDown(){
+
+    const timestamp = Date.now();
+
+    // create it!
+    createThisMarkDown().then((response) => {
+
+      console.log('API response', response)
+
+      const processed = processResponseObject(response);
+
+      console.log('Processed Response Object', processed);
+
+    }).catch((error) => {
+      console.log('API error', error)
+    })
+
   }
 
   function submit(event) {

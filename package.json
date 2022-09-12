@@ -6,6 +6,7 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public --no-clear",
+    "bootstrap": "node ./scripts/bootstrap-fauna-database.js",
     "test": "jest --watch"
   },
   "devDependencies": {
@@ -26,6 +27,7 @@
   },
   "dependencies": {
     "@entomdt/myriad-core": "^0.2.1",
+    "faunadb": "^4.6.0",
     "g": "^2.0.1",
     "netlify-cli": "^8.14.1",
     "sirv-cli": "^1.0.0",

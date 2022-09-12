@@ -1,342 +1,201 @@
-import { v4 as uuidv4 } from 'uuid';
+import { Wxrd } from './Wxrd';
+import { MDWxrd } from './MDWxrd';
 
 export class Djehuti {
 
-  static previousTimeStamp;
+	constructor(){
 
-  constructor(){
+	}
 
-  }
+	createWxrd(multiLineInput) {
+ 
+		return new Wxrd(multiLineInput);
+	}
 
-  pruneTasks(markdownText){
+	createMDWxrd(multiLineInput) {
+ 
+ 		let newWxrd = new MDWxrd(multiLineInput);
 
-    //split into lines
-    const lines = markdownText.split('\n');
-    let newLines = [];
+ 		this.parseMD(newWxrd);
 
-    const trimmed = markdownText.trim();
+ 		// console.log(newWxrd);
 
-    for(const line of lines){
+		return newWxrd;
+	}
 
-      if(line.startsWith('uuid: ')){
+	startsWithADivider(multiLineInput) {
 
-        //push new uuid here instead
-        const uuidLine = 'uuid: ' + uuidv4();
+		let found = false;
 
-        newLines.push(uuidLine);
+		if(multiLineInput.trim().startsWith('---')){
+			
+			found = true;
+		}
 
-      }else if(!line.startsWith('- [x] ')){
+		return found;
+	}
 
-        newLines.push(line);
-      }
-    }
+	parseMD(wxrd) {
 
-    const newBlock = newLines.join('\n');
+		if(this.startsWithADivider(wxrd.markDown)){
 
-    return newBlock;
-  }
+			// console.log('found opening divider');
 
-  padDigits(num) {
-    return num.toString().padStart(2, '0');
-  }
+			// set to false here, will flip to true on first
+			// line in for loop below, then back to false
+			// when it finds the next divider
+			let inFrontMattter = false;
+			let frontMatterClosed = false;
+			// let outOfFrontMatter = true; 
+			let dividerCount = 0;
 
-  formatDate(date) {
-    return (
-      [
-        date.getFullYear(),
-        this.padDigits(date.getMonth() + 1),
-        this.padDigits(date.getDate()),
-      ].join('-') +
-      '_' +
-      [
-        this.padDigits(date.getHours()),
-        this.padDigits(date.getMinutes()),
-        this.padDigits(date.getSeconds()),
-      ].join('-')
-    );
-  }
+			const lines = this.splitToLines(wxrd.markDown);
 
-  getCurrentTimeStamp(){
+			// console.log('lines found: ' + lines.length);
 
-    return this.formatDate(new Date());
-  }
+			let parsedContent = '';
+			let lineCount = 0;
+			let frontMatterLines = [];
 
-  generatePraxisTemplate(){
+			for (const line of lines){
 
-    const praxisTemplate =
-`
----
+				lineCount++;
+				// console.log('begin processing line ' + lineCount);
 
-wxrdUuid: replaceThisValue
-wxrdType: praxisInstance
-wxrdCreatedOn: 2022-08-29
-wxrdCreatedAt: 10-53-23
-wxrdSpecVersion: 1.0
+				if(this.startsWithADivider(line)){
 
----
+					// console.log('closing divider found');
 
+					// we found a divider, toggle status
+					// which was initialized to false above
+					// if its the first we'll become true
+					// if its the second it'll become false
+					inFrontMattter = !inFrontMattter;
+					dividerCount++;
 
+					// if(dividerCount < 2){
+					// 	outOfFrontMatter = false;
+					// }
+				}
 
-`;
+				// console.log("inFrontMattter: " + inFrontMattter);
+				// console.log("dividerCount: " + dividerCount);
 
-    return praxisTemplate;
-  }
+				if(inFrontMattter && dividerCount < 2){
 
+					// ignore divider lines and empty lines
 
-  setPreferredAlias(markdownText, preferredAliasToSet){
+					frontMatterLines.push(line);
+					// console.log('frontMatterLines: ' + frontMatterLines);
 
-    //split into lines
-    const lines = markdownText.split('\n');
-    let newLines = [];
+					// console.log('front matter line prior to trim: ' + line);
 
-    const trimmed = markdownText.trim();
+					// const trimmedLine = line.replace(/-/g, '').trim();
 
-    if(!trimmed.startsWith('---')){
+					const trimmedLine = line;
 
-      //there's no front matter found, so we can
-      //skip checking for existing uuid also
-      newLines.push('---');
-      newLines.push('');
+					if(trimmedLine){
 
-      const preferredAliasLine = 
-        'preferredAlias: ' + preferredAliasToSet;
-  
-      newLines.push(preferredAliasLine);
-      newLines.push('');
-      newLines.push('---');
-      newLines.push('');
-      newLines = newLines.concat(lines);
-    
-    }else{
+						// console.log('processing line: ' + trimmedLine);
 
-      //check if preferredAlias is set
-      let preferredAliasIsSet = false;
+						const metaKey = trimmedLine.slice(0, trimmedLine.indexOf(':')).trim();
+						const metaValue = trimmedLine.slice(trimmedLine.indexOf(':') + 1).trim();
 
-      for(const line of lines){
+						if(!metaValue.startsWith('-')){
 
-        //parse each line to see if begins with preferredAlias: 
-        if(line.startsWith('preferredAlias:')){
+						wxrd.metaData[metaKey] = metaValue;	
+						}
 
-          preferredAliasIsSet = true;
-        }
-      }
+					} else {
 
-      //now that we know if we have one or not
-      //we can cycle through and append as appropriate
+						// console.log('ignoring empty line');
+					}
 
-      let openFound = false;
+				} else if (dividerCount == 2 && 
+						   !frontMatterClosed) {
 
-      for(const line of lines){
+					// add the closing divider to front matter
+					frontMatterLines.push(line);
+					frontMatterClosed = true;
 
-        if(line.startsWith('---') && 
-           !openFound){
+				} else {
 
-          // console.log(line);
-  
-          const preferredAliasLine = 
-            'preferredAlias: ' + preferredAliasToSet;
-  
-          openFound = true;
-          newLines.push(line);
-          newLines.push('');
-          newLines.push(preferredAliasLine);
-        
-          // console.log(newLines);
+					// console.log(wxrd);
 
-        }else{
+					// console.log("line of content: " + line);
+					// console.log(dividerCount);
 
-          if(line.startsWith('preferredAlias: ')){
-          
+					if(!this.startsWithADivider(line) ||
+						dividerCount > 2){
 
-            const preferredAliasLine = 
-              'preferredAlias: ' + preferredAliasToSet;
-            newLines.push(preferredAliasLine);
+						parsedContent += line;	
+					}
+				
+				}
 
-          }else{
 
-            newLines.push(line);            
+				// console.log('end processing line ' + lineCount);
 
-          }
+			}
 
-        }
+			// console.log('finished front matter lines: ' + frontMatterLines);
 
-      }
-    }
+			wxrd.content = parsedContent;
+			wxrd.frontMatter = frontMatterLines.join('\n');
 
-    // console.log(newLines);
+			// console.log(wxrd);
+		}
+	}
 
-    const newBlock = newLines.join('\n');
+	splitToLines(multiLineInput) {
 
-    return newBlock;
-  }
+		return multiLineInput.split('\n');
+	}
 
-  ensureUuid(markdownText){
 
-    //split into lines
-    const lines = markdownText.split('\n');
-    let newLines = [];
+	// TODO: Mimic createWxrd to implement createMarkDown
 
-    const trimmed = markdownText.trim();
+	importWxrdFromJson(jsonString) {
 
-    if(!trimmed.startsWith('---')){
+		if(!this.hasJsonStructure(jsonString)){
 
-      //there's no front matter found, so we can
-      //skip checking for existing uuid also
-      newLines.push('---');
-      newLines.push('');
+			throw "can't import json from non-json string";
+		}
 
-      const uuidLine = 'uuid: ' + uuidv4();
-  
-      newLines.push(uuidLine);
-      newLines.push('');
-      newLines.push('---');
-      newLines.push('');
-      newLines = newLines.concat(lines);
-    
-    }else{
+		const parsed = JSON.parse(jsonString);
 
-      //check if uuid is set
-      let uuidIsSet = false;
+		return new Wxrd(parsed);
+	}
 
-      for(const line of lines){
+	importMDWxrdFromJson(jsonString) {
 
-        //parse each line to see if begins with uuid: 
-        if(line.startsWith('uuid:')){
+		if(!this.hasJsonStructure(jsonString)){
 
-          uuidIsSet = true;
-        }
-      }
+			throw "can't import json from non-json string";
+		}
 
-      //now that we know if we have one or not
-      //we can cycle through and append as appropriate
+		const parsed = JSON.parse(jsonString);
 
-      let openFound = false;
+		return new MDWxrd(parsed);
+	}
 
-      for(const line of lines){
+	hasJsonStructure(str) {
+	
+		// adapted from: https://stackoverflow.com/a/52799327/670768
+		if (typeof str !== 'string') {
+			return false;
+		}
 
-        if(!uuidIsSet && 
-           line.startsWith('---') && 
-           !openFound){
-
-  
-          const uuidLine = 'uuid: ' + uuidv4();
-  
-          openFound = true;
-          newLines.push(line);
-          newLines.push('');
-          newLines.push(uuidLine);
-        
-        }else{
-
-          newLines.push(line);
-        }
-
-      }
-    }
-
-    const newBlock = newLines.join('\n');
-
-    return newBlock
-  }
-
-  parsePreferredAlias(markdownText){
-    
-    //split into lines
-    const lines = markdownText.split('\n');
-
-    let preferredAlias = '';
-
-    for(const line of lines){
-      
-      //parse each line to see if begins with preferredAlias: 
-      if(line.startsWith('preferredAlias:')){
-
-        preferredAlias = line.replace('preferredAlias:', '').trim();
-      }
-    }
-
-    return preferredAlias;
-  }
-
-  parseUuid(markdownText){
-
-    //split into lines
-    const lines = markdownText.split('\n');
-
-    let uuid = '';
-
-    for(const line of lines){
-
-      //parse each line to see if begins with uuid: 
-      if(line.startsWith('uuid:')){
-
-        uuid = line.replace('uuid:', '').trim();
-      }
-    }
-
-    return uuid;
-  }
-
-  getPreferredAlias(markdownText){
-
-    //try preferred alias
-    if(this.parsePreferredAlias(markdownText)){
-      return this.parsePreferredAlias(markdownText);
-    }
-
-    //try uuid
-    if(this.parseUuid(markdownText)){
-      return this.parseUuid(markdownText);
-    }
-
-    if(markdownText.length < 30){
-      return markdownText;
-    }
-
-    return 'no uuid found';
-  }
-
-  generateName(adverbs, adjectives, nouns){
-
-    let options = ['two', 'three'];
-
-    this.shuffle(options);
-
-    this.shuffle(adjectives);
-    this.shuffle(nouns);
-
-    if(options[0] === 'two'){
-
-      return adjectives[0] + '-' + nouns[0];
-
-    }else{
-
-      this.shuffle(adverbs);
-
-      return adverbs[0] + '-' + adjectives[0] + '-' + nouns[0];      
-    }
-
-  }
-
-  shuffle(array){
-    // An implementation of the Fisher-Yates (aka Knuth) Shuffle
-    // from: https://stackoverflow.com/a/2450976/670768
-
-    let currentIndex = array.length, randomIndex;
-
-    //while there remains elements to shuffle...
-    while (currentIndex != 0) {
-
-      // Pick a remaining element...
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-
-      // and swap it with the current element.
-      [array[currentIndex], array[randomIndex]] =
-        [array[randomIndex], array[currentIndex]];
-    }
-
-    return array;
-  }
-
+	    try {
+	    
+	        const result = JSON.parse(str);
+	        const type = Object.prototype.toString.call(result);
+	        return type === '[object Object]' 
+	            || type === '[object Array]';
+	    
+	    } catch (err) {
+	    
+	        return false;
+	    }
+	}
 }
