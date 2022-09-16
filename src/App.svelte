@@ -59,7 +59,7 @@
 
     if($devMode){
 
-      $passPhrase = 'Tzimisce';  
+      $passPhrase = 'help';  
       $affinityAnchor = 'quotidian';
  
       $voidMode = false;  

@@ -92,7 +92,66 @@
 
   <div class="citadel-desk">
 
-    Try "lament"
+    <p>
+      Try "lament" for ...
+    </p>
+
+    <p>
+      Try 'craft' for ...
+    </p>
+    
+    <p>
+      Try 'leAC' for ...
+    </p>
+    
+    <p>
+      Try 'matriculate' for ...
+    </p>
+    
+    <p>
+      Try 'daedalusLab' for ...
+    </p>
+    
+    <p>
+      Try 'well' for ...
+    </p>
+    
+    <p>
+      Try 'leMat' for ...
+    </p>
+    
+    <p>
+      Try 'learn' for ...
+    </p>
+    
+    <p>
+      Try 'lament' for ...
+    </p>
+    
+    <p>
+      Try 'leMonde' for ...
+    </p>
+    
+    <p>
+      Try 'leNuit' for ...
+    </p>
+    
+    <p>
+      Try 'leCE' for ...
+    </p>
+    
+    <p>
+      Try 'Channard' for ...
+    </p>
+    
+    <p>
+      Try 'Tzimisce' for ...
+    </p>
+    
+    <p>
+      Try 'help' for ...
+    </p>
+    
 
     <!-- We wanna make more of a game and less of a lesson... -->
 
