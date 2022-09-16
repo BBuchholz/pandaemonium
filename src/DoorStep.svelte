@@ -35,6 +35,9 @@
   function turnMyrKi() {
 
     $passPhrase = currentMyrKi;
+
+    console.log('passPhrase set to: ' + $passPhrase);
+
     currentMyrKi = '';
   }
   

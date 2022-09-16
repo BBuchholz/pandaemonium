@@ -25,6 +25,7 @@
   import Alexandria from './alex/Alexandria.svelte';
   import LeMarchand from './prospero/LeMarchand.svelte';
   import Daedalus from './wayland/Daedalus.svelte';
+  import WellOfWxrds from './md/WellOfWxrds.svelte';
   import OpRoom from './wayland/OpRoom.svelte';
   import MDMatrix from './wayland/MDMatrix.svelte';
   import AffinityHeader from './wayland/AffinityHeader.svelte';
@@ -108,6 +109,10 @@
       {:else if $passPhrase === 'daedalusLab'}
 
         <DaedalusLab {$passPhrase} />
+
+      {:else if $passPhrase === 'well'}
+
+        <WellOfWxrds />
 
       {:else if $passPhrase === 'leMat'}
 

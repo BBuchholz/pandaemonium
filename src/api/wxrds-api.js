@@ -1,13 +1,13 @@
 // NB: /api/ prefix used below is mapped in netlify.toml (cf.)
 
 
-  import DjehutiController from '../myriad/DjehutiController.js';
+  import { Djehuti } from '../myriad/Djehuti.js';
 
-  const djehuti = DjehutiController();
+  const thothMagus = new Djehuti();
 
 export const create = (text) => {
 
-  const newWxrd = djehuti.createWxrd(text).result;
+  const newWxrd = thothMagus.createWxrd(text).result;
 
   return fetch('/api/wxrds-create', {
     body: JSON.stringify(newWxrd),
