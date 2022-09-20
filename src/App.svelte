@@ -27,6 +27,7 @@
   import Daedalus from './wayland/Daedalus.svelte';
   import WellOfWxrds from './md/WellOfWxrds.svelte';
   import OpRoom from './wayland/OpRoom.svelte';
+  import Pruner from './wayland/Pruner.svelte';
   import MDMatrix from './wayland/MDMatrix.svelte';
   import AffinityHeader from './wayland/AffinityHeader.svelte';
   import CardAffinityHeader from './wayland/CardAffinityHeader.svelte';
@@ -45,8 +46,6 @@
 
   function initialize(){
 
-
-
     $devMode = false; 
 
     const urlParams = 
@@ -59,7 +58,7 @@
 
     if($devMode){
 
-      $passPhrase = 'help';  
+      $passPhrase = 'prune';  
       $affinityAnchor = 'quotidian';
  
       $voidMode = false;  
@@ -151,6 +150,10 @@
       {:else if $passPhrase === 'help'}
 
         <HelpDesk />
+
+      {:else if $passPhrase === 'prune'}
+
+        <Pruner />
 
       {:else}
 

@@ -3,6 +3,8 @@
   import { Djehuti } from '../myriad/Djehuti.js';
   const thothMagus = new Djehuti();
 
+  import AffinityHeader from '../wayland/AffinityHeader.svelte';
+
   import SvelteMarkdown from 'svelte-markdown';
 
   import { createEventDispatcher } from 'svelte';
@@ -59,49 +61,59 @@
 
   <div class="op-room">
 
-    {#if $prevItemIndex > -1}
+    <div class="header">
 
-      <div class='workbench workbench-list'>
-        
-        <h1>Work Bench Items</h1>
+      <AffinityHeader />  
 
-        <ul>
+    </div>
 
-          {#each $workBenchList as listItem, itemIndex}
+    <div class="workbench">
 
-            <li>
-              <a
-                href="#UUID_SHOULD_GO_HERE"
-                on:click={() => handleWxrdClick(itemIndex)}
-              >  
-                {thothMagus.getPreferredAlias(listItem)}
-              </a>
-            </li>
+      {#if $prevItemIndex > -1}
 
-          {/each}
+        <div class='workbench-list'>
+          
+          <h1>Work Bench Items</h1>
 
-        </ul>
+          <ul>
 
-      </div>
+            {#each $workBenchList as listItem, itemIndex}
 
-      <div class='workbench workbench-active'>
-       
-        {#if $editMode}
+              <li>
+                <a
+                  href="#UUID_SHOULD_GO_HERE"
+                  on:click={() => handleWxrdClick(itemIndex)}
+                >  
+                  {thothMagus.parsePreferredAlias(listItem)}
+                </a>
+              </li>
 
-          <textarea
-            bind:value={$currentWorkBenchText}
-            rows="5" 
-          />
+            {/each}
 
-        {:else}
+          </ul>
 
-          <SvelteMarkdown source={$currentWorkBenchText} />
+        </div>
 
-        {/if}
+        <div class='workbench-active'>
+         
+          {#if $editMode}
 
-      </div>
+            <textarea
+              bind:value={$currentWorkBenchText}
+              rows="5" 
+            />
 
-    {/if}
+          {:else}
+
+            <SvelteMarkdown source={$currentWorkBenchText} />
+
+          {/if}
+
+        </div>
+
+      {/if}
+
+    </div>
 
   </div> 
 
@@ -112,11 +124,20 @@
   height: 100%;
   width: 100%;
   display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.header {
+  width: 100%;
+  height: 100%;
+  display: flex;
   align-items: center;
 }
 
 .workbench {
   flex: 1;
+  display: flex;
   border: solid;
 }
 

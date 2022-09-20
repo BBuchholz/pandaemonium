@@ -141,7 +141,7 @@
     </p>
     
     <p>
-      Try 'Channard' for ...
+      Try 'Channard' for OpRoom
     </p>
     
     <p>
@@ -152,6 +152,9 @@
       Try 'help' for ...
     </p>
     
+    <p>
+      Try 'prune' for the MarkDown Completed Task Pruner
+    </p>
 
     <!-- We wanna make more of a game and less of a lesson... -->
 
