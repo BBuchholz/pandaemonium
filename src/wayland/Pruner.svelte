@@ -11,6 +11,33 @@
   import SvelteMarkdown from 'svelte-markdown';
 
 
+  import { getNotificationsContext } from 'svelte-notifications';
+  const { addNotification } = getNotificationsContext();
+
+  function notifyCopied(textToWrite){
+    addNotification({
+      position: 'bottom-right',
+      text: 'copied to clipboard: ' + textToWrite,
+      type: 'error',
+      description: 'lorem ipsum',
+      removeAfter: 4000,
+      disableButtons: true,
+      disableDescription: true
+    });
+  }
+  
+  function notifyCopyError(){
+    addNotification({
+      position: 'bottom-right',
+      text: 'error copying to clipboard',
+      type: 'error',
+      description: 'lorem ipsum',
+      removeAfter: 4000,
+      disableButtons: true,
+      disableDescription: true
+    });
+  }
+
   function handleCopyClick(){
 
     const textToWrite = $currentWorkBenchText;
