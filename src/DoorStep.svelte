@@ -7,18 +7,14 @@
   import { getNotificationsContext } from 'svelte-notifications';
   const { addNotification } = getNotificationsContext();
 
-
   import { Djehuti } from './myriad/Djehuti.js';
 
   const djehuti = new Djehuti();
 
   import { 
-    // currentBookTitle,
     passPhrase,
     devMode,
   } from './stores.js';
-
-  // import TurnMyrKiOption from './TurnMyrKiOption.svelte';
 
   function notify(textValue){
     addNotification({
@@ -54,7 +50,6 @@
 
     turnMyrKi();
   }
-
 
   // Function using fetch to POST to our API endpoint
   function createThisMarkDown() {
@@ -108,7 +103,7 @@
 
 <!-- TODO: single point of entry, have to enter something to get something out, anything less than 100 wxrds should be looked up as a potential alias, increase limit? not found should return a list of things you can do -->
 
-  <div class='citadel-shelf'>
+  <div class='input-div'>
     
     <input 
       bind:value={currentMyrKi} 
@@ -117,7 +112,7 @@
     
   </div>
 
-  <div class='citadel-desk'>
+  <div class='link-div'>
       
     <a 
       href="#openBook"
@@ -128,11 +123,19 @@
     
   </div>  
 
+  <div class='link-div'>
+      
+    <a href="?passPhrase=ImNew"> 
+      I'm New And Need Buttons
+    </a>
+    
+  </div>  
+
 </div>
 
 <style>
 
-.citadel-shelf, .citadel-desk {
+.input-div, .link-div {
   border: solid;
   border-radius: 10px;
   margin: 10px;

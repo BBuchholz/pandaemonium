@@ -34,6 +34,7 @@
   import QuoteHeader from './wayland/QuoteHeader.svelte';
   import JosephDaedalus from './joseph/JosephDaedalus.svelte';
   import DoorStep from './DoorStep.svelte';
+  import ButtonStep from './ButtonStep.svelte';
   import HelpDesk from './HelpDesk.svelte';
 
   import DaedalusLab from './components/DaedalusLab.svelte';
@@ -54,6 +55,7 @@
     if(urlParams.has('passPhrase')){
 
       $passPhrase = urlParams.get('passPhrase');
+      console.log('passPhrase set to: ' + $passPhrase);
     }
 
     if($devMode){
@@ -155,6 +157,10 @@
 
         <Pruner />
 
+      {:else if $passPhrase === 'ImNew'}
+
+        <ButtonStep />
+
       {:else}
 
         <DoorStep />
@@ -162,8 +168,10 @@
       {/if}
 
       <div class='footer'>
-        
-        a Temple Cathedral Tomb production
+         
+        <a href="?passPhrase=">
+          a Temple Cathedral Tomb production
+        </a>
 
       </div>
 
