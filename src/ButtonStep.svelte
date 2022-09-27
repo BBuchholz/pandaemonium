@@ -73,6 +73,49 @@
 
   </div>
 
+
+  
+  <div class='link-div'>
+
+    <a href="?passPhrase=leMat">
+      Try 'leMat' for single card layout that deals a random card upon request (named for the Fool card in the Marseilles deck)
+    </a>
+
+  </div>
+
+
+  <div class='link-div'>
+
+    <a href="?passPhrase=leAC">
+      Try 'leAC' for the very first version of the Tarot game we are currently working on.
+    </a>
+
+  </div>
+  
+  <div class='link-div'>
+
+    <a href="?passPhrase=leMonde">
+      Try 'leMonde' for a variant layout based on the World Card of the Marseilles deck that uses similar interaction rules to BoardAC (passPhrase 'leAC');
+    </a>
+
+  </div>
+  
+  <div class='link-div'>
+
+    <a href="?passPhrase=leNuit">
+      Try 'leNuit' for an experimental variation of what we started in leMonde.
+    </a>
+
+  </div>
+  
+  <div class='link-div'>
+
+    <a href="?passPhrase=leCE">
+      Try 'leCE' for ...
+    </a>
+
+  </div>
+
   <div class='link-div'>
 
     <a href="?passPhrase=lament">
@@ -91,16 +134,8 @@
   
   <div class='link-div'>
 
-    <a href="?passPhrase=leAC">
-      Try 'leAC' for the very first version of the Tarot game we are currently working on.
-    </a>
-
-  </div>
-  
-  <div class='link-div'>
-
     <a href="?passPhrase=matriculate">
-      Try 'matriculate' for ...
+      Try 'matriculate' to go directly into the ML/JK Balance Point
     </a>
 
   </div>
@@ -108,7 +143,7 @@
   <div class='link-div'>
 
     <a href="?passPhrase=daedalusLab">
-      Try 'daedalusLab' for ...
+      Try 'daedalusLab' for the earlier version of Daedalus (prior to the creation of the Shop Floor concept of work benches for each sub category of development)
     </a>
 
   </div>
@@ -117,14 +152,6 @@
 
     <a href="?passPhrase=well">
       Try 'well' for ...
-    </a>
-
-  </div>
-  
-  <div class='link-div'>
-
-    <a href="?passPhrase=leMat">
-      Try 'leMat' for ...
     </a>
 
   </div>
@@ -141,30 +168,6 @@
 
     <a href="?passPhrase=lament">
       Try 'lament' for ...
-    </a>
-
-  </div>
-  
-  <div class='link-div'>
-
-    <a href="?passPhrase=leMonde">
-      Try 'leMonde' for ...
-    </a>
-
-  </div>
-  
-  <div class='link-div'>
-
-    <a href="?passPhrase=leNuit">
-      Try 'leNuit' for ...
-    </a>
-
-  </div>
-  
-  <div class='link-div'>
-
-    <a href="?passPhrase=leCE">
-      Try 'leCE' for ...
     </a>
 
   </div>
