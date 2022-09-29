@@ -12,6 +12,7 @@
     voidMode,
     devNotifyDelay,
     affinityKeys,
+    tctClicked,
   } from './stores.js';
 
   import MyriadNotification from './MyriadNotification.svelte';
@@ -56,6 +57,12 @@
 
       $passPhrase = urlParams.get('passPhrase');
       console.log('passPhrase set to: ' + $passPhrase);
+    }
+
+    if(urlParams.has('tctClicked')){
+
+      $tctClicked = urlParams.get('tctClicked');
+      console.log('tctClicked set to: ' + $tctClicked);
     }
 
     if($devMode){
@@ -169,9 +176,18 @@
 
       <div class='footer'>
          
-        <a href="?passPhrase=">
-          a Temple Cathedral Tomb production
-        </a>
+
+        {#if $tctClicked}
+
+          <a href="https://www.tiktok.com/t/ZTRmfV2eB/">View The MyriaD Vision Statement on TikTok</a>
+
+        {:else}
+
+          <a href="?tctClicked=true&passPhrase=">
+            a Temple Cathedral Tomb production
+          </a>
+
+        {/if}
 
       </div>
 

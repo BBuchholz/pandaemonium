@@ -12,6 +12,7 @@ export const passPhrase = writable('');
 export const affinityAnchor = writable('quotidian');
 export const affinityKeys = writable([]);
 export const contextualQuotes = writable([]);
+export const tctClicked = writable(false);
 
 
 /**
