@@ -508,12 +508,12 @@
   
 .buttons-vessel {
 
-  position: absolute;
+  /*position: absolute;*/
   min-height: 2em;
   min-width: 10em;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  /*top: 50%;
+  left: 50%;*/
+  /*transform: translate(-50%, -50%);*/
   border: none;
   display: flex;
   flex-flow: row;

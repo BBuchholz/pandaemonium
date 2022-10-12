@@ -249,57 +249,96 @@
 /* REF-USED: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout */
 
 .game-board {
-
+  
+  border: solid;
+  width: 100vw;
+  height: 100vh;
   display: grid;
   grid-template-columns: auto auto auto auto auto auto;
   gap: 10px;
 }
 
 .water-vessel {
-
-  grid-column: 1/3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid;
+  grid-column: 1/4;
   grid-row: 1;
 }
 
 .air-vessel {
-
-  grid-column: 4/6;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid;
+  grid-column: 4/7;
   grid-row: 1;
 }
 
 .deck-vessel {
-
-  grid-column: 1;
-  grid-row: 2;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid;
+  grid-column: 1/7;
+  grid-row: 4;
 }
 
 .ac-vessel {
-
-  grid-column: 1;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid;
+  grid-column: 1/7;
   grid-row: 3;
 }
 
 .buttons-vessel {
+  
 
-  grid-column: 1;
-  grid-row: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid;
+  grid-column: 1/7;
+  grid-row: 2;
 }
 
 .discard-vessel {
+  
 
-  grid-column: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid;
+  grid-column: 1/7;
   grid-row: 5;
 }
 
 .earth-vessel {
+  
 
-  grid-column: 1/3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid;
+  grid-column: 1/4;
   grid-row: 6;
 }
 
+
 .fire-vessel {
 
-  grid-column: 4/6;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+  border: solid;
+  grid-column: 4/7;
   grid-row: 6;
 }
 
