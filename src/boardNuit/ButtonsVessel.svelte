@@ -341,11 +341,11 @@
       
         if(foundAir.length > 0){
 
-          notifyCollectedWaterWet(cardKey);
+          // notifyCollectedWaterWet(cardKey);
 
         }else{
 
-          notifyCollectedWater(cardKey);
+          // notifyCollectedWater(cardKey);
 
         }
       }
@@ -362,11 +362,11 @@
       
         if(foundWater.length > 0){
 
-          notifyCollectedAirWet(cardKey);
+          // notifyCollectedAirWet(cardKey);
 
         }else{
 
-          notifyCollectedAir(cardKey);
+          // notifyCollectedAir(cardKey);
 
         }
       }
@@ -383,11 +383,11 @@
       
         if(foundFire.length > 0){
 
-          notifyCollectedEarthDry(cardKey);
+          // notifyCollectedEarthDry(cardKey);
 
         }else{
 
-          notifyCollectedEarth(cardKey);
+          // notifyCollectedEarth(cardKey);
 
         }
       }
@@ -404,11 +404,11 @@
       
         if(foundEarth.length > 0){
 
-          notifyCollectedFireDry(cardKey);
+          // notifyCollectedFireDry(cardKey);
 
         }else{
 
-          notifyCollectedFire(cardKey);
+          // notifyCollectedFire(cardKey);
 
         }
       }

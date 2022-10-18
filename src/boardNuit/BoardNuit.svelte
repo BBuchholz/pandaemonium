@@ -250,7 +250,7 @@
 
 .game-board {
   
-  border: solid;
+  border: none;
   width: 100vw;
   height: 100vh;
   display: grid;
@@ -262,7 +262,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: solid;
+  border: none;
   grid-column: 1/4;
   grid-row: 1;
 }
@@ -272,7 +272,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: solid;
+  border: none;
   grid-column: 4/7;
   grid-row: 1;
 }
@@ -282,7 +282,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: solid;
+  border: none;
   grid-column: 1/7;
   grid-row: 4;
 }
@@ -292,7 +292,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: solid;
+  border: none;
   grid-column: 1/7;
   grid-row: 3;
 }
@@ -303,7 +303,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: solid;
+  border: none;
   grid-column: 1/7;
   grid-row: 2;
 }
@@ -314,7 +314,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: solid;
+  border: none;
   grid-column: 1/7;
   grid-row: 5;
 }
@@ -325,7 +325,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: solid;
+  border: none;
   grid-column: 1/4;
   grid-row: 6;
 }
@@ -337,7 +337,7 @@
   display: flex;
   align-items: center;
   justify-content: center;  
-  border: solid;
+  border: none;
   grid-column: 4/7;
   grid-row: 6;
 }
