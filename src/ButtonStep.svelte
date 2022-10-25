@@ -15,6 +15,24 @@
 
   // import TurnMyrKiOption from './TurnMyrKiOption.svelte';
 
+  import { 
+    lamentText,
+    leMatText,
+    leACText,
+    leMondeText,
+    leNuitText,
+    leCEText,
+    craftText,
+    matriculateText,
+    daedalusLabText,
+    wellText,
+    learnText,
+    channardText,
+    tzimisceText,
+    helpText,
+    pruneText,
+  } from './hd-constants.js';
+
   function notify(textValue){
     addNotification({
       position: 'top-right',
@@ -78,7 +96,7 @@
   <div class='link-div'>
 
     <a href="?passPhrase=leMat">
-      Try 'leMat' for single card layout that deals a random card upon request (named for the Fool card in the Marseilles deck)
+      {leMatText}
     </a>
 
   </div>
@@ -87,7 +105,7 @@
   <div class='link-div'>
 
     <a href="?passPhrase=leAC">
-      Try 'leAC' for the very first version of the Tarot game we are currently working on.
+      {leACText}
     </a>
 
   </div>
@@ -95,7 +113,7 @@
   <div class='link-div'>
 
     <a href="?passPhrase=leMonde">
-      Try 'leMonde' for a variant layout based on the World Card of the Marseilles deck that uses similar interaction rules to BoardAC (passPhrase 'leAC');
+      {leMondeText}
     </a>
 
   </div>
@@ -103,7 +121,7 @@
   <div class='link-div'>
 
     <a href="?passPhrase=leNuit">
-      Try 'leNuit' for an experimental variation of what we started in leMonde.
+      {leNuitText}
     </a>
 
   </div>
@@ -111,7 +129,7 @@
   <div class='link-div'>
 
     <a href="?passPhrase=leCE">
-      Try 'leCE' for ...
+      {leCEText}
     </a>
 
   </div>
@@ -119,7 +137,7 @@
   <div class='link-div'>
 
     <a href="?passPhrase=lament">
-      Try 'lament' for the original library/workshop organizational dichotomy with ML/JK balance point...
+      {lamentText}
     </a>
 
   </div>
@@ -127,7 +145,7 @@
   <div class='link-div'>
 
     <a href="?passPhrase=craft">
-      Try 'craft' to go directly into the Daedalus Shop Floor
+      {craftText}
     </a>
 
   </div>
@@ -135,7 +153,7 @@
   <div class='link-div'>
 
     <a href="?passPhrase=matriculate">
-      Try 'matriculate' to go directly into the ML/JK Balance Point
+      {matriculateText}
     </a>
 
   </div>
@@ -143,7 +161,7 @@
   <div class='link-div'>
 
     <a href="?passPhrase=daedalusLab">
-      Try 'daedalusLab' for the earlier version of Daedalus (prior to the creation of the Shop Floor concept of work benches for each sub category of development)
+      {daedalusLabText}
     </a>
 
   </div>
@@ -151,7 +169,7 @@
   <div class='link-div'>
 
     <a href="?passPhrase=well">
-      Try 'well' for ...
+      {wellText}
     </a>
 
   </div>
@@ -159,7 +177,7 @@
   <div class='link-div'>
 
     <a href="?passPhrase=learn">
-      Try 'learn' for ...
+      {learnText}
     </a>
 
   </div>
@@ -167,15 +185,15 @@
   <div class='link-div'>
 
     <a href="?passPhrase=lament">
-      Try 'lament' for ...
+      {lamentText}
     </a>
 
   </div>
   
   <div class='link-div'>
 
-    <a href="?passPhrase=Channard' f">
-      Try 'Channard' for OpRoom
+    <a href="?passPhrase=Channard">
+      {channardText}
     </a>
 
   </div>
@@ -183,7 +201,7 @@
   <div class='link-div'>
 
     <a href="?passPhrase=Tzimisce">
-      Try 'Tzimisce' for ...
+      {tzimisceText}
     </a>
 
   </div>
@@ -191,7 +209,7 @@
   <div class='link-div'>
 
     <a href="?passPhrase=help">
-      Try 'help' for ...
+      {helpText}
     </a>
 
   </div>
@@ -199,7 +217,7 @@
   <div class='link-div'>
 
     <a href="?passPhrase=prune">
-      Try 'prune' for the MarkDown Completed Task Pruner
+      {pruneText}
     </a>
 
   </div>

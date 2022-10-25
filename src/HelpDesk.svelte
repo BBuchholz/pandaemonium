@@ -15,6 +15,24 @@
 
   // import TurnMyrKiOption from './TurnMyrKiOption.svelte';
 
+  import { 
+    lamentText,
+    leMatText,
+    leACText,
+    leMondeText,
+    leNuitText,
+    leCEText,
+    craftText,
+    matriculateText,
+    daedalusLabText,
+    wellText,
+    learnText,
+    channardText,
+    tzimisceText,
+    helpText,
+    pruneText,
+  } from './hd-constants.js';
+
   function notify(textValue){
     addNotification({
       position: 'top-right',
@@ -93,67 +111,73 @@
   <div class="citadel-desk">
 
     <p>
-      Try "lament" for ...
+      Check out the <a href="https://youtu.be/l9m-q0c6l_M">Help Desk Intro</a> video notes for details. (What's a Video Note? We've posted an explanation video <a href="https://youtu.be/CIekmoVgJ_4">here</a> to clarify)
     </p>
 
     <p>
-      Try 'craft' for ...
+      {lamentText}
+    </p>
+
+    <!-- TODO: replace all these with constants, do buttonstep also! -->
+
+    <p>
+      {craftText}
     </p>
     
     <p>
-      Try 'leAC' for ...
+      {leACText}
     </p>
     
     <p>
-      Try 'matriculate' for ...
+      {matriculateText}
     </p>
     
     <p>
-      Try 'daedalusLab' for ...
+      {daedalusLabText}
     </p>
     
     <p>
-      Try 'well' for ...
+      {wellText}
     </p>
     
     <p>
-      Try 'leMat' for ...
+      {leMatText}
     </p>
     
     <p>
-      Try 'learn' for ...
+      {learnText}
     </p>
     
     <p>
-      Try 'lament' for ...
+      {lamentText}
     </p>
     
     <p>
-      Try 'leMonde' for ...
+      {leMondeText}
     </p>
     
     <p>
-      Try 'leNuit' for ...
+      {leNuitText}
     </p>
     
     <p>
-      Try 'leCE' for ...
+      {leCEText}
     </p>
     
     <p>
-      Try 'Channard' for OpRoom
+      {channardText}
     </p>
     
     <p>
-      Try 'Tzimisce' for ...
+      {tzimisceText}
     </p>
     
     <p>
-      Try 'help' for ...
+      {helpText}
     </p>
     
     <p>
-      Try 'prune' for the MarkDown Completed Task Pruner
+      {pruneText}
     </p>
 
     <!-- We wanna make more of a game and less of a lesson... -->
