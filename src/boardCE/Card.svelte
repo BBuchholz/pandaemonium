@@ -302,9 +302,9 @@ img {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  height: 100%;
-  width: auto;
-  object-fit: fill;
+  height: auto;
+  width: 100%;
+  object-fit: contain;
 }
 
 
