@@ -10,7 +10,19 @@
     } from './stores.js';
 
   import {
-    cardImagePath
+    cardImagePath,
+    keysVirgo,
+    keysTaurus,
+    keysCapricorn,
+    keysGemini,
+    keysAquarius,
+    keysLibra,
+    keysPisces,
+    keysScorpio,
+    keysCancer,
+    keysSagittarius,
+    keysLeo,
+    keysAries,
   } from '../constants.js'
 
   import KnechtController from '../myriad/KnechtController.js';
@@ -23,8 +35,16 @@
   let src = '';
   let cardTitle = 'card title';
   let cardPower = 'zw';
+  let cardRank = 'card rank';
+  let cardElement = 'zw';
+  let cardSuit = '?';
+  let cardZodiac = 'zz';
 
   $: src = getImgSrcFromCardKey(cardPower);
+  $: cardElement = getElementalSymbolFromCardKey(cardKey); 
+  $: cardZodiac = getZodiacalSymbolFromCardKey(cardKey);
+  $: cardSuit = magisterLudi.parseSuit(cardKey);
+  $: cardRank = magisterLudi.parseRank(cardKey, cardSuit);
   $: cardTitle = cardKey;
   $: cardPower = cardKey; 
   // $: console.log("isSelected for " + cardKey + ": " + isSelected);
@@ -36,6 +56,77 @@
     // return '/images/' + powerString + '.jpg';
     return cardImagePath + powerString + '.jpg';
   }
+
+
+  function getElementalSymbolFromCardKey(cardKey){
+    const suit = magisterLudi.parseSuit(cardKey);
+    switch(suit){
+      case 'C':
+        return '🜄';
+      case 'W':
+        return '🜂';
+      case 'D':
+        return '🜃';
+      case 'S':
+        return '🜁';
+      default:  
+        return '';
+    }
+  }
+
+
+function getZodiacalSymbolFromCardKey(cardKey){
+    
+    if(keysVirgo.includes(cardKey)){
+      return "♍";
+    }
+
+    if(keysTaurus.includes(cardKey)){
+      return "♉";
+    }
+    
+    if(keysScorpio.includes(cardKey)){
+      return "♏";
+    }
+    
+    if(keysSagittarius.includes(cardKey)){
+      return "♐";
+    }
+    
+    if(keysPisces.includes(cardKey)){
+      return "♓";
+    }
+    
+    if(keysLibra.includes(cardKey)){
+      return "♎";
+    }
+    
+    if(keysLeo.includes(cardKey)){
+      return "♌";
+    }
+    
+    if(keysGemini.includes(cardKey)){
+      return "♊";
+    }
+    
+    if(keysCapricorn.includes(cardKey)){
+      return "♑";
+    }
+    
+    if(keysCancer.includes(cardKey)){
+      return "♋";
+    }
+    
+    if(keysAries.includes(cardKey)){
+      return "♈";
+    }
+    
+    if(keysAquarius.includes(cardKey)){
+      return "♒";
+    }
+    
+  }
+
 
   function handleClick() {
 
@@ -102,9 +193,34 @@
   class:earth-color={magisterLudi.parseSuit(cardKey) === 'D'}
   on:click={handleClick}
 >
-  <div class="text">{cardTitle}</div>
+  
+  <!-- <div class="text">{cardTitle}</div>
   <img class="image" alt={cardTitle} {src}/>
-  <div class="power">{cardPower}</div>
+  <div class="power">{cardPower}</div> -->
+
+
+  <div 
+    class="card-zodiac"
+    class:fire-color={cardSuit === 'W'}
+    class:water-color={cardSuit === 'C'}
+    class:air-color={cardSuit === 'S'}
+    class:earth-color={cardSuit === 'D'}
+  >{cardZodiac}</div>
+  <div 
+    class="card-rank"
+    class:fire-color={cardSuit === 'W'}
+    class:water-color={cardSuit === 'C'}
+    class:air-color={cardSuit === 'S'}
+    class:earth-color={cardSuit === 'D'}
+  >{cardRank}</div>
+  <img class="image" alt={cardRank} {src}/>
+  <div class="card-element"
+    class:fire-color={cardSuit === 'W'}
+    class:water-color={cardSuit === 'C'}
+    class:air-color={cardSuit === 'S'}
+    class:earth-color={cardSuit === 'D'}
+  >{cardElement}</div>
+
 </div>
 
 <style>
@@ -177,9 +293,74 @@
 }
 
 img {
-  width: 10vw;
+  
+  /*ORIGINAL*/
+  /*width: 10vw;
   height: 20vh;
-  object-fit: contain;
+  object-fit: contain;*/
+
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+  width: auto;
+  object-fit: fill;
+}
+
+
+.card-element {
+  font-size: 30px;
+  position: absolute;
+  bottom: 0px;
+  line-height: 30px;
+  left: 0px;
+  width: 30px;
+  height: 30px;
+  padding: 3px;
+  text-align: center;
+  border-radius: 12%;
+  color: black;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.card-rank {
+  font-size: 30px;
+  position: absolute;
+  top: 0px;
+  line-height: 30px;
+  right: 6px;
+  width: 30px;
+  height: 30px;
+  padding: 3px;
+  text-align: center;
+  border-radius: 12%;
+  border-spacing: 12px;
+  color: black;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.card-zodiac {
+  font-size: 20px;
+  position: absolute;
+  align-content: center;
+  align-items: center;
+  top: 0px;
+  line-height: 30px;
+  left: 4px;
+  width: 30px;
+  height: 30px;
+  padding: 3px;
+  text-align: center;
+  border-radius: 12%;
+  border-spacing: 12px;
+  color: black;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .daemon-color { 
