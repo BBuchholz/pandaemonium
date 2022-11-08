@@ -300,8 +300,9 @@ img {
   object-fit: contain;*/
 
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  /*margin-left: auto;
+  margin-right: auto;*/
+  margin: auto;
   height: auto;
   width: 100%;
   object-fit: contain;
