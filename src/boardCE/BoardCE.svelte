@@ -350,7 +350,7 @@
       return;
     }
 
-    var cardsToDeal = 3;
+    var cardsToDeal = 2;
 
     while((cardsToDeal * 2) > $deck.length){
       cardsToDeal -= 1;
