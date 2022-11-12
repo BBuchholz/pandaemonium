@@ -13,7 +13,8 @@
     collectedAir,
     collectedSpirit,
     heatIndex,
-    moistureIndex
+    moistureIndex,
+    currentElementRuleText,
   } from './stores.js';
 
   import { 
@@ -22,6 +23,21 @@
     keysLibra,
     keysAir
   } from '../constants.js';
+
+  
+  import { getNotificationsContext } from 'svelte-notifications';
+  const { addNotification } = getNotificationsContext();
+
+
+  function notifyElementChange(){
+    addNotification({
+      position: 'top-center',
+      text: 'Air',
+      type: 'error',
+      description: $currentElementRuleText,
+    });
+  }
+
 
   function redeemAir() {
     
@@ -39,6 +55,8 @@
 
       selectAir(false);
     }
+
+    notifyElementChange();
   }
 
   function selectAir(resetIndexes){

@@ -602,6 +602,47 @@ export const selectionIsValid = derived(
     } 
 );
 
+
+export const currentElementRuleText = derived(
+  [currentQuadrant],
+    ([$currentQuadrant]) => {
+
+      let elementText = 'rules go here';
+
+      if($currentQuadrant === 'Void'){
+
+        elementText = 'void rules';
+      }
+
+      if($currentQuadrant === 'Water'){
+
+        elementText = 'Water rules';
+      }
+
+
+      if($currentQuadrant === 'Air'){
+
+        elementText = 'Air rules';
+      }
+
+
+      if($currentQuadrant === 'Earth'){
+
+        elementText = 'Earth rules';
+
+      }
+
+
+      if($currentQuadrant === 'Fire'){
+
+        elementText = 'Fire rules';
+      
+      }
+
+      return elementText;
+    } 
+);
+
 export const selectionResolutionValue = derived(
   [unselectedCards,
    selectedCardsForDaemon, 

@@ -13,6 +13,7 @@
     collectedSpirit,
     heatIndex,
     moistureIndex, 
+    currentElementRuleText,
   } from './stores.js';
 
   import { 
@@ -22,6 +23,10 @@
     keysFire, 
   } from '../constants.js';
   
+
+  import { getNotificationsContext } from 'svelte-notifications';
+  const { addNotification } = getNotificationsContext();
+
   // function redeemFire() {
 
   //   $fireCollection = $fireCollection.filter(cardKey => !keysFire.includes(cardKey)); 
@@ -29,6 +34,16 @@
   //   $heatIndex += 9;
   //   $moistureIndex += -9;
   // }
+
+
+  function notifyElementChange(){
+    addNotification({
+      position: 'top-center',
+      text: 'Fire',
+      type: 'error',
+      description: $currentElementRuleText,
+    });
+  }
 
   function redeemFire() {
     
@@ -46,6 +61,8 @@
 
       selectFire(false);
     }
+
+    notifyElementChange();
   }
 
   function selectFire(resetIndexes){

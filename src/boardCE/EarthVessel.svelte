@@ -13,7 +13,8 @@
     collectedEarth,
     collectedSpirit,
     heatIndex,
-    moistureIndex
+    moistureIndex,
+    currentElementRuleText,
   } from './stores.js';
 
   import { 
@@ -23,6 +24,9 @@
     keysEarth 
   } from '../constants.js';
   
+  import { getNotificationsContext } from 'svelte-notifications';
+  const { addNotification } = getNotificationsContext();
+
 
   // function redeemEarth() {
 
@@ -34,6 +38,16 @@
   //   $heatIndex += -9;
   //   $moistureIndex += -9;
   // }
+
+
+  function notifyElementChange(){
+    addNotification({
+      position: 'top-center',
+      text: 'Earth',
+      type: 'error',
+      description: $currentElementRuleText,
+    });
+  }
 
   function redeemEarth() {
     
@@ -51,6 +65,8 @@
 
       selectEarth(false);
     }
+
+    notifyElementChange();
   }
 
   function selectEarth(resetIndexes){

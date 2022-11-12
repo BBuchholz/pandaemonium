@@ -12,7 +12,8 @@
     collectedWater,
     collectedSpirit,
     heatIndex,
-    moistureIndex 
+    moistureIndex,
+    currentElementRuleText,
   } from './stores.js';
 
   import { 
@@ -21,6 +22,20 @@
     keysPisces,
     keysWater 
   } from '../constants.js';
+
+
+  
+  import { getNotificationsContext } from 'svelte-notifications';
+  const { addNotification } = getNotificationsContext();
+
+  function notifyElementChange(){
+    addNotification({
+      position: 'top-center',
+      text: 'Water',
+      type: 'error',
+      description: $currentElementRuleText,
+    });
+  }
   
   function redeemWater() {
     
@@ -38,6 +53,8 @@
 
       selectWater(false);
     }
+
+    notifyElementChange();
   }
 
   function selectWater(resetIndexes){

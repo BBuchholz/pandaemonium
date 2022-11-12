@@ -62,14 +62,14 @@
     });
   }
 
-  function notifyElementChange(){
-    // addNotification({
-    //   position: 'bottom-right',
-    //   text: $currentElementRuleText,
-    //   type: 'error',
-    //   description: 'lorem ipsum',
-    // });
-  }
+  // function notifyElementChange(){
+  //   addNotification({
+  //     position: 'bottom-right',
+  //     text: $currentElementRuleText,
+  //     type: 'error',
+  //     description: 'lorem ipsum',
+  //   });
+  // }
 
   function notifyPassPhraseFound(){
     addNotification({
@@ -79,8 +79,6 @@
       description: 'passPhrase: ' + $passPhrase,
     });
   }
-
-
 
   function notifyDevInfo(infoTitle, infoDesc, position){
 
