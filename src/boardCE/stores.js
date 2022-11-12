@@ -611,31 +611,53 @@ export const currentElementRuleText = derived(
 
       if($currentQuadrant === 'Void'){
 
-        elementText = 'void rules';
+        elementText = 
+          `
+          The A at the Apex of the Temple.
+          The Palace of Inspiration.
+          Should have a Solar and a Lunar Mode,
+          represented by the upright 
+          and averse pentagrams.
+          The Fifth Element of Spirit and Space.
+          (any selections here will be valid, as 
+          a way to explore new combinations, anything 
+          you select can be copied to the clipboard 
+          for taking notes on future specs)
+          `;
       }
 
       if($currentQuadrant === 'Water'){
 
-        elementText = 'Water rules';
+        elementText = 
+        `
+        As far as collection rules go, should be the opposite of air, whearas intelectual ideas become more developed over time, water dilutes as time churns, so closest to source is strongest for current, thus withing the same suit lower card should trujp higher card, and when suits differ, preceding element in chronological astrological order should trump successibve/later element, so air trumps water, earth trumps arir fire trumps earth, and water trumps fire.
+        `;
       }
 
 
       if($currentQuadrant === 'Air'){
 
-        elementText = 'Air rules';
+        elementText = `
+        A test of wits, what it C. Within the same suit, a more developed idea is superior, and hence, it will win out time and again, so we collect the lower rank and the higher rank goes back in. However, it is quite possible to take a position rooted in entirely different principles, in which case I'm inclined to lean towards a rock paper scissors style succession system where each element trumps and is trumped by another. Need to work out the logic on that... UPDATE: let's try astrological order, so air trumps earth, water trumps air, fire trumps water, and earth trumps fire. Have water and earth harmonize (treat as same suit but tie goes to water), have fire and air fuel/consume (treat as same but tie goes to fire).
+
+        `;
       }
 
 
       if($currentQuadrant === 'Earth'){
 
-        elementText = 'Earth rules';
+        elementText = `
+        A test of identity, of Is-ness, the facts at hand, what it B. Order is enshrined, so collection is based on matching either suit or rank. It's all about getting everything where it belongs, and 9 cards means you can't just rely on even pairing every element, the odd number is the rough edges that must be accommodated, the facts for which a fit must be found, the metric of the puzzle as it were
+        `;
 
       }
 
 
       if($currentQuadrant === 'Fire'){
 
-        elementText = 'Fire rules';
+        elementText = `
+        A test of wills, what it G, only rank is compared, if your will attunes to the same principles as your opponent, the one closest to root essence will win (defining principles) hence low rank collects in same suit. If suits are differing, and a tie in ranks occurs, fire resonates with the spark within and player card collects daemon card. (Daemon card is collected)
+        `;
       
       }
 

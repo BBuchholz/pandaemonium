@@ -128,10 +128,12 @@
 
   function enterDevMode(){
     $devMode = true;
+    close();
   }
 
   function enterVoidMode(){
     $voidMode = true;
+    close();
   }
 
 </script>
