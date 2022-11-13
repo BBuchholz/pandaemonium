@@ -14,6 +14,27 @@ export const affinityKeys = writable([]);
 export const contextualQuotes = writable([]);
 export const tctClicked = writable(false);
 
+export const deckName = writable('');
+
+export const cardImagePath = derived(
+	[deckName, ],
+	([$deckName, ]) => {
+
+		let path = "/images/cbdt/";
+
+
+		if($deckName === 'traditional'){
+
+			path = "/images/";
+			console.log("cardImagePath set to traditional");
+		
+		}
+	console.log("cardImagePath set to " + path);
+		
+		return path;
+	}
+);
+
 
 /**
  * @deprecated - Since version 1.0. 

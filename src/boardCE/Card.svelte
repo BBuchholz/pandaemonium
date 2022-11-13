@@ -6,11 +6,11 @@
     selectedCardsForPlayer, 
     selectedCardsForDaemon,
     selectionIsWet,
-    resolutionIsHeated
+    resolutionIsHeated,
     } from './stores.js';
 
   import {
-    cardImagePath,
+    // cardImagePath,
     keysVirgo,
     keysTaurus,
     keysCapricorn,
@@ -23,7 +23,11 @@
     keysSagittarius,
     keysLeo,
     keysAries,
-  } from '../constants.js'
+  } from '../constants.js';
+
+  import {
+    cardImagePath,
+  } from '../stores.js';
 
   import KnechtController from '../myriad/KnechtController.js';
   const magisterLudi = KnechtController();
@@ -54,7 +58,7 @@
 
   function getImgSrcFromCardKey(powerString){
     // return '/images/' + powerString + '.jpg';
-    return cardImagePath + powerString + '.jpg';
+    return $cardImagePath + powerString + '.jpg';
   }
 
 

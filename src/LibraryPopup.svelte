@@ -13,6 +13,7 @@
     passPhrase,
     devMode, 
     voidMode,
+    deckName,
     requestedInitialDeal,
   } from './stores.js';
 
@@ -150,6 +151,8 @@
     <button on:click={enterVoidMode} >Enter Void Mode</button>
     <p>Dev Mode is {$devMode}</p>
     <p>Void Mode is {$voidMode}</p>
+
+    <input bind:value={$deckName} />
 
 
     <p>This is an open source project based on another under GPL licensing, and subject to those conditions, contact me through the github site, hosted at <a href='https://github.com/BBuchholz/pandaemonium'>github.com/BBuchholz/pandaemonium</a>, for details </p>
