@@ -204,39 +204,39 @@ uuid: someValue
   
 });
 
-it('should generate praxis instance templates', () => {
+// it('should generate praxis instance templates', () => {
 
 
-  //KEEP THIS AS WE IMPLEMENT, BUT THEN FLIP TEST TO MAKE SURE
-  //IT HAS ALL THESE VALUES BUT THAT THEY DIFFER WHERE
-  //THEY SHOULD
-  const templateText =
-`
----
+//   //KEEP THIS AS WE IMPLEMENT, BUT THEN FLIP TEST TO MAKE SURE
+//   //IT HAS ALL THESE VALUES BUT THAT THEY DIFFER WHERE
+//   //THEY SHOULD
+//   const templateText =
+// `
+// ---
 
-wxrdUuid: replaceThisValue
-wxrdType: praxisInstance
-wxrdCreatedOn: 2022-08-29
-wxrdCreatedAt: 10-53-23
-wxrdSpecVersion: 1.0
+// wxrdUuid: replaceThisValue
+// wxrdType: praxisInstance
+// wxrdCreatedOn: 2022-08-29
+// wxrdCreatedAt: 10-53-23
+// wxrdSpecVersion: 1.0
 
----
-
-
-
-`;
-
-  const generatedTemplate =
-    thothMagus.generatePraxisTemplate();
+// ---
 
 
-  expect(generatedTemplate).toBe(templateText);
 
-  //AFTER THAT LINE IS WORKING, CHANGE IT TO THIS
-  // expect(generatedTemplate).not.toBe(templateText);
+// `;
+
+//   const generatedTemplate =
+//     thothMagus.generatePraxisTemplate();
+
+
+//   expect(generatedTemplate).toBe(templateText);
+
+//   //AFTER THAT LINE IS WORKING, CHANGE IT TO THIS
+//   // expect(generatedTemplate).not.toBe(templateText);
 
   
-});
+// });
 
 
 

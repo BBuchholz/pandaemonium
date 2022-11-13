@@ -103,7 +103,7 @@
   {/if}
 
 
-  {#if $selectionIsValid }
+  {#if $selectionIsValid && $selectionResolutionValue.length }
 
     <button 
       class="confirmSelection"

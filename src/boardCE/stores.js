@@ -657,6 +657,8 @@ export const currentElementRuleText = derived(
 
         elementText = `
         A test of wills, what it G, only rank is compared, if your will attunes to the same principles as your opponent, the one closest to root essence will win (defining principles) hence low rank collects in same suit. If suits are differing, and a tie in ranks occurs, fire resonates with the spark within and player card collects daemon card. (Daemon card is collected)
+        UPDATE =====> ranking should be reversed, an old fire should be more easily bested by a younger flame, unless there is affinity, in which case the old flame is invigorated by the affinity, is honored by the succession, technically the younger flame takes the office of the elder, but the effect should be that the lower card gets collected, as the new attainment is the rising to the occasion
+also, only should collect when player collects, daemon collections should go back in the deck, so the only way to win is to win all trick as the player...
         `;
       
       }
@@ -722,7 +724,7 @@ export const selectionResolutionValue = derived(
 
       outcome = 
         magisterLudi.selResValFire(
-          $selectedCardsForPlayer, $selectedCardsForDaemon);
+          $selectedCardsForDaemon, $selectedCardsForPlayer);
 
     }
 
@@ -761,10 +763,12 @@ export const selectionResolutionText = derived(
 export const newDealEligible = derived(
   [playerCards, 
    daemonCards,
-   currentQuadrant],
+   currentQuadrant,
+   selectionResolutionValue],
   ([$playerCards, 
     $daemonCards,
-    $currentQuadrant]) => {
+    $currentQuadrant,
+    $selectionResolutionValue]) => {
 
     if($playerCards.length === 0 ||
        $daemonCards.length === 0){
@@ -802,8 +806,10 @@ export const newDealEligible = derived(
 
     if($currentQuadrant === 'Fire'){
 
-        return magisterLudi.newDealEligibleFire(
-          $daemonCards, $playerCards);
+        // return magisterLudi.newDealEligibleFire(
+        //   $daemonCards, $playerCards);
+
+        return $selectionResolutionValue.length == 0;
 
     }
 

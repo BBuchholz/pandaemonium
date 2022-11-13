@@ -53,6 +53,11 @@
   const { addNotification } = getNotificationsContext();
 
   function notifySelectionResolutionValue(){
+
+    if($selectionResolutionValue.length == 0){
+      return;
+    }
+
     addNotification({
       position: 'bottom-right',
       text: 'collected ' + $selectionResolutionValue,

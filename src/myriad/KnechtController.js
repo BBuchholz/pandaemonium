@@ -1051,29 +1051,44 @@ const KnechtController = () => {
         const dRank = self.parseRank(dCardKey, dSuit);
         const pRank = self.parseRank(pCardKey, pSuit);
 
+        console.log("dSuit: ", dSuit);
+
         if(dSuit == pSuit){
           
           //same suit, low rank succeeds
-          if(dRank > pRank){
+          if(pRank < dRank){
 
-            outcome.push(dCardKey);
+            //PLAYER WINS
+            //but in accordance with SUCCESSION, player card
+            //gets collected (the youth, slaying the elder, takes its rank, becoming it)
+            outcome.push(pCardKey);
           
           }else{
           
-            outcome.push(pCardKey);
+            // DAEMON WINS
+            // fire should not collect when player loses
+            // the flame has gone out, no wins today
+            // outcome.push(dCardKey);
           
           }
 
         }else{
           
           //differing suits, high rank succeeds
-          if(dRank > pRank){
+          if(pRank > dRank){
+
+
+            // PLAYER WINS
+            // collect Daemon card
            
-            outcome.push(pCardKey);
+            outcome.push(dCardKey);           
           
           }else{
-           
-            outcome.push(dCardKey);
+
+            // DAEMON WINS
+            // fire should not collect when player loses 
+            // outcome.push(pCardKey);
+
           }
 
         }
