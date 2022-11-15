@@ -19,6 +19,8 @@
     lamentText,
     leMatText,
     leACText,
+    divineText,
+    divinePortText,
     leMondeText,
     leNuitText,
     leCEText,
@@ -110,6 +112,22 @@
 
   </div>
   
+  <div class='link-div'>
+
+    <a href="?passPhrase=divine">
+      {divineText}
+    </a>
+
+  </div>
+  
+  <div class='link-div'>
+
+    <a href="?passPhrase=port">
+      {divinePortText}
+    </a>
+
+  </div>
+
   <div class='link-div'>
 
     <a href="?passPhrase=leMonde">

@@ -22,6 +22,8 @@
   import BoardMonde from './boardMonde/BoardMonde.svelte'; 
   import BoardNuit from './boardNuit/BoardNuit.svelte'; 
   import BoardCE from './boardCE/BoardCE.svelte';
+  import BoardDivine from './boardDivine/BoardDivine.svelte';
+  import BoardDivinePort from './boardDivine/BoardDivinePort.svelte';
 
   import Alexandria from './alex/Alexandria.svelte';
   import LeMarchand from './prospero/LeMarchand.svelte';
@@ -109,6 +111,14 @@
       {:else if $passPhrase === 'leAC'}
 
         <BoardAC />
+
+      {:else if $passPhrase === 'divine'}
+
+        <BoardDivine />
+
+      {:else if $passPhrase === 'port'}
+
+        <BoardDivinePort />
 
       {:else if $passPhrase.startsWith('matriculate')}
 

@@ -5,6 +5,10 @@ const leMatText = "Try 'leMat' for single card layout that deals a random card u
 
 const leACText = "Try 'leAC' for the very first version of the Tarot game we are currently working on.";
 
+const divineText = "Try 'divine' for our divination board.";
+
+const divinePortText = "Try 'port' for our attempt to port the svelte transition tutorial to something that works with cards and dealing.";
+
 const leMondeText = "Try 'leMonde' for a variant layout based on the World Card of the Marseilles deck that uses similar interaction rules to BoardAC (passPhrase 'leAC');";
 
 const leNuitText = "Try 'leNuit' for an experimental variation of what we started in leMonde.";
@@ -33,6 +37,8 @@ const pruneText = "Try 'prune' for the MarkDown Completed Task Pruner";
 exports.lamentText = lamentText;
 exports.leMatText = leMatText;
 exports.leACText = leACText;
+exports.divineText = divineText;
+exports.divinePortText = divinePortText;
 exports.leMondeText = leMondeText;
 exports.leNuitText = leNuitText;
 exports.leCEText = leCEText;
